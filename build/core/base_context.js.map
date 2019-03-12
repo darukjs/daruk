@@ -1,0 +1,1 @@
+{"version":3,"file":"base_context.js","sourceRoot":"","sources":["../../src/core/base_context.ts"],"names":[],"mappings":";;AAOA,MAAqB,WAAW;IAI9B,YAAmB,GAAkB;QACnC,IAAI,CAAC,GAAG,GAAG,GAAG,CAAC;QACf,IAAI,CAAC,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC;QACnB,IAAI,CAAC,OAAO,GAAG,GAAG,CAAC,OAAO,CAAC;IAC7B,CAAC;CACF;AATD,8BASC"}

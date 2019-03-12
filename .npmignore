@@ -1,0 +1,14 @@
+src
+test
+docs
+tsconfig.json
+tslint.json
+yarn.lock
+.arcconfig
+.gitattributes
+.gitignore
+prettier.config.js
+test.js
+.vscode
+coverage
+.nyc_output

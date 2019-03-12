@@ -1,0 +1,86 @@
+{
+  "name": "daruk",
+  "version": "0.2.4",
+  "description": "a node.js web framework",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "rm -rf ./build && tsc",
+    "cov": "nyc report",
+    "test": "TS_NODE_FILES=true nyc --cache mocha --exit ./test/{,/**/}*.test.ts",
+    "tslint": "tslint --project . ./**/*.ts ./src/**/*.ts",
+    "publish": "npm run build && cnpm publish",
+    "diff": "arc diff --cc=#mfe_seniors --reviewers=#mfe_HdFigureDetails",
+    "land": "arc land --onto developer"
+  },
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:daruk-framework/daruk.git"
+  },
+  "keywords": [
+    "framework"
+  ],
+  "author": {
+    "name": "xiaojue",
+    "email": "designsor@gmail.com"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/basic-auth": "^1.1.2",
+    "@types/chai": "^4.1.7",
+    "@types/convert-hrtime": "^2.0.0",
+    "@types/expect": "^1.20.3",
+    "@types/is": "^0.0.21",
+    "@types/koa-router": "^7.0.37",
+    "@types/mocha": "^5.2.5",
+    "@types/nodemailer": "^4.6.5",
+    "@types/supertest": "^2.0.7",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "supertest": "^3.3.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.12.1",
+    "tslint-config-alloy": "^0.2.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "daruk-exit-hook": "^0.1.1",
+    "daruk-request-id": "^0.1.0",
+    "daruk-logger": "^1.9.1",
+    "@types/koa": "^2.0.46",
+    "@types/node": "^10.12.18",
+    "basic-auth": "^2.0.1",
+    "chalk": "^2.4.1",
+    "convert-hrtime": "^2.0.0",
+    "cron": "^1.4.1",
+    "http-server-shutdown": "^1.0.0",
+    "is": "^3.3.0",
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "nodemailer": "^4.6.8",
+    "object-assign-deep": "^0.4.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "src/typings/*"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  }
+}

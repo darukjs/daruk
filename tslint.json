@@ -1,0 +1,14 @@
+{
+  "extends": ["tslint-config-alloy", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["**/node_modules/**"]
+  },
+  "rules": {
+    "semicolon": true,
+    "eofline": false,
+    "indent": [true, "spaces", 2],
+    "no-empty-interface": false,
+    "jsdoc-format": false,
+    "no-redundant-jsdoc": false
+  }
+}
