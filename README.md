@@ -60,4 +60,4 @@ Daruk 脚手架集成了丰富的扩展与中间件
   - lodash
   - 大量的辅助函数
 
-查看 Daruk 文档[快速开始](http://localhost:8080/daruk.org/quick-start.html#%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8)吧！
+查看 Daruk 文档[快速开始](https://daruk-framework.github.io/daruk.org/quick-start.html)吧！
