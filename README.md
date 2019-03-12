@@ -8,9 +8,9 @@ Daruk的目的就是轻量和易扩展，核心代码非常简单，但是可以
 
 Daruk来源自塞尔达传说旷野之息里的四英杰之一，拥有在周围张开结界保护自己的力量，框架的目的也是为了给nodejs server提供健壮的基础管理能力。
 
-![logo200](/uploads/1460766d73ca0681a981ce79cc5ef8a6/logo200.png)
+![logo200](https://user-images.githubusercontent.com/15033260/54174052-7ee6ad80-44bf-11e9-9735-71c5403624c1.png)
 
-Daruk [说明文档](./docs/intro.md)
+Daruk [说明文档](https://daruk-framework.github.io/daruk.org/)
 
 Daruk基于koa2，包含以下核心功能：
 
