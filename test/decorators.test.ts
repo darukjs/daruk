@@ -83,6 +83,13 @@ describe('decorators', () => {
       .expect('routeMiddleware', done);
   });
 
+  it('decorator "multi @middleware"', (done) => {
+    request(server)
+      .get('/multiMiddleware')
+      .expect(code200)
+      .expect('routeMiddleware multiRouteMiddleware', done);
+  });
+
   it('decorator "@config"', () => {
     class A {
       @config('option1')

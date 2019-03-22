@@ -99,11 +99,13 @@ class DarukInitModule {
                 routeMap[method] = routeMap[method] || [];
                 assert(routeMap[method].indexOf(routePath) === -1, `[router] duplicate routing definition in ${ControllerClass.name}.${funcName}: ${routePath}`);
                 routeMap[method].push(routePath);
-                const middlewareName = Reflect.getMetadata(constants_1.MIDDLEWARE_NAME, ControllerClass, funcName);
-                if (middlewareName) {
-                    const middleware = self.module.middleware[middlewareName];
-                    assert(isFn(middleware), `[middleware] ${middlewareName} is not found or not a function`);
-                    self.router.use(routePath, middleware);
+                const middlewareNames = Reflect.getMetadata(constants_1.MIDDLEWARE_NAME, ControllerClass, funcName);
+                if (middlewareNames) {
+                    middlewareNames.forEach(name => {
+                        const middleware = self.module.middleware[name];
+                        assert(isFn(middleware), `[middleware] ${name} is not found or not a function`);
+                        self.router.use(routePath, middleware);
+                    });
                 }
                 self.prettyLog(`${method} - ${routePath}`, { type: 'router', init: true });
                 self.router[method](routePath, async function routeHandle(ctx, next) {

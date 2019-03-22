@@ -13,7 +13,10 @@ import { MIDDLEWARE_NAME } from './constants';
 export function middleware(middlewareName: string) {
   assert(is.string(middlewareName), `[Decorator @middleware] parameter must be a string`);
   return (target: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
-    // 保存装饰器使用的中间件名字
-    Reflect.defineMetadata(MIDDLEWARE_NAME, middlewareName, target.constructor, propertyKey);
+    // 一个路由 handle 可能被多个 @middleware 修饰
+    const names = Reflect.getMetadata(MIDDLEWARE_NAME, target.constructor, propertyKey) || [];
+    names.push(middlewareName);
+    // 保存 @middleware 应用的所有中间件名字
+    Reflect.defineMetadata(MIDDLEWARE_NAME, names, target.constructor, propertyKey);
   };
 }
