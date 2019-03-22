@@ -7,7 +7,9 @@ const constants_1 = require("./constants");
 function middleware(middlewareName) {
     assert(is.string(middlewareName), `[Decorator @middleware] parameter must be a string`);
     return (target, propertyKey, descriptor) => {
-        Reflect.defineMetadata(constants_1.MIDDLEWARE_NAME, middlewareName, target.constructor, propertyKey);
+        const names = Reflect.getMetadata(constants_1.MIDDLEWARE_NAME, target.constructor, propertyKey) || [];
+        names.push(middlewareName);
+        Reflect.defineMetadata(constants_1.MIDDLEWARE_NAME, names, target.constructor, propertyKey);
     };
 }
 exports.middleware = middleware;
