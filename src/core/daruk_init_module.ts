@@ -181,12 +181,15 @@ export default class DarukInitModule {
 
         // 绑定针对单个路由的中间件
         // 获取针对路由的中间件名字
-        const middlewareName = Reflect.getMetadata(MIDDLEWARE_NAME, ControllerClass, funcName);
+        const middlewareNames:Array<string> = Reflect.getMetadata(MIDDLEWARE_NAME, ControllerClass, funcName);
         // 是否使用了中间件装饰器
-        if (middlewareName) {
-          const middleware = self.module.middleware[middlewareName];
-          assert(isFn(middleware), `[middleware] ${middlewareName} is not found or not a function`);
-          self.router.use(routePath, middleware);
+        if (middlewareNames) {
+          // 可以对单个路由应用多个中间件
+          middlewareNames.forEach(name => {
+            const middleware = self.module.middleware[name];
+            assert(isFn(middleware), `[middleware] ${name} is not found or not a function`);
+            self.router.use(routePath, middleware);
+          });
         }
 
         // 初始化路由

@@ -49,4 +49,9 @@ export default class Index extends BaseController {
   @middleware('routeMiddleware')
   @get('/middleware')
   public async middleware(ctx: Daruk.Context, next: Function) {}
+
+  @middleware('multiRouteMiddleware')
+  @middleware('routeMiddleware')
+  @get('/multiMiddleware')
+  public async multiMiddleware(ctx: Daruk.Context, next: Function) {}
 }
