@@ -1,6 +1,6 @@
 {
   "name": "daruk",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
