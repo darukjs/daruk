@@ -45,7 +45,7 @@ npm run dev
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
-[travis-image]: https://img.shields.io/travis/daruk-framework/daruk/master.svg?style=flat-square
+[travis-image]: https://api.travis-ci.com/daruk-framework/daruk.svg?branch=master
 [travis-url]: https://travis-ci.com/daruk-framework/daruk
 [coveralls-image]: https://img.shields.io/codecov/c/github/daruk-framework/daruk.svg?style=flat-square
 [coveralls-url]: https://codecov.io/github/daruk-framework/daruk?branch=master
