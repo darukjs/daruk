@@ -3,8 +3,6 @@
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
-[![OpenCollective Backers][backers-image]](#backers)
-[![OpenCollective Sponsors][sponsors-image]](#sponsors)
 [![PR's Welcome][pr-welcoming-image]][pr-welcoming-url]
 
 # Daruk
@@ -17,55 +15,14 @@ Daruk 来源自塞尔达传说旷野之息里的四英杰之一，拥有在周�
 
 Daruk 基于 koa2，包含以下核心功能：
 
-- 一键生成项目，自动后续升级
+- 一键生成项目，开箱即用
+- 合理和克制的分层目录结构
 - 自动 loader 与装饰器结合的机制
 - 完整的 typescript 开发体验
 - 生产环境服务重启或退出邮件报警
-- 性能日志 & 业务日志染色功能
+- 性能日志 & 业务日志 染色功能
 - 支持线上实时性能分析
 - 轻量级的链路追踪
-
-Daruk 脚手架集成了丰富的扩展与中间件
-
-- 常用的中间件
-  - koa-bodyparser
-  - koa-favicon
-  - formidable-upload-koa (上传文件)
-  - koa-json-body
-  - koa-body-clean
-  - koa-logger
-  - koa-json
-  - koa2-cors
-  - koa-handle-error
-  - koa-response-handler
-  - koa-proxies (请求代理)
-  - koa-ip (ip 限制)
-  - koa-static (静态服务)
-  - koa-jsonp (jsonp 支持)
-  - koa-compress (压缩功能)
-  - koa-session (会话能力)
-  - koa-flash-simple (闪存能力)
-  - koa-ejs (模板引擎内置)
-  - graceful-shutdown (优雅关闭)
-- 常见的 service 功能
-  - ioredis
-  - node-rdkafka
-  - sequelize
-  - mysql
-  - request
-  - node-mail
-  - 图片处理能力
-  - xss 过滤
-  - 数据验证
-  - 分页类
-  - 数据加密
-  - 日历类
-  - 单元测试类
-  - 页面缓存化能力
-- 常见的 utils 功能
-  - lru-cache
-  - lodash
-  - 大量的辅助函数
 
 查看 Daruk 文档[快速开始](https://daruk-framework.github.io/daruk.org/quick-start.html)吧！
 
@@ -75,3 +32,5 @@ Daruk 脚手架集成了丰富的扩展与中间件
 [travis-url]: https://travis-ci.org/daruk-framework/daruk
 [coveralls-image]: https://img.shields.io/codecov/c/github/daruk-framework/daruk.svg?style=flat-square
 [coveralls-url]: https://codecov.io/github/daruk-framework/daruk?branch=master
+[pr-welcoming-image]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[pr-welcoming-url]: https://github.com/daruk-framework/daruk/pull/new
