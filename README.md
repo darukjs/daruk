@@ -2,8 +2,10 @@
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
 [![PR's Welcome][pr-welcoming-image]][pr-welcoming-url]
+![npm](https://img.shields.io/npm/dm/daruk.svg)
+[![Test coverage][coveralls-image]][coveralls-url]
+[![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
 
 # Daruk
 
