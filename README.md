@@ -45,7 +45,7 @@ npm run dev
 
 ## 演示视频
 
-<p align="left"><a href="https://v.youku.com/v_show/id_xndexmja5mti2na==.html?spm=a2h3j.8428770.3416059.1" target="_blank"><img width="60%" src="https://user-images.githubusercontent.com/289225/54988270-091b2f80-4ff1-11e9-9ccb-6057a26c5706.png" alt="daruk web framework video demo"></a></p
+<p align="left"><a href="https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0" target="_blank"><img width="60%" src="https://user-images.githubusercontent.com/289225/54988270-091b2f80-4ff1-11e9-9ccb-6057a26c5706.png" alt="daruk web framework video demo"></a></p>
 
 ## 更详细的文档
 
