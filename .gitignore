@@ -6,6 +6,8 @@ npm-debug.log*
 .DS_Store
 /node_modules
 
+coverage.lcov
+
 # Runtime data
 pids
 *.pid
