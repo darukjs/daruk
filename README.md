@@ -41,6 +41,10 @@ cd daruk-example
 npm run dev
 ```
 
+## 演示视频
+
+[![video](https://user-images.githubusercontent.com/289225/54988270-091b2f80-4ff1-11e9-9ccb-6057a26c5706.png)](https://v.youku.com/v_show/id_xndexmja5mti2na==.html?spm=a2h3j.8428770.3416059.1)
+
 ## 更详细的文档
 
 查看 Daruk 文档[快速开始](https://daruk-framework.github.io/daruk.org/quick-start.html)吧！
