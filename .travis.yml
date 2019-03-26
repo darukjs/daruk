@@ -5,5 +5,5 @@ install:
   - npm install
 script:
   - npm test
- after_success:
+after_success:
   - codecov -f coverage/*.json
