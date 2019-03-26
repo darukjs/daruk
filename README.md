@@ -1,5 +1,7 @@
 <p align="center"><img width="30%" src="https://user-images.githubusercontent.com/15033260/54174052-7ee6ad80-44bf-11e9-9735-71c5403624c1.png" alt="daruk web framework for nodejs"></p>
 
+<hr>
+
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![PR's Welcome][pr-welcoming-image]][pr-welcoming-url]
