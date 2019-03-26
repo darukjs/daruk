@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "rm -rf ./build && tsc",
-    "cov": "nyc report --reporter=json > coverage/coverage.json",
+    "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test": "TS_NODE_FILES=true nyc --cache mocha --timeout 5000 --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./**/*.ts ./src/**/*.ts",
     "publish": "npm run build && cnpm publish",
