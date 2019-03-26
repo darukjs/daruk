@@ -5,8 +5,8 @@ export function getRootPath (appName: string) {
   return path.resolve(__dirname, `../apps/${appName}`);
 }
 
-export function getApp (appName: string) {
-  return new Daruk('test app', {
+export function getApp (appName: string, options = {}) {
+  const defaultOptions = {
     alertAccounts: ['test'],
     rootPath: getRootPath(appName),
     debug: false,
@@ -14,5 +14,6 @@ export function getApp (appName: string) {
       disable: true,
       overwriteConsole: false
     }
-  });
+  };
+  return new Daruk('test app', { ...defaultOptions, ...options });
 }
