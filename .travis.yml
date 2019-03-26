@@ -9,4 +9,3 @@ script:
   - npm test
  after_success:
   - codecov -f coverage/*.json
-  - bash <(curl -s https://codecov.io/bash) -t 4f4f91dd-a42a-4358-877a-cf03a7e3f73e
