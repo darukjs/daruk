@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "rm -rf ./build && tsc",
-    "cov": "nyc report",
+    "cov": "nyc report --reporter=json > coverage/coverage.json",
     "test": "TS_NODE_FILES=true nyc --cache mocha --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./**/*.ts ./src/**/*.ts",
     "publish": "npm run build && cnpm publish",
