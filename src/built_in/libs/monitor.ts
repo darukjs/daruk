@@ -120,7 +120,7 @@ class Monitor extends EventEmitter {
       setTimeout(() => {
         let profile1 = profiler.stopProfiling();
         profile1.export((error: any, result: any) => {
-          isDirExist('profiler').then((res) => {
+          createDir('profiler').then((res) => {
             if (res) {
               fs.writeFileSync('profiler/profile.cpu.json', result);
             }
@@ -143,7 +143,7 @@ class Monitor extends EventEmitter {
     // console.log(snapshot.getHeader())
     return new Promise((resolve) => {
       snapshot.export((error: any, result: any) => {
-        isDirExist('profiler').then((res) => {
+        createDir('profiler').then((res) => {
           if (res) {
             fs.writeFileSync('profiler/profile.mem.heapsnapshot', result);
           }
@@ -168,7 +168,6 @@ class Monitor extends EventEmitter {
    * 处理路由中间件
    */
   public getAnalytics(ctx: any) {
-    if (!ctx || !ctx.request || !ctx.request.url) return;
     let url = ctx.request.url.split('?')[0];
     let period = ctx.query.period || defaultPeriod;
     // console.log('url:', url)
@@ -208,11 +207,10 @@ function bytesToMB(bytes: number) {
   return (bytes / unit / unit).toFixed(2);
 }
 
-function isDirExist(dirName: string, isCreated = true) {
+function createDir(dirName: string) {
   return new Promise((resolve) => {
     fs.stat(dirName, (err: any, stats: any) => {
       if (err) {
-        if (!isCreated) resolve(false);
         // console.log(`创建${dirName}目录`)
         fs.mkdir(dirName, (err: any) => {
           if (err) {
