@@ -21,8 +21,8 @@ export default function getDefaultOptions(rootPath: string, name: string, debug:
     debug,
     monitor: {
       enable: false,
-      v8AnalyticsPath: '',
-      v8ProfilerPath: '',
+      v8AnalyticsPath: 'v8-analytics',
+      v8ProfilerPath: 'v8-profiler-node8',
       auth: {
         name: '',
         password: ''
