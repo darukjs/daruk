@@ -4,7 +4,7 @@
 
 import { Daruk } from '../../typings/daruk';
 
-import { ShutDown } from 'http-server-shutdown';
+import ShutDown = require('http-server-shutdown');
 
 export default function(app: Daruk.DarukCore) {
   return function httpServerShutdown() {
