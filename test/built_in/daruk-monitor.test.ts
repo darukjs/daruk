@@ -26,6 +26,10 @@ describe('daruk-monitor', function cb() {
     server = app.httpServer;
   });
 
+  after((done) => {
+    server.close(done);
+  });
+
   it('/monitor auth failed', function(done) {
     // tslint:disable-next-line
     this.timeout(1000);
