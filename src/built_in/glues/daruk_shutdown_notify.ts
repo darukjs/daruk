@@ -7,24 +7,28 @@ import os = require('os');
 import { Daruk } from '../../typings/daruk';
 import { parallelWithNoBreak } from '../../utils';
 
+const noop = () => {};
+
 export default function(app: Daruk.DarukCore) {
-  let alertAccounts = app.options.alertAccounts;
-  assert(
-    alertAccounts && alertAccounts.length > 0,
-    'daruk.options.alertAccounts with email address required'
-  );
-  return () => {
+  // 如果没有配置邮箱服务
+  if (!app.options.nodemailer) return noop;
+  return function shutDownNotify() {
+    let alertAccounts = app.options.alertAccounts;
+    assert(
+      alertAccounts && alertAccounts.length > 0,
+      'daruk.options.alertAccounts with email address required'
+    );
     app.exitHook.addHook(function handleShutdownNotify(err: Error, cb: Function) {
       // 为了避免频繁的邮件通知，只有报错重启时，才做通知
       if (!err) return cb();
-      shutDownNotify(err, app).then(() => {
+      doNotify(err, app).then(() => {
         cb();
       });
     });
   };
 }
 
-function shutDownNotify(err: Error, app: Daruk.DarukCore) {
+function doNotify(err: Error, app: Daruk.DarukCore) {
   const tos = app.options.alertAccounts;
   const reason = (err && (err.stack || err.message)) || 'no error message';
   return new Promise((resolve) => {
@@ -34,7 +38,7 @@ function shutDownNotify(err: Error, app: Daruk.DarukCore) {
         app.name
       } server is shutdown in ${os.hostname()} at ${new Date().toLocaleString()} - ${reason}`;
 
-      const { daruk_nodemailer, daruk_sina_watch } = app.glue;
+      const { daruk_nodemailer } = app.glue;
       const mailOptions = daruk_nodemailer.options;
       const from = `${mailOptions.auth.user}@${mailOptions.domain}`;
 
