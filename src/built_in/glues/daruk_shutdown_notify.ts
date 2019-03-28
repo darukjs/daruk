@@ -12,12 +12,12 @@ const noop = () => {};
 export default function(app: Daruk.DarukCore) {
   // 如果没有配置邮箱服务
   if (!app.options.nodemailer) return noop;
+  let alertAccounts = app.options.alertAccounts;
+  assert(
+    alertAccounts && alertAccounts.length > 0,
+    'daruk.options.alertAccounts with email address required'
+  );
   return function shutDownNotify() {
-    let alertAccounts = app.options.alertAccounts;
-    assert(
-      alertAccounts && alertAccounts.length > 0,
-      'daruk.options.alertAccounts with email address required'
-    );
     app.exitHook.addHook(function handleShutdownNotify(err: Error, cb: Function) {
       // 为了避免频繁的邮件通知，只有报错重启时，才做通知
       if (!err) return cb();
@@ -40,8 +40,7 @@ function doNotify(err: Error, app: Daruk.DarukCore) {
 
       const { daruk_nodemailer } = app.glue;
       const mailOptions = daruk_nodemailer.options;
-      const from = `${mailOptions.auth.user}@${mailOptions.domain}`;
-
+      const from = `${mailOptions.auth && mailOptions.auth.user}@${mailOptions.domain}`;
       const tasks = [
         function sendMailAlert(cb: Function) {
           app.prettyLog('sending mail', { type: 'mail' });
