@@ -39,7 +39,7 @@ export interface Options {
     timeout: number;
   };
   requestId: any;
-  nodemailer: any;
+  nodemailer?: any;
   [key: string]: any;
 }
 

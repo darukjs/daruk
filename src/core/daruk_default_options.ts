@@ -60,16 +60,6 @@ export default function getDefaultOptions(rootPath: string, name: string, debug:
     loggerMiddleware: {},
     requestId: {
       inject: true
-    },
-    nodemailer: {
-      debug,
-      host: 'smtp.sina.com',
-      secureConnection: true,
-      auth: {
-        user: 'fedvip',
-        pass: '1234qwerasdfzxcv'
-      },
-      domain: 'sina.com'
     }
   };
 }
