@@ -16,7 +16,7 @@ class Monitor extends EventEmitter {
         v8memAnalytics = require(`${v8AnalyticsPath}/lib/mem_analysis.js`);
         profiler = require(v8ProfilerPath);
     }
-    computeProcessCpu(pid = process.pid, period = defaultPeriod, cb) {
+    computeProcessCpu(pid = process.pid, period = defaultPeriod) {
         const startTime = process.hrtime();
         const startUsage = process.cpuUsage();
         return new Promise((resolve, reject) => {
@@ -30,8 +30,6 @@ class Monitor extends EventEmitter {
                     cpuPercent,
                     period
                 };
-                if (cb)
-                    cb(result);
                 resolve(result);
             }, period);
         });
@@ -66,7 +64,7 @@ class Monitor extends EventEmitter {
             external: bytesToMB(memoryUsage.external)
         };
     }
-    computePerf(period, cb) {
+    computePerf(period) {
         this.deviceCpuProfiler = this.computeDeviceCpu();
         this.processMemoryUsage = this.computeMemoryUsage();
         return new Promise((resolve, reject) => {
@@ -78,8 +76,6 @@ class Monitor extends EventEmitter {
                     },
                     memory: this.processMemoryUsage
                 };
-                if (cb)
-                    cb(res);
                 resolve(res);
             });
         });
@@ -90,7 +86,7 @@ class Monitor extends EventEmitter {
             setTimeout(() => {
                 let profile1 = profiler.stopProfiling();
                 profile1.export((error, result) => {
-                    isDirExist('profiler').then((res) => {
+                    createDir('profiler').then((res) => {
                         if (res) {
                             fs.writeFileSync('profiler/profile.cpu.json', result);
                         }
@@ -108,7 +104,7 @@ class Monitor extends EventEmitter {
         let snapshot = profiler.takeSnapshot();
         return new Promise((resolve) => {
             snapshot.export((error, result) => {
-                isDirExist('profiler').then((res) => {
+                createDir('profiler').then((res) => {
                     if (res) {
                         fs.writeFileSync('profiler/profile.mem.heapsnapshot', result);
                     }
@@ -127,8 +123,6 @@ class Monitor extends EventEmitter {
         });
     }
     getAnalytics(ctx) {
-        if (!ctx || !ctx.request || !ctx.request.url)
-            return;
         let url = ctx.request.url.split('?')[0];
         let period = ctx.query.period || defaultPeriod;
         switch (url) {
@@ -161,12 +155,10 @@ function bytesToMB(bytes) {
     const unit = 1024;
     return (bytes / unit / unit).toFixed(2);
 }
-function isDirExist(dirName, isCreated = true) {
+function createDir(dirName) {
     return new Promise((resolve) => {
         fs.stat(dirName, (err, stats) => {
             if (err) {
-                if (!isCreated)
-                    resolve(false);
                 fs.mkdir(dirName, (err) => {
                     if (err) {
                         resolve(false);

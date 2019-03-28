@@ -2,6 +2,7 @@ import KoaLogger = require('daruk-logger');
 import EventEmitter = require('events');
 import Http = require('http');
 import Https = require('https');
+import Router from 'koa-router';
 import * as Koa from 'koa';
 import { Options, PartialOptions } from './daruk_options';
 
@@ -30,6 +31,7 @@ declare module 'daruk' {
     public logger: KoaLogger.logger;
     public options: Options;
     public readonly service: Service;
+    public router: Router;
     public readonly module: {
       readonly service: ExtractInterface<Service>;
       readonly controller: ExtractInterface<Controller>;
@@ -46,7 +48,7 @@ declare module 'daruk' {
     };
     public constructor(name: string, options: PartialOptions);
     public run(port: number | string, host?: string | Function, cb?: Function): Http.Server;
-    public serverReady (server: Http.Server | Https.Server): void;
+    public serverReady(server: Http.Server | Https.Server): void;
     public registerTimer: (describe: RegisterDes | Array<RegisterDes>) => void;
     public registerService(describe: RegisterDes | Array<RegisterDes>): void;
     public registerMiddleware(describe: RegisterDes | Array<RegisterDes>): void;

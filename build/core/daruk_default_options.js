@@ -17,8 +17,8 @@ function getDefaultOptions(rootPath, name, debug) {
         debug,
         monitor: {
             enable: false,
-            v8AnalyticsPath: '',
-            v8ProfilerPath: '',
+            v8AnalyticsPath: 'v8-analytics',
+            v8ProfilerPath: 'v8-profiler-node8',
             auth: {
                 name: '',
                 password: ''
@@ -52,16 +52,6 @@ function getDefaultOptions(rootPath, name, debug) {
         loggerMiddleware: {},
         requestId: {
             inject: true
-        },
-        nodemailer: {
-            debug,
-            host: 'smtp.sina.com',
-            secureConnection: true,
-            auth: {
-                user: 'fedvip',
-                pass: '1234qwerasdfzxcv'
-            },
-            domain: 'sina.com'
         }
     };
 }
