@@ -48,7 +48,7 @@ describe('daruk-monitor', function cb() {
       });
   });
 
-  it('/monitor/not-found 测试一个不存在的monitor路由，不应当报错', (done) => {
+  it('/monitor/not-found should not throw error when request non-existing route', (done) => {
     request(server)
       .get('/monitor/not-found')
       .auth(auth.name, auth.password)
