@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const nodemailer_1 = require("nodemailer");
 function default_1(app) {
+    if (!app.options.nodemailer)
+        return null;
     const mail = nodemailer_1.createTransport(app.options.nodemailer);
     mail.verify(function handleMailVerificationResult(err, success) {
         if (err) {

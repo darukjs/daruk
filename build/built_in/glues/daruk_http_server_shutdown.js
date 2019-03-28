@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const http_server_shutdown_1 = require("http-server-shutdown");
+const ShutDown = require("http-server-shutdown");
 function default_1(app) {
     return function httpServerShutdown() {
-        const serverShutDown = new http_server_shutdown_1.ShutDown(app.httpServer, { monitor: false });
+        const serverShutDown = new ShutDown(app.httpServer, { monitor: false });
         const timeout = app.options.gracefulShutdown.timeout;
         app.exitHook.addHook(function handleHttpGracefulShutdown(err, cb) {
             app.logger.info(`handle unfinished connections, waiting up to ${timeout}ms`);
