@@ -17,7 +17,7 @@ describe('http-server-shutdown', () => {
       gracefulShutdown: {
         enable: true
       }
-    }, true);
+    });
     app.run(port, done);
     server = app.httpServer;
     // 因为 daruk-exit-hook 监听到退出信号或者退出事件时，会执行进程退出的回调然后再执行 process.exit

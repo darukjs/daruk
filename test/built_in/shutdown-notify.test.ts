@@ -29,7 +29,7 @@ describe('shutdown-notify', () => {
     app = getApp('', {
       alertAccounts: ['test'],
       nodemailer: myTransport
-    }, true);
+    });
     app.run(port, done);
     // 劫持 process.exit()
     stub = sinon.stub(process, 'exit');
@@ -47,7 +47,7 @@ describe('shutdown-notify', () => {
     // 手动调用进程报错的回调
     // uncaughtException 的回调中会执行 process.exit()
     // 因此上面需要劫持 process.exit
-    process.listeners('uncaughtException')[0](new Error(errMsg));
+    process.listeners('uncaughtException')[1](new Error(errMsg));
     // 发邮件是一个异步过程，等待 500ms 再判断
     setTimeout(() => {
       // 邮件内容必须包含报错信息

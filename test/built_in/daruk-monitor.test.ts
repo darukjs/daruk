@@ -1,10 +1,8 @@
-import chai = require('chai');
 import fs = require('fs');
 import request = require('supertest');
 import { Daruk } from '../../src';
 import { getApp } from '../utils';
 
-const assert = chai.assert;
 const port = 3000;
 const code200 = 200;
 const code404 = 404;
