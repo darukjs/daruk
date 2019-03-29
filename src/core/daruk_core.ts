@@ -222,10 +222,6 @@ class DarukCore extends Koa {
       // 优雅关机
       this.glue.daruk_http_server_shutdown();
     }
-    if (!this.options.debug) {
-      // 在非 debug 模式，开启宕机或者重启通知
-      this.glue.daruk_shutdown_notify();
-    }
   }
   /**
    * @desc 监听进程退出，打印日志，触发 exit 事件

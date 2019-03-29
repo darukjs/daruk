@@ -1,25 +1,4 @@
 /**
- * @desc 并行执行，并且其中一个任务执行失败不影响其他任务的执行
- * @param Array<Function> tasks - 要执行的任务
- * @param Function cb - 并行任务执行完毕的回调
- * @param any scope - 执行任务函数的作用域
- */
-export function parallelWithNoBreak(tasks: Array<Function>, cb?: Function, scope?: any) {
-  let cbCallTimes = 0;
-  let len = tasks.length;
-  const result: Array<any> = [];
-  tasks.forEach((func) => {
-    func.call(scope || null, (res: any) => {
-      result.push(res);
-      cbCallTimes++;
-      if (cbCallTimes === len) {
-        if (cb) cb(result);
-      }
-    });
-  });
-}
-
-/**
  * @desc 简版 class 混入装饰器
  * @param BaseClass Function - 要混入的类
  */

@@ -7,7 +7,6 @@ type RecursivePartial<T> = {
 };
 
 export interface Options {
-  alertAccounts: Array<string>;
   routerPath: string;
   servicePath: string;
   controllerPath: string;
@@ -39,7 +38,6 @@ export interface Options {
     timeout: number;
   };
   requestId: any;
-  nodemailer?: any;
   [key: string]: any;
 }
 
