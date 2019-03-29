@@ -63,6 +63,7 @@ export default class DarukInitModule {
 
     loader.loadService(options.servicePath);
     this.emit('serviceLoaded', this);
+    this.initService();
 
     loader.loadMiddleware(options.middlewarePath);
     // 加载内置中间件
@@ -107,6 +108,15 @@ export default class DarukInitModule {
     this.glue = this.context.glue = this.module.glue;
     this.logModuleMsg('glue', this.glue);
   }
+
+  /**
+   * @desc service 在 HelpContextClass 中生效，不需要初始化
+   * 仅打印日志
+   */
+  private initService () {
+    this.logModuleMsg('service', this.module.services);
+  }
+
   /**
    * @desc 初始化中间件
    */
