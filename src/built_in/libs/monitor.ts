@@ -27,7 +27,7 @@ class Monitor extends EventEmitter {
    * @param pid 进程Pid
    * @param period 记录多少秒内的cpu使用率
    */
-  public computeProcessCpu(pid: number = process.pid, period = defaultPeriod) {
+  public computeProcessCpu(pid: number, period: number) {
     const startTime = process.hrtime();
     const startUsage = process.cpuUsage();
     return new Promise((resolve, reject) => {
@@ -94,7 +94,7 @@ class Monitor extends EventEmitter {
    * 统计所有的cpu的性能情况以及内存的用量
    * @param period 时期内
    */
-  public computePerf(period: any) {
+  public computePerf(period: number) {
     this.deviceCpuProfiler = this.computeDeviceCpu();
     this.processMemoryUsage = this.computeMemoryUsage();
     return new Promise((resolve, reject) => {
@@ -114,7 +114,7 @@ class Monitor extends EventEmitter {
    * 统计某个时间段内的function执行耗时
    * @param period 时间段
    */
-  public functionProfiler(period: number = defaultPeriod) {
+  public functionProfiler(period: number) {
     profiler.startProfiling('cpu', true);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
