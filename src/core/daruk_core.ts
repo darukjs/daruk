@@ -90,7 +90,7 @@ class DarukCore extends Koa {
     });
     // 监听 koa 的错误事件，输出日志
     this.on('error', function handleKoaError(err) {
-      self.logger.error('[koa error] ' + err.stack || err.message);
+      self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
     });
     this.router = new Router();
     this.initEnv();
@@ -232,11 +232,11 @@ class DarukCore extends Koa {
         if (err) {
           this.prettyLog(err.stack || err.message, { level: 'error' });
         }
-        this.logger.info('process is exiting');
+        this.prettyLog('process is exiting');
         Events.emit('exit', err, this);
       },
       onExitDone: (code: number) => {
-        this.logger.info(`process exited: ${code}`);
+        this.prettyLog(`process exited: ${code}`);
       }
     });
   }
