@@ -2,7 +2,7 @@ import KoaLogger = require('daruk-logger');
 import EventEmitter = require('events');
 import Http = require('http');
 import Https = require('https');
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 import * as Koa from 'koa';
 import { Options, PartialOptions } from './daruk_options';
 
