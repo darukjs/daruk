@@ -16,7 +16,7 @@ import Events from './daruk_event';
 import DarukLoader from './daruk_loader';
 
 const join = path.join;
-const noop = function noop() {};
+const noop = () => {};
 const isFn = is.fn;
 
 /**

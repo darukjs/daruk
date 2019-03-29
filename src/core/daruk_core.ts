@@ -176,7 +176,7 @@ class DarukCore extends Koa {
    * @param Object req - 配置模拟请求的 headers、query、url 等
    * @return Daruk.Context
    */
-  public mockContext(req = {}) {
+  public mockContext(req: {}) {
     const { request, response } = mockHttp(req);
     // 使用 koa 的 createContext 方法创建一个 ctx
     const ctx = this.createContext(request, response);

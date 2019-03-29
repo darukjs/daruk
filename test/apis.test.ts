@@ -27,4 +27,14 @@ describe('apis', () => {
   it('registerTimer', () => {
     assert(app.module.timer.testTimer !== undefined);
   });
+
+  it('mockContext', () => {
+    const host = '10.22.22.3';
+    const context = app.mockContext({
+      headers: {
+        host
+      }
+    });
+    assert(context.host === host);
+  });
 });
