@@ -42,12 +42,30 @@ describe('http-server-shutdown', () => {
         done();
       });
     // 因为 request 发出请求有一定的延时
-    // 如果立即触发关机，http-server-shutdown 会立即获取服务器的 tcp 连接数，会得到 0
+    // 如果执行关机回调，http-server-shutdown 会立即获取服务器的 tcp 连接数，会得到 0
     // 因此延迟 500ms 触发关机，从而可以得到正确的连接数
     const timeout = 500;
     setTimeout(() => {
-      // 杀死进程，从而触发 graceful shutdown
-      process.kill(process.pid, 'SIGTERM');
+      // 执行进程退出的回调
+      process.listeners('exit')[0](0);
+    }, timeout);
+  });
+  it('mock error: graceful shutdown', (done) => {
+    // @ts-ignore
+    app.exitHook.called = false;
+    const stubErrorLog = sinon.stub(app.logger, 'error');
+    // 上面的测试用例已经关闭了 server
+    // 再次执行关机回调时，http-server-shutdown 会再次执行 httpServer.close()
+    // 从而会报错，进入报错回调
+    process.listeners('exit')[0](0);
+
+    // httpServer.close 是异步操作，这里延时判断
+    const timeout = 200;
+    setTimeout(() => {
+      // 如果进入错误回调，应该调用 daruk.logger.error
+      assert(stubErrorLog.callCount === 1, 'should call daruk.logger.error');
+      stubErrorLog.restore();
+      done();
     }, timeout);
   });
 });
