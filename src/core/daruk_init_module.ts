@@ -16,7 +16,6 @@ import Events from './daruk_event';
 import DarukLoader from './daruk_loader';
 
 const join = path.join;
-const noop = () => {};
 const isFn = is.fn;
 
 /**
@@ -228,11 +227,9 @@ export default class DarukInitModule {
   private initTimer() {
     let timer = this.module.timer || {};
     const defaultJob = {
-      onComplete: noop,
-      start: noop,
+      start: true,
       // https://www.zeitverschiebung.net/cn/all-time-zones.html
       timeZone: 'Asia/Shanghai',
-      runOninit: false
     };
     Object.keys(timer).forEach(function initTimer(jobName: string) {
       let job = timer[jobName];

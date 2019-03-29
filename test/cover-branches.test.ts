@@ -4,7 +4,7 @@
 
 import chai = require('chai');
 import sinon = require('sinon');
-import { Daruk } from '../src';
+import { Daruk, DarukEvents } from '../src';
 import { getApp } from './utils';
 
 const port = 3000;
@@ -15,22 +15,16 @@ describe('cover-branches', () => {
   let stubExit: sinon.SinonStub;
 
   before((done) => {
-    // 劫持 console，避免 debug: true 输出日志
-    const stubConsole = sinon.stub(console, 'log');
-    app = getApp('', {
-      // rootPath 没有传的情况
-      rootPath: undefined,
-      // 初始化时 debug 为 true 的情况
-      debug: true
+    app = getApp('cover-branches');
+
+    // 匿名中间件的情况
+    app.use((ctx:any, next: Function) => {
+      return next();
     });
+
     // 传递 host 的情况
-    app.run(port, '127.0.0.1', () => {
-      // 延迟一下，避免输出日志
-      setTimeout(() => {
-        stubConsole.restore();
-        done();
-      });
-    });
+    app.run(port, '127.0.0.1', done);
+
     stubExit = sinon.stub(process, 'exit');
   });
 
@@ -84,5 +78,23 @@ describe('cover-branches', () => {
     // 只有 src/utils/debugLog 的调用才会导致 console 的调用
     assert(stubConsole.callCount === 1);
     stubConsole.restore();
+  });
+
+  it('daruk options', () => {
+    // 强行走 timer 不存在的分支语句
+    const cb = (app: Daruk) => {
+      app.module.timer = undefined;
+    };
+    DarukEvents.on('timerLoaded', cb);
+    // 劫持 console，避免 debug: true 输出日志
+    const stubConsole = sinon.stub(console, 'log');
+    getApp('', {
+      // rootPath 没有传的情况
+      rootPath: undefined,
+      // 初始化时 debug 为 true 的情况
+      debug: true
+    });
+    stubConsole.restore();
+    DarukEvents.removeListener('timerLoaded', cb);
   });
 });
