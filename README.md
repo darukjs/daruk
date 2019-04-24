@@ -1,4 +1,4 @@
-<p align="center"><img width="30%" src="https://user-images.githubusercontent.com/15033260/54174052-7ee6ad80-44bf-11e9-9735-71c5403624c1.png" alt="daruk web framework for nodejs"></p>
+<p align="center"><img width="30%" src="https://user-images.githubusercontent.com/289225/56637111-66140f00-669d-11e9-8ea9-501a37528e01.png" alt="daruk web framework for nodejs"></p>
 
 <hr>
 
