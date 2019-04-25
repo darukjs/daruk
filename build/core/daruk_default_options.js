@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = require("path");
 function getDefaultOptions(rootPath, name, debug) {
     return {
-        alertAccounts: [],
         rootPath,
         routerPath: path_1.join(rootPath, 'routers'),
         servicePath: path_1.join(rootPath, 'services'),

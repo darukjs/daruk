@@ -16,7 +16,7 @@ class Monitor extends EventEmitter {
         v8memAnalytics = require(`${v8AnalyticsPath}/lib/mem_analysis.js`);
         profiler = require(v8ProfilerPath);
     }
-    computeProcessCpu(pid = process.pid, period = defaultPeriod) {
+    computeProcessCpu(pid, period) {
         const startTime = process.hrtime();
         const startUsage = process.cpuUsage();
         return new Promise((resolve, reject) => {
@@ -80,7 +80,7 @@ class Monitor extends EventEmitter {
             });
         });
     }
-    functionProfiler(period = defaultPeriod) {
+    functionProfiler(period) {
         profiler.startProfiling('cpu', true);
         return new Promise((resolve, reject) => {
             setTimeout(() => {

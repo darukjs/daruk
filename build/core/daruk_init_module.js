@@ -10,7 +10,6 @@ const utils_1 = require("../utils");
 const daruk_event_1 = require("./daruk_event");
 const daruk_loader_1 = require("./daruk_loader");
 const join = path.join;
-const noop = function noop() { };
 const isFn = is.fn;
 class DarukInitModule {
     initEnv() {
@@ -31,6 +30,7 @@ class DarukInitModule {
         this.initGlue();
         loader.loadService(options.servicePath);
         this.emit('serviceLoaded', this);
+        this.initService();
         loader.loadMiddleware(options.middlewarePath);
         loader.loadMiddleware(join(__dirname, '../built_in/middlewares'));
         daruk_event_1.default.emit('middlewareLoaded', this);
@@ -57,6 +57,9 @@ class DarukInitModule {
     initGlue() {
         this.glue = this.context.glue = this.module.glue;
         this.logModuleMsg('glue', this.glue);
+    }
+    initService() {
+        this.logModuleMsg('service', this.module.services);
     }
     initMiddleware() {
         const middlewareOrder = this.module.middlewareOrder || [];
@@ -124,10 +127,8 @@ class DarukInitModule {
     initTimer() {
         let timer = this.module.timer || {};
         const defaultJob = {
-            onComplete: noop,
-            start: noop,
+            start: true,
             timeZone: 'Asia/Shanghai',
-            runOninit: false
         };
         Object.keys(timer).forEach(function initTimer(jobName) {
             let job = timer[jobName];
