@@ -48,7 +48,7 @@ let DarukCore = class DarukCore extends Koa {
             self.logger.access(access_log, ctx);
         });
         this.on('error', function handleKoaError(err) {
-            self.logger.error('[koa error] ' + err.stack || err.message);
+            self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
         });
         this.router = new Router();
         this.initEnv();
@@ -97,7 +97,7 @@ let DarukCore = class DarukCore extends Koa {
     registerUtil(des) {
         this.register('util', des);
     }
-    mockContext(req = {}) {
+    mockContext(req) {
         const { request, response } = http_server_1.default(req);
         const ctx = this.createContext(request, response);
         ctx.service = new help_context_class_1.default(ctx);
@@ -128,9 +128,6 @@ let DarukCore = class DarukCore extends Koa {
         if (this.options.gracefulShutdown.enable) {
             this.glue.daruk_http_server_shutdown();
         }
-        if (!this.options.debug) {
-            this.glue.daruk_shutdown_notify();
-        }
     }
     initExitHook() {
         this.exitHook = new ExitHook({
@@ -138,11 +135,11 @@ let DarukCore = class DarukCore extends Koa {
                 if (err) {
                     this.prettyLog(err.stack || err.message, { level: 'error' });
                 }
-                this.logger.info('process is exiting');
+                this.prettyLog('process is exiting');
                 daruk_event_1.default.emit('exit', err, this);
             },
             onExitDone: (code) => {
-                this.logger.info(`process exited: ${code}`);
+                this.prettyLog(`process exited: ${code}`);
             }
         });
     }

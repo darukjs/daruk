@@ -5,7 +5,7 @@ export function getRootPath(appName: string) {
   return path.resolve(__dirname, `../apps/${appName}`);
 }
 
-let darukInstance:Daruk;
+let darukInstance: Daruk;
 
 export function getApp(appDir: string, options = {}) {
   const defaultOptions = {

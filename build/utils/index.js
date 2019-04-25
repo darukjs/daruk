@@ -3,22 +3,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-function parallelWithNoBreak(tasks, cb, scope) {
-    let cbCallTimes = 0;
-    let len = tasks.length;
-    const result = [];
-    tasks.forEach((func) => {
-        func.call(scope || null, (res) => {
-            result.push(res);
-            cbCallTimes++;
-            if (cbCallTimes === len) {
-                if (cb)
-                    cb(result);
-            }
-        });
-    });
-}
-exports.parallelWithNoBreak = parallelWithNoBreak;
 function SimpleMixin(BaseClass) {
     return (DerivedClass) => {
         Object.getOwnPropertyNames(BaseClass.prototype).forEach((name) => {
@@ -35,14 +19,7 @@ function uRequire(path) {
 }
 exports.uRequire = uRequire;
 function isSubClass(subClass, superClass) {
-    let proto = subClass;
-    while (proto) {
-        if (proto === superClass) {
-            return true;
-        }
-        proto = Object.getPrototypeOf(proto);
-    }
-    return false;
+    return superClass.isPrototypeOf(subClass);
 }
 exports.isSubClass = isSubClass;
 __export(require("./debug_log"));

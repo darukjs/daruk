@@ -24,14 +24,7 @@ export function uRequire(path: string) {
  * @desc 判断 subClass 是否是 superClass 的子类
  */
 export function isSubClass(subClass: any, superClass: any) {
-  let proto = subClass;
-  while (proto) {
-    if (proto === superClass) {
-      return true;
-    }
-    proto = Object.getPrototypeOf(proto);
-  }
-  return false;
+  return superClass.isPrototypeOf(subClass);
 }
 
 export * from './debug_log';
