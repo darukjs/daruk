@@ -4,6 +4,8 @@
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
     "build": "rm -rf ./build && tsc",
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test": "TS_NODE_FILES=true nyc --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
@@ -34,6 +36,7 @@
     "@types/mocha": "^5.2.5",
     "@types/sinon": "^7.0.10",
     "@types/supertest": "^2.0.7",
+    "all-contributors-cli": "^6.3.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
