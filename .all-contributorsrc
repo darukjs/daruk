@@ -19,6 +19,16 @@
         "code",
         "design"
       ]
+    },
+    {
+      "login": "Youjingyu",
+      "name": "whale",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15033260?v=4",
+      "profile": "https://github.com/Youjingyu",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7
