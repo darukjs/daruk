@@ -29,7 +29,7 @@ Daruk 基于 koa2，包含以下核心功能：
 - 支持线上实时性能分析
 - 轻量级的链路追踪
 
-## 快速上手
+## Installation & Quick start
 
 ```bash
 # 全局安装daurk脚手架
@@ -44,11 +44,11 @@ cd daruk-example
 npm run dev
 ```
 
-## 演示视频
+## Demo video
 
-<p align="left"><a href="https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0" target="_blank"><img width="60%" src="https://user-images.githubusercontent.com/289225/54988270-091b2f80-4ff1-11e9-9ccb-6057a26c5706.png" alt="daruk web framework video demo"></a></p>
+<p align="left"><a href="https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0" target="_blank">点击开始</a></p>
 
-## 更详细的文档
+## Docs
 
 查看 Daruk 文档[快速开始](https://daruk-framework.github.io/daruk.org/quick-start.html)吧！
 
