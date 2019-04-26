@@ -7,7 +7,6 @@ type RecursivePartial<T> = {
 };
 
 export interface Options {
-  routerPath: string;
   servicePath: string;
   controllerPath: string;
   utilPath: string;

@@ -8,7 +8,6 @@ import { Options } from '../../types/daruk_options';
 export default function getDefaultOptions(rootPath: string, name: string, debug: boolean): Options {
   return {
     rootPath,
-    routerPath: join(rootPath, 'routers'),
     servicePath: join(rootPath, 'services'),
     gluePath: join(rootPath, 'glues'),
     timerPath: join(rootPath, 'timers'),
