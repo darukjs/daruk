@@ -14,11 +14,11 @@
 
 [Chinese Document](./CN.md)
 
-[Daruk](https://daruk-framework.github.io/daruk.org) is a lightweight web framework base on [Koa](https://github.com/koajs/koa) and written in [Typescript](https://www.typescriptlang.org/).Koa is original http server implementation if you used it. In the daily development,we have to use many open source middleware in Koa to implement scaffold, routing, abstraction and some components such as logging, monitoring, etc.
+[Daruk](https://daruk-framework.github.io/daruk.org) is a lightweight web framework base on [Koa](https://github.com/koajs/koa) and written in [Typescript](https://www.typescriptlang.org/). Koa is original http server implementation if you used it. In the daily development,we have to use many open source middleware in Koa to implement scaffold, routing, abstraction and some components such as logging, monitoring, etc.
 
 We can create your web project by Daruk scaffold for business. Daruk core is lightweight and easy extension and learing, but it can provides more options for developer to rapid development such as constraints directory specification and code style.
 
-Daruk, it comes from [The Legend of Zelda: Breath of the Wild](https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild) One of the four heroes,it have symbol of guardian ability. The goal of the framework is also as it.
+Daruk, it comes from [The Legend of Zelda: Breath of the Wild](https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild) one of the four heroes,it have symbol of guardian ability. The goal of the framework is also as it.
 
 Daruk is base on Koa2, includes features:
 
