@@ -4,7 +4,6 @@ const path_1 = require("path");
 function getDefaultOptions(rootPath, name, debug) {
     return {
         rootPath,
-        routerPath: path_1.join(rootPath, 'routers'),
         servicePath: path_1.join(rootPath, 'services'),
         gluePath: path_1.join(rootPath, 'glues'),
         timerPath: path_1.join(rootPath, 'timers'),
