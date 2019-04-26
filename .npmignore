@@ -12,3 +12,5 @@ test.js
 .vscode
 coverage
 .nyc_output
+.travis.yml
+coverage.lcov
