@@ -4,6 +4,7 @@
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
+    "dev": "TS_NODE_FILES=true NODE_ENV=dev ts-node --project ./tsconfig.json",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "build": "rm -rf ./build && tsc",
@@ -42,7 +43,7 @@
     "nyc": "^13.1.0",
     "sinon": "^7.3.0",
     "supertest": "^3.3.0",
-    "ts-node": "^7.0.1",
+    "ts-node": "^8.1.0",
     "tslint": "^5.12.1",
     "tslint-config-alloy": "^0.2.1",
     "tslint-config-prettier": "^1.17.0",
