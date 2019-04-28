@@ -22,8 +22,6 @@
     "koa-bodyparser": "^4.2.1",
     "koa-ejs": "^4.2.0",
     "koa-favicon": "^2.0.1",
-    "koa-static": "^5.0.0",
-    "request": "^2.88.0",
     "sqlite3": "^4.0.6",
     "typeorm": "^0.2.16"
   }
