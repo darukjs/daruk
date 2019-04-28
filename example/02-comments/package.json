@@ -1,0 +1,30 @@
+{
+  "name": "02-mvc-dog-app",
+  "version": "1.0.0",
+  "description": "daruk mv dog app",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "TS_NODE_FILES=true NODE_ENV=dev ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "daruk",
+    "example"
+  ],
+  "author": "xiaojue",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^8.1.0"
+  },
+  "dependencies": {
+    "@types/koa-bodyparser": "^4.2.2",
+    "daruk": "^0.3.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "^4.2.0",
+    "koa-favicon": "^2.0.1",
+    "koa-static": "^5.0.0",
+    "request": "^2.88.0",
+    "sqlite3": "^4.0.6",
+    "typeorm": "^0.2.16"
+  }
+}

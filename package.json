@@ -4,7 +4,6 @@
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
-    "dev": "TS_NODE_FILES=true NODE_ENV=dev ts-node --project ./tsconfig.json",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "build": "rm -rf ./build && tsc",
