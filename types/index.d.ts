@@ -18,6 +18,8 @@ declare module 'daruk' {
   interface Glue {}
   interface Service {}
   interface Controller {}
+  interface Request extends Koa.Request {}
+  interface Response extends Koa.Response {}
 
   type ExtractInterface<T> = { [P in keyof T]: new (ctx: Context) => T[P] };
 
