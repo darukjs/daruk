@@ -5,5 +5,6 @@
   "git.enableSmartCommit": true,
   "tslint.autoFixOnSave": true,
   "workbench.iconTheme": "vscode-icons",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "javascript.implicitProjectConfig.experimentalDecorators": true
 }
