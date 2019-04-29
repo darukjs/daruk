@@ -18,7 +18,7 @@
 
 We can create your web project by Daruk scaffold for business. Daruk core is lightweight and easy extension and learing, but it can provides more options for developer to rapid development such as constraints directory specification and code style.
 
-Daruk, it comes from [The Legend of Zelda: Breath of the Wild](https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild) one of the four heroes,it have symbol of guardian ability. The goal of the framework is also as it.
+Daruk, it comes from [The Legend of Zelda: Breath of the Wild](https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild) one of the four heroes, it have symbol of guardian ability. The goal of the framework is also as it.
 
 Daruk is base on Koa2, includes features:
 
