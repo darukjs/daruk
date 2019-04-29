@@ -31,8 +31,8 @@
     "@types/node" "*"
 
 "@types/express-serve-static-core@*":
-  version "4.16.3"
-  resolved "https://registry.npm.taobao.org/@types/express-serve-static-core/download/@types/express-serve-static-core-4.16.3.tgz#49d9cea50e801f8bf757702060752fe65f169ba7"
+  version "4.16.4"
+  resolved "https://registry.npm.taobao.org/@types/express-serve-static-core/download/@types/express-serve-static-core-4.16.4.tgz#56bb8be4559401d68af4a3624ae9dd3166103e60"
   dependencies:
     "@types/node" "*"
     "@types/range-parser" "*"
@@ -82,11 +82,11 @@
 
 "@types/node@*":
   version "11.13.8"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-11.13.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-11.13.8.tgz#e5d71173c95533be9842b2c798978f095f912aab"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-11.13.8.tgz#e5d71173c95533be9842b2c798978f095f912aab"
 
 "@types/node@^10.12.18":
   version "10.14.6"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-10.14.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-10.14.6.tgz#9cbfcb62c50947217f4d88d4d274cc40c22625a9"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-10.14.6.tgz#9cbfcb62c50947217f4d88d4d274cc40c22625a9"
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -100,10 +100,10 @@
     "@types/mime" "*"
 
 accepts@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.npm.taobao.org/accepts/download/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
+  version "1.3.6"
+  resolved "https://registry.npm.taobao.org/accepts/download/accepts-1.3.6.tgz#27de8682f0833e966dde5c5d7a63ec8523106e4b"
   dependencies:
-    mime-types "~2.1.18"
+    mime-types "~2.1.24"
     negotiator "0.6.1"
 
 ansi-styles@^3.2.1:
@@ -164,7 +164,7 @@ chai@^4.2.0:
 
 chalk@^2.4.1:
   version "2.4.2"
-  resolved "https://registry.npm.taobao.org/chalk/download/chalk-2.4.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fchalk%2Fdownload%2Fchalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
+  resolved "https://registry.npm.taobao.org/chalk/download/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   dependencies:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
@@ -285,9 +285,8 @@ daruk-request-id@^0.1.0:
   dependencies:
     uuid "^3.3.2"
 
-daruk@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npm.taobao.org/daruk/download/daruk-0.3.0.tgz#a5d2414d9d108986e92677863e4af20ea9faabc7"
+"daruk@file:../..":
+  version "0.3.8"
   dependencies:
     "@types/koa" "^2.0.46"
     "@types/koa-router" "^7.0.37"
@@ -308,13 +307,13 @@ daruk@^0.3.0:
 
 debug@^3.1.0:
   version "3.2.6"
-  resolved "https://registry.npm.taobao.org/debug/download/debug-3.2.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
+  resolved "https://registry.npm.taobao.org/debug/download/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   dependencies:
     ms "^2.1.1"
 
 debug@~3.1.0:
   version "3.1.0"
-  resolved "https://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  resolved "https://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
 
@@ -419,13 +418,13 @@ has-flag@^3.0.0:
   resolved "https://registry.npm.taobao.org/has-flag/download/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
 
 http-assert@^1.3.0:
-  version "1.4.0"
-  resolved "https://registry.npm.taobao.org/http-assert/download/http-assert-1.4.0.tgz#0e550b4fca6adf121bbeed83248c17e62f593a9a"
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/http-assert/download/http-assert-1.4.1.tgz#c5f725d677aa7e873ef736199b89686cceb37878"
   dependencies:
     deep-equal "~1.0.1"
-    http-errors "~1.7.1"
+    http-errors "~1.7.2"
 
-http-errors@^1.3.1, http-errors@^1.6.3, http-errors@~1.7.1:
+http-errors@^1.3.1, http-errors@^1.6.3, http-errors@~1.7.2:
   version "1.7.2"
   resolved "https://registry.npm.taobao.org/http-errors/download/http-errors-1.7.2.tgz#4f5029cf13239f31036e5b2e55292bcfbcc85c8f"
   dependencies:
@@ -543,7 +542,7 @@ kuler@1.0.x:
 
 lodash@^4.17.11:
   version "4.17.11"
-  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.11.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
 logform@^2.1.1:
   version "2.1.2"
@@ -571,7 +570,7 @@ mime-db@1.40.0:
   version "1.40.0"
   resolved "https://registry.npm.taobao.org/mime-db/download/mime-db-1.40.0.tgz#a65057e998db090f732a68f6c276d387d4126c32"
 
-mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.18, mime-types@~2.1.24:
+mime-types@^2.1.12, mime-types@^2.1.18, mime-types@~2.1.24:
   version "2.1.24"
   resolved "https://registry.npm.taobao.org/mime-types/download/mime-types-2.1.24.tgz#b6f8d0b3e951efb77dedeca194cff6d16f676f81"
   dependencies:
