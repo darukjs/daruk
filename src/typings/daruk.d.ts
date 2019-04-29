@@ -1,8 +1,8 @@
 // import * as daruk from "./build/index";
-import KoaLogger = require('daruk-logger');
-import Koa = require('koa');
-import Http = require('http');
 import ExitHook = require('daruk-exit-hook');
+import KoaLogger = require('daruk-logger');
+import Http = require('http');
+import Koa = require('koa');
 import { Options } from '../../types/daruk_options';
 
 export namespace Daruk {

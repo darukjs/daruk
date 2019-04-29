@@ -10,9 +10,7 @@
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test": "TS_NODE_FILES=true nyc --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./**/*.ts ./src/**/*.ts",
-    "publish": "npm run build && cnpm publish",
-    "diff": "arc diff --cc=#mfe_seniors --reviewers=#mfe_HdFigureDetails",
-    "land": "arc land --onto developer"
+    "publish": "npm run build && cnpm publish"
   },
   "types": "./types/index.d.ts",
   "repository": {
