@@ -13,6 +13,6 @@
     "ts-node": "^8.1.0"
   },
   "dependencies": {
-    "daruk": "^0.3.0"
+    "daruk": "file:../../"
   }
 }

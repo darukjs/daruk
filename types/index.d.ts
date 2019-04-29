@@ -2,8 +2,8 @@ import KoaLogger = require('daruk-logger');
 import EventEmitter = require('events');
 import Http = require('http');
 import Https = require('https');
-import * as Router from 'koa-router';
 import * as Koa from 'koa';
+import * as Router from 'koa-router';
 import { Options, PartialOptions } from './daruk_options';
 
 interface RegisterDes {
@@ -51,7 +51,7 @@ declare module 'daruk' {
     public constructor(name: string, options: PartialOptions);
     public run(port: number | string, host?: string | Function, cb?: Function): Http.Server;
     public serverReady(server: Http.Server | Https.Server): void;
-    public registerTimer: (describe: RegisterDes | Array<RegisterDes>) => void;
+    public registerTimer(describe: RegisterDes | Array<RegisterDes>): void;
     public registerService(describe: RegisterDes | Array<RegisterDes>): void;
     public registerMiddleware(describe: RegisterDes | Array<RegisterDes>): void;
     public registerController(describe: RegisterDes | Array<RegisterDes>): void;
@@ -93,10 +93,10 @@ declare module 'daruk' {
 
   export const middleware: (middlewareName: string) => MethodDecorator;
 
-  type PropDecoratorFunc = (field: string) => PropertyDecorator;
+  type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 
   export const config: PropDecoratorFunc;
   export const util: PropDecoratorFunc;
   export const glue: PropDecoratorFunc;
-  export const logger: (fileInfo: string) => PropertyDecorator;
+  export const logger: (fileInfo?: string) => PropertyDecorator;
 }

@@ -3,5 +3,5 @@ declare module 'http-server-shutdown' {
     public serverClose: Function;
     public constructor(server: any, options: any);
   }
-  export = ShutDown
+  export = ShutDown;
 }
