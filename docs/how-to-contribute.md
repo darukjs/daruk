@@ -28,7 +28,7 @@ In the package.json the dependencies with daruk like this:
     "ts-node": "^8.1.0"
   },
   "dependencies": {
-    "daruk": "files:../../"
+    "daruk": "file:../../"
   }
 }
 ```
