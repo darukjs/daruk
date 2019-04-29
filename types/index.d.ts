@@ -93,10 +93,10 @@ declare module 'daruk' {
 
   export const middleware: (middlewareName: string) => MethodDecorator;
 
-  type PropDecoratorFunc = (field: string) => PropertyDecorator;
+  type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 
   export const config: PropDecoratorFunc;
   export const util: PropDecoratorFunc;
   export const glue: PropDecoratorFunc;
-  export const logger: (fileInfo: string) => PropertyDecorator;
+  export const logger: (fileInfo?: string) => PropertyDecorator;
 }
