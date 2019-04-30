@@ -5,13 +5,19 @@
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![PR's Welcome][pr-welcoming-image]][pr-welcoming-url]
+![GitHub closed issues](https://img.shields.io/github/issues-closed/daruk-framework/daruk.svg)
 ![npm](https://img.shields.io/npm/dm/daruk.svg)
 [![Test coverage][coveralls-image]][coveralls-url]
+![GitHub top language](https://img.shields.io/github/languages/top/daruk-framework/daruk.svg)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/daruk-framework/daruk.svg)
 [![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 [![HitCount](http://hits.dwyl.io/daruk-framework/daruk.svg)](http://hits.dwyl.io/daruk-framework/daruk)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/daruk-framework/daruk/master.svg)
 [![Gitter](https://badges.gitter.im/daruk_framework/community.svg)](https://gitter.im/daruk_framework/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![start with why](https://img.shields.io/badge/start%20with-why%3F-brightgreen.svg?style=flat)](https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0)
+![GitHub language count](https://img.shields.io/github/languages/count/daruk-framework/daruk.svg)
+![APM](https://img.shields.io/apm/l/vim-mode.svg)
 
 # Daruk
 
