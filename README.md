@@ -33,7 +33,7 @@ Daruk is base on Koa2, includes features:
 - The MVC development of object-oriented
 - Supporting the development of the module
 
-## Installation & Quick start
+## Installation scaffolding
 
 ```bash
 # install daruk scaffold cli
@@ -48,6 +48,47 @@ cd daruk-example
 npm run dev
 ```
 
+## Quick start
+
+You can write your code shown below :
+
+```typescript
+import { Daruk } from 'daruk';
+
+const port = 3000;
+const myApp = new Daruk('darukProject', {
+  rootPath: __dirname,
+  debug: process.env.NODE_ENV === 'dev'
+});
+
+myApp.run(port);
+```
+
+`controllers/index.ts`:
+
+```typescript
+import { BaseController, config, Context, Daruk, get, middleware, util } from 'daruk';
+
+export default class Index extends BaseController {
+  @util('getToday')
+  public getToday: Daruk['util']['getToday'];
+  @config('author')
+  public author: Daruk['config']['author'];
+  @config('version')
+  public version: Daruk['config']['version'];
+  @middleware('cors')
+  @get('/')
+  public async index(ctx: Context, next: Function) {
+    const weather = await ctx.service.weather.getWeather();
+    ctx.body = `Hi, ${this.author}, project version is ${
+      this.version
+    }, Today is ${this.getToday()}, weather is ${weather}`;
+  }
+}
+```
+
+More information you can check out [example/03-weather](./example/03-weather).
+
 ## Demo video
 
 <p align="left"><a href="https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0" target="_blank">Play</a></p>
@@ -55,6 +96,12 @@ npm run dev
 ## Docs
 
 More docs: [Quick Start](https://daruk-framework.github.io/daruk.org/)
+
+## How to Contribute
+
+Please let us know how can we help. Do check out issues for bug reports or suggestions first.
+
+To become a contributor, please follow our [contributing guide](./docs/how-to-contribute.md)
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
