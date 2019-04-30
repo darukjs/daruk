@@ -9,7 +9,9 @@
 [![Test coverage][coveralls-image]][coveralls-url]
 [![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![HitCount](http://hits.dwyl.io/daruk-framework/daruk.svg)](http://hits.dwyl.io/daruk-framework/daruk)
 [![Gitter](https://badges.gitter.im/daruk_framework/community.svg)](https://gitter.im/daruk_framework/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![start with why](https://img.shields.io/badge/start%20with-why%3F-brightgreen.svg?style=flat)](https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0)
 
 # Daruk
 
@@ -89,10 +91,6 @@ export default class Index extends BaseController {
 ```
 
 More information you can check out [example/03-weather](./example/03-weather).
-
-## Demo video
-
-<p align="left"><a href="https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0" target="_blank">Play</a></p>
 
 ## Docs
 
