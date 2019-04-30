@@ -1,7 +1,7 @@
 {
-  "name": "03-weather",
+  "name": "04-timers",
   "version": "1.0.0",
-  "description": "daruk weather",
+  "description": "daruk timers",
   "main": "index.js",
   "scripts": {
     "dev": "TS_NODE_FILES=true NODE_ENV=dev ts-node index.ts",
@@ -13,8 +13,6 @@
     "ts-node": "^8.1.0"
   },
   "dependencies": {
-    "daruk": "file:../../",
-    "iconv-lite": "^0.4.24",
-    "request-promise": "^4.2.4"
+    "daruk": "file:../../"
   }
 }
