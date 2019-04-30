@@ -1,0 +1,18 @@
+{
+  "name": "01-lifecycle",
+  "version": "1.0.0",
+  "description": "daruk lifecycle",
+  "main": "index.js",
+  "scripts": {
+    "dev": "TS_NODE_FILES=true NODE_ENV=dev ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xiaojue",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^8.1.0"
+  },
+  "dependencies": {
+    "daruk": "file:../../"
+  }
+}
