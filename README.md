@@ -9,6 +9,7 @@
 [![Test coverage][coveralls-image]][coveralls-url]
 [![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![Gitter](https://badges.gitter.im/daruk_framework/community.svg)](https://gitter.im/daruk_framework/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Daruk
 
