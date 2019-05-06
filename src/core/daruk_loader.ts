@@ -9,6 +9,7 @@ import path = require('path');
 import { Daruk } from '../typings/daruk';
 import { isJsTsFile, isSubClass, JsTsReg, uRequire } from '../utils';
 import BaseContext from './base_context';
+import { normalize } from 'upath';
 
 const join = path.join;
 const isFn = is.fn;
@@ -89,35 +90,37 @@ class DarukLoader {
     // 以路由的 path 作为 key 保存 controller
     const routePath2ControllerMap: any = {};
     let routers = this.getFilePathRecursive(path);
-    routers.forEach((file: string) => {
-      let controller = uRequire(file);
-      assert(
-        isSubClass(controller, BaseContext),
-        `[controller must export a subclass of Daruk.BaseController in path: ${file}`
-      );
-      let RoutePath = file.replace(path, '').replace(JsTsReg, '');
+    routers
+      .map((router: string) => normalize(router))
+      .forEach((file: string) => {
+        let controller = uRequire(file);
+        assert(
+          isSubClass(controller, BaseContext),
+          `[controller must export a subclass of Daruk.BaseController in path: ${file}`
+        );
+        let RoutePath = file.replace(path, '').replace(JsTsReg, '');
 
-      // 验证类名必须是首字母大写的驼峰形式，并且和路由 path 匹配
-      const validClassName = RoutePath
-        // 首字母大写
-        .replace(/(^[a-z])/, (matches: string, capture: string) => {
-          return capture.toLocaleUpperCase();
-        })
-        // 斜线后面的字母大写
-        .replace(/\/([a-z])/g, (matches: string, capture: string) => {
-          return capture.toLocaleUpperCase();
-        })
-        // 去除所有斜线
-        .replace(/\//g, '');
-      assert(
-        validClassName === controller.name,
-        `controller class name should be '${validClassName}' ( CamelCase style and match route path ) in path: ${file}`
-      );
+        // 验证类名必须是首字母大写的驼峰形式，并且和路由 path 匹配
+        const validClassName = RoutePath
+          // 首字母大写
+          .replace(/(^[a-z])/, (matches: string, capture: string) => {
+            return capture.toLocaleUpperCase();
+          })
+          // 斜线后面的字母大写
+          .replace(/\/([a-z])/g, (matches: string, capture: string) => {
+            return capture.toLocaleUpperCase();
+          })
+          // 去除所有斜线
+          .replace(/\//g, '');
+        assert(
+          validClassName === controller.name,
+          `controller class name should be '${validClassName}' ( CamelCase style and match route path ) in path: ${file}`
+        );
 
-      // 认为 index 文件名对应的路由是 /
-      RoutePath = RoutePath.replace(/\/index$/g, '/');
-      routePath2ControllerMap[RoutePath] = controller;
-    });
+        // 认为 index 文件名对应的路由是 /
+        RoutePath = RoutePath.replace(/\/index$/g, '/');
+        routePath2ControllerMap[RoutePath] = controller;
+      });
     this.app.mergeModule('controller', routePath2ControllerMap);
   }
   /**
