@@ -10,15 +10,19 @@ import auth = require('basic-auth');
 export default function(app: Daruk.DarukCore) {
   let monitor: Monitor;
 
-  return async function DarukMonitor (ctx: any, next: any) {
+  return async function DarukMonitor(ctx: any, next: any) {
     if (ctx.request && /^\/monitor\//.test(ctx.request.url)) {
       // 访问监控路由需要通过验证
       const authRes = doAuth(ctx, app.options.monitor.auth);
       if (authRes) {
-        if (!monitor) monitor = getMonitor();
-        let result = monitor.getAnalytics(ctx);
-        if (result) {
-          ctx.body = await result;
+        try {
+          if (!monitor) monitor = getMonitor();
+          let result = monitor.getAnalytics(ctx);
+          if (result) {
+            ctx.body = await result;
+          }
+        } catch (e) {
+          ctx.body = e.message;
         }
       }
     }

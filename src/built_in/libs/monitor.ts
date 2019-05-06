@@ -164,11 +164,14 @@ class Monitor extends EventEmitter {
       });
     });
   }
+  public async notSupport() {
+    return 'not support profiler';
+  }
   /**
    * 处理路由中间件
    */
   public getAnalytics(ctx: any) {
-    let url = ctx.request.url.split('?')[0];
+    let url: string = ctx.request.url.split('?')[0];
     let period = ctx.query.period || defaultPeriod;
     // console.log('url:', url)
     switch (url) {
