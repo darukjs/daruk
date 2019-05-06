@@ -8,13 +8,13 @@ import is = require('is');
 import path = require('path');
 // tslint:disable-next-line
 import 'reflect-metadata';
+import { join as ujoin } from 'upath';
 import { Options } from '../../types/daruk_options';
 import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH, MIDDLEWARE_NAME } from '../decorators/constants';
 import { Daruk } from '../typings/daruk';
 import { filterBuiltInModule } from '../utils';
 import Events from './daruk_event';
 import DarukLoader from './daruk_loader';
-import { join as ujoin } from 'upath';
 
 const join = path.join;
 const isFn = is.fn;

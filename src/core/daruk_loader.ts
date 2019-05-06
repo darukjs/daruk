@@ -6,10 +6,10 @@ import assert = require('assert');
 import fs = require('fs');
 import is = require('is');
 import path = require('path');
+import { normalize } from 'upath';
 import { Daruk } from '../typings/daruk';
 import { isJsTsFile, isSubClass, JsTsReg, uRequire } from '../utils';
 import BaseContext from './base_context';
-import { normalize } from 'upath';
 
 const join = path.join;
 const isFn = is.fn;
