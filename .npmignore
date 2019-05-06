@@ -1,6 +1,7 @@
 src
 test
 docs
+example
 tsconfig.json
 tslint.json
 yarn.lock
