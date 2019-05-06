@@ -8,7 +8,7 @@
     "contributors:generate": "all-contributors generate",
     "build": "rimraf -rf ./build && tsc",
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "test": "TS_NODE_FILES=true nyc --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
+    "test": "cross-env TS_NODE_FILES=true nyc --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./src/**/*.ts",
     "publish": "npm run build && cnpm publish"
   },
@@ -38,6 +38,7 @@
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
+    "rimraf": "^2.6.3",
     "sinon": "^7.3.0",
     "supertest": "^3.3.0",
     "ts-node": "^8.1.0",
@@ -45,9 +46,9 @@
     "tslint-config-alloy": "^0.2.1",
     "tslint-config-prettier": "^1.17.0",
     "typescript": "^3.0.1",
+    "cross-env": "^5.2.0",
     "v8-analytics": "^1.3.7",
-    "v8-profiler-node8": "^6.0.1",
-    "rimraf": "^2.6.3"
+    "v8-profiler-node8": "^6.0.1"
   },
   "dependencies": {
     "@types/koa": "^2.0.46",
