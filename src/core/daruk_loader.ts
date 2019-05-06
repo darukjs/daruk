@@ -98,7 +98,7 @@ class DarukLoader {
           isSubClass(controller, BaseContext),
           `[controller must export a subclass of Daruk.BaseController in path: ${file}`
         );
-        let RoutePath = file.replace(path, '').replace(JsTsReg, '');
+        let RoutePath = file.replace(normalize(path), '').replace(JsTsReg, '');
 
         // 验证类名必须是首字母大写的驼峰形式，并且和路由 path 匹配
         const validClassName = RoutePath

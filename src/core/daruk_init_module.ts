@@ -14,6 +14,7 @@ import { Daruk } from '../typings/daruk';
 import { filterBuiltInModule } from '../utils';
 import Events from './daruk_event';
 import DarukLoader from './daruk_loader';
+import { join as ujoin } from 'upath';
 
 const join = path.join;
 const isFn = is.fn;
@@ -112,7 +113,7 @@ export default class DarukInitModule {
    * @desc service 在 HelpContextClass 中生效，不需要初始化
    * 仅打印日志
    */
-  private initService () {
+  private initService() {
     this.logModuleMsg('service', this.module.services);
   }
 
@@ -130,7 +131,7 @@ export default class DarukInitModule {
     // 再次保存 middlewareOrder，使外部对最终的 middlewareOrder 可见
     this.module.middlewareOrder = middlewareOrder;
     // tslint:disable-next-line
-    const self = this
+    const self = this;
     middlewareOrder.forEach(function useMiddleware(name: string) {
       const middleware = self.module.middleware[name];
       assert(is.undefined(middleware) === false, `[middleware] ${name} is not found`);
@@ -163,7 +164,7 @@ export default class DarukInitModule {
     // 用于验证是否定义了重复路由
     const routeMap: { [key: string]: Array<string> } = {};
     // tslint:disable-next-line
-    const self = this
+    const self = this;
     // controllers 对象的 key 就是路由 path 的前缀
     Object.keys(controllers).forEach(function handleControllers(prefixPath: string) {
       const ControllerClass = controllers[prefixPath];
@@ -175,7 +176,7 @@ export default class DarukInitModule {
         const { method, path } = Reflect.getMetadata(CONTROLLER_PATH, ControllerClass, funcName);
         // 避免解析出的路由没有 / 前缀
         // 并保证前后都有 /，方便后续比对路由 key
-        const routePath = join('/', prefixPath, path, '/');
+        const routePath = ujoin('/', prefixPath, path, '/');
         // 将路由按照 http method 分组
         routeMap[method] = routeMap[method] || [];
         // 判断路由是否重复定义
@@ -190,11 +191,15 @@ export default class DarukInitModule {
 
         // 绑定针对单个路由的中间件
         // 获取针对路由的中间件名字
-        const middlewareNames:Array<string> = Reflect.getMetadata(MIDDLEWARE_NAME, ControllerClass, funcName);
+        const middlewareNames: Array<string> = Reflect.getMetadata(
+          MIDDLEWARE_NAME,
+          ControllerClass,
+          funcName
+        );
         // 是否使用了中间件装饰器
         if (middlewareNames) {
           // 可以对单个路由应用多个中间件
-          middlewareNames.forEach(name => {
+          middlewareNames.forEach((name) => {
             const middleware = self.module.middleware[name];
             assert(isFn(middleware), `[middleware] ${name} is not found or not a function`);
             self.router.use(routePath, middleware);
@@ -203,18 +208,18 @@ export default class DarukInitModule {
 
         // 初始化路由
         self.prettyLog(`${method} - ${routePath}`, { type: 'router', init: true });
-        self.router[method](
-          routePath,
-          async function routeHandle(ctx: Daruk.Context, next: () => Promise<void>): Promise<any>{
-            let controllerInstance = new ControllerClass(ctx);
-            await controllerInstance[funcName](ctx, next);
-            // 允许用户在 controller 销毁前执行清理逻辑
-            if (isFn(controllerInstance._destroy)) {
-              controllerInstance._destroy();
-            }
-            controllerInstance = null;
+        self.router[method](routePath, async function routeHandle(
+          ctx: Daruk.Context,
+          next: () => Promise<void>
+        ): Promise<any> {
+          let controllerInstance = new ControllerClass(ctx);
+          await controllerInstance[funcName](ctx, next);
+          // 允许用户在 controller 销毁前执行清理逻辑
+          if (isFn(controllerInstance._destroy)) {
+            controllerInstance._destroy();
           }
-        );
+          controllerInstance = null;
+        });
       });
     });
 
@@ -229,7 +234,7 @@ export default class DarukInitModule {
     const defaultJob = {
       start: true,
       // https://www.zeitverschiebung.net/cn/all-time-zones.html
-      timeZone: 'Asia/Shanghai',
+      timeZone: 'Asia/Shanghai'
     };
     Object.keys(timer).forEach(function initTimer(jobName: string) {
       let job = timer[jobName];
