@@ -7,7 +7,7 @@ import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
 /**
  * @desc 生成 http method 装饰器
- * @param string method - http method，如 get、post、head
+ * @param {string} method - http method，如 get、post、head
  * @return Decorator - 装饰器
  */
 function createMethodDecorator(method: string) {
