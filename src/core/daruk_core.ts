@@ -48,8 +48,8 @@ class DarukCore extends Koa {
   public initEnv: () => void;
   /**
    * @desc 构造函数
-   * @param string name - app 名字，会用于日志输出、邮件报警等
-   * @param PartialOptions options - 项目配置
+   * @param {string} name - app 名字，会用于日志输出、邮件报警等
+   * @param {PartialOptions} options - 项目配置
    */
   public constructor(name: string, options: PartialOptions) {
     super();
@@ -173,7 +173,7 @@ class DarukCore extends Koa {
   }
   /**
    * @desc 模拟 ctx，从而可以从非请求链路中得到 ctx
-   * @param Object req - 配置模拟请求的 headers、query、url 等
+   * @param {Object, undefined} req - 配置模拟请求的 headers、query、url 等
    * @return Daruk.Context
    */
   public mockContext(req?: {}) {
