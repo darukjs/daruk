@@ -1,7 +1,7 @@
 import chai = require('chai');
 import path = require('path');
 import sinon = require('sinon');
-import { debugLog, isSubClass, uRequire } from '../src/utils';
+import { debugLog, isJsTsFile, isSubClass, uRequire } from '../src/utils';
 
 const assert = chai.assert;
 
@@ -28,5 +28,12 @@ describe('utils', () => {
     class C {}
     assert(isSubClass(B, A) === true);
     assert(isSubClass(B, C) === false);
+  });
+  it('isJsTsFile', () => {
+    assert(isJsTsFile('.js') === true);
+    assert(isJsTsFile('.ts') === true);
+    assert(isJsTsFile('foo.ts') === true);
+    assert(isJsTsFile('foo.js') === true);
+    assert(isJsTsFile('foo') === false);
   });
 });
