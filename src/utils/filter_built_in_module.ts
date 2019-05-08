@@ -8,7 +8,7 @@ import { isJsTsFile, JsTsReg } from './is_js_ts';
 
 /**
  * @desc 获取内置模块名
- * @param string path - 模块路径
+ * @param {string} path - 模块路径
  * @return Array<string> - 内置模块名字
  */
 function getBuiltInModuleNames(path: string) {

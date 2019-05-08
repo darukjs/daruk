@@ -11,7 +11,7 @@ import { CONTROLLER_PREFIX_PATH } from './constants';
 
 /**
  * @desc controller 装饰器，将类装饰为 controller
- * @param string prefixPath - 路由前缀
+ * @param {string} prefixPath - 路由前缀
  * @return Decorator - 装饰器
  */
 export default function controller(prefixPath: string) {
