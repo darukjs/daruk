@@ -49,6 +49,16 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "myluluy",
+      "name": "arck.liu",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4242799?v=4",
+      "profile": "https://github.com/myluluy",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
