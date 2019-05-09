@@ -49,8 +49,6 @@
         "test",
         "code"
       ]
-<<<<<<< HEAD
-=======
     },
     {
       "login": "myluluy",
@@ -61,7 +59,6 @@
         "code",
         "doc"
       ]
->>>>>>> bcc764163f1b0212eec7ae0104b1aee6a9c25666
     }
   ],
   "contributorsPerLine": 7
