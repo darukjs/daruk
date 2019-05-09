@@ -5,7 +5,7 @@
  */
 
 import request = require('supertest');
-import {  Daruk } from '../src';
+import { Daruk } from '../src';
 import { getApp } from './utils';
 
 const port = 3000;
@@ -16,7 +16,7 @@ describe('life destroy', () => {
   let server: Daruk['httpServer'];
   before((done) => {
     app = getApp('life-destroy');
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
   });
 

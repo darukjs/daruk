@@ -10,7 +10,7 @@ describe('define route', () => {
   let server: Daruk['httpServer'];
   before((done) => {
     app = getApp('load-controllers');
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
   });
 

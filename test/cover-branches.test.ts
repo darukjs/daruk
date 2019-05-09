@@ -18,12 +18,12 @@ describe('cover-branches', () => {
     app = getApp('cover-branches');
 
     // 匿名中间件的情况
-    app.use((ctx:any, next: Function) => {
+    app.use((ctx: any, next: Function) => {
       return next();
     });
 
     // 传递 host 的情况
-    app.run(port, '127.0.0.1', done);
+    app.listen(port, '127.0.0.1', done);
 
     stubExit = sinon.stub(process, 'exit');
   });
@@ -35,9 +35,11 @@ describe('cover-branches', () => {
 
   it('should call prettyLog with error level when Koa error', () => {
     let prettyLogLevel = '';
-    const stubPrettyLog = sinon.stub(app, 'prettyLog').callsFake((msg, options = { level: 'info' }) => {
-      prettyLogLevel = options.level;
-    });
+    const stubPrettyLog = sinon
+      .stub(app, 'prettyLog')
+      .callsFake((msg, options = { level: 'info' }) => {
+        prettyLogLevel = options.level;
+      });
 
     const err = new Error('mockError');
     // stack 置为空，才能走到 error.stack 不存在的分支
