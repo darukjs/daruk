@@ -69,7 +69,7 @@ const myApp = new Daruk('darukProject', {
   debug: process.env.NODE_ENV === 'dev'
 });
 
-myApp.run(port);
+myApp.listen(port);
 ```
 
 `controllers/index.ts`:

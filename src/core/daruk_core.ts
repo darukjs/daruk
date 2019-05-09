@@ -9,6 +9,7 @@ import Https = require('https');
 import is = require('is');
 import Koa = require('koa');
 import Router = require('koa-router');
+import { ListenOptions } from 'net';
 import deepAssign = require('object-assign-deep');
 import path = require('path');
 import { Options, PartialOptions } from '../../types/daruk_options';
@@ -45,7 +46,6 @@ class DarukCore extends Koa {
   // 覆写 koa 的 createContext 方法声明
   public createContext: (req: any, res: any) => Daruk.Context;
   public initEnv: () => void;
-
   /**
    * @desc 构造函数
    * @param string name - app 名字，会用于日志输出、邮件报警等
@@ -187,6 +187,54 @@ class DarukCore extends Koa {
   /**
    * @desc 启动服务
    */
+  public listen(...args: any[]): Http.Server {
+    // https://github.com/nodejs/node/blob/master/lib/net.js#L182
+    let arr: any;
+    let options: {
+      path?: string;
+      port?: number;
+      host?: string;
+    } = {};
+
+    const _cb = args[args.length - 1];
+    const cb = (...arg1: any) => {
+      this.serverReady(this.httpServer);
+      if (typeof _cb === 'function') _cb(...arg1);
+      this.prettyLog(
+        `${this.name} is starting at http://${options.host ? options.host : 'localhost'}:${
+          options.port
+        }`
+      );
+    };
+    const normalizedArgsSymbol: any = Symbol('normalizedArgs');
+
+    if (args.length === 0) {
+      arr = [{}, null];
+      arr[normalizedArgsSymbol] = true;
+    } else {
+      const arg0 = args[0];
+      if (typeof arg0 === 'object' && arg0 !== null) {
+        // (options[...][, cb])
+        options = arg0;
+      } else if (this.isPipeName(arg0)) {
+        // (path[...][, cb])
+        options.path = arg0;
+      } else {
+        // ([port][, host][...][, cb])
+        options.port = arg0;
+        if (args.length > 1 && typeof args[1] === 'string') {
+          options.host = args[1];
+        }
+      }
+      if (typeof _cb === 'function') {
+        args[args.length - 1] = cb;
+      } else {
+        args.push(cb);
+      }
+    }
+    this.httpServer = super.listen(...args);
+    return this.httpServer;
+  }
   public run(port: number, host?: string | Function, cb?: Function) {
     let _cb: any = cb;
     let _host: any = host;
@@ -194,16 +242,9 @@ class DarukCore extends Koa {
       _cb = host;
       _host = undefined;
     }
-
-    const httpServer = this.listen(port, _host, () => {
-      this.serverReady(httpServer);
-      if (_cb) _cb();
-      this.prettyLog(`${this.name} is starting at http://${_host ? _host : 'localhost'}:${port}`);
-    });
-    // 保证在同步代码中也能访问到 server 实例
-    this.httpServer = httpServer;
-    return httpServer;
+    return this.listen(port, _host, _cb);
   }
+
   /**
    * @desc 服务启动后的需要完成的剩余工作
    * 如果用户不使用 run 方法启动，而是自定义启动（比如启动 https 服务）
@@ -239,6 +280,17 @@ class DarukCore extends Koa {
         this.prettyLog(`process exited: ${code}`);
       }
     });
+  }
+
+  // https://github.com/nodejs/node/blob/master/lib/net.js#L1117
+  private toNumber(x: any) {
+    // tslint:disable-next-line:no-conditional-assignment
+    return Number(x) >= 0;
+  }
+
+  // https://github.com/nodejs/node/blob/master/lib/net.js#L137
+  private isPipeName(s: any) {
+    return typeof s === 'string' && this.toNumber(s) === false;
   }
 }
 
