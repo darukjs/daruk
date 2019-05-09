@@ -6,7 +6,7 @@ import helpDecoratorClass from './help_decorator_class';
 
 /**
  * @desc 生成装饰器
- * @param string moduleName - 装饰器类型，同时也是要从 daruk 获取的模块名
+ * @param {string} moduleName - 装饰器类型，同时也是要从 daruk 获取的模块名
  * @return Decorator - 装饰器
  */
 function createDecorator(moduleName: string) {
@@ -36,7 +36,7 @@ function createDecorator(moduleName: string) {
 
 /**
  * @desc logger 装饰器
- * @param string fileInfo - 支持自定义 logger 输出的日志中的 fileinfo 字段
+ * @param {string} fileInfo - 支持自定义 logger 输出的日志中的 fileinfo 字段
  */
 function loggerDecorator(fileInfo?: string) {
   return (proto: any, propertyKey: string) => {
