@@ -91,6 +91,9 @@ declare module 'daruk' {
   export const head: MethodDecoratorFunc;
   export const all: MethodDecoratorFunc;
 
+  export const json: MethodDecoratorFunc;
+  export const JSON: MethodDecoratorFunc;
+
   export const middleware: (middlewareName: string) => MethodDecorator;
 
   type PropDecoratorFunc = (field?: string) => PropertyDecorator;
