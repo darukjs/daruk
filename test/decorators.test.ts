@@ -88,6 +88,12 @@ describe('decorators', () => {
       .expect({ foo: 1 }, done);
   });
 
+  it('decorator @prefix', (done) => {
+    request(server)
+      .get('/v1/prefix/index')
+      .expect(code200, done);
+  });
+
   it('decorator "@middleware"', (done) => {
     request(server)
       .get('/middleware')
