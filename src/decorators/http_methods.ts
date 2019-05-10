@@ -3,7 +3,7 @@ import is = require('is');
 // tslint:disable-next-line
 import 'reflect-metadata';
 import BaseContext from '../core/base_context';
-import { Daruk } from "../typings/daruk";
+import { Daruk } from '../typings/daruk';
 import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
 /**
@@ -29,7 +29,7 @@ import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
  *      }
  *    }
  */
-export function json (type = 'application/json') {
+export function json() {
   return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
 
@@ -37,7 +37,7 @@ export function json (type = 'application/json') {
       const val = await oldFunc(ctx);
       // 确保是Object类型
       ctx.body = { ...val };
-      ctx.type = type;
+      ctx.type = 'application/json';
       await next();
     };
   };
