@@ -4,7 +4,7 @@ import is = require('is');
 import 'reflect-metadata';
 import BaseContext from '../core/base_context';
 import { Daruk } from '../typings/daruk';
-import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
+import { CONTROLLER_CLASS_PREFIX, CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
 /**
  * @desc 将函数的返回打包到 ctx.body，并返回 application/json 类型
@@ -47,6 +47,19 @@ export function json() {
 export const JSON = json;
 
 /**
+ * @desc prefix 装饰器，对controller class的所有router进行path前缀修正
+ * @param {string} path - 如 /v1, /api/v1
+ * @return ClassDecorator - 装饰器
+ */
+
+export function prefix(path: string) {
+  assert(is.string(path), `[Decorator @${path}] parameter must be a string`);
+  return (target: Function) => {
+    Reflect.defineMetadata(CONTROLLER_CLASS_PREFIX, path, target);
+  };
+}
+
+/**
  * @desc 生成 http method 装饰器
  * @param {string} method - http method，如 get、post、head
  * @return Decorator - 装饰器
@@ -63,7 +76,6 @@ function createMethodDecorator(method: string) {
       funcs.push(propertyKey);
       // 保存该类中被装饰过的方法
       Reflect.defineMetadata(CONTROLLER_FUNC_NAME, funcs, target);
-      // 保存装饰器提供的路由信息
       const routerMeta = {
         method,
         path
