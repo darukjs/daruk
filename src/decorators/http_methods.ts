@@ -4,7 +4,12 @@ import is = require('is');
 import 'reflect-metadata';
 import BaseContext from '../core/base_context';
 import { Daruk } from '../typings/daruk';
-import { CONTROLLER_CLASS_PREFIX, CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
+import {
+  CONTROLLER_CLASS_PREFIX,
+  CONTROLLER_FUNC_NAME,
+  CONTROLLER_PATH,
+  CONTROLLER_REDIRECT_PATH
+} from './constants';
 
 /**
  * @desc 将函数的返回打包到 ctx.body，并返回 application/json 类型
@@ -56,6 +61,18 @@ export function prefix(path: string) {
   assert(is.string(path), `[Decorator @${path}] parameter must be a string`);
   return (target: Function) => {
     Reflect.defineMetadata(CONTROLLER_CLASS_PREFIX, path, target);
+  };
+}
+
+/**
+ * URL 重定向
+ * @param {string} path - 跳转的路径
+ */
+export function redirect(path: string) {
+  assert(is.string(path), `[Decorator @${path}] parameter must be a string`);
+  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const target = proto.constructor;
+    Reflect.defineMetadata(CONTROLLER_REDIRECT_PATH, path, target, propertyKey);
   };
 }
 
