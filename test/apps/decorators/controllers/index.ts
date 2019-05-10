@@ -10,7 +10,8 @@ import {
   options,
   patch,
   post,
-  put
+  put,
+  redirect
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
 
@@ -50,12 +51,17 @@ export default class Index extends BaseController {
   @json()
   @get('/json1')
   public json() {
-   return { foo: 1 };
+    return { foo: 1 };
   }
   @get('/json2')
   @JSON()
   public JSON() {
     return { foo: 1 };
+  }
+  @redirect('/json2')
+  @get('/redirect')
+  public redirect(ctx: Daruk.Context) {
+    ctx.body = '';
   }
 
   @middleware('routeMiddleware')

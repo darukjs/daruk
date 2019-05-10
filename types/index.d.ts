@@ -96,6 +96,7 @@ declare module 'daruk' {
   export const json: JSONDecorator;
   export const JSON: JSONDecorator;
   export const prefix: PrefixClassDecoratorFunc;
+  export const redirect: MethodDecoratorFunc;
 
   export const middleware: (middlewareName: string) => MethodDecorator;
 
