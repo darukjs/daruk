@@ -5,6 +5,7 @@ import { getApp } from './utils';
 
 const port = 3000;
 const code200 = 200;
+const code302 = 302;
 const assert = chai.assert;
 
 describe('decorators', () => {
@@ -87,7 +88,14 @@ describe('decorators', () => {
       .expect(code200)
       .expect({ foo: 1 }, done);
   });
-
+  it('decorator @redirect', (done) => {
+    request(server)
+      .get('/redirect')
+      .expect(code302)
+      .expect((response) => {
+        assert(response.header.location, '/redirect/target');
+      }, done);
+  });
   it('decorator @prefix', (done) => {
     request(server)
       .get('/v1/prefix/index')

@@ -43,6 +43,22 @@ export function json() {
   };
 }
 
+/**
+ * URL 重定向
+ * @param {string} path - 跳转的路径
+ */
+export function redirect (path: string) {
+  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const oldFunc = descriptor.value;
+
+    descriptor.value = async function jsonWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+      await oldFunc(ctx);
+      ctx.redirect(path);
+      await next();
+    };
+  };
+}
+
 // json的大写别名
 export const JSON = json;
 
