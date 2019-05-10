@@ -5,6 +5,7 @@ import { getApp } from './utils';
 
 const port = 3000;
 const code200 = 200;
+const code302 = 302;
 const assert = chai.assert;
 
 describe('decorators', () => {
@@ -12,7 +13,7 @@ describe('decorators', () => {
   let server: Daruk['httpServer'];
   before((done) => {
     app = getApp('decorators');
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
   });
 
@@ -73,6 +74,30 @@ describe('decorators', () => {
   it('decorator "@put"', (done) => {
     request(server)
       .put('/put')
+      .expect(code200, done);
+  });
+  it('decorator @json', (done) => {
+    request(server)
+      .get('/json1')
+      .expect(code200)
+      .expect({ foo: 1 }, done);
+  });
+  it('decorator @JSON', (done) => {
+    request(server)
+      .get('/json2')
+      .expect(code200)
+      .expect({ foo: 1 }, done);
+  });
+
+  it('decorator @redirect', (done) => {
+    request(server)
+      .get('/redirect')
+      .expect(code302, done);
+  });
+
+  it('decorator @prefix', (done) => {
+    request(server)
+      .get('/v1/prefix/index')
       .expect(code200, done);
   });
 

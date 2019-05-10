@@ -1,6 +1,6 @@
 {
   "name": "daruk",
-  "version": "0.4.0",
+  "version": "0.5.33",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test": "cross-env TS_NODE_FILES=true nyc --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./src/**/*.ts",
-    "publish": "npm run build && cnpm publish"
+    "prepublish": "npm run build"
   },
   "types": "./types/index.d.ts",
   "repository": {

@@ -22,7 +22,7 @@ describe('daruk-monitor', function cb() {
         auth: { ...auth }
       }
     });
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
   });
 

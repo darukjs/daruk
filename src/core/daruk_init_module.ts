@@ -10,7 +10,13 @@ import path = require('path');
 import 'reflect-metadata';
 import { join as ujoin } from 'upath';
 import { Options } from '../../types/daruk_options';
-import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH, MIDDLEWARE_NAME } from '../decorators/constants';
+import {
+  CONTROLLER_CLASS_PREFIX,
+  CONTROLLER_FUNC_NAME,
+  CONTROLLER_PATH,
+  CONTROLLER_REDIRECT_PATH,
+  MIDDLEWARE_NAME
+} from '../decorators/constants';
 import { Daruk } from '../typings/daruk';
 import { filterBuiltInModule } from '../utils';
 import Events from './daruk_event';
@@ -170,13 +176,19 @@ export default class DarukInitModule {
       const ControllerClass = controllers[prefixPath];
       // 获取类中定义了路由的方法名
       const routeFuncs = Reflect.getMetadata(CONTROLLER_FUNC_NAME, ControllerClass) || [];
-
+      // 保存装饰器提供的路由信息
+      const prefix = Reflect.getMetadata(CONTROLLER_CLASS_PREFIX, ControllerClass) || '';
       routeFuncs.forEach(function defineRoute(funcName: string) {
         // 获取装饰器注入的路由信息
         const { method, path } = Reflect.getMetadata(CONTROLLER_PATH, ControllerClass, funcName);
+        // 重定向信息
+        const redirectPath =
+          Reflect.getMetadata(CONTROLLER_REDIRECT_PATH, ControllerClass, funcName) || '';
         // 避免解析出的路由没有 / 前缀
         // 并保证前后都有 /，方便后续比对路由 key
-        const routePath = ujoin('/', prefixPath, path, '/');
+        let routePath = ujoin('/', prefixPath);
+        // 不转path，因为可能会把通配符转成unix path
+        routePath = join('/', prefix, routePath, path, '/');
         // 将路由按照 http method 分组
         routeMap[method] = routeMap[method] || [];
         // 判断路由是否重复定义
@@ -219,6 +231,10 @@ export default class DarukInitModule {
             controllerInstance._destroy();
           }
           controllerInstance = null;
+          // 增加重定向：
+          if (redirectPath) {
+            ctx.redirect(redirectPath);
+          }
         });
       });
     });

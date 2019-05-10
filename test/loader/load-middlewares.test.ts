@@ -2,7 +2,6 @@ import request = require('supertest');
 import { Daruk } from '../../src';
 import { getApp } from '../utils';
 
-
 const port = 3000;
 const code200 = 200;
 
@@ -27,7 +26,7 @@ describe('define middleware', () => {
         ]
       }
     });
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
   });
 

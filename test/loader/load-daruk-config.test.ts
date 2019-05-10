@@ -13,7 +13,7 @@ describe('load daruk.config', () => {
   let ctx: Daruk['context'];
   before((done) => {
     app = getApp('load-daruk-config');
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
     ctx = app.mockContext();
   });

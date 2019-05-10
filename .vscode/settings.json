@@ -6,5 +6,6 @@
   "tslint.autoFixOnSave": true,
   "workbench.iconTheme": "vscode-icons",
   "editor.formatOnSave": true,
-  "javascript.implicitProjectConfig.experimentalDecorators": true
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "git.ignoreLimitWarning": true
 }

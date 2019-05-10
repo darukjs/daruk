@@ -11,14 +11,14 @@ const code200 = 200;
 describe('http-server-shutdown', () => {
   let app: Daruk;
   let server: Daruk['httpServer'];
-  let stub:sinon.SinonStub;
+  let stub: sinon.SinonStub;
   before((done) => {
     app = getApp('http-server-shutdown', {
       gracefulShutdown: {
         enable: true
       }
     });
-    app.run(port, done);
+    app.listen(port, done);
     server = app.httpServer;
     // 因为 daruk-exit-hook 监听到退出信号或者退出事件时，会执行进程退出的回调然后再执行 process.exit
     // 但我们的测试中肯定是不希望真正的退出的，因此需要劫持 process.ext

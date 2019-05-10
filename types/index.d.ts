@@ -81,6 +81,8 @@ declare module 'daruk' {
   export const DarukEvents = new DarukEventsClass();
 
   type MethodDecoratorFunc = (path: string) => MethodDecorator;
+  type JSONDecorator = () => MethodDecorator;
+  type PrefixClassDecoratorFunc = (path: string) => ClassDecorator;
 
   export const post: MethodDecoratorFunc;
   export const get: MethodDecoratorFunc;
@@ -90,6 +92,11 @@ declare module 'daruk' {
   export const options: MethodDecoratorFunc;
   export const head: MethodDecoratorFunc;
   export const all: MethodDecoratorFunc;
+
+  export const json: JSONDecorator;
+  export const JSON: JSONDecorator;
+  export const prefix: PrefixClassDecoratorFunc;
+  export const redirect: MethodDecoratorFunc;
 
   export const middleware: (middlewareName: string) => MethodDecorator;
 

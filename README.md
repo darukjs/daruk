@@ -11,7 +11,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/daruk-framework/daruk.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/daruk-framework/daruk.svg)
 [![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/daruk-framework/daruk/master.svg)
 [![Gitter](https://badges.gitter.im/daruk_framework/community.svg)](https://gitter.im/daruk_framework/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![start with why](https://img.shields.io/badge/start%20with-why%3F-brightgreen.svg?style=flat)](https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0)
@@ -69,7 +69,7 @@ const myApp = new Daruk('darukProject', {
   debug: process.env.NODE_ENV === 'dev'
 });
 
-myApp.run(port);
+myApp.listen(port);
 ```
 
 `controllers/index.ts`:
@@ -122,7 +122,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="http://www.tuer.me"><img src="https://avatars3.githubusercontent.com/u/289225?v=4" width="40px;" alt="xiaojue"/><br /><sub><b>xiaojue</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=xiaojue" title="Code">💻</a> <a href="#design-xiaojue" title="Design">🎨</a></td><td align="center"><a href="https://github.com/Youjingyu"><img src="https://avatars3.githubusercontent.com/u/15033260?v=4" width="40px;" alt="whale"/><br /><sub><b>whale</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=Youjingyu" title="Code">💻</a> <a href="https://github.com/daruk-framework/daruk/commits?author=Youjingyu" title="Tests">⚠️</a></td><td align="center"><a href="https://github.com/dxil"><img src="https://avatars1.githubusercontent.com/u/17681925?v=4" width="40px;" alt="cuzz"/><br /><sub><b>cuzz</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=dxil" title="Code">💻</a> <a href="https://github.com/daruk-framework/daruk/commits?author=dxil" title="Tests">⚠️</a></td></tr></table>
+<table><tr><td align="center"><a href="http://www.tuer.me"><img src="https://avatars3.githubusercontent.com/u/289225?v=4" width="40px;" alt="xiaojue"/><br /><sub><b>xiaojue</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=xiaojue" title="Code">💻</a> <a href="#design-xiaojue" title="Design">🎨</a></td><td align="center"><a href="https://github.com/Youjingyu"><img src="https://avatars3.githubusercontent.com/u/15033260?v=4" width="40px;" alt="whale"/><br /><sub><b>whale</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=Youjingyu" title="Code">💻</a> <a href="https://github.com/daruk-framework/daruk/commits?author=Youjingyu" title="Tests">⚠️</a></td><td align="center"><a href="https://github.com/dxil"><img src="https://avatars1.githubusercontent.com/u/17681925?v=4" width="40px;" alt="cuzz"/><br /><sub><b>cuzz</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=dxil" title="Code">💻</a> <a href="https://github.com/daruk-framework/daruk/commits?author=dxil" title="Tests">⚠️</a></td><td align="center"><a href="https://www.himself65.com"><img src="https://avatars0.githubusercontent.com/u/14026360?v=4" width="40px;" alt="扩散性百万甜面包"/><br /><sub><b>扩散性百万甜面包</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=Himself65" title="Tests">⚠️</a> <a href="https://github.com/daruk-framework/daruk/commits?author=Himself65" title="Code">💻</a></td><td align="center"><a href="https://github.com/myluluy"><img src="https://avatars2.githubusercontent.com/u/4242799?v=4" width="40px;" alt="arck.liu"/><br /><sub><b>arck.liu</b></sub></a><br /><a href="https://github.com/daruk-framework/daruk/commits?author=myluluy" title="Code">💻</a> <a href="https://github.com/daruk-framework/daruk/commits?author=myluluy" title="Documentation">📖</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

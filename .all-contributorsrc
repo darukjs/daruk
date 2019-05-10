@@ -39,6 +39,26 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "Himself65",
+      "name": "扩散性百万甜面包",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/14026360?v=4",
+      "profile": "https://www.himself65.com",
+      "contributions": [
+        "test",
+        "code"
+      ]
+    },
+    {
+      "login": "myluluy",
+      "name": "arck.liu",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4242799?v=4",
+      "profile": "https://github.com/myluluy",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
