@@ -75,6 +75,18 @@ describe('decorators', () => {
       .put('/put')
       .expect(code200, done);
   });
+  it('decorator @json', (done) => {
+    request(server)
+      .get('/json1')
+      .expect(code200)
+      .expect({ foo: 1 }, done);
+  });
+  it('decorator @JSON', (done) => {
+    request(server)
+      .get('/json2')
+      .expect(code200)
+      .expect({ foo: 1 }, done);
+  });
 
   it('decorator "@middleware"', (done) => {
     request(server)
