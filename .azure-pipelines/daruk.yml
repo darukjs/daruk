@@ -1,0 +1,16 @@
+steps:
+- task: NodeTool@0 
+  inputs:
+    versionSpec: $(node_version)
+
+- script: npm install -g codecov && npm install
+  displayName: 'Install Dependency'
+
+- script: npm run tslint
+  displayName: 'Lint Code'
+
+- script: npm test
+  displayName: 'Run Tests'
+
+- script: npm run cov
+  displayName: 'Coverage Report'
