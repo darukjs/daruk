@@ -4,7 +4,7 @@ declare module 'cron' {
       cronTime: Date | string,
       onTick: Function,
       onComplete: Function,
-      start: Boolean,
+      start: boolean,
       timezone: string,
       context: CronJob,
       runOninit: Function
