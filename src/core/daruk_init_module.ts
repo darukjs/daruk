@@ -188,6 +188,7 @@ export default class DarukInitModule {
         // 并保证前后都有 /，方便后续比对路由 key
         let routePath = ujoin('/', prefixPath);
         // 不转path，因为可能会把通配符转成unix path
+        console.log(prefix, routePath, path);
         routePath = join('/', prefix, routePath, path, '/');
         console.log(routePath);
         // 将路由按照 http method 分组
