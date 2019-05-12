@@ -11,7 +11,8 @@ import {
   patch,
   post,
   put,
-  redirect
+  redirect,
+  type
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
 
@@ -62,6 +63,13 @@ export default class Index extends BaseController {
   @get('/redirect')
   public redirect(ctx: Daruk.Context) {
     ctx.body = '';
+  }
+  @type('application/json')
+  @get('/type')
+  public type(ctx: Daruk.Context) {
+    ctx.body = {
+      foo: 1
+    };
   }
 
   @middleware('routeMiddleware')

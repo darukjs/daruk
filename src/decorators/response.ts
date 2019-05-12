@@ -44,12 +44,12 @@ export function prefix(path: string) {
 export function json() {
   return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
+    type('application/json')(proto, propertyKey, descriptor);
 
     descriptor.value = async function jsonWrap(ctx: Daruk.Context, next: () => Promise<void>) {
       const val = await oldFunc(ctx);
       // 确保是Object类型
       ctx.body = { ...val };
-      ctx.type = 'application/json';
       await next();
     };
   };
@@ -67,5 +67,29 @@ export function redirect(path: string) {
   return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
     const target = proto.constructor;
     Reflect.defineMetadata(CONTROLLER_REDIRECT_PATH, path, target, propertyKey);
+  };
+}
+
+/**
+ * 设置 response Content-Type
+ * @param {string} type - `Content-Type` 内容
+ * @example
+ *    @type('.png')
+ *
+ *    @type('png')
+ *
+ *    @type('image/png')
+ *
+ *    @type('text/plain; charset=utf-8')
+ */
+export function type(type: string) {
+  assert(is.string(type), `[Decorator @${type}] parameter must be a string`);
+  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const oldFunc = descriptor.value;
+    descriptor.value = async function typeWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+      await oldFunc(ctx);
+      ctx.type = type;
+      await next();
+    };
   };
 }
