@@ -12,7 +12,8 @@ import {
   post,
   put,
   redirect,
-  type
+  type,
+  header
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
 
@@ -71,6 +72,13 @@ export default class Index extends BaseController {
       foo: 1
     };
   }
+
+  @header('foo', 'bar')
+  @get('/header')
+  public header(ctx: Daruk.Context) {
+    ctx.body = 'bar';
+  }
+
   @get('/wildcard_(\\d)_(\\d).htm')
   public deatil(ctx: Daruk.Context) {
     ctx.body = {
