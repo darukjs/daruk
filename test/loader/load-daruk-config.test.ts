@@ -26,7 +26,7 @@ describe('load daruk.config', () => {
     request(server)
       .get('/')
       .expect(code200)
-      .expect('packetMid;configMid', done);
+      .expect('packetMid;packetMid2;configMid', done);
   });
 
   it('define util with daruk.config', () => {
@@ -39,7 +39,7 @@ describe('load daruk.config', () => {
     assert(app.globalModule.module1 !== undefined);
   });
 
-  it('define timer with daruk.config', function(done) {
+  it('define timer with daruk.config', function (done) {
     const timerDelay = 1300;
     const timeOut = 1200;
     // tslint:disable-next-line
@@ -49,5 +49,14 @@ describe('load daruk.config', () => {
       assert(app.timerComplete === true);
       done();
     }, timeOut);
+  });
+});
+
+describe('load daruk.config.fail', () => {
+  it('should throw error when can not load middleware', () => {
+    let app: Daruk;
+    assert.throws(() => {
+      app = getApp('load-daruk-config-fail');
+    }, '[daruk.config.middleware] can not find function');
   });
 });
