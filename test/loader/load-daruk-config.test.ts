@@ -39,8 +39,8 @@ describe('load daruk.config', () => {
     assert(app.globalModule.module1 !== undefined);
   });
 
-  it('define timer with daruk.config', function (done) {
-    const timerDelay = 1300;
+  it('define timer with daruk.config', function(done) {
+    const timerDelay = 5000;
     const timeOut = 1200;
     // tslint:disable-next-line
     this.timeout(timerDelay);
