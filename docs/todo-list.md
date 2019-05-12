@@ -4,39 +4,39 @@ We want be support features before v1.0.0 version's todo list:
 
 - request:
 
-  - @required({methodName:key})
-  - @validate(method,key,validFunc])
-  - @useAuth(middleware)
-  - @security(type,username,password)
+  - [x] @required({methodName:key})
+  - [x] @validate(method,key,validFunc])
+  - [x] @useAuth(middleware)
+  - [x] @security(type,username,password)
 
 - response:
 
-  - @header(key, value)
-  - @headers({key1:value1,key2:value2})
-  - ~~@type(type:string)~~ √
-  - ~~@redirect(path:string)~~ √
-  - @cache
+  - [x] @header(key, value)
+  - [x] @headers({key1:value1,key2:value2})
+  - [√] @type(type:string)
+  - [√] @redirect(path:string)
+  - [x] @cache
 
 - arguments:
 
-  - @param(key:string)
-  - @body(key:string)
-  - @query(key:string)
+  - [x] @param(key:string)
+  - [x] @body(key:string)
+  - [x] @query(key:string)
 
 - Class:
 
-  - @controller(path:string)
-  - @timer(cronTime:string)
-  - @inject(LibName:string)
-  - @provide(LibName)
-  - @ctx(routerPath)
+  - [x] @controller(path:string)
+  - [x] @timer(cronTime:string)
+  - [x] @inject(LibName:string)
+  - [x] @provide(LibName)
+  - [x] @ctx(routerPath)
 
 - controllerClass:
 
-  - @local
-  - ~~@prefix(path:string)~~ √
+  - [x] @local
+  - [√] @prefix(path:string)
 
 - utils:
 
-  - @decorator
-  - @globalSetting
+  - [x] @decorator
+  - [x] @globalSetting
