@@ -12,7 +12,9 @@ interface RegisterDes {
 }
 
 declare module 'daruk' {
-  interface Config {}
+  interface Config {
+    [key: string]: any;
+  }
   interface GlobalModule {}
   interface Util {}
   interface Glue {}
