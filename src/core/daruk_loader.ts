@@ -152,9 +152,15 @@ class DarukLoader {
       let packet;
       try {
         packet = require(packetName);
+        // 有些包导出 export default function
+        if (typeof packet !== 'function' &&
+            typeof packet.default === 'function') {
+          packet = packet.default;
+        }
       } catch (e) {
         throw new Error(`[daruk.config.middleware] require ${packetName} failed -  ${e.message}`);
       }
+      assert(isFn(packet), `[daruk.config.middleware] can not find function at packet: ${packet}.`);
       assert(isFn(midExport), `[daruk.config.middleware] ${key} must be (or export) a function`);
       middleware[midName] = midExport(packet);
     });
