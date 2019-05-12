@@ -11,8 +11,7 @@ We want be support features before v1.0.0 version's todo list:
 
 - response:
 
-  - [x] @header(key, value)
-  - [ ] @headers({key1:value1,key2:value2})
+  - [x] @header(key|fields, ?value)
   - [x] @type(type:string)
   - [x] @redirect(path:string)
   - [ ] @cache
@@ -22,6 +21,7 @@ We want be support features before v1.0.0 version's todo list:
   - [ ] @param(key:string)
   - [ ] @body(key:string)
   - [ ] @query(key:string)
+  - [ ] @headers(key?:string)
 
 - Class:
 
