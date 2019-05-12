@@ -89,6 +89,13 @@ describe('decorators', () => {
       .expect({ foo: 1 }, done);
   });
 
+  it('decorator @type', (done) => {
+    request(server)
+      .get('/type')
+      .expect('Content-Type', /application\/json/)
+      .expect(code200, done);
+  });
+
   it('decorator @redirect', (done) => {
     request(server)
       .get('/redirect')
