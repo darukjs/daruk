@@ -18,7 +18,7 @@
     "ts-node": "^8.1.0"
   },
   "dependencies": {
-    "daruk": "files:../../",
+    "daruk": "lastest",
     "koa-bodyparser": "^4.2.1",
     "koa-ejs": "^4.2.0",
     "koa-favicon": "^2.0.1",
