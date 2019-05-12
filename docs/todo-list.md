@@ -11,7 +11,7 @@ We want be support features before v1.0.0 version's todo list:
 
 - response:
 
-  - [ ] @header(key, value)
+  - [x] @header(key, value)
   - [ ] @headers({key1:value1,key2:value2})
   - [x] @type(type:string)
   - [x] @redirect(path:string)
