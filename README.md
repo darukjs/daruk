@@ -102,7 +102,7 @@ More information you can check out [example/03-weather](./example/03-weather).
 
 More docs: [Quick Start](https://daruk-framework.github.io/daruk.org/)
 
-## Features TODO
+## Features Todo
 
 Beta [TodoList](./docs/todo-list.md)
 
