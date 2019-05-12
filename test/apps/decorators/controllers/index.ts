@@ -4,16 +4,16 @@ import {
   del,
   get,
   head,
-  json,
+  header,
   JSON,
+  json,
   middleware,
   options,
   patch,
   post,
   put,
   redirect,
-  type,
-  header
+  type
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
 
@@ -76,6 +76,12 @@ export default class Index extends BaseController {
   @header('foo', 'bar')
   @get('/header')
   public header(ctx: Daruk.Context) {
+    ctx.body = 'bar';
+  }
+
+  @header({foo: 'bar'})
+  @get('/headers')
+  public headers(ctx: Daruk.Context) {
     ctx.body = 'bar';
   }
 
