@@ -9,7 +9,6 @@ import Https = require('https');
 import is = require('is');
 import Koa = require('koa');
 import Router = require('koa-router');
-import { ListenOptions } from 'net';
 import deepAssign = require('object-assign-deep');
 import path = require('path');
 import { Options, PartialOptions } from '../../types/daruk_options';

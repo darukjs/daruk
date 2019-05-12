@@ -8,4 +8,9 @@ import EventEmitter = require('events');
 
 class Events extends EventEmitter {}
 
-export default new Events();
+const emitter = new Events();
+
+// 增加limit 上限,暂定 100
+emitter.setMaxListeners(100);
+
+export default emitter;

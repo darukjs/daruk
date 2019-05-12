@@ -11,7 +11,7 @@ describe('define timer', () => {
   });
 
   it('should timer be completed', function(done) {
-    const timerDelay = 1300;
+    const timerDelay = 5000;
     const timeOut = 1200;
     // tslint:disable-next-line
     this.timeout(timerDelay);
