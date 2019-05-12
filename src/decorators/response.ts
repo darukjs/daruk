@@ -1,8 +1,8 @@
-import assert = require("assert");
+import assert = require('assert');
 import is = require('is');
-import BaseContext from "../core/base_context";
-import { Daruk } from "../typings/daruk";
-import { CONTROLLER_CLASS_PREFIX, CONTROLLER_REDIRECT_PATH } from "./constants";
+import BaseContext from '../core/base_context';
+import { Daruk } from '../typings/daruk';
+import { CONTROLLER_CLASS_PREFIX, CONTROLLER_REDIRECT_PATH } from './constants';
 
 /**
  * @desc prefix 装饰器，对controller class的所有router进行path前缀修正
@@ -16,7 +16,6 @@ export function prefix(path: string) {
     Reflect.defineMetadata(CONTROLLER_CLASS_PREFIX, path, target);
   };
 }
-
 
 /**
  * @desc 将函数的返回打包到 ctx.body，并返回 application/json 类型
@@ -89,6 +88,19 @@ export function type(type: string) {
     descriptor.value = async function typeWrap(ctx: Daruk.Context, next: () => Promise<void>) {
       await oldFunc(ctx);
       ctx.type = type;
+      await next();
+    };
+  };
+}
+
+export function header(key: string, value: string) {
+  assert(is.string(key), `[Decorator @${key}] parameter must be a string`);
+  assert(is.string(value), `[Decorator @${value}] parameter must be a string`);
+  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const oldFunc = descriptor.value;
+    descriptor.value = async function headerWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+      await oldFunc(ctx);
+      ctx.headers[key] = value;
       await next();
     };
   };
