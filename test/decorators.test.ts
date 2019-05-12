@@ -100,6 +100,15 @@ describe('decorators', () => {
     request(server)
       .get('/header')
       .expect(code200)
+      .expect('foo', 'bar')
+      .expect('bar', done);
+  });
+
+  it('decorator @header', (done) => {
+    request(server)
+      .get('/headers')
+      .expect(code200)
+      .expect('foo', 'bar')
       .expect('bar', done);
   });
 

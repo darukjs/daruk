@@ -93,14 +93,28 @@ export function type(type: string) {
   };
 }
 
-export function header(key: string, value: string) {
-  assert(is.string(key), `[Decorator @${key}] parameter must be a string`);
-  assert(is.string(value), `[Decorator @${value}] parameter must be a string`);
+/**
+ *
+ * @param {string|object} key
+ * @param {string=} value
+ */
+export function header(key: string | { [key: string]: string }, value?: string) {
+  assert(is.string(key) || is.object(key), `[Decorator @${key}] parameter must be a string or object`);
+  assert((is.string(key) && is.string(value)) || is.object(key),
+    `[Decorator @${value}] parameter must be a string`);
+
+  let headers: { [key: string]: string } = {};
+  if (typeof key === 'string') {
+    headers[key] = value;
+  } else if (typeof key === 'object') {
+    headers = key;
+  }
+
   return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
     descriptor.value = async function headerWrap(ctx: Daruk.Context, next: () => Promise<void>) {
       await oldFunc(ctx);
-      ctx.headers[key] = value;
+      ctx.set(headers);
       await next();
     };
   };
