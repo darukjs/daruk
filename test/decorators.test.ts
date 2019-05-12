@@ -114,6 +114,12 @@ describe('decorators', () => {
       .expect(code200, done);
   });
 
+  it('decorator @prefix deep controller', (done) => {
+    request(server)
+      .get('/v1/prefix/test/deep/json')
+      .expect(code200, done);
+  });
+
   it('decorator "@middleware"', (done) => {
     request(server)
       .get('/middleware')

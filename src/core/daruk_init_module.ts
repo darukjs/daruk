@@ -9,6 +9,7 @@ import path = require('path');
 // tslint:disable-next-line
 import 'reflect-metadata';
 import { join as ujoin } from 'upath';
+import urljoin = require('url-join');
 import { Options } from '../../types/daruk_options';
 import {
   CONTROLLER_CLASS_PREFIX,
@@ -186,11 +187,8 @@ export default class DarukInitModule {
           Reflect.getMetadata(CONTROLLER_REDIRECT_PATH, ControllerClass, funcName) || '';
         // 避免解析出的路由没有 / 前缀
         // 并保证前后都有 /，方便后续比对路由 key
-        let routePath = ujoin('/', prefixPath);
         // 不转path，因为可能会把通配符转成unix path
-        console.log(prefix, routePath, path);
-        routePath = join('/', prefix, routePath, path, '/');
-        console.log(routePath);
+        const routePath = urljoin('/', prefix, ujoin(prefixPath), path).replace(/\/\//g, '/');
         // 将路由按照 http method 分组
         routeMap[method] = routeMap[method] || [];
         // 判断路由是否重复定义

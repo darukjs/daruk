@@ -56,6 +56,7 @@
     "@types/koa": "^2.0.46",
     "@types/koa-router": "^7.0.37",
     "@types/node": "^10.12.18",
+    "@types/url-join": "^4.0.0",
     "basic-auth": "^2.0.1",
     "chalk": "^2.4.1",
     "convert-hrtime": "^2.0.0",
@@ -69,7 +70,8 @@
     "koa-router": "^7.4.0",
     "object-assign-deep": "^0.4.0",
     "reflect-metadata": "^0.1.13",
-    "upath": "^1.1.2"
+    "upath": "^1.1.2",
+    "url-join": "^4.0.0"
   },
   "nyc": {
     "include": [
