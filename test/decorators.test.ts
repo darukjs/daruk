@@ -96,6 +96,12 @@ describe('decorators', () => {
       .expect(code200, done);
   });
 
+  it('decorator @get for wildcard', (done) => {
+    request(server)
+      .get('/wildcard_3_4.htm')
+      .expect(code200, done);
+  });
+
   it('decorator @redirect', (done) => {
     request(server)
       .get('/redirect')

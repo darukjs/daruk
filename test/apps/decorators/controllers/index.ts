@@ -71,6 +71,12 @@ export default class Index extends BaseController {
       foo: 1
     };
   }
+  @get('/wildcard_(\\d)_(\\d).htm')
+  public deatil(ctx: Daruk.Context) {
+    ctx.body = {
+      foo: 1
+    };
+  }
 
   @middleware('routeMiddleware')
   @get('/middleware')

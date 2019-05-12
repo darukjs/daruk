@@ -189,6 +189,7 @@ export default class DarukInitModule {
         let routePath = ujoin('/', prefixPath);
         // 不转path，因为可能会把通配符转成unix path
         routePath = join('/', prefix, routePath, path, '/');
+        console.log(routePath);
         // 将路由按照 http method 分组
         routeMap[method] = routeMap[method] || [];
         // 判断路由是否重复定义
