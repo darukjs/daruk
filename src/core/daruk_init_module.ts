@@ -186,9 +186,8 @@ export default class DarukInitModule {
           Reflect.getMetadata(CONTROLLER_REDIRECT_PATH, ControllerClass, funcName) || '';
         // 避免解析出的路由没有 / 前缀
         // 并保证前后都有 /，方便后续比对路由 key
-        let routePath = ujoin('/', prefixPath);
         // 不转path，因为可能会把通配符转成unix path
-        routePath = join('/', prefix, routePath, path, '/');
+        const routePath = ujoin('/', prefix, '/', prefixPath, path, '/');
         // 将路由按照 http method 分组
         routeMap[method] = routeMap[method] || [];
         // 判断路由是否重复定义
