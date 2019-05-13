@@ -1,28 +1,34 @@
 import chalk from 'chalk';
 
-const warnR = 225;
-const warnG = 250;
-const warnB = 120;
-const errorR = 238;
-const errorG = 119;
-const errorB = 109;
-const logR = 38;
-const logG = 209;
-const logB = 237;
+const COLOR_TYPE: {
+  [key: string]: {
+    r: number,
+    g: number,
+    b: number
+  }
+} = {
+  'warn': {
+    r: 225,
+    g: 250,
+    b: 120
+  },
+  'error': {
+    r: 238,
+    g: 119,
+    b: 109
+  },
+  'log': {
+    r: 38,
+    g: 209,
+    b: 237
+  }
+};
 
 /**
  * @desc 高亮 console 输出
  */
-export function debugLog(msg: string, type = 'info') {
-  switch (type) {
-    case 'warn':
-      console.log(chalk.rgb(warnR, warnG, warnB)(msg));
-      break;
-    case 'error':
-      console.log(chalk.rgb(errorR, errorG, errorB)(msg));
-      break;
-    default:
-      console.log(chalk.rgb(logR, logG, logB)(msg));
-      break;
-  }
+export function debugLog(msg: string, type = 'log') {
+  // tslint:disable-next-line:no-magic-numbers
+  const { r = 38, g = 209, b = 237 } = COLOR_TYPE[type];
+  console.log(chalk.rgb(r, g, b)(msg));
 }
