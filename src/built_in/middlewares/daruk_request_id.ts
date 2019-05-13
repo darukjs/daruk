@@ -3,9 +3,8 @@
  */
 
 import { Daruk } from '../../typings/daruk';
-
-import koaRequestId = require('daruk-request-id');
+import { xRequestId } from 'daruk-request-id';
 
 export default (app: Daruk.DarukCore) => {
-  return koaRequestId(app.options.requestId, app);
+  return xRequestId(app.options.requestId, app);
 };
