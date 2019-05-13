@@ -100,6 +100,7 @@ declare module 'daruk' {
   export const prefix: PrefixClassDecoratorFunc;
   export const redirect: MethodDecoratorFunc;
   export const type: (type: string) => MethodDecorator;
+  export const header: (key: string | { [key: string]: string }, value?: string) => MethodDecorator;
 
   export const middleware: (middlewareName: string) => MethodDecorator;
 
