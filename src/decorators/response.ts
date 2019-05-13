@@ -99,9 +99,14 @@ export function type(type: string) {
  * @param {string=} value
  */
 export function header(key: string | { [key: string]: string }, value?: string) {
-  assert(is.string(key) || is.object(key), `[Decorator @${key}] parameter must be a string or object`);
-  assert((is.string(key) && is.string(value)) || is.object(key),
-    `[Decorator @${value}] parameter must be a string`);
+  assert(
+    is.string(key) || is.object(key),
+    `[Decorator @${key}] parameter must be a string or object`
+  );
+  assert(
+    (is.string(key) && is.string(value)) || is.object(key),
+    `[Decorator @${value}] parameter must be a string`
+  );
 
   let headers: { [key: string]: string } = {};
   if (typeof key === 'string') {

@@ -14,6 +14,7 @@ import { CONTROLLER_PREFIX_PATH } from './constants';
  * @param {string} prefixPath - 路由前缀
  * @return Decorator - 装饰器
  */
+
 export default function controller(prefixPath: string) {
   assert(is.string(prefixPath), '[Decorator @controller] parameter must be a string');
   return (target: BaseContext) => {

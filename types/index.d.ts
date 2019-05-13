@@ -15,13 +15,27 @@ declare module 'daruk' {
   interface Config {
     [key: string]: any;
   }
-  interface GlobalModule {}
-  interface Util {}
-  interface Glue {}
-  interface Service {}
-  interface Controller {}
-  interface Request extends Koa.Request {}
-  interface Response extends Koa.Response {}
+  interface GlobalModule {
+    [key: string]: any;
+  }
+  interface Util {
+    [key: string]: any;
+  }
+  interface Glue {
+    [key: string]: any;
+  }
+  interface Service {
+    [key: string]: any;
+  }
+  interface Controller {
+    [key: string]: any;
+  }
+  interface Request extends Koa.Request {
+    [key: string]: any;
+  }
+  interface Response extends Koa.Response {
+    [key: string]: any;
+  }
 
   type ExtractInterface<T> = { [P in keyof T]: new (ctx: Context) => T[P] };
 
@@ -102,6 +116,7 @@ declare module 'daruk' {
   export const type: (type: string) => MethodDecorator;
 
   export const middleware: (middlewareName: string) => MethodDecorator;
+  export const controller: (prefixPath: string) => ClassDecorator;
 
   type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 

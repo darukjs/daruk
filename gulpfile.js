@@ -14,12 +14,12 @@ gulp.task('build', (cb) => exec('npm run build', cb));
 
 gulp.task('watch:src', () => {
   const watcher = gulp.watch('src/**/*.ts');
-  watcher.on('all', gulp.series('build', 'move:build', 'move:types'));
+  watcher.on('all', gulp.series('build', 'move:build'));
 });
 
 gulp.task('watch:types', () => {
   const watcher = gulp.watch('types/**/*.d.ts');
-  watcher.on('all', gulp.series('build', 'move:build', 'move:types'));
+  watcher.on('all', gulp.series('build', 'move:types'));
 });
 
 gulp.task('watch', gulp.parallel('watch:src', 'watch:types'));
