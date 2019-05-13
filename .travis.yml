@@ -1,10 +1,29 @@
 language: node_js
 node_js:
-  - 10
+  - '10'
+cache:
+  yarn: true
+  directories:
+    - node_modules
 install:
-  - npm install -g codecov
-  - npm install
-script:
-  - npm run tslint
-  - npm test
-  - npm run cov
+  - yarn --frozen-lockfile --non-interactive
+jobs:
+  include:
+    - stage: commit-message
+      name: 'Check Commit Message'
+      script:
+        - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+          commitlint-travis;
+          fi
+    - stage: lint
+      name: 'Lint Code'
+      script:
+        - yarn run tslint
+    - stage: test
+      name: 'Unit Test'
+      before_script:
+        - yarn global add codecov
+      script:
+        - yarn run test
+      after_script:
+        - yarn run cov
