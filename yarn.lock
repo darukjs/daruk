@@ -227,6 +227,11 @@
   version "10.14.6"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-10.14.6.tgz#9cbfcb62c50947217f4d88d4d274cc40c22625a9"
 
+"@types/node@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.0.0.tgz#d11813b9c0ff8aaca29f04cbc12817f4c7d656e5"
+  integrity sha512-Jrb/x3HT4PTJp6a4avhmJCDEVrPdqLfl3e8GGMbpkGGdwAV5UGlIs4vVEfsHHfylZVOKZWpOqmqFH8CbfOZ6kg==
+
 "@types/range-parser@*":
   version "1.2.3"
   resolved "https://registry.npm.taobao.org/@types/range-parser/download/@types/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
@@ -953,9 +958,12 @@ d@1:
   dependencies:
     es5-ext "^0.10.9"
 
-daruk-exit-hook@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/daruk-exit-hook/download/daruk-exit-hook-0.2.0.tgz#e5a56efab2afe92cbf08d8d51cda484542fd5565"
+daruk-exit-hook@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/daruk-exit-hook/-/daruk-exit-hook-0.3.0.tgz#5377a90a0e188564146037f62cf61d71ebf42c8c"
+  integrity sha512-VlgZVJx+YUpI9QSLpp1mzRs2839HI72d1k3QJKVs3QHfssC9OHAd3+g18NblZ1tuHdysdhwxeNoTE0NtAMisxA==
+  dependencies:
+    "@types/node" "^12.0.0"
 
 daruk-logger@^1.9.1:
   version "1.9.1"

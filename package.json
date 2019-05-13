@@ -25,7 +25,7 @@
     "name": "xiaojue",
     "email": "designsor@gmail.com"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/basic-auth": "^1.1.2",
     "@types/chai": "^4.1.7",
@@ -61,7 +61,7 @@
     "chalk": "^2.4.1",
     "convert-hrtime": "^2.0.0",
     "cron": "^1.4.1",
-    "daruk-exit-hook": "^0.2.0",
+    "daruk-exit-hook": "^0.3.0",
     "daruk-logger": "^1.9.1",
     "daruk-request-id": "^0.1.0",
     "http-server-shutdown": "^1.1.2",
