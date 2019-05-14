@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ignoreRoot": [".git"]
+}

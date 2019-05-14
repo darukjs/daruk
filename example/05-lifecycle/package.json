@@ -4,7 +4,7 @@
   "description": "daruk lifecycle",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env TS_NODE_FILES=true NODE_ENV=dev ts-node index.ts",
+    "dev": "cross-env NODE_ENV=dev nodemon --watch ./ --exec ts-node index.ts -e ts,js,json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "xiaojue",
