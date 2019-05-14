@@ -66,7 +66,45 @@ declare module 'daruk' {
     };
     public constructor(name: string, options: PartialOptions);
     public run(port: number | string, host?: string | Function, cb?: Function): Http.Server;
-    public listen(port: number | string, host?: string | Function, cb?: Function): Http.Server;
+    /**
+     * Shorthand for:
+     *
+     *    http.createServer(app.callback()).listen(...)
+     *    copy from Koa
+     */
+    listen(
+        port?: number,
+        hostname?: string,
+        backlog?: number,
+        listeningListener?: () => void,
+    ): Http.Server;
+    listen(
+        port: number,
+        hostname?: string,
+        listeningListener?: () => void,
+    ): Http.Server;
+    listen(
+        port: number,
+        backlog?: number,
+        listeningListener?: () => void,
+    ): Http.Server;
+    listen(port: number, listeningListener?: () => void): Http.Server;
+    listen(
+        path: string,
+        backlog?: number,
+        listeningListener?: () => void,
+    ): Http.Server;
+    listen(path: string, listeningListener?: () => void): Http.Server;
+    listen(options: ListenOptions, listeningListener?: () => void): Http.Server;
+    listen(
+        handle: any,
+        backlog?: number,
+        listeningListener?: () => void,
+    ): Http.Server;
+    listen(handle: any, listeningListener?: () => void): Http.Server;
+
+
+
     public serverReady(server: Http.Server | Https.Server): void;
     public registerTimer(describe: RegisterDes | Array<RegisterDes>): void;
     public registerService(describe: RegisterDes | Array<RegisterDes>): void;
@@ -75,6 +113,19 @@ declare module 'daruk' {
     public registerUtil(describe: RegisterDes | Array<RegisterDes>): void;
     public mockContext(req?: {}): Context;
   }
+
+  /**
+   * Copy from Koa
+   */
+  interface ListenOptions {
+        port?: number;
+        host?: string;
+        backlog?: number;
+        path?: string;
+        exclusive?: boolean;
+        readableAll?: boolean;
+        writableAll?: boolean;
+    }
   export interface Context extends Koa.Context {
     readonly config: Config;
     readonly globalModule: GlobalModule;

@@ -246,7 +246,7 @@ class DarukCore extends Koa {
 
   /**
    * @desc 服务启动后的需要完成的剩余工作
-   * 如果用户不使用 run 方法启动，而是自定义启动（比如启动 https 服务）
+   * 如果不使用listen  方法启动，而是自定义启动（比如启动 https 服务）
    * 需要在启动后的回调中调用该函数
    */
   public serverReady(server: Http.Server | Https.Server) {
