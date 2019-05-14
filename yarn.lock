@@ -1271,10 +1271,10 @@ daruk-logger@^1.9.1:
     prettyjson "^1.2.1"
     winston "^3.0.0"
 
-daruk-request-id@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.npmjs.org/daruk-request-id/-/daruk-request-id-0.4.0.tgz#4f5278470f54444f1c707617d9857674228e4d01"
-  integrity sha512-chlWhKbpYRGYHCMD/X2CSLb2jD4mEDz1I4Nq9lVav+SX6uGr5oiifHzZUcfyQbSgi+t8xIlbkqwKpy+svXGdIA==
+daruk-request-id@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.npmjs.org/daruk-request-id/-/daruk-request-id-0.4.1.tgz#7048fb386e7710e398bcc47f30d98620660ec8ff"
+  integrity sha512-4zft2yerVuhSuNTpK3PPcqoR72rlwVgTgsg3apHu7yqULEkDYVwsSk2OsoFhPAkZQmt4RwnZGPS2pOFO2jUSew==
   dependencies:
     "@types/uuid" "^3.4.4"
     uuid "^3.3.2"
