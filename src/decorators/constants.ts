@@ -4,3 +4,4 @@ export const CONTROLLER_FUNC_NAME = 'daruk:controller_func_name';
 export const MIDDLEWARE_NAME = 'daruk:middleware_name';
 export const CONTROLLER_CLASS_PREFIX = 'daruk:controller_class_prefix';
 export const CONTROLLER_REDIRECT_PATH = 'daruk:controller_redirect_path';
+export const defineModulePrivateProperty = (property: PropertyKey) => `daruk:module_property_${property.toString()}`;
