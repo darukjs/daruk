@@ -11,7 +11,7 @@ export default function(app: Daruk.DarukCore) {
   let monitor: Monitor;
 
   return async function DarukMonitor(ctx: any, next: any) {
-    if (ctx.request && /^\/monitor\/profiler/.test(ctx.request.url)) {
+    if (ctx.request && /^\/monitor\//.test(ctx.request.url)) {
       // 访问监控路由需要通过验证
       const authRes = doAuth(ctx, app.options.monitor.auth);
       if (authRes) {

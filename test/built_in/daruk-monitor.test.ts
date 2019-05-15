@@ -12,6 +12,39 @@ const auth = {
   password: 'monitor'
 };
 
+describe('daruk-monitor error v8ProfilerPath', function cb() {
+  let app: Daruk;
+  let server: Daruk['httpServer'];
+  before((done) => {
+    app = getApp('', {
+      monitor: {
+        enable: true,
+        auth: { ...auth },
+        v8AnalyticsPath: '',
+        v8ProfilerPath: ''
+      }
+    });
+    app.listen(port, done);
+    server = app.httpServer;
+  });
+
+  after((done) => {
+    server.close(done);
+    deleteFolderRecursive(process.cwd() + '/profiler');
+  });
+
+  it('/monitor/ start up with v8ProfilerPath error', (done) => {
+    request(server)
+      .get('/monitor/profiler/function')
+      .expect(code200)
+      .auth(auth.name, auth.password)
+      .expect((res) => {
+        return res.text === `The argument 'id' must be a non-empty string. Received ''`;
+      })
+      .end(done);
+  });
+});
+
 describe('daruk-monitor', function cb() {
   let app: Daruk;
   let server: Daruk['httpServer'];

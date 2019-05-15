@@ -60,3 +60,12 @@ describe('load daruk.config.fail', () => {
     }, '[daruk.config.middleware] can not find function');
   });
 });
+
+describe('load daruk.config.failMid', () => {
+  it('should throw error when can not require middleware', () => {
+    let app: Daruk;
+    assert.throws(() => {
+      app = getApp('load-daruk-config-failMid');
+    }, `[daruk.config.middleware] require errorMid failed -  Cannot find module \'errorMid\'`);
+  });
+});

@@ -3,19 +3,19 @@ import { Daruk } from '../../../src/typings/daruk';
 
 const mockNodeModulesPacket = path.resolve(__dirname, './node_modules/mock-middleware/index.js');
 
-export default function (daruk: Daruk.DarukCore) {
+export default function(daruk: Daruk.DarukCore) {
   return {
     globalModule: {
       module1: () => {}
     },
     middlewareOrder: [mockNodeModulesPacket, 'configMid'],
     middleware: {
-      [mockNodeModulesPacket] () {
+      [mockNodeModulesPacket]() {
         throw new Error('code should throw error before executed here');
       },
-      'configMid': {
+      configMid: {
         packet: mockNodeModulesPacket,
-        export (mid: Function) {
+        export(mid: Function) {
           return mid('configMid');
         }
       }
