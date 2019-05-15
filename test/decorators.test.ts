@@ -1,6 +1,6 @@
 import chai = require('chai');
 import request = require('supertest');
-import { config, Daruk, glue, logger, util } from '../src';
+import { config, controller, Daruk, glue, logger, util } from '../src';
 import { getApp } from './utils';
 
 const port = 3000;

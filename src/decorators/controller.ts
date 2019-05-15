@@ -15,10 +15,12 @@ import { CONTROLLER_PREFIX_PATH } from './constants';
  * @return Decorator - 装饰器
  */
 
-export default function controller(prefixPath: string) {
+export function controller(prefixPath: string) {
+  /*
   assert(is.string(prefixPath), '[Decorator @controller] parameter must be a string');
-  return (target: BaseContext) => {
+  return (target: any) => {
     // 将路由前缀信息保存到当前的类
     Reflect.defineMetadata(CONTROLLER_PREFIX_PATH, prefixPath, target);
   };
+  */
 }

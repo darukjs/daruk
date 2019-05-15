@@ -12,7 +12,6 @@ import Router = require('koa-router');
 import deepAssign = require('object-assign-deep');
 import path = require('path');
 import { Options, PartialOptions } from '../../types/daruk_options';
-import { defineModulePrivateProperty } from "../decorators/constants";
 import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
 import { Daruk } from '../typings/daruk';
@@ -116,7 +115,7 @@ class DarukCore extends Koa {
     if (!is.object(mergeObj)) return;
     if (!this.module[type]) this.module[type] = {};
 
-    Object.keys(mergeObj).forEach(key => {
+    Object.keys(mergeObj).forEach((key) => {
       this.setModule(type, key, mergeObj[key]);
     });
   }
