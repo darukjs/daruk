@@ -1,7 +1,7 @@
 import chai = require('chai');
 import path = require('path');
 import sinon = require('sinon');
-import { debugLog, isJsTsFile, isSubClass, uRequire } from '../src/utils';
+import { debugLog, deepDefineProperty, isJsTsFile, isSubClass, uRequire } from '../src/utils';
 
 const assert = chai.assert;
 
@@ -35,5 +35,33 @@ describe('utils', () => {
     assert(isJsTsFile('foo.ts') === true);
     assert(isJsTsFile('foo.js') === true);
     assert(isJsTsFile('foo') === false);
+  });
+  it('deepDefineProperty', () => {
+    const obj = {};
+    deepDefineProperty(obj, 'foo', {
+      goo: 1,
+      func () {
+
+      }
+    });
+    deepDefineProperty(obj, 'soo', 2);
+    // @ts-ignore
+    assert(obj.foo.goo === 1);
+    // @ts-ignore
+    assert(typeof obj.foo.func === 'function');
+    // @ts-ignore
+    assert(obj.soo === 2);
+  });
+  it('deepDefineProperty', () => {
+    assert.throws(() => {
+      const obj = {};
+      deepDefineProperty(obj, 'foo', {
+        goo: 1
+      });
+      // @ts-ignore
+      obj.foo = {
+
+      };
+    });
   });
 });

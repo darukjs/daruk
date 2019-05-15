@@ -12,10 +12,11 @@ import Router = require('koa-router');
 import deepAssign = require('object-assign-deep');
 import path = require('path');
 import { Options, PartialOptions } from '../../types/daruk_options';
+import { defineModulePrivateProperty } from "../decorators/constants";
 import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
 import { Daruk } from '../typings/daruk';
-import { debugLog, SimpleMixin } from '../utils';
+import { debugLog, deepDefineProperty, SimpleMixin } from '../utils';
 import getDefaultOptions from './daruk_default_options';
 import Events from './daruk_event';
 import DarukInitModule from './daruk_init_module';
@@ -111,9 +112,13 @@ class DarukCore extends Koa {
    * @desc DarukLoader 加载模块后，
    * 将加载的内容合并到 this.module[type]
    */
-  public mergeModule(type: string, mergeObj: any) {
+  public mergeModule(type: string, mergeObj: { [key: string]: any }) {
+    if (!is.object(mergeObj)) return;
     if (!this.module[type]) this.module[type] = {};
-    this.module[type] = { ...this.module[type], ...mergeObj };
+
+    Object.keys(mergeObj).forEach(key => {
+      this.setModule(type, key, mergeObj[key]);
+    });
   }
   /**
    * @desc 支持合并单个模块到 this.module[type]
@@ -121,7 +126,7 @@ class DarukCore extends Koa {
    */
   public setModule(type: string, key: string, value: any) {
     if (!this.module[type]) this.module[type] = {};
-    this.module[type][key] = value;
+    deepDefineProperty(this.module[type], key, value);
   }
   /**
    * @desc 保存数据类型的模块到 this.module[type]
