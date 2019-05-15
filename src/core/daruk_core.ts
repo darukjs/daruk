@@ -209,20 +209,15 @@ class DarukCore extends Koa {
         }`
       );
     };
-    const normalizedArgsSymbol: any = Symbol('normalizedArgs');
 
-    if (args.length === 0) {
-      arr = [{}, null];
-      arr[normalizedArgsSymbol] = true;
-    } else {
+    if (args.length !== 0){ 
       const arg0 = args[0];
       if (typeof arg0 === 'object' && arg0 !== null) {
         // (options[...][, cb])
         options = arg0;
-      } else if (this.isPipeName(arg0)) {
+      } else if (!this.isPipeName(arg0)) {
         // (path[...][, cb])
-        options.path = arg0;
-      } else {
+        // options.path = arg0;
         // ([port][, host][...][, cb])
         options.port = arg0;
         if (args.length > 1 && typeof args[1] === 'string') {
