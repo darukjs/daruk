@@ -46,6 +46,12 @@ describe('apis', () => {
     assert(context.host === host);
   });
 
+  it('listen string port', (done) => {
+    app.listen('3000', '127.0.0.1', () => {
+      app.httpServer.close(done);
+    });
+  });
+
   it('listen args with port, host, cb', (done) => {
     let port = 3000;
     app.listen(port, '127.0.0.1', () => {

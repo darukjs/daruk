@@ -210,7 +210,7 @@ class DarukCore extends Koa {
       );
     };
 
-    if (args.length !== 0){ 
+    if (args.length !== 0) {
       const arg0 = args[0];
       if (typeof arg0 === 'object' && arg0 !== null) {
         // (options[...][, cb])
