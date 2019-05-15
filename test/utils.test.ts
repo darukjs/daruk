@@ -40,7 +40,7 @@ describe('utils', () => {
     const obj = {};
     deepDefineProperty(obj, 'foo', {
       goo: 1,
-      func () {
+      func() {
 
       }
     });
@@ -59,9 +59,30 @@ describe('utils', () => {
         goo: 1
       });
       // @ts-ignore
-      obj.foo = {
-
-      };
+      obj.foo = {};
     });
+    assert.throws(() => {
+      const obj = {};
+      deepDefineProperty(obj, 'foo', {
+        func() {
+
+        }
+      });
+      // @ts-ignore
+      obj.foo.func = () => {};
+    });
+  });
+  it('deepDefineProperty', () => {
+    const obj = {};
+    deepDefineProperty(obj, 'foo', {
+      goo: 1,
+      func() {
+        return 'func';
+      }
+    });
+    // @ts-ignore
+    assert.equal(obj.foo.goo, 1);
+    // @ts-ignore
+    assert.equal(obj.foo.func(), 'func');
   });
 });
