@@ -120,17 +120,14 @@ class Monitor extends EventEmitter {
       setTimeout(() => {
         let profile1 = profiler.stopProfiling();
         profile1.export((error: any, result: any) => {
-          createDir('profiler').then((res) => {
-            if (res) {
-              fs.writeFileSync('profiler/profile.cpu.json', result);
-            }
-            // list all js function and it's execTime
-            const execTime = 30;
-            let snapshotJson = JSON.parse(result);
-            let str = v8Analytics(snapshotJson, execTime);
-            profile1.delete();
-            resolve(str);
-          });
+          createDir('profiler');
+          fs.writeFileSync('profiler/profile.cpu.json', result);
+          // list all js function and it's execTime
+          const execTime = 30;
+          let snapshotJson = JSON.parse(result);
+          let str = v8Analytics(snapshotJson, execTime);
+          profile1.delete();
+          resolve(str);
         });
       }, period);
     });
@@ -143,13 +140,10 @@ class Monitor extends EventEmitter {
     // console.log(snapshot.getHeader())
     return new Promise((resolve) => {
       snapshot.export((error: any, result: any) => {
-        createDir('profiler').then((res) => {
-          if (res) {
-            fs.writeFileSync('profiler/profile.mem.heapsnapshot', result);
-          }
-          snapshot.delete();
-          resolve(result);
-        });
+        createDir('profiler');
+        fs.writeFileSync('profiler/profile.mem.heapsnapshot', result);
+        snapshot.delete();
+        resolve(result);
       });
     });
   }
@@ -163,9 +157,6 @@ class Monitor extends EventEmitter {
         resolve(v8memAnalytics(json));
       });
     });
-  }
-  public async notSupport() {
-    return 'not support profiler';
   }
   /**
    * 处理路由中间件
@@ -211,21 +202,8 @@ function bytesToMB(bytes: number) {
 }
 
 function createDir(dirName: string) {
-  return new Promise((resolve) => {
-    fs.stat(dirName, (err: any, stats: any) => {
-      if (err) {
-        // console.log(`创建${dirName}目录`)
-        fs.mkdir(dirName, (err: any) => {
-          if (err) {
-            resolve(false);
-          } else {
-            resolve(true);
-          }
-        });
-      } else {
-        resolve(true);
-      }
-    });
-  });
+  if (!fs.existsSync(dirName)) {
+    fs.mkdirSync(dirName);
+  }
 }
 export default Monitor;

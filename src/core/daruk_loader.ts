@@ -99,14 +99,9 @@ class DarukLoader {
           `[controller must export a subclass of Daruk.BaseController in path: ${file}`
         );
         let RoutePath = file.replace(normalize(path), '').replace(JsTsReg, '');
-
         // 验证类名必须是首字母大写的驼峰形式，并且和路由 path 匹配
         const validClassName = RoutePath
-          // 首字母大写
-          .replace(/(^[a-z])/, (matches: string, capture: string) => {
-            return capture.toLocaleUpperCase();
-          })
-          // 斜线后面的字母大写
+          // 斜线后面的字母大写, RoutePath 定会有 / 开头
           .replace(/\/([a-z])/g, (matches: string, capture: string) => {
             return capture.toLocaleUpperCase();
           })
@@ -153,8 +148,7 @@ class DarukLoader {
       try {
         packet = require(packetName);
         // 有些包导出 export default function
-        if (typeof packet !== 'function' &&
-            typeof packet.default === 'function') {
+        if (typeof packet !== 'function' && typeof packet.default === 'function') {
           packet = packet.default;
         }
       } catch (e) {
