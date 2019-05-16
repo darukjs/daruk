@@ -16,6 +16,7 @@ export default function getDefaultOptions(rootPath: string, name: string, debug:
     utilPath: join(rootPath, 'utils'),
     darukConfigPath: join(rootPath, 'daruk.config'),
     configPath: join(rootPath, 'config'),
+    bodyOptions: {},
     debug,
     monitor: {
       enable: false,

@@ -1,7 +1,5 @@
 # Todo
 
-Todo list of features we want to support before version v1.0.0:
-
 - request:
 
   - [ ] @typeParse(key:string)

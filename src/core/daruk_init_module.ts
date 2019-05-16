@@ -133,7 +133,12 @@ export default class DarukInitModule {
     if (this.options.monitor.enable) {
       middlewareOrder.unshift('daruk_monitor');
     }
-    middlewareOrder.unshift('daruk_request_id', 'daruk_logger', 'daruk_context_loader');
+    middlewareOrder.unshift(
+      'daruk_request_id',
+      'daruk_logger',
+      'daruk_body',
+      'daruk_context_loader'
+    );
 
     // 再次保存 middlewareOrder，使外部对最终的 middlewareOrder 可见
     this.module.middlewareOrder = middlewareOrder;

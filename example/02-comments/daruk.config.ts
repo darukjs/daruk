@@ -11,7 +11,8 @@ interface DarukConfig {
 
 export default function(daruk: Daruk) {
   const globalConfig: DarukConfig = {
-    middlewareOrder: ['koa-ejs', 'koa-favicon', 'koa-bodyparser'],
+    // middlewareOrder: ['koa-ejs', 'koa-favicon', 'koa-bodyparser'],
+    middlewareOrder: ['koa-ejs', 'koa-favicon'],
     middleware: {
       'koa-favicon'(mid: Function) {
         return mid(`${daruk.options.rootPath}/public/favicon.png`);
@@ -23,10 +24,6 @@ export default function(daruk: Daruk) {
           viewExt: 'tpl'
         });
         return false;
-      },
-      // https://github.com/koajs/bodyparser
-      'koa-bodyparser'(mid: Function) {
-        return mid();
       }
     }
   };

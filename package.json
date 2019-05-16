@@ -70,6 +70,7 @@
     "http-server-shutdown": "^1.1.2",
     "is": "^3.3.0",
     "koa": "^2.5.2",
+    "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "object-assign-deep": "^0.4.0",
     "reflect-metadata": "^0.1.13",

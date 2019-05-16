@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "daruk": "lastest",
+    "daruk-request-id": "0.4.3",
     "koa-bodyparser": "^4.2.1",
     "koa-ejs": "^4.2.0",
     "koa-favicon": "^2.0.1",

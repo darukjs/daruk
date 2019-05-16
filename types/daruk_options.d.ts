@@ -1,3 +1,5 @@
+import koaBody = require('koa-body');
+
 type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
     ? RecursivePartial<U>[]
@@ -17,6 +19,7 @@ export interface Options {
   middlewarePath: string;
   rootPath: string;
   debug: boolean;
+  bodyOptions: koaBody.IKoaBodyOptions;
   monitor: {
     enable: boolean;
     v8AnalyticsPath: string;
