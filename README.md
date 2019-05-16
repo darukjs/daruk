@@ -35,26 +35,26 @@ Daruk is base on Koa2, includes features:
 - Directory and file specification
 - Auto loader and decorator combination
 - Complete Typescript development experience
-- Life cycle and hook.
+- Lifecycle and hook.
 - Custom(performance logs & business logs) & tracked
 - Online performance analysis
 - Lightweight link tracking
 - The MVC development of object-oriented
-- Supporting the development of the module
+- Support the development of the module
 
 ## Installation scaffolding
 
 ```bash
 # install daruk scaffold cli
-cnpm i -g daruk-cli
+$ cnpm i -g daruk-cli
 
 # init project
 # --ignore ignore local template cache
-daruk init --ignore daruk-example
+$ daruk init --ignore daruk-example
 
 # run the project
-cd daruk-example
-npm run dev
+$ cd daruk-example
+$ npm run dev
 ```
 
 ## Quick start
@@ -64,13 +64,12 @@ You can write your code shown below :
 ```typescript
 import { Daruk } from 'daruk';
 
-const port = 3000;
 const myApp = new Daruk('darukProject', {
   rootPath: __dirname,
   debug: process.env.NODE_ENV === 'dev'
 });
 
-myApp.listen(port);
+myApp.listen(process.env.PORT || 3000);
 ```
 
 `controllers/index.ts`:
@@ -81,10 +80,13 @@ import { BaseController, config, Context, Daruk, get, middleware, util } from 'd
 export default class Index extends BaseController {
   @util('getToday')
   public getToday: Daruk['util']['getToday'];
+
   @config('author')
   public author: Daruk['config']['author'];
+
   @config('version')
   public version: Daruk['config']['version'];
+
   @middleware('cors')
   @get('/')
   public async index(ctx: Context, next: Function) {
