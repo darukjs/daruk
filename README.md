@@ -17,7 +17,7 @@
 [![start with why](https://img.shields.io/badge/start%20with-why%3F-brightgreen.svg?style=flat)](https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0)
 ![GitHub language count](https://img.shields.io/github/languages/count/darukjs/daruk.svg)
 ![APM](https://img.shields.io/apm/l/vim-mode.svg)
-[![Build Status](https://dev.azure.com/designsor/daruk/_apis/build/status/darukjs.ci?branchName=developer)](https://dev.azure.com/designsor/daruk/_build/latest?definitionId=2&branchName=developer)
+[![Build Status](https://dev.azure.com/designsor/daruk/_apis/build/status/daruk-framework.ci?branchName=developer)](https://dev.azure.com/designsor/daruk/_build/latest?definitionId=2&branchName=developer)
 
 # Daruk
 
