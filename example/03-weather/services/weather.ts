@@ -1,5 +1,5 @@
 import { BaseService, Context, Daruk, util } from 'daruk';
-const request = require('request-promise');
+import request = require('request-promise');
 
 export default class Weather extends BaseService {
   @util('fixIP')
