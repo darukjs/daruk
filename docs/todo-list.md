@@ -4,35 +4,27 @@ Todo list of features we want to support before version v1.0.0:
 
 - request:
 
-  - [ ] @param(key:string)
-  - [ ] @body(key:string)
-  - [ ] @query(key:string)
+  - [ ] @typeParse(key:string)
   - [ ] @required({methodName:keys})
   - [ ] @validate(method,key,validFunc)
-  - [ ] @auth(middleware)
-  - [ ] @security(type,username,password)
-  - [ ] @headers(key?:string)
 
 - response:
 
   - [x] @header(key|fields, ?value)
   - [x] @type(type:string)
   - [x] @redirect(path:string)
-  - [ ] @cache
+  - [ ] @cache(options,store)
 
 - Class:
 
-  - [ ] @controller(path:string)
-  - [ ] @timer(cronTime:string)
-  - [ ] @inject(LibName:string)
-  - [ ] @provide(LibName)
-  - [ ] @ctx(routerPath)
+  - [ ] @inject(service:string)
+  - [ ] @provide(service:string)
 
 - controllerClass:
 
-  - [ ] @local
   - [x] @prefix(path:string)
 
-* utils:
+- utils:
 
-  - [ ] @decorator
+  - [ ] decoratorFactory
+  - [ ] Darukx
