@@ -13,6 +13,7 @@ import BaseContext from './base_context';
 
 const join = path.join;
 const isFn = is.fn;
+const isObj = is.object;
 
 /**
  * @desc daruk loader 类
@@ -169,8 +170,12 @@ class DarukLoader {
     // 这里 load 的是文件夹，所以可以直接判断路径是否存在
     if (!fs.existsSync(path)) return;
     const mod = uRequire(path);
-    assert(isFn(mod), `${type} must export a function in path: ${path}`);
-    this.app.mergeModule(type, mod(this.app));
+    assert(isFn(mod) || isObj(mod), `${type} must export a function or object in path: ${path}`);
+    if (isObj(mod)) {
+      this.app.mergeModule(type, { ...mod });
+    } else if (isFn(mod)) {
+      this.app.mergeModule(type, mod(this.app));
+    }
   }
   /**
    * @desc 获取约定目下第一级目录的文件名和 path
