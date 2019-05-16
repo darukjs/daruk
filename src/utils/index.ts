@@ -1,4 +1,3 @@
-import is = require("is");
 import { defineModulePrivateProperty } from "../decorators/constants";
 
 /**
@@ -30,32 +29,28 @@ export function isSubClass(subClass: any, superClass: any) {
   return superClass.isPrototypeOf(subClass);
 }
 
-export function deepDefineProperty(target: any, key: PropertyKey, value: any): void {
+export function deepDefineProperty(target: any, key: string, value: any): void {
   const privateKey = defineModulePrivateProperty(key);
-  if (is.undefined(target[key])) {
-    Object.defineProperty(target, privateKey, {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value
-    });
-    Object.defineProperty(target, key, {
-      configurable: true,
-      enumerable: true,
-      get() {
-        return target[privateKey];
-      },
-      set(val): void {
-        // 提醒用户不能直接修改
-        throw new SyntaxError('[daruk error] user could not change module directly\nplease use function\'setModule\'');
-      }
-    });
-  } else if (typeof value !== 'object') {
-    target[privateKey] = value;
-  }
+  Object.defineProperty(target, privateKey, {
+    writable: true,
+    configurable: true,
+    enumerable: false,
+    value
+  });
+  Object.defineProperty(target, key, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      return target[privateKey];
+    },
+    set(val): void {
+      // 提醒用户不能直接修改
+      throw new SyntaxError('[daruk error] user could not change module directly\nplease use function\'setModule\'');
+    }
+  });
   if (typeof value === 'object') {
     Object.keys(value).forEach(innerKey => {
-      deepDefineProperty(target[key], innerKey, target[key][innerKey]);
+      deepDefineProperty(target[privateKey], innerKey, target[privateKey][innerKey]);
     });
   }
 }

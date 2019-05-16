@@ -1,10 +1,12 @@
-# how-to-contribute
+# How-to-contribute
+
+## Fork and Init
 
 Fork the repo and install the dependencies use yarn or cnpm (If you are in China).
 
 ```bash
 $ cd daruk
-$ cnpm install
+$ cnpm install # or `yarn install`, `npm install`
 ```
 
 The src directory is core directory, if you change something and want to check it.
@@ -17,7 +19,7 @@ $ mkdir playground
 $ npm init
 ```
 
-In the package.json the dependencies with daruk like this:
+In the `package.json` the dependencies with daruk like this:
 
 ```json
 {
@@ -33,7 +35,7 @@ In the package.json the dependencies with daruk like this:
 }
 ```
 
-tsconfig.json
+`tsconfig.json`
 
 ```json
 {
@@ -62,9 +64,11 @@ $ yarn
 $ npm run dev
 ```
 
-The daruk dependencies path is `file:../../` and localy. You can reference other complete example such as `01-helloWorld`.
+## After Code
 
-If you want a pr, you must run these script and no error.
+The daruk dependencies path is `file:../../` and locally. You can reference other complete example such as `01-helloWorld`.
+
+If you want to pull request, you must run these script without error.
 
 ```bash
 $ npm run test
@@ -72,16 +76,24 @@ $ npm run tslint
 $ npm run build
 ```
 
-Commit Message Format
+## Commit Message Format
 
 Must be one of the following:
 
 - feat: A new feature
+
 - fix: A bug fix
+
 - docs: Documentation-only changes
+
 - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+
 - refactor: A code change that neither fixes a bug nor adds a feature
+
 - perf: A code change that improves performance
+
 - test: Adding missing tests
+
 - chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
+
 - deps: Updates about dependencies
