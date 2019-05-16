@@ -7,7 +7,7 @@
 [![PR's Welcome][pr-welcoming-image]][pr-welcoming-url]
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/darukjs/daruk.svg)
 ![npm](https://img.shields.io/npm/dm/daruk.svg)
-[![codecov](https://codecov.io/gh/darukjs/daruk/branch/master/graph/badge.svg)](https://codecov.io/gh/darukjs/daruk)
+[![codecov](https://codecov.io/gh/daruk-framework/daruk/branch/developer/graph/badge.svg)](https://codecov.io/gh/daruk-framework/daruk)
 ![GitHub top language](https://img.shields.io/github/languages/top/darukjs/daruk.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/darukjs/daruk.svg)
 [![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
@@ -116,8 +116,8 @@ To become a contributor, please follow our [contributing guide](./docs/how-to-co
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
-[travis-image]: https://api.travis-ci.com/darukjs/daruk.svg?branch=master
-[travis-url]: https://travis-ci.com/darukjs/daruk
+[travis-image]: https://api.travis-ci.com/daruk-framework/daruk.svg?branch=developer
+[travis-url]: https://travis-ci.com/daruk-framework/daruk
 [pr-welcoming-image]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [pr-welcoming-url]: https://github.com/darukjs/daruk/pull/new
 
