@@ -25,4 +25,4 @@
 - utils:
 
   - [ ] decoratorFactory
-  - [ ] Darukx
+  - [ ] DarukX
