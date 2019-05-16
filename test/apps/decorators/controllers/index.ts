@@ -18,6 +18,11 @@ import {
 import { Daruk } from '../../../../src/typings/daruk';
 
 export default class Index extends BaseController {
+  @get('/repeatMethod')
+  @post('/repeatMethod')
+  public async repeatMethod(ctx: Daruk.Context, next: Function) {
+    ctx.body = '';
+  }
   @all('/all')
   public async all(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
@@ -79,7 +84,7 @@ export default class Index extends BaseController {
     ctx.body = 'bar';
   }
 
-  @header({foo: 'bar'})
+  @header({ foo: 'bar' })
   @get('/headers')
   public headers(ctx: Daruk.Context) {
     ctx.body = 'bar';

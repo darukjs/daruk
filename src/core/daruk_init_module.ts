@@ -181,65 +181,70 @@ export default class DarukInitModule {
     Object.keys(controllers).forEach(function handleControllers(prefixPath: string) {
       const ControllerClass = controllers[prefixPath];
       // 获取类中定义了路由的方法名
-      const routeFuncs = Reflect.getMetadata(CONTROLLER_FUNC_NAME, ControllerClass) || [];
+      let routeFuncs = Reflect.getMetadata(CONTROLLER_FUNC_NAME, ControllerClass) || [];
+      // 去重复router
+      routeFuncs = [...new Set(routeFuncs)];
       // 保存装饰器提供的路由信息
       const prefix = Reflect.getMetadata(CONTROLLER_CLASS_PREFIX, ControllerClass) || '';
       routeFuncs.forEach(function defineRoute(funcName: string) {
         // 获取装饰器注入的路由信息
-        const { method, path } = Reflect.getMetadata(CONTROLLER_PATH, ControllerClass, funcName);
-        // 重定向信息
-        const redirectPath =
-          Reflect.getMetadata(CONTROLLER_REDIRECT_PATH, ControllerClass, funcName) || '';
-        // 避免解析出的路由没有 / 前缀
-        // 并保证前后都有 /，方便后续比对路由 key
-        // 不转path，因为可能会把通配符转成unix path
-        const routePath = urljoin('/', prefix, ujoin(prefixPath), path).replace(/\/\//g, '/');
-        // 将路由按照 http method 分组
-        routeMap[method] = routeMap[method] || [];
-        // 判断路由是否重复定义
-        assert(
-          routeMap[method].indexOf(routePath) === -1,
-          `[router] duplicate routing definition in ${
-            ControllerClass.name
-          }.${funcName}: ${routePath}`
-        );
-        // 保存路由 path
-        routeMap[method].push(routePath);
+        let metaRouters = Reflect.getMetadata(CONTROLLER_PATH, ControllerClass, funcName);
+        metaRouters.forEach(function defineMethdRoute(meta: { [key: string]: string }) {
+          const { method, path } = meta;
+          // 重定向信息
+          const redirectPath =
+            Reflect.getMetadata(CONTROLLER_REDIRECT_PATH, ControllerClass, funcName) || '';
+          // 避免解析出的路由没有 / 前缀
+          // 并保证前后都有 /，方便后续比对路由 key
+          // 不转path，因为可能会把通配符转成unix path
+          const routePath = urljoin('/', prefix, ujoin(prefixPath), path).replace(/\/\//g, '/');
+          // 将路由按照 http method 分组
+          routeMap[method] = routeMap[method] || [];
+          // 判断路由是否重复定义
+          assert(
+            routeMap[method].indexOf(routePath) === -1,
+            `[router] duplicate routing definition in ${
+              ControllerClass.name
+            }.${funcName}: ${routePath}`
+          );
+          // 保存路由 path
+          routeMap[method].push(routePath);
 
-        // 绑定针对单个路由的中间件
-        // 获取针对路由的中间件名字
-        const middlewareNames: Array<string> = Reflect.getMetadata(
-          MIDDLEWARE_NAME,
-          ControllerClass,
-          funcName
-        );
-        // 是否使用了中间件装饰器
-        if (middlewareNames) {
-          // 可以对单个路由应用多个中间件
-          middlewareNames.forEach((name) => {
-            const middleware = self.module.middleware[name];
-            assert(isFn(middleware), `[middleware] ${name} is not found or not a function`);
-            self.router.use(routePath, middleware);
+          // 绑定针对单个路由的中间件
+          // 获取针对路由的中间件名字
+          const middlewareNames: Array<string> = Reflect.getMetadata(
+            MIDDLEWARE_NAME,
+            ControllerClass,
+            funcName
+          );
+          // 是否使用了中间件装饰器
+          if (middlewareNames) {
+            // 可以对单个路由应用多个中间件
+            middlewareNames.forEach((name) => {
+              const middleware = self.module.middleware[name];
+              assert(isFn(middleware), `[middleware] ${name} is not found or not a function`);
+              self.router.use(routePath, middleware);
+            });
+          }
+
+          // 初始化路由
+          self.prettyLog(`${method} - ${routePath}`, { type: 'router', init: true });
+          self.router[method](routePath, async function routeHandle(
+            ctx: Daruk.Context,
+            next: () => Promise<void>
+          ): Promise<any> {
+            let controllerInstance = new ControllerClass(ctx);
+            await controllerInstance[funcName](ctx, next);
+            // 允许用户在 controller 销毁前执行清理逻辑
+            if (isFn(controllerInstance._destroy)) {
+              controllerInstance._destroy();
+            }
+            controllerInstance = null;
+            // 增加重定向：
+            if (redirectPath) {
+              ctx.redirect(redirectPath);
+            }
           });
-        }
-
-        // 初始化路由
-        self.prettyLog(`${method} - ${routePath}`, { type: 'router', init: true });
-        self.router[method](routePath, async function routeHandle(
-          ctx: Daruk.Context,
-          next: () => Promise<void>
-        ): Promise<any> {
-          let controllerInstance = new ControllerClass(ctx);
-          await controllerInstance[funcName](ctx, next);
-          // 允许用户在 controller 销毁前执行清理逻辑
-          if (isFn(controllerInstance._destroy)) {
-            controllerInstance._destroy();
-          }
-          controllerInstance = null;
-          // 增加重定向：
-          if (redirectPath) {
-            ctx.redirect(redirectPath);
-          }
         });
       });
     });

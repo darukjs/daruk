@@ -21,6 +21,16 @@ describe('decorators', () => {
     app.httpServer.close(done);
   });
 
+  it('decorator repeat method', (done) => {
+    request(server)
+      .get('/repeatMethod')
+      .expect(code200, () => {
+        request(server)
+          .post('/repeatMethod')
+          .expect(code200, done);
+      });
+  });
+
   it('decorator "@all"', (done) => {
     request(server)
       .get('/all')

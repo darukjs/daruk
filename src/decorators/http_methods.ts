@@ -3,10 +3,7 @@ import is = require('is');
 // tslint:disable-next-line
 import 'reflect-metadata';
 import BaseContext from '../core/base_context';
-import {
-  CONTROLLER_FUNC_NAME,
-  CONTROLLER_PATH,
-} from './constants';
+import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
 /**
  * @desc 生成 http method 装饰器
@@ -25,11 +22,12 @@ function createMethodDecorator(method: string) {
       funcs.push(propertyKey);
       // 保存该类中被装饰过的方法
       Reflect.defineMetadata(CONTROLLER_FUNC_NAME, funcs, target);
-      const routerMeta = {
+      let routerMetas = Reflect.getMetadata(CONTROLLER_PATH, target, propertyKey) || [];
+      routerMetas.push({
         method,
         path
-      };
-      Reflect.defineMetadata(CONTROLLER_PATH, routerMeta, target, propertyKey);
+      });
+      Reflect.defineMetadata(CONTROLLER_PATH, routerMetas, target, propertyKey);
     };
   };
 }
