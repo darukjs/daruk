@@ -4,10 +4,14 @@ Todo list of features we want to support before version v1.0.0:
 
 - request:
 
-  - [ ] @required({methodName:key})
-  - [ ] @validate(method,key,validFunc])
-  - [ ] @useAuth(middleware)
+  - [ ] @param(key:string)
+  - [ ] @body(key:string)
+  - [ ] @query(key:string)
+  - [ ] @required({methodName:keys})
+  - [ ] @validate(method,key,validFunc)
+  - [ ] @auth(middleware)
   - [ ] @security(type,username,password)
+  - [ ] @headers(key?:string)
 
 - response:
 
@@ -15,13 +19,6 @@ Todo list of features we want to support before version v1.0.0:
   - [x] @type(type:string)
   - [x] @redirect(path:string)
   - [ ] @cache
-
-- arguments:
-
-  - [ ] @param(key:string)
-  - [ ] @body(key:string)
-  - [ ] @query(key:string)
-  - [ ] @headers(key?:string)
 
 - Class:
 
@@ -36,7 +33,6 @@ Todo list of features we want to support before version v1.0.0:
   - [ ] @local
   - [x] @prefix(path:string)
 
-- utils:
+* utils:
 
   - [ ] @decorator
-  - [ ] @globalSetting
