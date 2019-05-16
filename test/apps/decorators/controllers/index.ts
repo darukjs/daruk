@@ -13,6 +13,7 @@ import {
   post,
   put,
   redirect,
+  required,
   type
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
@@ -23,59 +24,84 @@ export default class Index extends BaseController {
   public async repeatMethod(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @all('/all')
   public async all(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @del('/del')
   public async del(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @get('/get')
   public async get(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @head('/head')
   public async head(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @options('/options')
   public async options(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @patch('/patch')
   public async patch(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @post('/post')
   public async post(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @put('/put')
   public async put(ctx: Daruk.Context, next: Function) {
     ctx.body = '';
   }
+
   @json()
   @get('/json1')
   public json() {
     return { foo: 1 };
   }
+
   @get('/json2')
   @JSON()
   public JSON() {
     return { foo: 1 };
   }
+
   @redirect('/json2')
   @get('/redirect')
   public redirect(ctx: Daruk.Context) {
     ctx.body = '';
   }
+
   @type('application/json')
   @get('/type')
   public type(ctx: Daruk.Context) {
     ctx.body = {
       foo: 1
     };
+  }
+
+  @required({
+    body: ['foo'],
+    query: ['bar'],
+    params: ['id'],
+    callback: (expected, part) => {
+      throw new Error(`${expected} ${part}`);
+    }
+  })
+  @post('/required/:id')
+  public required(ctx: Daruk.Context) {
+    ctx.body = '';
   }
 
   @header('foo', 'bar')
@@ -99,10 +125,12 @@ export default class Index extends BaseController {
 
   @middleware('routeMiddleware')
   @get('/middleware')
-  public async middleware(ctx: Daruk.Context, next: Function) {}
+  public async middleware(ctx: Daruk.Context, next: Function) {
+  }
 
   @middleware('multiRouteMiddleware')
   @middleware('routeMiddleware')
   @get('/multiMiddleware')
-  public async multiMiddleware(ctx: Daruk.Context, next: Function) {}
+  public async multiMiddleware(ctx: Daruk.Context, next: Function) {
+  }
 }
