@@ -52,13 +52,13 @@ npm run dev
 
 ## Docs
 
-查看 Daruk 文档[快速开始](https://daruk-framework.github.io/daruk.org/)吧！
+查看 Daruk 文档[快速开始](https://darukjs.github.io/daruk.org/)吧！
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
-[travis-image]: https://api.travis-ci.com/daruk-framework/daruk.svg?branch=master
-[travis-url]: https://travis-ci.com/daruk-framework/daruk
-[coveralls-image]: https://img.shields.io/codecov/c/github/daruk-framework/daruk.svg?style=flat-square
-[coveralls-url]: https://codecov.io/github/daruk-framework/daruk?branch=master
+[travis-image]: https://api.travis-ci.com/darukjs/daruk.svg?branch=master
+[travis-url]: https://travis-ci.com/darukjs/daruk
+[coveralls-image]: https://img.shields.io/codecov/c/github/darukjs/daruk.svg?style=flat-square
+[coveralls-url]: https://codecov.io/github/darukjs/daruk?branch=master
 [pr-welcoming-image]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[pr-welcoming-url]: https://github.com/daruk-framework/daruk/pull/new
+[pr-welcoming-url]: https://github.com/darukjs/daruk/pull/new

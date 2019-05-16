@@ -16,7 +16,7 @@
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git@github.com:daruk-framework/daruk.git"
+    "url": "git@github.com:darukjs/daruk.git"
   },
   "keywords": [
     "framework"
