@@ -44,4 +44,4 @@ npm run dev
 
 ## Docs
 
-查看 Daruk 文档[快速开始](https://darukjs.github.io/daruk.org/)吧！
+查看 Daruk 文档[快速开始](http://darukjs.com/)吧！

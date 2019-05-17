@@ -102,7 +102,7 @@ More information you can check out [example/03-weather](./example/03-weather).
 
 ## Docs
 
-More docs: [Quick Start](https://darukjs.github.io/daruk.org/)
+More docs: [Quick Start](http://darukjs.com/)
 
 ## Features Todo
 
