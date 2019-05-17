@@ -23,6 +23,6 @@ export default class CommentsModel extends BaseService {
       name,
       content
     });
-    return await EntityManager.save(comments);
+    return EntityManager.save(comments);
   }
 }
