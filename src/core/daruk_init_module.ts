@@ -129,10 +129,11 @@ export default class DarukInitModule {
    */
   private initMiddleware() {
     const middlewareOrder = this.module.middlewareOrder || [];
-    // 是否开启了 v8 分析功能
-    if (this.options.monitor.enable) {
-      middlewareOrder.unshift('daruk_monitor');
-    }
+    // v8分析相关逻辑已经拆出成一个单独的包，请使用npm install daruk-monitor-middleware 安装
+    // // 是否开启了 v8 分析功能
+    // if (this.options.monitor.enable) {
+    //   middlewareOrder.unshift('daruk_monitor');
+    // }
     middlewareOrder.unshift(
       'daruk_request_id',
       'daruk_logger',
