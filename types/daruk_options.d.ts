@@ -20,15 +20,15 @@ export interface Options {
   rootPath: string;
   debug: boolean;
   bodyOptions: koaBody.IKoaBodyOptions;
-  monitor: {
-    enable: boolean;
-    v8AnalyticsPath: string;
-    v8ProfilerPath: string;
-    auth: {
-      name: string;
-      password: string;
-    };
-  };
+  // monitor: {
+  //   enable: boolean;
+  //   v8AnalyticsPath: string;
+  //   v8ProfilerPath: string;
+  //   auth: {
+  //     name: string;
+  //     password: string;
+  //   };
+  // };
   loggerOptions: any;
   customLogger: any;
   loggerMiddleware: {
