@@ -22,6 +22,20 @@ describe('load daruk.config', () => {
     app.httpServer.close(done);
   });
 
+  it('should middleware loaded with params', (done) => {
+    request(server)
+      .get('/test')
+      .expect(code200)
+      .expect('packetMid;packetMid2;configMid;test;testController', done);
+  });
+
+  it('should global middleware loaded without params', (done) => {
+    request(server)
+      .get('/testMid')
+      .expect(code200)
+      .expect('packetMid;packetMid2;configMid;configMid;testController2', done);
+  });
+
   it('should middleware loaded and execute in order', (done) => {
     request(server)
       .get('/')

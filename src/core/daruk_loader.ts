@@ -131,6 +131,7 @@ class DarukLoader {
    */
   private loadDarukConfigMid(midConfig: any) {
     const middleware: any = {};
+    const globalMiddleware: any = {};
     Object.keys(midConfig).forEach((key: string) => {
       const config = midConfig[key];
       let midName = key;
@@ -158,8 +159,10 @@ class DarukLoader {
       assert(isFn(packet), `[daruk.config.middleware] can not find function at packet: ${packet}.`);
       assert(isFn(midExport), `[daruk.config.middleware] ${key} must be (or export) a function`);
       middleware[midName] = midExport(packet);
+      globalMiddleware[midName] = packet;
     });
     this.app.mergeModule('middleware', middleware);
+    this.app.mergeModule('globalMiddleware', globalMiddleware);
   }
   /**
    * @desc 只是加载约定目录中的 index 文件并执行

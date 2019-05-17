@@ -102,7 +102,7 @@ export default class Index extends BaseController {
   @get('/middleware')
   public async middleware(ctx: Daruk.Context, next: Function) {}
 
-  @middleware('multiRouteMiddleware')
+  @middleware('multiRouteMiddleware', { foo: 1 })
   @middleware('routeMiddleware')
   @get('/multiMiddleware')
   public async multiMiddleware(ctx: Daruk.Context, next: Function) {}

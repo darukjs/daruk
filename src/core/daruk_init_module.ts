@@ -5,6 +5,7 @@
 import assert = require('assert');
 import { CronJob as cronJob } from 'cron';
 import is = require('is');
+import { Context } from 'koa';
 import path = require('path');
 // tslint:disable-next-line
 import 'reflect-metadata';
@@ -213,17 +214,30 @@ export default class DarukInitModule {
 
           // 绑定针对单个路由的中间件
           // 获取针对路由的中间件名字
-          const middlewareNames: Array<string> = Reflect.getMetadata(
+          const middlewares: Array<any> = Reflect.getMetadata(
             MIDDLEWARE_NAME,
             ControllerClass,
             funcName
           );
           // 是否使用了中间件装饰器
-          if (middlewareNames) {
+          if (middlewares) {
             // 可以对单个路由应用多个中间件
-            middlewareNames.forEach((name) => {
-              const middleware = self.module.middleware[name];
-              assert(isFn(middleware), `[middleware] ${name} is not found or not a function`);
+            middlewares.forEach(({ middlewareName, options }) => {
+              let modules = self.module;
+              let middleware: Function;
+              if (modules.globalMiddleware && modules.globalMiddleware[middlewareName] && options) {
+                middleware = modules.globalMiddleware[middlewareName](options);
+              } else if (modules.globalMiddleware && !options) {
+                middleware = modules.middleware[middlewareName];
+              } else if (options) {
+                middleware = modules.middleware[middlewareName](options);
+              } else {
+                middleware = modules.middleware[middlewareName];
+              }
+              assert(
+                isFn(middleware),
+                `[middleware] ${middlewareName} is not found or not a function`
+              );
               self.router.use(routePath, middleware);
             });
           }

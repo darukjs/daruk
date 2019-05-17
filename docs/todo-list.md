@@ -3,7 +3,7 @@
 - request:
 
   - [ ] @typeParse(key:string)
-  - [ ] @required({methodName:keys})
+  - [x] @required({methodName:keys})
   - [ ] @validate(method,key,validFunc)
 
 - response:

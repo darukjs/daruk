@@ -150,7 +150,7 @@ declare module 'daruk' {
   export const type: (type: string) => MethodDecorator;
   export const header: (key: string | { [key: string]: string }, value?: string) => MethodDecorator;
 
-  export const middleware: (middlewareName: string) => MethodDecorator;
+  export const middleware: (middlewareName: string, options?: any) => MethodDecorator;
   export const required: (config: {
     body?: string[];
     query?: string[];
