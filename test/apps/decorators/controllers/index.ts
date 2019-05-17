@@ -13,6 +13,7 @@ import {
   post,
   put,
   redirect,
+  required,
   type
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
@@ -105,4 +106,14 @@ export default class Index extends BaseController {
   @middleware('routeMiddleware')
   @get('/multiMiddleware')
   public async multiMiddleware(ctx: Daruk.Context, next: Function) {}
+
+  @required({
+    body: ['foo'],
+    query: ['bar'],
+    params: ['id']
+  })
+  @post('/required/:id')
+  public async required(ctx: Daruk.Context, next: Function) {
+    ctx.body = ctx.validateRequired || '';
+  }
 }

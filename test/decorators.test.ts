@@ -196,4 +196,24 @@ describe('decorators', () => {
     // 自定义 logger 的 fileInfo 成功
     assert(new A().logger.customFileInformation === 'customFileInfo');
   });
+  it('decorator "@required" success', (done) => {
+    request(server)
+      .post('/required/1')
+      .send({ foo: 2 })
+      .query({ bar: 3 })
+      .expect(code200)
+      .expect('', done);
+  });
+  it('decorator "@required" fail', (done) => {
+    request(server)
+      .post('/required/1')
+      .expect(code200)
+      .expect(
+        {
+          part: 'body',
+          key: 'foo'
+        },
+        done
+      );
+  });
 });

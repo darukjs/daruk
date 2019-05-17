@@ -14,6 +14,7 @@ export namespace Daruk {
     service: any;
     controller: any;
     app: DarukCore;
+    validateRequired: undefined | { [key: string]: string };
   }
 
   export interface DarukCore extends Koa {

@@ -151,7 +151,11 @@ declare module 'daruk' {
   export const header: (key: string | { [key: string]: string }, value?: string) => MethodDecorator;
 
   export const middleware: (middlewareName: string) => MethodDecorator;
-  export const controller: (prefixPath: string) => ClassDecorator;
+  export const required: (config: {
+    body?: string[];
+    query?: string[];
+    params?: string[];
+  }) => MethodDecorator;
 
   type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 
