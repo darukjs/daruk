@@ -42,17 +42,18 @@ jobs:
       deploy:
         - provider: npm
           api_key: $NPM_API_KEY
-          email: "designsor@gmail.com"
+          email: "himself6565@gmail.com"
           skip_cleanup: true
           on:
             repo: darukjs/daruk
-            tags: true
             branch: master
+            tags: true
         - provider: releases
           api_key: $GETHUB_API_KEY
           file: "release/daruk-${TRAVIS_TAG}.zip"
           skip_cleanup: true
+          draft: true
           on:
-            repo: darukjs/daruk
             branch: master
+            repo: darukjs/daruk
             tags: true
