@@ -13,10 +13,17 @@
   - [x] @redirect(path:string)
   - [ ] @cache(options,store)
 
-- Class:
+- Ioc:
 
-  - [ ] @inject(service:string)
+  - [ ] @inject(service:string) property | arguments
   - [ ] @provide(service:string)
+  - [ ] @async() async provide init
+  - [ ] @scope(scopeEum) global | access | prototype
+  - [ ] bindProvide(id, provider)
+  - [ ] Container
+  - [ ] Container.bind(class)
+  - [ ] Container.registerInstance(instance)
+  - [ ] Container.dump()
 
 - controllerClass:
 
