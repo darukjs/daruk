@@ -116,8 +116,8 @@ To become a contributor, please follow our [contributing guide](./docs/how-to-co
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
-[travis-image]: https://api.travis-ci.com/daruk-framework/daruk.svg?branch=developer
-[travis-url]: https://travis-ci.com/daruk-framework/daruk
+[travis-image]: https://api.travis-ci.com/darukjs/daruk.svg?branch=developer
+[travis-url]: https://travis-ci.com/darukjs/daruk
 [pr-welcoming-image]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [pr-welcoming-url]: https://github.com/darukjs/daruk/pull/new
 
