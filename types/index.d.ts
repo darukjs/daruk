@@ -72,20 +72,20 @@ declare module 'daruk' {
      *    http.createServer(app.callback()).listen(...)
      *    copy from Koa
      */
-    listen(
+    public listen(
       port?: number,
       hostname?: string,
       backlog?: number,
       listeningListener?: () => void
     ): Http.Server;
-    listen(port: number, hostname?: string, listeningListener?: () => void): Http.Server;
-    listen(port: number, backlog?: number, listeningListener?: () => void): Http.Server;
-    listen(port: number, listeningListener?: () => void): Http.Server;
-    listen(path: string, backlog?: number, listeningListener?: () => void): Http.Server;
-    listen(path: string, listeningListener?: () => void): Http.Server;
-    listen(options: ListenOptions, listeningListener?: () => void): Http.Server;
-    listen(handle: any, backlog?: number, listeningListener?: () => void): Http.Server;
-    listen(handle: any, listeningListener?: () => void): Http.Server;
+    public listen(port: number, hostname?: string, listeningListener?: () => void): Http.Server;
+    public listen(port: number, backlog?: number, listeningListener?: () => void): Http.Server;
+    public listen(port: number, listeningListener?: () => void): Http.Server;
+    public listen(path: string, backlog?: number, listeningListener?: () => void): Http.Server;
+    public listen(path: string, listeningListener?: () => void): Http.Server;
+    public listen(options: ListenOptions, listeningListener?: () => void): Http.Server;
+    public listen(handle: any, backlog?: number, listeningListener?: () => void): Http.Server;
+    public listen(handle: any, listeningListener?: () => void): Http.Server;
 
     public serverReady(server: Http.Server | Https.Server): void;
     public registerTimer(describe: RegisterDes | Array<RegisterDes>): void;
@@ -130,32 +130,29 @@ declare module 'daruk' {
   // @ts-ignore
   export const DarukEvents = new DarukEventsClass();
 
-  type MethodDecoratorFunc = (path: string) => MethodDecorator;
-  type JSONDecorator = () => MethodDecorator;
-  type PrefixClassDecoratorFunc = (path: string) => ClassDecorator;
+  export function post (path: string): MethodDecorator;
+  export function get (path: string): MethodDecorator;
+  export function del (path: string):  MethodDecorator;
+  export function put (path: string): MethodDecorator;
+  export function patch (path: string): MethodDecorator;
+  export function options (path: string): MethodDecorator;
+  export function head (path: string): MethodDecorator;
+  export function all (path: string): MethodDecorator;
 
-  export const post: MethodDecoratorFunc;
-  export const get: MethodDecoratorFunc;
-  export const del: MethodDecoratorFunc;
-  export const put: MethodDecoratorFunc;
-  export const patch: MethodDecoratorFunc;
-  export const options: MethodDecoratorFunc;
-  export const head: MethodDecoratorFunc;
-  export const all: MethodDecoratorFunc;
+  export function json(): MethodDecorator;
+  export function JSON(): MethodDecorator;
+  export function prefix (path: string): MethodDecorator;
+  export function redirect (path: string): MethodDecorator;
+  export function type (type: string): MethodDecorator;
+  export function header (key: string, value: string): MethodDecorator;
+  export function header (key: { [key: string]: string }): MethodDecorator;
 
-  export const json: JSONDecorator;
-  export const JSON: JSONDecorator;
-  export const prefix: PrefixClassDecoratorFunc;
-  export const redirect: MethodDecoratorFunc;
-  export const type: (type: string) => MethodDecorator;
-  export const header: (key: string | { [key: string]: string }, value?: string) => MethodDecorator;
-
-  export const middleware: (middlewareName: string, options?: any) => MethodDecorator;
-  export const required: (config: {
+  export function middleware (middlewareName: string, options?: any): MethodDecorator;
+  export function required (config: {
     body?: string[];
     query?: string[];
     params?: string[];
-  }) => MethodDecorator;
+  }): MethodDecorator;
 
   type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 
