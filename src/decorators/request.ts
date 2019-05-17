@@ -13,12 +13,14 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
     expected: string[],
     part: 'body' | 'query' | 'params'
   ) {
-    for (let key of expected) {
-      if (is.object(actual) && is.undefined(actual[key])) {
-        return {
-          part,
-          key
-        };
+    if (is.object(actual)) {
+      for (let key of expected) {
+        if (is.undefined(actual[key])) {
+          return {
+            part,
+            key
+          };
+        }
       }
     }
   }
