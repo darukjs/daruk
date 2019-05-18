@@ -39,6 +39,10 @@ declare module 'daruk' {
 
   type ExtractInterface<T> = { [P in keyof T]: new (ctx: Context) => T[P] };
 
+  type AllDarukEventName = 'configLoaded' | 'darukConfigLoaded' | 'utilLoaded'
+    | 'glueLoaded' | 'serviceLoaded' | 'middlewareLoaded' | 'controllerLoaded'
+    | 'timerLoaded' | 'access' | 'exit';
+
   export class Daruk extends Koa {
     public name: string;
     public readonly config: Config;
@@ -126,7 +130,10 @@ declare module 'daruk' {
   export class BaseController extends BaseContext {}
   export class BaseService extends BaseContext {}
 
-  class DarukEventsClass extends EventEmitter {}
+  class DarukEventsClass extends EventEmitter {
+    public on(event: AllDarukEventName | string | symbol, listener: (...args: any[]) => void): this;
+    public addListener(event: AllDarukEventName | string | symbol, listener: (...args: any[]) => void): this;
+  }
   // @ts-ignore
   export const DarukEvents = new DarukEventsClass();
 
