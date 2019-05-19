@@ -2,9 +2,9 @@
 
 - request:
 
-  - [ ] @typeParse(key:string)
+  - [x] @typeParse(key:string)
   - [x] @required({methodName:keys})
-  - [ ] @validate(method,key,validFunc)
+  - [x] @validate(method,key,validFunc)
 
 - response:
 

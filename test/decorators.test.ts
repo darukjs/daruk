@@ -254,4 +254,23 @@ describe('decorators', () => {
         done
       );
   });
+
+  it('decorator @validate success', (done) => {
+    request(server)
+      .get('/validate')
+      .query({
+        foo: 'bar'
+      })
+      .expect(code200, done);
+  });
+
+  it('decorator @validate fail', (done) => {
+    request(server)
+      .post('/validate')
+      .send({
+        foo: 'foo'
+      })
+      .expect(code200)
+      .expect('foo not pass validate!', done);
+  });
 });

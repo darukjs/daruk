@@ -15,7 +15,8 @@ import {
   redirect,
   required,
   type,
-  typeParse
+  typeParse,
+  validate
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
 
@@ -143,5 +144,33 @@ export default class Index extends BaseController {
       params: ctx.parseParams,
       query: ctx.parseQuery
     };
+  }
+
+  @validate('query', 'foo', (value: string) => {
+    if (value !== 'bar') {
+      return 'foo not pass validate!';
+    }
+  })
+  @get('/validate')
+  public validate(ctx: Daruk.Context) {
+    if (ctx.validateError.length) {
+      ctx.body = ctx.validateError[0];
+    } else {
+      ctx.body = '';
+    }
+  }
+
+  @validate('body', 'foo', (value: string) => {
+    if (value !== 'bar') {
+      return 'foo not pass validate!';
+    }
+  })
+  @post('/validate')
+  public validatePost(ctx: Daruk.Context) {
+    if (ctx.validateError.length) {
+      ctx.body = ctx.validateError[0];
+    } else {
+      ctx.body = '';
+    }
   }
 }

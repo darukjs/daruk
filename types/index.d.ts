@@ -11,6 +11,9 @@ interface RegisterDes {
   export: any;
 }
 
+type method = 'body' | 'query' | 'params';
+type validateFunc = (value: string) => string | undefined;
+
 declare module 'daruk' {
   interface Config {
     [key: string]: any;
@@ -39,9 +42,17 @@ declare module 'daruk' {
 
   type ExtractInterface<T> = { [P in keyof T]: new (ctx: Context) => T[P] };
 
-  type AllDarukEventName = 'configLoaded' | 'darukConfigLoaded' | 'utilLoaded'
-    | 'glueLoaded' | 'serviceLoaded' | 'middlewareLoaded' | 'controllerLoaded'
-    | 'timerLoaded' | 'access' | 'exit';
+  type AllDarukEventName =
+    | 'configLoaded'
+    | 'darukConfigLoaded'
+    | 'utilLoaded'
+    | 'glueLoaded'
+    | 'serviceLoaded'
+    | 'middlewareLoaded'
+    | 'controllerLoaded'
+    | 'timerLoaded'
+    | 'access'
+    | 'exit';
 
   export class Daruk extends Koa {
     public name: string;
@@ -132,39 +143,59 @@ declare module 'daruk' {
 
   class DarukEventsClass extends EventEmitter {
     public on(event: AllDarukEventName | string | symbol, listener: (...args: any[]) => void): this;
-    public addListener(event: AllDarukEventName | string | symbol, listener: (...args: any[]) => void): this;
+    public addListener(
+      event: AllDarukEventName | string | symbol,
+      listener: (...args: any[]) => void
+    ): this;
   }
   // @ts-ignore
   export const DarukEvents = new DarukEventsClass();
 
-  export function post (path: string): MethodDecorator;
-  export function get (path: string): MethodDecorator;
-  export function del (path: string):  MethodDecorator;
-  export function put (path: string): MethodDecorator;
-  export function patch (path: string): MethodDecorator;
-  export function options (path: string): MethodDecorator;
-  export function head (path: string): MethodDecorator;
-  export function all (path: string): MethodDecorator;
+  export function post(path: string): MethodDecorator;
+  export function get(path: string): MethodDecorator;
+  export function del(path: string): MethodDecorator;
+  export function put(path: string): MethodDecorator;
+  export function patch(path: string): MethodDecorator;
+  export function options(path: string): MethodDecorator;
+  export function head(path: string): MethodDecorator;
+  export function all(path: string): MethodDecorator;
 
   export function json(): MethodDecorator;
   export function JSON(): MethodDecorator;
-  export function prefix (path: string): MethodDecorator;
-  export function redirect (path: string): MethodDecorator;
-  export function type (type: string): MethodDecorator;
-  export function header (key: string, value: string): MethodDecorator;
-  export function header (key: { [key: string]: string }): MethodDecorator;
+  export function prefix(path: string): MethodDecorator;
+  export function redirect(path: string): MethodDecorator;
+  export function type(type: string): MethodDecorator;
+  export function header(key: string, value: string): MethodDecorator;
+  export function header(key: { [key: string]: string }): MethodDecorator;
 
-  export function middleware (middlewareName: string, options?: any): MethodDecorator;
-  export function required (config: {
+  export function middleware(middlewareName: string, options?: any): MethodDecorator;
+  export function required(config: {
     body?: string[];
     query?: string[];
     params?: string[];
   }): MethodDecorator;
-  export function typeParse (config: {
-    body?: { [key: string]: Function };
-    query?: { [key: string]: Function };
-    params?: { [key: string]: Function };
+
+  interface ParseType {
+    [key: string]:
+      | ArrayConstructor
+      | BooleanConstructor
+      | StringConstructor
+      | NumberConstructor
+      | ArrayConstructor
+      | ObjectConstructor;
+  }
+
+  export function typeParse(config: {
+    body?: ParseType;
+    query?: ParseType;
+    params?: ParseType;
   }): MethodDecorator;
+
+  export function validate(
+    method: method,
+    key: string,
+    validateFunc: validateFunc
+  ): MethodDecorator;
 
   type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 

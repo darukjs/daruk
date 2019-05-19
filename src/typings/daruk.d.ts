@@ -14,16 +14,17 @@ export namespace Daruk {
     service: any;
     controller: any;
     app: DarukCore;
-    parseBody: {
+    parseBody?: {
       [key: string]: any;
     };
-    parseQuery: {
+    parseQuery?: {
       [key: string]: any;
     };
-    parseParams: {
+    parseParams?: {
       [key: string]: any;
     };
-    validateRequired: undefined | { [key: string]: string };
+    validateRequired?: undefined | { [key: string]: string };
+    validateError?: Array<string>;
   }
 
   export interface DarukCore extends Koa {
@@ -58,4 +59,6 @@ export namespace Daruk {
       | ArrayConstructor
       | ObjectConstructor;
   }
+  export type method = 'body' | 'query' | 'params';
+  export type validateFunc = (value: string) => string | undefined;
 }
