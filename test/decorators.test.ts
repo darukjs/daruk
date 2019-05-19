@@ -165,6 +165,7 @@ describe('decorators', () => {
       @config('option1')
       public option1: any;
     }
+
     assert(new A().option1 !== undefined);
   });
   it('decorator "@glue"', () => {
@@ -172,6 +173,7 @@ describe('decorators', () => {
       @glue('testGlue')
       public testGlue: any;
     }
+
     assert(new A().testGlue !== undefined);
   });
   it('decorator "@util"', () => {
@@ -179,6 +181,7 @@ describe('decorators', () => {
       @util('util1')
       public util1: any;
     }
+
     assert(new A().util1 !== undefined);
   });
   it('decorator "@logger"', () => {
@@ -186,6 +189,7 @@ describe('decorators', () => {
       @logger()
       public logger: any;
     }
+
     assert(new A().logger !== undefined);
   });
   it('decorator "@logger" with fileInfo', () => {
@@ -193,6 +197,7 @@ describe('decorators', () => {
       @logger('customFileInfo')
       public logger: any;
     }
+
     // 自定义 logger 的 fileInfo 成功
     assert(new A().logger.customFileInformation === 'customFileInfo');
   });
@@ -215,5 +220,19 @@ describe('decorators', () => {
         },
         done
       );
+  });
+  it('decorator @typeParse', (done) => {
+    request(server)
+      .post('/typeparse/123')
+      .send({ foo: '123' })
+      .query({ bar: [1, 2, 3] })
+      .expect(code200)
+      .expect({
+        body: {
+          foo: true
+        },
+        params: { id: 123 },
+        query: { bar: '1,2,3' }
+      }, done);
   });
 });
