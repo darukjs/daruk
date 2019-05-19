@@ -7,23 +7,53 @@ cache:
     - node_modules
 install:
   - yarn --frozen-lockfile --non-interactive
+
+stages:
+  - name: commit-message
+    if: (type != push)
+  - name: test
+    if: (tag IS blank) OR (type != push) OR (repo != darukjs/daruk)
+  - name: release
+    if: (tag IS present) AND (type = push) AND (repo = darukjs/daruk)
+
 jobs:
   include:
     - stage: commit-message
-      name: 'Check Commit Message'
+      name: 'Check Commit Message (only on pull request)'
       script:
-        - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
-          commitlint-travis;
-          fi
-    - stage: lint
-      name: 'Lint Code'
-      script:
-        - yarn run tslint
+        - commitlint-travis
     - stage: test
-      name: 'Unit Test'
+      name: 'Test'
       before_script:
         - yarn global add codecov
       script:
+        - yarn run tslint
         - yarn run test
       after_script:
         - yarn run cov
+    - stage: release
+      name: 'release'
+      script:
+        - yarn run build
+        - rm -rf release
+        - mkdir -p release
+        - for file in ./build/*; do cp "$file" "${file\/release/daruk-${TRAVIS_TAG}}"; done
+        - zip -jr "release/daruk-${TRAVIS_TAG}.zip" release/*
+      deploy:
+        - provider: npm
+          api_key: $NPM_API_KEY
+          email: "himself6565@gmail.com"
+          skip_cleanup: true
+          on:
+            repo: darukjs/daruk
+            branch: master
+            tags: true
+        - provider: releases
+          api_key: $GETHUB_API_KEY
+          file: "release/daruk-${TRAVIS_TAG}.zip"
+          skip_cleanup: true
+          draft: true
+          on:
+            branch: master
+            repo: darukjs/daruk
+            tags: true
