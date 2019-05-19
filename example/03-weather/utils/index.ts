@@ -1,4 +1,4 @@
-const iconv = require('iconv-lite');
+import iconv = require('iconv-lite');
 
 function getToday() {
   let today = new Date();

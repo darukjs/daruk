@@ -14,7 +14,8 @@
     "ts-node": "^8.1.0"
   },
   "dependencies": {
-    "daruk": "lastest",
+    "@types/request-promise": "^4.1.43",
+    "daruk": "^0.5.7",
     "iconv-lite": "^0.4.24",
     "request-promise": "^4.2.4"
   }
