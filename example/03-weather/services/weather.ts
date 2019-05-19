@@ -8,13 +8,11 @@ export default class Weather extends BaseService {
     super(ctx);
   }
   public async getLatLong(ip: string) {
-    let latlong = await request(`https://ipapi.co/${ip}/latlong/`);
-    return latlong;
+    return await request(`https://ipapi.co/${ip}/latlong/`);
   }
   public async getIP() {
     let json = await request('http://pv.sohu.com/cityjson', { encoding: null });
-    let ip = this.fixIP(json);
-    return ip;
+    return this.fixIP(json);
   }
   public async getWeather() {
     const API_KEY = 'f4019f67f66c97d24751ac71c72f936f';
@@ -25,7 +23,6 @@ export default class Weather extends BaseService {
     let weatherAPI = `http://api.openweathermap.org/data/2.5/weather?lat=${latlong[0]}&lon=${
       latlong[1]
     }&appid=${API_KEY}`;
-    let weather = await request(weatherAPI);
-    return weather;
+    return await request(weatherAPI);
   }
 }
