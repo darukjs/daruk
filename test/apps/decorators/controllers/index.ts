@@ -14,7 +14,8 @@ import {
   put,
   redirect,
   required,
-  type
+  type,
+  typeParse
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
 
@@ -115,5 +116,25 @@ export default class Index extends BaseController {
   @post('/required/:id')
   public async required(ctx: Daruk.Context, next: Function) {
     ctx.body = ctx.validateRequired || '';
+  }
+
+  @typeParse({
+    body: {
+      foo: Boolean
+    },
+    query: {
+      bar: String
+    },
+    params: {
+      id: Number
+    }
+  })
+  @post('/typeparse/:id')
+  public typeParse(ctx: Daruk.Context) {
+    ctx.body = {
+      body: ctx.request.body,
+      params: ctx.params,
+      query: ctx.query
+    };
   }
 }

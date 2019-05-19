@@ -160,6 +160,11 @@ declare module 'daruk' {
     query?: string[];
     params?: string[];
   }): MethodDecorator;
+  export function typeParse (config: {
+    body?: { [key: string]: Function };
+    query?: { [key: string]: Function };
+    params?: { [key: string]: Function };
+  }): MethodDecorator;
 
   type PropDecoratorFunc = (field?: string) => PropertyDecorator;
 
