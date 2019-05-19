@@ -2,7 +2,12 @@ import assert = require('assert');
 import is = require('is');
 import BaseContext from '../core/base_context';
 import { Daruk } from '../typings/daruk';
-import { CONTROLLER_CLASS_PREFIX, CONTROLLER_REDIRECT_PATH } from './constants';
+import {
+  CONTROLLER_CLASS_PREFIX,
+  CONTROLLER_DISABLED_CLASS,
+  CONTROLLER_DISABLED_METHOD,
+  CONTROLLER_REDIRECT_PATH
+} from './constants';
 
 /**
  * @desc prefix 装饰器，对controller class的所有router进行path前缀修正
@@ -14,6 +19,17 @@ export function prefix(path: string) {
   assert(is.string(path), `[Decorator @${path}] parameter must be a string`);
   return (target: Function) => {
     Reflect.defineMetadata(CONTROLLER_CLASS_PREFIX, path, target);
+  };
+}
+
+export function disabled() {
+  return (proto: any, propertyKey?: string, descriptor?: PropertyDescriptor) => {
+    if (propertyKey) {
+      const target = proto.constructor;
+      Reflect.defineMetadata(CONTROLLER_DISABLED_METHOD, 'disabled', target, propertyKey);
+    } else {
+      Reflect.defineMetadata(CONTROLLER_DISABLED_CLASS, 'disabled', proto);
+    }
   };
 }
 

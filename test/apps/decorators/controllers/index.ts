@@ -3,6 +3,7 @@ import {
   BaseController,
   cache,
   del,
+  disabled,
   get,
   head,
   header,
@@ -208,5 +209,11 @@ export default class Index extends BaseController {
   @get('/cache')
   public cache(ctx: Daruk.Context) {
     ctx.body = 'cacheData';
+  }
+
+  @disabled()
+  @get('/disabled')
+  public disabled(ctx: Daruk.Context) {
+    ctx.body = '';
   }
 }

@@ -163,6 +163,7 @@ declare module 'daruk' {
   export function json(): MethodDecorator;
   export function JSON(): MethodDecorator;
   export function prefix(path: string): MethodDecorator;
+  export function disabled(): MethodDecorator | ClassDecorator;
   export function redirect(path: string): MethodDecorator;
   export function type(type: string): MethodDecorator;
   export function header(key: string, value: string): MethodDecorator;

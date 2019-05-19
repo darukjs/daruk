@@ -5,6 +5,7 @@ import { getApp } from './utils';
 
 const port = 3000;
 const code200 = 200;
+const code404 = 404;
 const code302 = 302;
 const assert = chai.assert;
 
@@ -288,5 +289,17 @@ describe('decorators', () => {
           })
           .expect(code200, done);
       });
+  });
+
+  it('decorator @disabled method', (done) => {
+    request(server)
+      .get('/disabled')
+      .expect(code404, done);
+  });
+
+  it('decorator @disabled class', (done) => {
+    request(server)
+      .get('/disabled/test')
+      .expect(code404, done);
   });
 });

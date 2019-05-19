@@ -4,4 +4,7 @@ export const CONTROLLER_FUNC_NAME = 'daruk:controller_func_name';
 export const MIDDLEWARE_NAME = 'daruk:middleware_name';
 export const CONTROLLER_CLASS_PREFIX = 'daruk:controller_class_prefix';
 export const CONTROLLER_REDIRECT_PATH = 'daruk:controller_redirect_path';
-export const defineModulePrivateProperty = (property: string) => `daruk:module_property_${property}`;
+export const CONTROLLER_DISABLED_CLASS = 'daruk:controller_disabled_class';
+export const CONTROLLER_DISABLED_METHOD = 'daruk:controller_disabled_method';
+export const defineModulePrivateProperty = (property: string) =>
+  `daruk:module_property_${property}`;
