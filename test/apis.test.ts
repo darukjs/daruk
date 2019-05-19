@@ -109,6 +109,6 @@ describe('apis', () => {
   });
 
   it('rewrite koa toJSON', () => {
-    console.log(app);
+    assert(app.toJSON().name === 'test app');
   });
 });
