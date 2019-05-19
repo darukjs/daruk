@@ -167,6 +167,9 @@ declare module 'daruk' {
   export function type(type: string): MethodDecorator;
   export function header(key: string, value: string): MethodDecorator;
   export function header(key: { [key: string]: string }): MethodDecorator;
+  export function cache(
+    callback: (cacheKey: string, shouldCacheData?: string) => Promise<string>
+  ): MethodDecorator;
 
   export function middleware(middlewareName: string, options?: any): MethodDecorator;
   export function required(config: {

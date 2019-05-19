@@ -1,6 +1,7 @@
 import {
   all,
   BaseController,
+  cache,
   del,
   get,
   head,
@@ -19,6 +20,28 @@ import {
   validate
 } from '../../../../src';
 import { Daruk } from '../../../../src/typings/daruk';
+
+class Store {
+  public store: any;
+  public constructor() {
+    this.store = {};
+  }
+  public get(key: string) {
+    if (this.store[key] && Date.now() - this.store[key].createTime > this.store[key].timeout) {
+      delete this.store[key];
+    }
+    return this.store[key];
+  }
+  public set(key: string, value: string, timeout: number) {
+    this.store[key] = {
+      value,
+      createTime: Date.now(),
+      timeout
+    };
+  }
+}
+
+const cacheStore = new Store();
 
 export default class Index extends BaseController {
   @get('/repeatMethod')
@@ -172,5 +195,18 @@ export default class Index extends BaseController {
     } else {
       ctx.body = '';
     }
+  }
+
+  @cache(async (cacheKey, data) => {
+    if (data) {
+      cacheStore.set(cacheKey, data, 1000);
+      return data;
+    } else {
+      return cacheStore.get(cacheKey);
+    }
+  })
+  @get('/cache')
+  public cache(ctx: Daruk.Context) {
+    ctx.body = 'cacheData';
   }
 }

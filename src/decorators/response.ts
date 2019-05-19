@@ -124,3 +124,21 @@ export function header(key: string | { [key: string]: string }, value?: string) 
     };
   };
 }
+
+export function cache(callback: (cacheKey: string, shouldCacheData?: string) => Promise<string>) {
+  assert(is.function(callback), `[Decorator @${callback}] parameter must be a function`);
+  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const oldFunc = descriptor.value;
+    descriptor.value = async function cacheWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+      let cacheKey = ctx.request.querystring;
+      let cacheData = await callback(cacheKey);
+      if (cacheData) {
+        ctx.body = cacheData;
+      } else {
+        await oldFunc(ctx);
+        await callback(cacheKey, ctx.body);
+      }
+      await next();
+    };
+  };
+}

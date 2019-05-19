@@ -273,4 +273,20 @@ describe('decorators', () => {
       .expect(code200)
       .expect('foo not pass validate!', done);
   });
+
+  it('decorator @cache', (done) => {
+    request(server)
+      .get('/cache')
+      .query({
+        foo: 'bar'
+      })
+      .expect(code200, () => {
+        request(server)
+          .get('/cache')
+          .query({
+            foo: 'bar'
+          })
+          .expect(code200, done);
+      });
+  });
 });

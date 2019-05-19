@@ -11,7 +11,7 @@
   - [x] @header(key|fields, ?value)
   - [x] @type(type:string)
   - [x] @redirect(path:string)
-  - [ ] @cache(options,store)
+  - [x] @cache(options,store)
 
 - Ioc:
 
