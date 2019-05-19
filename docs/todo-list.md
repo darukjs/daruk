@@ -28,6 +28,7 @@
 - controllerClass:
 
   - [x] @prefix(path:string)
+  - [ ] @disabled()
 
 - utils:
 
