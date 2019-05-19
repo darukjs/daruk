@@ -224,15 +224,34 @@ describe('decorators', () => {
   it('decorator @typeParse', (done) => {
     request(server)
       .post('/typeparse/123')
-      .send({ foo: '123' })
-      .query({ bar: [1, 2, 3] })
+      .send({ foo: '123', object2: '{"a":1}', arr2: '[1,2,3]' })
+      .query({ bar: [1, 2, 3], object2: '{a:1}', arr2: '1,2,3,4' })
       .expect(code200)
-      .expect({
-        body: {
-          foo: true
+      .expect(
+        {
+          body: {
+            foo: true,
+            arr2: [1, 2, 3],
+            object2: { a: 1 }
+          },
+          params: { id: 123 },
+          query: { bar: '1,2,3', object2: {}, arr2: ['1,2,3,4'] }
         },
-        params: { id: 123 },
-        query: { bar: '1,2,3' }
-      }, done);
+        done
+      );
+  });
+
+  it('decorator @typeParse without request args', (done) => {
+    request(server)
+      .post('/typeparse/123')
+      .expect(code200)
+      .expect(
+        {
+          body: {},
+          params: { id: 123 },
+          query: {}
+        },
+        done
+      );
   });
 });

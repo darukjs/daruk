@@ -1,4 +1,5 @@
 import assert = require('assert');
+import htmlspecialchars = require('htmlspecialchars');
 import is = require('is');
 import BaseContext from '../core/base_context';
 import { Daruk } from '../typings/daruk';
@@ -42,30 +43,47 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
 }
 
 export function typeParse(config: {
-  body?: { [key: string]: Function };
-  query?: { [key: string]: Function };
-  params?: { [key: string]: Function };
+  body?: Daruk.ParseType;
+  query?: Daruk.ParseType;
+  params?: Daruk.ParseType;
 }) {
-  function parse(constructors: { [key: string]: any }, actual: { [key: string]: string }): any {
-    // if (is.not.object(actual)) return actual;
+  function parse(constructors: Daruk.ParseType, actual: { [key: string]: string }) {
     const parsed: { [key: string]: any } = {};
-    Object.keys(constructors).forEach(key => {
+    Object.keys(constructors).forEach((key) => {
+      if (!actual[key]) {
+        return;
+      }
       const constructor = constructors[key];
-      parsed[key] = constructor(actual[key]);
+      switch (constructor) {
+        case Boolean:
+        case String:
+        case Number:
+          parsed[key] = constructor(htmlspecialchars(actual[key]));
+          break;
+        case Object:
+        case Array:
+          try {
+            parsed[key] = JSON.parse(actual[key]);
+          } catch (e) {
+            if (constructor === Object) {
+              parsed[key] = {};
+            } else {
+              parsed[key] = Array(actual[key]);
+            }
+          }
+          break;
+      }
     });
-    return {
-      ...actual,
-      ...parsed
-    };
+    return parsed;
   }
 
   return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
 
     descriptor.value = async function parseWrap(ctx: Daruk.Context, next: Function) {
-      ctx.request.body = parse(config.body, ctx.request.body);
-      ctx.query = parse(config.query, ctx.query);
-      ctx.params = parse(config.params, ctx.params);
+      ctx.parseBody = parse(config.body, ctx.request.body);
+      ctx.parseQuery = parse(config.query, ctx.query);
+      ctx.parseParams = parse(config.params, ctx.params);
       await oldFunc(ctx, next);
       await next();
     };

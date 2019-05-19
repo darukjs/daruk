@@ -120,10 +120,17 @@ export default class Index extends BaseController {
 
   @typeParse({
     body: {
-      foo: Boolean
+      foo: Boolean,
+      bar: String,
+      arr: Array,
+      object: Object,
+      arr2: Array,
+      object2: Object
     },
     query: {
-      bar: String
+      bar: String,
+      arr2: Array,
+      object2: Object
     },
     params: {
       id: Number
@@ -132,9 +139,9 @@ export default class Index extends BaseController {
   @post('/typeparse/:id')
   public typeParse(ctx: Daruk.Context) {
     ctx.body = {
-      body: ctx.request.body,
-      params: ctx.params,
-      query: ctx.query
+      body: ctx.parseBody,
+      params: ctx.parseParams,
+      query: ctx.parseQuery
     };
   }
 }

@@ -14,6 +14,15 @@ export namespace Daruk {
     service: any;
     controller: any;
     app: DarukCore;
+    parseBody: {
+      [key: string]: any;
+    };
+    parseQuery: {
+      [key: string]: any;
+    };
+    parseParams: {
+      [key: string]: any;
+    };
     validateRequired: undefined | { [key: string]: string };
   }
 
@@ -39,5 +48,14 @@ export namespace Daruk {
   export interface RegisterDes {
     name: string;
     export: any;
+  }
+  export interface ParseType {
+    [key: string]:
+      | ArrayConstructor
+      | BooleanConstructor
+      | StringConstructor
+      | NumberConstructor
+      | ArrayConstructor
+      | ObjectConstructor;
   }
 }

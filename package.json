@@ -64,6 +64,7 @@
     "daruk-exit-hook": "^0.3.0",
     "daruk-logger": "^1.9.1",
     "daruk-request-id": "0.4.3",
+    "htmlspecialchars": "^1.0.5",
     "http-server-shutdown": "^1.1.2",
     "is": "^3.3.0",
     "koa": "^2.5.2",
