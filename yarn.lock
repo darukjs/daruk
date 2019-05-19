@@ -3226,6 +3226,10 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+only@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npmjs.org/only/-/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
+
 only@~0.0.2:
   version "0.0.2"
   resolved "https://registry.npm.taobao.org/only/download/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"

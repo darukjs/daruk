@@ -107,4 +107,8 @@ describe('apis', () => {
       app.util.testUtil = function changedModule() {};
     }, "[daruk error] user could not change module directly\nplease use function'setModule'");
   });
+
+  it('rewrite koa toJSON', () => {
+    console.log(app);
+  });
 });

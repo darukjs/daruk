@@ -11,11 +11,13 @@ const midNames: string[] = [];
 const WRAP_MIDDLEWARE_USE = Symbol('WRAP_MIDDLEWARE_USE');
 
 function wrapUse(fn: Function, name: string) {
-  return async function wrappedUse(ctx: any, next: Function) {
+  let f = async (ctx: any, next: Function) => {
     enterMid(ctx);
     await fn(ctx, next);
     outMid(ctx);
   };
+  Object.defineProperty(f, 'name', { value: name, writable: false });
+  return f;
 }
 
 function enterMid(ctx: any) {

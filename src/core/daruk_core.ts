@@ -253,6 +253,27 @@ class DarukCore extends Koa {
     this.initAfter();
     this.emit('ready', this);
   }
+  public toJSON() {
+    let instance: { [key: string]: any } = {};
+    Object.keys(this)
+      .filter(
+        (name) =>
+          [
+            'context',
+            'request',
+            'response',
+            '_events',
+            '_eventsCount',
+            '_maxListeners',
+            'timerComplete'
+          ].indexOf(name) === -1
+      )
+      .forEach((name: string) => {
+        // @ts-ignore
+        instance[name] = this[name];
+      });
+    return instance;
+  }
   /**
    * @desc 初始化完成后做一定操作
    */
