@@ -15,13 +15,13 @@ export namespace Daruk {
     controller: any;
     app: DarukCore;
     parseBody?: {
-      [key: string]: any;
+      [key: string]: ParsedType;
     };
     parseQuery?: {
-      [key: string]: any;
+      [key: string]: ParsedType;
     };
     parseParams?: {
-      [key: string]: any;
+      [key: string]: ParsedType;
     };
     validateRequired?: undefined | { [key: string]: string };
     validateError?: Array<string>;
@@ -56,8 +56,15 @@ export namespace Daruk {
       | BooleanConstructor
       | StringConstructor
       | NumberConstructor
-      | ArrayConstructor
       | ObjectConstructor;
+  }
+  export interface ParsedType {
+    [key: string]:
+      | Array<string>
+      | Boolean
+      | String
+      | Number
+      | Object;
   }
   export type method = 'body' | 'query' | 'params';
   export type validateFunc = (value: string) => string | undefined;
