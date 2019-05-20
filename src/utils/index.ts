@@ -1,5 +1,4 @@
 import is = require('is');
-import { defineModulePrivateProperty } from '../decorators/constants';
 
 /**
  * @desc 简版 class 混入装饰器

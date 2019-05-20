@@ -125,6 +125,7 @@ class DarukCore extends Koa {
    */
   public setModule(type: string, key: string, value: any) {
     if (!this.module[type]) this.module[type] = {};
+    this.module[type][key] = value;
   }
   /**
    * @desc 保存数据类型的模块到 this.module[type]

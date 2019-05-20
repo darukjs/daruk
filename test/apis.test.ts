@@ -102,12 +102,6 @@ describe('apis', () => {
     });
   });
 
-  it('should log error when use change modules', () => {
-    assert.throws(() => {
-      app.util.testUtil = function changedModule() {};
-    }, "[daruk error] user could not change module directly\nplease use function'setModule'");
-  });
-
   it('rewrite koa toJSON', () => {
     assert(app.toJSON().name === 'test app');
   });
