@@ -15,7 +15,7 @@ import { Options, PartialOptions } from '../../types/daruk_options';
 import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
 import { Daruk } from '../typings/daruk';
-import { debugLog, deepDefineProperty, SimpleMixin } from '../utils';
+import { debugLog, SimpleMixin } from '../utils';
 import getDefaultOptions from './daruk_default_options';
 import Events from './daruk_event';
 import DarukInitModule from './daruk_init_module';
@@ -125,7 +125,6 @@ class DarukCore extends Koa {
    */
   public setModule(type: string, key: string, value: any) {
     if (!this.module[type]) this.module[type] = {};
-    deepDefineProperty(this.module[type], key, value);
   }
   /**
    * @desc 保存数据类型的模块到 this.module[type]
