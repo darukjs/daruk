@@ -39,10 +39,24 @@ describe('utils', () => {
   it('deepDefineProperty', () => {
     const obj = {};
     deepDefineProperty(obj, 'foo', {
+      bar: {
+        bar10: null,
+        zoo: {
+          test: {
+            bar1: {
+              bar2: {
+                bar3: {
+                  bar4: {
+                    bar5: null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       goo: 1,
-      func() {
-
-      }
+      func() {}
     });
     deepDefineProperty(obj, 'soo', 2);
     // @ts-ignore
@@ -64,9 +78,7 @@ describe('utils', () => {
     assert.throws(() => {
       const obj = {};
       deepDefineProperty(obj, 'foo', {
-        func() {
-
-        }
+        func() {}
       });
       // @ts-ignore
       obj.foo.func = () => {};
