@@ -185,7 +185,6 @@ declare module 'daruk' {
       | BooleanConstructor
       | StringConstructor
       | NumberConstructor
-      | ArrayConstructor
       | ObjectConstructor;
   }
 
