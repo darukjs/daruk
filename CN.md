@@ -26,7 +26,7 @@ Daruk 基于 koa2，包含以下核心功能：
 ## Installation & Quick start
 
 ```bash
-# 全局安装daurk脚手架
+# 全局安装 daruk 脚手架
 cnpm i -g daruk-cli
 
 # 初始化项目
