@@ -1,11 +1,11 @@
 /**
  * @fileOverview 日志中间件
  */
+import { Daruk } from '../../typings/daruk';
 
 import { middleware as loggerMiddleware } from 'daruk-logger';
-import Daruk from '../../core/daruk';
 
-export default (app: Daruk) => {
+export default function(app: Daruk.DarukCore) {
   const { filter, requiredLogs } = app.options.loggerMiddleware;
   const options: any = {
     transform(logObj: any, ctx: any) {
@@ -19,4 +19,4 @@ export default (app: Daruk) => {
   if (filter) options.filter = filter;
   if (requiredLogs) options.requiredLogs = requiredLogs;
   return loggerMiddleware(options);
-};
+}

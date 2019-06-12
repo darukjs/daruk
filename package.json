@@ -6,6 +6,7 @@
   "scripts": {
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
+    "dev": "ts-node --project tsconfig.json --files src/index.ts",
     "build": "rimraf -rf ./build && tsc",
     "build:watch": "rimraf -rf ./build && tsc && gulp build:watch",
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",

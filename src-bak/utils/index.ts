@@ -1,9 +1,4 @@
-import fs = require('fs');
 import is = require('is');
-import path = require('path');
-import { isJsTsFile } from '../utils/is_js_ts';
-
-const join = path.join;
 
 /**
  * @desc 简版 class 混入装饰器
@@ -25,26 +20,6 @@ export function SimpleMixin(BaseClass: Function) {
 export function uRequire(path: string) {
   const module = require(path);
   return module.__esModule && module.default ? module.default : module;
-}
-
-/**
- * @desc 递归加载多级目录的模块
- */
-export function getFilePathRecursive(startPath: string) {
-  let result: Array<string> = [];
-  if (fs.existsSync(startPath)) {
-    finder(startPath);
-  }
-  function finder(path: string) {
-    let files = fs.readdirSync(path);
-    files.forEach((val: string) => {
-      let fPath = join(path, val);
-      let stats = fs.statSync(fPath);
-      if (stats.isDirectory()) finder(fPath);
-      if (stats.isFile() && isJsTsFile(val)) result.push(fPath);
-    });
-  }
-  return result;
 }
 
 /**

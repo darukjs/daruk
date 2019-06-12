@@ -5,7 +5,6 @@
 import assert = require('assert');
 import { CronJob as cronJob } from 'cron';
 import is = require('is');
-import { Context } from 'koa';
 import path = require('path');
 // tslint:disable-next-line
 import 'reflect-metadata';

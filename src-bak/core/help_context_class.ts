@@ -1,4 +1,5 @@
 import is = require('is');
+import { Daruk } from '../typings/daruk';
 
 /**
  * @desc 为了实现自动在 service 类的实例中绑定 ctx
@@ -7,10 +8,10 @@ import is = require('is');
  * 然后再通过 ctx.service.xxxService 获取用户定义的 service
  */
 export default class HelpContextClass {
-  private _ctx: any;
+  private _ctx: Daruk.Context;
   private _serviceCache: any;
 
-  public constructor(ctx: any) {
+  public constructor(ctx: Daruk.Context) {
     const services = ctx.app.module.service;
     this._ctx = ctx;
     // 缓存 service 实例
@@ -18,7 +19,7 @@ export default class HelpContextClass {
     this._serviceCache = {};
 
     // tslint:disable-next-line
-    const self = this;
+    const self = this
     Object.keys(services).forEach(function definePropertyForServices(serviceName) {
       Object.defineProperty(self, serviceName, {
         get() {

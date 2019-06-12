@@ -4,8 +4,8 @@
  */
 
 import koaBody = require('koa-body');
-import Daruk from '../../core/daruk';
+import { Daruk } from '../../typings/daruk';
 
-export default (app: Daruk) => {
+export default (app: Daruk.DarukCore) => {
   return koaBody(app.options.bodyOptions);
 };

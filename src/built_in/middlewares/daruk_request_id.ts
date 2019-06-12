@@ -3,8 +3,8 @@
  */
 
 import { xRequestId } from 'daruk-request-id';
-import { Daruk } from '../../typings/daruk';
+import Daruk from '../../core/daruk';
 
-export default (app: Daruk.DarukCore) => {
-  return xRequestId(app.options.requestId, app);
+export default (app: Daruk) => {
+  return xRequestId(app.options.requestId, app.httpServer);
 };
