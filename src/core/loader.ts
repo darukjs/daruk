@@ -60,6 +60,26 @@ class Loader {
     return modules;
   }
   /**
+   * @desc 加载导出类型为 class 的模块
+   * 比如 src/services
+   */
+  public loadClassModule(key: string, path: string) {
+    const descriptions = this.getModuleDesc(path);
+    const modules: any = {};
+    descriptions.forEach((desc) => {
+      const { name, path } = desc;
+      const classModule = uRequire(path);
+      assert(isFn(classModule), `[${key}] must export a function, ${path}`);
+      assert(
+        isSubClass(classModule, BaseContext),
+        `[${key}] must export a subclass of Daruk.Base${key.charAt(0).toUpperCase() +
+          key.slice(1)} in path: ${path}`
+      );
+      modules[name] = classModule;
+    });
+    return modules;
+  }
+  /**
    * @desc 获取约定目下第一级目录的文件名和 path
    */
   private getModuleDesc(modulePath: string) {

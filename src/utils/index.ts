@@ -1,7 +1,7 @@
 import fs = require('fs');
-import is = require('is');
 import path = require('path');
 import { isJsTsFile } from '../utils/is_js_ts';
+import { filterBuiltInModule } from './filter_built_in_module';
 
 const join = path.join;
 
@@ -25,6 +25,17 @@ export function SimpleMixin(BaseClass: Function) {
 export function uRequire(path: string) {
   const module = require(path);
   return module.__esModule && module.default ? module.default : module;
+}
+
+/**
+ * @desc 过滤无用日志的输出
+ */
+export function logModuleMsg(type: string, moduleObj: any, logger: any) {
+  if (!moduleObj) return;
+  const keys = filterBuiltInModule(type, Object.keys(moduleObj));
+  if (keys.length > 0) {
+    logger(JSON.stringify(keys), { type, init: true });
+  }
 }
 
 /**
