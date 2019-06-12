@@ -10,7 +10,7 @@ class DarukPlugin extends EventEmitter {
     super();
     this.plugins = {};
   }
-  public add(name: string, deps: string[], plugin: (Daruk: Daruk) => any) {
+  public add(name: string, deps: string[], plugin: (Daruk: Daruk) => any | Promise<any>) {
     this.plugins[name] = {
       deps,
       mod: plugin,
@@ -20,23 +20,26 @@ class DarukPlugin extends EventEmitter {
   public remove(name: string) {
     delete this.plugins[name];
   }
-  public run(Daruk: Daruk) {
+  public async run(Daruk: Daruk) {
     const names = Object.keys(this.plugins);
     // 对依赖排序，确保插件执行顺序
     while (names.length) {
       let name = names.shift();
       if (this.plugins[name].init) continue;
       let plugin = this.plugins[name];
-      if (plugin.deps.length) {
-        plugin.deps.forEach((dep: string) => {
-          if (!this.plugins[dep].init) {
-            let p = this.plugins[dep].mod(Daruk);
-            this.plugins[dep].init = true;
-            this.emit(`${dep}:apply`, p);
+      let deps = plugin.deps;
+      if (deps.length) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let i = 0; i < deps.length; i++) {
+          let name = deps[i];
+          if (!this.plugins[name].init) {
+            let p = await this.plugins[name].mod(Daruk);
+            this.plugins[name].init = true;
+            this.emit(`${name}:apply`, p);
           }
-        });
+        }
       }
-      let p = this.plugins[name].mod(Daruk);
+      let p = await this.plugins[name].mod(Daruk);
       this.plugins[name].init = true;
       this.emit(`${name}:apply`, p);
     }

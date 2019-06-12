@@ -19,8 +19,7 @@ function getBuiltInModuleNames(path: string) {
 }
 // 定义内置模块的名字，用于在输出日志时的过滤
 const builtInModuleMap: any = {
-  middleware: getBuiltInModuleNames(path.join(__dirname, '../built_in/middlewares')),
-  glue: getBuiltInModuleNames(path.join(__dirname, '../built_in/glues'))
+  middleware: getBuiltInModuleNames(path.join(__dirname, '../built_in/middlewares'))
 };
 
 /**

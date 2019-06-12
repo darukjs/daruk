@@ -90,7 +90,9 @@ class Daruk extends EventEmitter {
   /**
    * @desc 启动服务
    */
-  public listen(...args: any[]): Http.Server {
+  public async listen(...args: any[]): Promise<Http.Server> {
+    await this.plugin.run(this);
+    this.emit('pluginReady');
     // https://github.com/nodejs/node/blob/master/lib/net.js#L182
     let options: {
       path?: string;
@@ -102,8 +104,6 @@ class Daruk extends EventEmitter {
     const cb = (...arg1: any) => {
       this.serverReady(this.httpServer);
       if (typeof _cb === 'function') _cb(...arg1);
-      this.plugin.run(this);
-      this.emit('pluginReady');
       this.prettyLog(
         `${this.name} is starting at http://${options.host ? options.host : 'localhost'}:${
           options.port
