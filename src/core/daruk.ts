@@ -9,6 +9,7 @@ import path = require('path');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
 import { debugLog, getFilePathRecursive, uRequire } from '../utils';
+import { filterBuiltInModule } from '../utils/filter_built_in_module';
 import getDefaultOptions from './daruk_default_options';
 import HelpContextClass from './help_context_class';
 import DarukPlugin from './plugin';
@@ -144,6 +145,16 @@ class Daruk extends EventEmitter {
     Object.keys(mergeObj).forEach((key) => {
       this.setModule(type, key, mergeObj[key]);
     });
+  }
+  /**
+   * @desc 过滤无用日志的输出
+   */
+  public logModuleMsg(type: string, moduleObj: any) {
+    if (!moduleObj) return;
+    const keys = filterBuiltInModule(type, Object.keys(moduleObj));
+    if (keys.length > 0) {
+      this.prettyLog(JSON.stringify(keys), { type, init: true });
+    }
   }
   /**
    * @desc 支持合并单个模块到 this.module[type]

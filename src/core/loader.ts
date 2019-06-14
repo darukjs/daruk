@@ -3,7 +3,6 @@ import fs = require('fs');
 import is = require('is');
 import path = require('path');
 import { normalize } from 'upath';
-import { Daruk } from '../typings/daruk';
 import { getFilePathRecursive, isJsTsFile, isSubClass, JsTsReg, uRequire } from '../utils';
 import BaseContext from './base_context';
 
@@ -12,6 +11,10 @@ const isFn = is.fn;
 const isObj = is.object;
 
 class Loader {
+  /**
+   * @desc 加载 daruk 配置
+   */
+  public loadDarukConfig(path: string) {}
   /**
    * @desc 加载 controller
    * controller 的目录结构也是路由 path 的一部分
@@ -78,6 +81,58 @@ class Loader {
       modules[name] = classModule;
     });
     return modules;
+  }
+  /**
+   * @desc 只是加载约定目录中的 index 文件并执行
+   * 将返回值保存到 daruk
+   * 比如 src/utils、src/config
+   */
+  public loadModuleSimple(type: string, path: string) {
+    // 这里 load 的是文件夹，所以可以直接判断路径是否存在
+    if (!fs.existsSync(path)) return;
+    const mod = uRequire(path);
+    assert(isFn(mod) || isObj(mod), `${type} must export a function or object in path: ${path}`);
+    return mod;
+  }
+  /**
+   * @desc 加载 daurk.config 配置的中间件
+   */
+  public loadDarukConfigMid(midConfig: any) {
+    const middleware: any = {};
+    const globalMiddleware: any = {};
+    Object.keys(midConfig).forEach((key: string) => {
+      const config = midConfig[key];
+      let midName = key;
+      let midExport;
+      let packetName;
+      // 如果中间件的配置是一个对象
+      if (is.object(config)) {
+        packetName = config.packet;
+        midExport = config.export;
+      } else {
+        // 否则，值为一个函数，函数返回 middleware 内容
+        packetName = key;
+        midExport = config;
+      }
+      let packet;
+      try {
+        packet = require(packetName);
+        // 有些包导出 export default function
+        if (typeof packet !== 'function' && typeof packet.default === 'function') {
+          packet = packet.default;
+        }
+      } catch (e) {
+        throw new Error(`[daruk.config.middleware] require ${packetName} failed -  ${e.message}`);
+      }
+      assert(isFn(packet), `[daruk.config.middleware] can not find function at packet: ${packet}.`);
+      assert(isFn(midExport), `[daruk.config.middleware] ${key} must be (or export) a function`);
+      middleware[midName] = midExport(packet);
+      globalMiddleware[midName] = packet;
+    });
+    return {
+      middleware,
+      globalMiddleware
+    };
   }
   /**
    * @desc 获取约定目下第一级目录的文件名和 path

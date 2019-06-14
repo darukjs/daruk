@@ -28,7 +28,7 @@ interface DarukRouter extends Daruk {
   router: Router;
 }
 
-plugins.add('darukRouter', ['wrapMiddlewareUse'], (daruk: DarukRouter) => {
+plugins.add('darukRouter', ['wrapMiddlewareUse', 'darukConfig'], (daruk: DarukRouter) => {
   daruk.router = new Router();
   const middlewares = loader.loadModule('middleware', join(__dirname, '../built_in/middlewares'));
   daruk.mergeModule('middleware', middlewares);
