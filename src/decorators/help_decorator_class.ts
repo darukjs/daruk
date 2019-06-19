@@ -4,18 +4,18 @@
  * 这样的实现前提是 Daruk 在整个应用中只会被实例化一次
  */
 
-import { Daruk } from '../typings/daruk';
+import Daruk from '../core/daruk';
 
 /**
  * @desc 装饰器辅助类
  */
 class HelpDecoratorClass {
-  private app: Daruk.DarukCore;
+  private app: Daruk;
 
   /**
    * @desc 以 daruk 对象作为参数初始化该类
    */
-  public init(app: Daruk.DarukCore) {
+  public init(app: Daruk) {
     this.app = app;
   }
   public getModule(moduleName: string) {

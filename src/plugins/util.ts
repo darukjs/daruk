@@ -6,7 +6,7 @@ import plugins from '../core/plugin';
 const isFn = is.fn;
 const isObj = is.object;
 
-plugins.add('darukUtil', ['darukRouter'], (daruk: Daruk) => {
+plugins.add('darukUtil', (daruk: Daruk) => {
   const mod = loader.loadModuleSimple('util', daruk.options.utilPath);
   if (isObj(mod)) {
     daruk.mergeModule('util', { ...mod });

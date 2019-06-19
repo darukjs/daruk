@@ -1,3 +1,8 @@
+/**
+ * @author xiaojue
+ * @date 20190614
+ * @fileoverview plugin化daruk core
+ */
 import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
 import Http = require('http');
@@ -7,6 +12,7 @@ import Koa = require('koa');
 import deepAssign = require('object-assign-deep');
 import path = require('path');
 import { Options, PartialOptions } from '../../types/daruk_options';
+import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
 import { debugLog, getFilePathRecursive, uRequire } from '../utils';
 import { filterBuiltInModule } from '../utils/filter_built_in_module';
@@ -21,7 +27,8 @@ class Daruk extends EventEmitter {
     [key: string]: any;
   };
   public options: Options;
-  public httpServer: any;
+  public httpServer: Http.Server | Https.Server;
+  public app: Koa;
   public logger: KoaLogger.logger;
   public constructor(name: string, options: PartialOptions) {
     super();
@@ -41,10 +48,12 @@ class Daruk extends EventEmitter {
     // 用于保存 DarukLoader 加载的模块
     this.module = {};
     if (this.options.serverType === 'koa') {
-      this.httpServer = new Koa();
+      this.app = new Koa();
     } else {
       throw new Error('only support koa server Type');
     }
+    // 初始化装饰器与 daurk 实例之间的桥梁
+    helpDecoratorClass.init(this);
     // 初始化内置插件
     getFilePathRecursive(path.join(__dirname, '../plugins')).forEach((file: string) => {
       uRequire(file);
@@ -53,7 +62,7 @@ class Daruk extends EventEmitter {
     // tslint:disable-next-line
     const self = this;
     // 监听 koa 的错误事件，输出日志
-    this.httpServer.on('error', function handleKoaError(err: any) {
+    this.app.on('error', function handleKoaError(err: any) {
       self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
     });
   }
@@ -65,7 +74,7 @@ class Daruk extends EventEmitter {
   public mockContext(req?: {}) {
     const { request, response } = mockHttp(req);
     // 使用 koa 的 createContext 方法创建一个 ctx
-    const ctx = this.httpServer.createContext(request, response);
+    const ctx = this.app.createContext(request, response);
     // 为模拟的 ctx 绑定 service
     ctx.service = new HelpContextClass(ctx);
     return ctx;
@@ -85,7 +94,6 @@ class Daruk extends EventEmitter {
   }
   public serverReady(server: Http.Server | Https.Server) {
     this.httpServer = server;
-    this.emit('initAfter');
     this.emit('ready', this);
   }
   /**
@@ -132,7 +140,8 @@ class Daruk extends EventEmitter {
         args.push(cb);
       }
     }
-    return this.httpServer.listen(...args);
+    this.httpServer = this.app.listen(...args);
+    return this.httpServer;
   }
   /**
    * @desc DarukLoader 加载模块后，
@@ -182,12 +191,5 @@ class Daruk extends EventEmitter {
     return typeof s === 'string' && this.toNumber(s) === false;
   }
 }
-
-let app = new Daruk('test', {
-  rootPath: __dirname,
-  debug: true
-});
-let port = 1212;
-app.listen(port);
 
 export default Daruk;

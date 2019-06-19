@@ -1,66 +1,28 @@
-// import * as daruk from "./build/index";
 import ExitHook = require('daruk-exit-hook');
 import KoaLogger = require('daruk-logger');
-import Http = require('http');
 import Koa = require('koa');
-import { Options } from '../../types/daruk_options';
+import { Options, PartialOptions } from '../../types/daruk_options';
+import DarukPlugin from '../core/plugin';
+import Http = require('http');
+import Https = require('https');
+import { EventEmitter } from 'events';
 
-export namespace Daruk {
-  export interface Context extends Koa.Context {
-    config: any;
-    globalModule: any;
-    util: any;
-    glue: any;
-    service: any;
-    controller: any;
-    app: DarukCore;
-    parseBody?: {
-      [key: string]: ParsedType;
-    };
-    parseQuery?: {
-      [key: string]: ParsedType;
-    };
-    parseParams?: {
-      [key: string]: ParsedType;
-    };
-    validateRequired?: undefined | { [key: string]: string };
-    validateError?: Array<string>;
-  }
-
-  export interface DarukCore extends Koa {
-    config: any;
-    module: any;
-    name: string;
-    // 只能声明为 any 才能覆写了 koa 的 use
-    use: any;
-    context: Context;
-    options: Options;
-    prettyLog: (msg: string, ext?: { type?: string; level?: string; init?: boolean }) => void;
-    mergeModule: (type: string, mergeModule: any) => void;
-    setArrayModule: (type: string, arr: []) => void;
-    logger: KoaLogger.logger;
-    exitHook: ExitHook;
-    httpServer: Http.Server;
-    glue: {
-      daruk_nodemailer: any;
-      daruk_sina_watch: any;
-    };
-  }
-  export interface RegisterDes {
-    name: string;
-    export: any;
-  }
-  export interface ParseType {
-    [key: string]:
-      | ArrayConstructor
-      | BooleanConstructor
-      | StringConstructor
-      | NumberConstructor
-      | ObjectConstructor;
-  }
-  export interface ParsedType {
-    [key: string]: Array<string> | Boolean | String | Number | Object;
-  }
-  export type method = 'body' | 'query' | 'params';
-  export type validateFunc = (value: string) => string | undefined;
+export interface DarukCore extends EventEmitter {
+  plugin: typeof DarukPlugin;
+  name: string;
+  module: {
+    [key: string]: any;
+  };
+  options: Options;
+  httpServer: Http.Server | Https.Server;
+  app: Koa;
+  logger: KoaLogger.logger;
+  mockContext: (req?: {}) => any;
+  prettyLog: (msg: string, ext?: { type?: string; level?: string; init?: boolean }) => void;
+  serverReady: (server: Http.Server | Https.Server) => void;
+  listen: (...args: any[]) => Promise<Http.Server | Https.Server>;
+  mergeModule: (type: string, mergeObj: { [key: string]: any }) => void;
+  logModuleMsg: (type: string, moduleObj: any) => void;
+  setModule: (type: string, key: string, value: any) => void;
+  setArrayModule: (type: string, arr: []) => void;
 }

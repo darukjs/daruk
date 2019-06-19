@@ -3,14 +3,10 @@
  */
 
 import ExitHook = require('daruk-exit-hook');
-import Daruk from '../core/daruk';
 import plugins from '../core/plugin';
+import { DarukCore } from '../typings/daruk';
 
-interface DarukExitHook extends Daruk {
-  exitHook: ExitHook;
-}
-
-plugins.add('darukExitHook', [], (daruk: DarukExitHook) => {
+plugins.add('darukExitHook', (daruk: DarukCore) => {
   daruk.exitHook = new ExitHook({
     onExit: (err: Error) => {
       if (err) {

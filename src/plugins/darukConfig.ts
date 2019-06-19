@@ -8,7 +8,7 @@ import { uRequire } from '../utils';
 
 const isFn = is.fn;
 
-plugins.add('darukGlobalConfig', ['darukConfig'], (daruk: Daruk) => {
+plugins.add('darukGlobalConfig', (daruk: Daruk) => {
   const path = daruk.options.darukConfigPath;
   // 在 ts 的 dev 环境，文件名是 daruk.config.ts
   if (!fs.existsSync(path + '.js') && !fs.existsSync(path + '.ts')) return;

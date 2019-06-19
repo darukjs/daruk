@@ -28,7 +28,7 @@ interface DarukRouter extends Daruk {
   router: Router;
 }
 
-plugins.add('darukRouter', ['wrapMiddlewareUse', 'darukConfig'], (daruk: DarukRouter) => {
+plugins.add('darukRouter', (daruk: DarukRouter) => {
   daruk.router = new Router();
   const middlewares = loader.loadModule('middleware', join(__dirname, '../built_in/middlewares'));
   daruk.mergeModule('middleware', middlewares);
@@ -36,7 +36,7 @@ plugins.add('darukRouter', ['wrapMiddlewareUse', 'darukConfig'], (daruk: DarukRo
 
   const middlewareOrder = daruk.module.middlewareOrder || [];
 
-  middlewareOrder.unshift('daruk_request_id', 'daruk_logger', 'daruk_body');
+  middlewareOrder.unshift('daruk_request_id', 'daruk_logger', 'daruk_body', 'daruk_context_loader');
 
   // 再次保存 middlewareOrder，使外部对最终的 middlewareOrder 可见
   daruk.module.middlewareOrder = middlewareOrder;
@@ -46,7 +46,8 @@ plugins.add('darukRouter', ['wrapMiddlewareUse', 'darukConfig'], (daruk: DarukRo
     // 有些中间件是直接修改 koa 实例，不会返回一个函数
     // 因此只 use 函数类型的中间件
     if (isFn(middleware)) {
-      daruk.httpServer.use(middleware(daruk), name);
+      // @ts-ignore
+      daruk.app.use(middleware(daruk), name);
     }
   });
   daruk.prettyLog(JSON.stringify(filterBuiltInModule('middleware', middlewareOrder)), {
@@ -160,6 +161,8 @@ plugins.add('darukRouter', ['wrapMiddlewareUse', 'darukConfig'], (daruk: DarukRo
     }
   });
 
-  daruk.httpServer.use(daruk.router.routes(), 'router');
-  daruk.httpServer.use(daruk.router.allowedMethods(), 'allowedMethods');
+  // @ts-ignore
+  daruk.app.use(daruk.router.routes(), 'router');
+  // @ts-ignore
+  daruk.app.use(daruk.router.allowedMethods(), 'allowedMethods');
 });

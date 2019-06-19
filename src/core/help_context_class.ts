@@ -1,4 +1,5 @@
 import is = require('is');
+import koa = require('koa');
 
 /**
  * @desc 为了实现自动在 service 类的实例中绑定 ctx
@@ -10,7 +11,7 @@ export default class HelpContextClass {
   private _ctx: any;
   private _serviceCache: any;
 
-  public constructor(ctx: any) {
+  public constructor(ctx: koa['context']) {
     const services = ctx.app.module.service;
     this._ctx = ctx;
     // 缓存 service 实例

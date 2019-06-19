@@ -7,6 +7,7 @@ import { Options } from '../../types/daruk_options';
 
 export default function getDefaultOptions(rootPath: string, name: string, debug: boolean): Options {
   return {
+    pluginOrder: [],
     rootPath,
     serverType: 'koa',
     servicePath: join(rootPath, 'services'),
@@ -19,15 +20,6 @@ export default function getDefaultOptions(rootPath: string, name: string, debug:
     configPath: join(rootPath, 'config'),
     bodyOptions: {},
     debug,
-    // monitor: {
-    //   enable: false,
-    //   v8AnalyticsPath: 'v8-analytics',
-    //   v8ProfilerPath: 'v8-profiler-node8',
-    //   auth: {
-    //     name: '',
-    //     password: ''
-    //   }
-    // },
     gracefulShutdown: {
       enable: false,
       timeout: 10 * 1000

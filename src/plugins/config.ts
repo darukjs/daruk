@@ -6,7 +6,7 @@ import plugins from '../core/plugin';
 const isFn = is.fn;
 const isObj = is.object;
 
-plugins.add('darukConfig', [], (daruk: Daruk) => {
+plugins.add('darukConfig', (daruk: Daruk) => {
   const mod = loader.loadModuleSimple('config', daruk.options.configPath);
   if (isObj(mod)) {
     daruk.mergeModule('config', { ...mod });

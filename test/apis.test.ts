@@ -7,7 +7,7 @@ const assert = chai.assert;
 
 describe('apis', () => {
   let app: Daruk;
-  let ctx: Daruk['context'];
+  let ctx: Daruk['app']['context'];
   let stubExit: sinon.SinonStub;
 
   before(() => {
@@ -18,22 +18,6 @@ describe('apis', () => {
 
   after(() => {
     stubExit.restore();
-  });
-
-  it('registerService', () => {
-    assert(ctx.service.testService !== undefined);
-  });
-  it('registerUtil', () => {
-    assert(ctx.util.testUtil !== undefined);
-  });
-  it('registerGlue', () => {
-    assert(ctx.glue.testGlue !== undefined);
-  });
-  it('registerMiddleware', () => {
-    assert(app.module.middleware.testMiddleware !== undefined);
-  });
-  it('registerTimer', () => {
-    assert(app.module.timer.testTimer !== undefined);
   });
 
   it('mockContext', () => {
@@ -57,52 +41,5 @@ describe('apis', () => {
     app.listen(port, '127.0.0.1', () => {
       app.httpServer.close(done);
     });
-  });
-
-  it('run args with port, cb', (done) => {
-    let port = 3000;
-    app.listen(port, () => {
-      app.httpServer.close(done);
-    });
-  });
-
-  it('run args with object, cb', (done) => {
-    let port = 3000;
-    app.listen(
-      {
-        port
-      },
-      () => {
-        app.httpServer.close(done);
-      }
-    );
-  });
-
-  it('run args with object', (done) => {
-    let port = 3000;
-    app.listen({
-      port
-    });
-    setTimeout(() => {
-      app.httpServer.close(done);
-    }, 1000);
-  });
-
-  it('run args with port, host, cb', (done) => {
-    let port = 3000;
-    app.run(port, '127.0.0.1', () => {
-      app.httpServer.close(done);
-    });
-  });
-
-  it('run args with port, cb', (done) => {
-    let port = 3000;
-    app.run(port, () => {
-      app.httpServer.close(done);
-    });
-  });
-
-  it('rewrite koa toJSON', () => {
-    assert(app.toJSON().name === 'test app');
   });
 });

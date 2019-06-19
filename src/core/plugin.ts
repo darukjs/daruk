@@ -1,6 +1,5 @@
-import { deepStrictEqual } from 'assert';
 import { EventEmitter } from 'events';
-import Daruk from './daruk';
+import { DarukCore } from '../typings/daruk';
 
 class DarukPlugin extends EventEmitter {
   public plugins: {
@@ -10,37 +9,32 @@ class DarukPlugin extends EventEmitter {
     super();
     this.plugins = {};
   }
-  public add(name: string, deps: string[], plugin: (Daruk: Daruk) => any | Promise<any>) {
-    this.plugins[name] = {
-      deps,
-      mod: plugin,
-      init: false
-    };
+  public add(name: string, plugin: (Daruk: DarukCore) => any | Promise<any>) {
+    this.plugins[name] = plugin;
   }
   public remove(name: string) {
     delete this.plugins[name];
   }
-  public async run(Daruk: Daruk) {
-    const names = Object.keys(this.plugins);
+  public async run(Daruk: DarukCore) {
+    let pluginOrder = Daruk.options.pluginOrder;
+    pluginOrder.unshift(
+      'wrapMiddlewareUse',
+      'darukExitHook',
+      'darukHttpServerShutdown',
+      'darukRouter',
+      'darukConfig',
+      'darukGlobalConfig',
+      'darukUtil',
+      'darukGlue',
+      'darukService',
+      'darukTimer'
+    );
+    Daruk.emit('pluginOrderReady', pluginOrder);
     // 对依赖排序，确保插件执行顺序
-    while (names.length) {
-      let name = names.shift();
-      if (this.plugins[name].init) continue;
+    while (pluginOrder.length) {
+      let name = pluginOrder.shift();
       let plugin = this.plugins[name];
-      let deps = plugin.deps;
-      if (deps.length) {
-        // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < deps.length; i++) {
-          let name = deps[i];
-          if (!this.plugins[name].init) {
-            let p = await this.plugins[name].mod(Daruk);
-            this.plugins[name].init = true;
-            this.emit(`${name}:apply`, p);
-          }
-        }
-      }
-      let p = await this.plugins[name].mod(Daruk);
-      this.plugins[name].init = true;
+      let p = await plugin(Daruk);
       this.emit(`${name}:apply`, p);
     }
   }

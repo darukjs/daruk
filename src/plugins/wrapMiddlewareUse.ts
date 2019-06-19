@@ -7,7 +7,7 @@ import convertHrtime = require('convert-hrtime');
 import Daruk from '../core/daruk';
 import plugins from '../core/plugin';
 
-plugins.add('wrapMiddlewareUse', [], (daruk: Daruk) => {
+plugins.add('wrapMiddlewareUse', (daruk: Daruk) => {
   const midNames: string[] = [];
   const WRAP_MIDDLEWARE_USE = Symbol('WRAP_MIDDLEWARE_USE');
 
@@ -72,8 +72,9 @@ plugins.add('wrapMiddlewareUse', [], (daruk: Daruk) => {
     return convertHrtime(process.hrtime()).nanoseconds;
   }
 
-  function wrapMiddleware(app: Daruk['httpServer']) {
+  function wrapMiddleware(app: Daruk['app']) {
     const use = app.use;
+    // @ts-ignore
     app.use = function wrappedKoaUse(fn: Function, name: string) {
       midNames.push(name || 'index_' + midNames.length);
       return use.call(app, wrapUse(fn, name));
@@ -88,5 +89,5 @@ plugins.add('wrapMiddlewareUse', [], (daruk: Daruk) => {
     daruk.logger.access(access_log, ctx);
   });
 
-  wrapMiddleware(daruk.httpServer);
+  wrapMiddleware(daruk.app);
 });
