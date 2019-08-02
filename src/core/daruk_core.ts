@@ -2,6 +2,7 @@
  * @fileOverview Daruk 核心类
  */
 
+import { CronJob } from 'cron';
 import ExitHook = require('daruk-exit-hook');
 import KoaLogger = require('daruk-logger');
 import Http = require('http');
@@ -40,6 +41,7 @@ class DarukCore extends Koa {
   public globalModule: any;
   public util: any;
   public glue: any;
+  public timer: { [key:string]: CronJob };
   public context: Daruk.Context;
   public httpServer: any;
   // 覆写 koa 的 createContext 方法声明

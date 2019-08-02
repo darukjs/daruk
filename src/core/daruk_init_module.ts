@@ -3,9 +3,8 @@
  */
 
 import assert = require('assert');
-import { CronJob as cronJob } from 'cron';
+import { CronJob } from 'cron';
 import is = require('is');
-import { Context } from 'koa';
 import path = require('path');
 // tslint:disable-next-line
 import 'reflect-metadata';
@@ -40,6 +39,7 @@ export default class DarukInitModule {
   public globalModule: any;
   public util: any;
   public glue: any;
+  public timer: { [key:string]: CronJob };
   public context: Daruk.Context;
   public router: any;
   public prettyLog: (msg: string, ext?: { type?: string; level?: string; init?: boolean }) => void;
@@ -288,6 +288,9 @@ export default class DarukInitModule {
    * @desc 初始化定时器
    */
   private initTimer() {
+    const timerInstance: { [key:string]: CronJob } = {};
+    this.timer = this.context.timer = timerInstance;
+
     let timer = this.module.timer || {};
     const defaultJob = {
       start: true,
@@ -297,7 +300,7 @@ export default class DarukInitModule {
     Object.keys(timer).forEach(function initTimer(jobName: string) {
       let job = timer[jobName];
       job = { ...defaultJob, ...job };
-      job.export = new cronJob(
+      timerInstance[jobName] = new CronJob(
         job.cronTime,
         job.onTick,
         job.onComplete,

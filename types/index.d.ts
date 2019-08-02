@@ -1,3 +1,4 @@
+import { CronJob } from 'cron';
 import KoaLogger = require('daruk-logger');
 import EventEmitter = require('events');
 import Http = require('http');
@@ -26,6 +27,9 @@ declare module 'daruk' {
   }
   interface Glue {
     [key: string]: any;
+  }
+  interface Timer {
+    [key: string]: CronJob;
   }
   interface Service {
     [key: string]: any;
@@ -60,6 +64,7 @@ declare module 'daruk' {
     public readonly globalModule: GlobalModule;
     public readonly util: Util;
     public readonly glue: Glue;
+    public readonly timer: Timer;
     public readonly httpServer: Http.Server;
     public logger: KoaLogger.logger;
     public options: Options;
@@ -128,6 +133,7 @@ declare module 'daruk' {
     readonly globalModule: GlobalModule;
     readonly util: Util;
     readonly glue: Glue;
+    readonly timer: Timer;
     readonly service: Service;
     readonly controller: Controller;
   }

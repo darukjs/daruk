@@ -289,6 +289,14 @@
     "@types/keygrip" "*"
     "@types/node" "*"
 
+"@types/cron@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.npm.taobao.org/@types/cron/download/@types/cron-1.7.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fcron%2Fdownload%2F%40types%2Fcron-1.7.1.tgz#752e47ebbe26e83d9e40f2dd6a3f679f2eec54b8"
+  integrity sha1-dS5H674m6D2eQPLdaj9nny7sVLg=
+  dependencies:
+    "@types/node" "*"
+    moment ">=2.14.0"
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/@types/events/download/@types/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -1181,9 +1189,10 @@ cosmiconfig@^5.2.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cron@^1.4.1:
+cron@^1.7.1:
   version "1.7.1"
   resolved "https://registry.npm.taobao.org/cron/download/cron-1.7.1.tgz#e85ee9df794d1bc6579896ee382053c3ce33778f"
+  integrity sha1-6F7p33lNG8ZXmJbuOCBTw84zd48=
   dependencies:
     moment-timezone "^0.5.x"
 
@@ -1243,9 +1252,10 @@ daruk-exit-hook@^0.3.0:
   dependencies:
     "@types/node" "^12.0.0"
 
-daruk-logger@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.npm.taobao.org/daruk-logger/download/daruk-logger-1.9.1.tgz#74f8bbc99b82463fa984815e3d9a1fd3b1d88203"
+daruk-logger@^1.9.6:
+  version "1.9.6"
+  resolved "https://registry.npm.taobao.org/daruk-logger/download/daruk-logger-1.9.6.tgz#575a5ee246aa23ea752ebd81487416211ba10a92"
+  integrity sha1-V1pe4kaqI+p1Lr2BSHQWIRuhCpI=
   dependencies:
     convert-hrtime "^2.0.0"
     moment "^2.22.2"
@@ -2956,7 +2966,7 @@ moment-timezone@^0.5.x:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.22.2:
+"moment@>= 2.9.0", moment@>=2.14.0, moment@^2.22.2:
   version "2.24.0"
   resolved "https://registry.npm.taobao.org/moment/download/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
 

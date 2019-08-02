@@ -21,4 +21,16 @@ describe('define timer', () => {
       done();
     }, timeOut);
   });
+  it('should manual timer be completed', function(done) {
+    app.timer.manualStartTimer.start();
+    const timerDelay = 5000;
+    const timeOut = 1200;
+    // tslint:disable-next-line
+    this.timeout(timerDelay);
+    setTimeout(() => {
+      // @ts-ignore
+      assert(app.timerComplete === true);
+      done();
+    }, timeOut);
+  });
 });
