@@ -1,5 +1,7 @@
 # settings
 .vscode
+.idea
+
 
 # Build
 build
