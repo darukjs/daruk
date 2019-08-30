@@ -41,15 +41,6 @@
       ]
     },
     {
-      "login": "imakan",
-      "name": "imakan",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/11512704?v=4",
-      "profile": "https://github.com/imakan",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
       "login": "Himself65",
       "name": "扩散性百万甜面包",
       "avatar_url": "https://avatars0.githubusercontent.com/u/14026360?v=4",
@@ -130,6 +121,15 @@
       "profile": "https://github.com/yiliang114",
       "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "imakan",
+      "name": "imakan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11512704?v=4",
+      "profile": "https://github.com/imakan",
+      "contributions": [
+        "code"
       ]
     }
   ],
