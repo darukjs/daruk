@@ -292,7 +292,6 @@
 "@types/cron@^1.7.1":
   version "1.7.1"
   resolved "https://registry.npm.taobao.org/@types/cron/download/@types/cron-1.7.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fcron%2Fdownload%2F%40types%2Fcron-1.7.1.tgz#752e47ebbe26e83d9e40f2dd6a3f679f2eec54b8"
-  integrity sha1-dS5H674m6D2eQPLdaj9nny7sVLg=
   dependencies:
     "@types/node" "*"
     moment ">=2.14.0"
@@ -1192,7 +1191,6 @@ cosmiconfig@^5.2.0:
 cron@^1.7.1:
   version "1.7.1"
   resolved "https://registry.npm.taobao.org/cron/download/cron-1.7.1.tgz#e85ee9df794d1bc6579896ee382053c3ce33778f"
-  integrity sha1-6F7p33lNG8ZXmJbuOCBTw84zd48=
   dependencies:
     moment-timezone "^0.5.x"
 
@@ -1255,7 +1253,6 @@ daruk-exit-hook@^0.3.0:
 daruk-logger@^1.9.6:
   version "1.9.6"
   resolved "https://registry.npm.taobao.org/daruk-logger/download/daruk-logger-1.9.6.tgz#575a5ee246aa23ea752ebd81487416211ba10a92"
-  integrity sha1-V1pe4kaqI+p1Lr2BSHQWIRuhCpI=
   dependencies:
     convert-hrtime "^2.0.0"
     moment "^2.22.2"
@@ -2714,6 +2711,10 @@ lodash.templatesettings@^4.0.0:
 lodash@4.17.11, lodash@^4.11.2, lodash@^4.17.11, lodash@^4.2.1:
   version "4.17.11"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+
+lodash@4.17.13:
+  version "4.17.13"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
 
 logform@^2.1.1:
   version "2.1.2"

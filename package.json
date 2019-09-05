@@ -71,6 +71,7 @@
     "koa": "^2.5.2",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
+    "lodash": "4.17.13",
     "object-assign-deep": "^0.4.0",
     "reflect-metadata": "^0.1.13",
     "upath": "^1.1.2",
