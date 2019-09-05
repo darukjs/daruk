@@ -72,7 +72,7 @@
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "lodash": "4.17.13",
-    "mixin-deep": "1.3.2",
+    "mixin-deep": "2.0.1",
     "object-assign-deep": "^0.4.0",
     "reflect-metadata": "^0.1.13",
     "set-value": "2.0.1",
