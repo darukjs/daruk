@@ -1255,12 +1255,12 @@ daruk-exit-hook@^0.3.0:
   dependencies:
     "@types/node" "^12.0.0"
 
-daruk-logger@^1.9.6:
-  version "1.9.6"
-  resolved "https://registry.npm.taobao.org/daruk-logger/download/daruk-logger-1.9.6.tgz#575a5ee246aa23ea752ebd81487416211ba10a92"
+daruk-logger@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/daruk-logger/-/daruk-logger-1.10.0.tgz#0478f88a5f9c0bd07100881614528860a8bf9aec"
+  integrity sha512-O8SHsuZz5x+RKk5htRnRReIsiDqMDp0wtF7dkLh8oG40PSuooxNsWp+qtDc5OzwDkdWeOHbIOuvRMGCgTaaXEg==
   dependencies:
     convert-hrtime "^2.0.0"
-    moment "^2.22.2"
     prettyjson "^1.2.1"
     winston "^3.0.0"
 
@@ -2992,7 +2992,7 @@ moment-timezone@^0.5.x:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@>=2.14.0, moment@^2.22.2:
+"moment@>= 2.9.0", moment@>=2.14.0:
   version "2.24.0"
   resolved "https://registry.npm.taobao.org/moment/download/moment-2.24.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmoment%2Fdownload%2Fmoment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
 
