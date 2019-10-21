@@ -1,6 +1,6 @@
 {
   "name": "daruk",
-  "version": "0.5.10",
+  "version": "0.6.0",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
@@ -63,14 +63,16 @@
     "convert-hrtime": "^2.0.0",
     "cron": "^1.7.1",
     "daruk-exit-hook": "^0.3.0",
-    "daruk-logger": "^1.9.6",
-    "daruk-request-id": "0.4.3",
+    "daruk-logger": "^1.10.0",
+    "daruk-request-id": "^0.4.3",
     "htmlspecialchars": "^1.0.5",
     "http-server-shutdown": "^1.1.2",
     "is": "^3.3.0",
     "koa": "^2.5.2",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
+    "lodash": "^4.17.13",
+    "mixin-deep": "^2.0.1",
     "object-assign-deep": "^0.4.0",
     "reflect-metadata": "^0.1.13",
     "upath": "^1.1.2",
@@ -95,5 +97,10 @@
     ],
     "sourceMap": true,
     "instrument": true
-  }
+  },
+  "files": [
+    "types",
+    "build",
+    "LICENSE"
+  ]
 }
