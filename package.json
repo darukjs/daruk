@@ -97,5 +97,10 @@
     ],
     "sourceMap": true,
     "instrument": true
-  }
+  },
+  "files": [
+    "types",
+    "build",
+    "LICENSE"
+  ]
 }
