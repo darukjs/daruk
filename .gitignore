@@ -63,3 +63,5 @@ profiler
 test.js
 test.ts
 coverage
+
+package-lock.json
