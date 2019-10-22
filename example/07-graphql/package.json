@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "apollo-server-koa": "^2.5.0",
-    "daruk": "lastest",
+    "daruk": "latest",
     "graphql": "^14.3.0"
   }
 }
