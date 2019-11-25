@@ -71,6 +71,7 @@ class DarukCore extends Koa {
 
     // 初始化 logger
     this.logger =new KoaLogger.logger(this.options.loggerOptions);
+    // 初始化this.logger为customLogger
     if(Object.getOwnPropertyNames(customLogger).length > 0) this.logger = customLogger;
    
     // 初始化装饰器与 daurk 实例之间的桥梁
