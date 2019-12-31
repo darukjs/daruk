@@ -7,7 +7,7 @@
 [![PR's Welcome][pr-welcoming-image]][pr-welcoming-url]
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/darukjs/daruk.svg)
 ![npm](https://img.shields.io/npm/dm/daruk.svg)
-[![codecov](https://codecov.io/gh/daruk-framework/daruk/branch/developer/graph/badge.svg)](https://codecov.io/gh/daruk-framework/daruk)
+[![codecov](https://codecov.io/gh/darukjs/daruk/branch/developer/graph/badge.svg)](https://codecov.io/gh/darukjs/daruk)
 ![GitHub top language](https://img.shields.io/github/languages/top/darukjs/daruk.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/darukjs/daruk.svg)
 [![Package Quality](https://npm.packagequality.com/shield/daruk.svg)](https://packagequality.com/#?package=daruk)
