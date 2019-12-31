@@ -45,6 +45,7 @@ class DarukCore extends Koa {
   public context: Daruk.Context;
   public httpServer: any;
   // 覆写 koa 的 createContext 方法声明
+  // @ts-ignore
   public createContext: (req: any, res: any) => Daruk.Context;
   public initEnv: () => void;
   /**
@@ -56,6 +57,7 @@ class DarukCore extends Koa {
     super();
     this.name = name;
     // 保证 context.app 是 daruk 而不是 koa
+    // @ts-ignore
     this.context.app = this;
     // 获取 DarukLoader 加载模块的根目录
     const rootPath = options.rootPath || path.dirname(require.main.filename);
@@ -77,11 +79,13 @@ class DarukCore extends Koa {
     }
 
     // 初始化装饰器与 daurk 实例之间的桥梁
+    // @ts-ignore
     helpDecoratorClass.init(this);
 
     // 用于保存 DarukLoader 加载的模块
     this.module = {};
     this.initExitHook();
+    // @ts-ignore
     wrapMiddlewareUse(this);
 
     // tslint:disable-next-line
