@@ -1,4 +1,5 @@
 import chai = require('chai');
+import koa = require('koa');
 import { Daruk } from '../../src';
 import { getApp } from '../utils';
 
@@ -6,35 +7,35 @@ const assert = chai.assert;
 
 describe('load modules', () => {
   let app: Daruk;
-  let ctx: Daruk['context'];
+  let ctx: koa.Context;
   before(() => {
     app = getApp('load-modules');
     ctx = app.mockContext();
   });
 
   it('define file service', () => {
-    assert(ctx.service.fileService !== undefined);
+    assert(ctx.module.service.fileService !== undefined);
   });
   it('define folder service', () => {
-    assert(ctx.service.folderService !== undefined);
+    assert(ctx.module.service.folderService !== undefined);
   });
 
   it('define file glue', () => {
-    assert(ctx.glue.fileGlue !== undefined);
-    assert(app.glue.fileGlue !== undefined);
+    assert(ctx.module.glue.fileGlue !== undefined);
+    assert(app.module.glue.fileGlue !== undefined);
   });
   it('define folder glue', () => {
-    assert(ctx.glue.folderGlue !== undefined);
-    assert(app.glue.folderGlue !== undefined);
+    assert(ctx.module.glue.folderGlue !== undefined);
+    assert(app.module.glue.folderGlue !== undefined);
   });
 
   it('define util', () => {
-    assert(ctx.util.util1 !== undefined);
-    assert(app.util.util1 !== undefined);
+    assert(ctx.module.util.util1 !== undefined);
+    assert(app.module.util.util1 !== undefined);
   });
 
   it('define project config', () => {
-    assert(ctx.config.option1 !== undefined);
-    assert(app.config.option1 !== undefined);
+    assert(ctx.module.config.option1 !== undefined);
+    assert(app.module.config.option1 !== undefined);
   });
 });

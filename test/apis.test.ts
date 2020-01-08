@@ -1,4 +1,5 @@
 import chai = require('chai');
+import koa = require('koa');
 import sinon = require('sinon');
 import { Daruk } from '../src';
 import { getApp } from './utils';
@@ -7,7 +8,7 @@ const assert = chai.assert;
 
 describe('apis', () => {
   let app: Daruk;
-  let ctx: Daruk['app']['context'];
+  let ctx: koa['context'];
   let stubExit: sinon.SinonStub;
 
   before(() => {

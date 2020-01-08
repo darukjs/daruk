@@ -13,7 +13,7 @@ plugins.add('darukHttpServerShutdown', (daruk: DarukCore) => {
     if (daruk.options.gracefulShutdown.enable) {
       const serverShutDown = new ShutDown(daruk.httpServer, { monitor: false });
       const timeout = daruk.options.gracefulShutdown.timeout;
-      (daruk.exitHook as ExitHook).addHook(function handleHttpGracefulShutdown(
+      (daruk.plugins.exitHook as ExitHook).addHook(function handleHttpGracefulShutdown(
         err: Error,
         cb: Function
       ) {

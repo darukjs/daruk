@@ -27,6 +27,7 @@ class DarukPlugin extends EventEmitter {
       'darukUtil',
       'darukGlue',
       'darukService',
+      'darukMiddleware',
       'darukTimer'
     );
     Daruk.emit('pluginOrderReady', pluginOrder);

@@ -8,7 +8,7 @@ import Https = require('https');
 import { EventEmitter } from 'events';
 
 export interface DarukCore extends EventEmitter {
-  plugin: typeof DarukPlugin;
+  plugins: typeof DarukPlugin.plugins;
   name: string;
   module: {
     [key: string]: any;
@@ -19,10 +19,26 @@ export interface DarukCore extends EventEmitter {
   logger: KoaLogger.logger;
   mockContext: (req?: {}) => any;
   prettyLog: (msg: string, ext?: { type?: string; level?: string; init?: boolean }) => void;
-  serverReady: (server: Http.Server | Https.Server) => void;
   listen: (...args: any[]) => Promise<Http.Server | Https.Server>;
   mergeModule: (type: string, mergeObj: { [key: string]: any }) => void;
   logModuleMsg: (type: string, moduleObj: any) => void;
   setModule: (type: string, key: string, value: any) => void;
   setArrayModule: (type: string, arr: []) => void;
 }
+export interface RegisterDes {
+  name: string;
+  export: any;
+}
+export interface ParseType {
+  [key: string]:
+    | ArrayConstructor
+    | BooleanConstructor
+    | StringConstructor
+    | NumberConstructor
+    | ObjectConstructor;
+}
+export interface ParsedType {
+  [key: string]: Array<string> | Boolean | String | Number | Object;
+}
+export type method = 'body' | 'query' | 'params';
+export type validateFunc = (value: string) => string | undefined;

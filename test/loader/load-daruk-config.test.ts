@@ -1,4 +1,5 @@
 import chai = require('chai');
+import koa = require('koa');
 import request = require('supertest');
 import { Daruk } from '../../src';
 import { getApp } from '../utils';
@@ -10,7 +11,7 @@ const code200 = 200;
 describe('load daruk.config', () => {
   let app: Daruk;
   let server: Daruk['httpServer'];
-  let ctx: Daruk['context'];
+  let ctx: koa.Context;
   before((done) => {
     app = getApp('load-daruk-config');
     app.listen(port, done);
@@ -44,13 +45,13 @@ describe('load daruk.config', () => {
   });
 
   it('define util with daruk.config', () => {
-    assert(ctx.util.util1 !== undefined);
-    assert(app.util.util1 !== undefined);
+    assert(ctx.module.util.util1 !== undefined);
+    assert(app.module.util.util1 !== undefined);
   });
 
   it('define global module with daruk.config', () => {
-    assert(ctx.globalModule.module1 !== undefined);
-    assert(app.globalModule.module1 !== undefined);
+    assert(ctx.module.globalModule.module1 !== undefined);
+    assert(app.module.globalModule.module1 !== undefined);
   });
 
   it('define timer with daruk.config', function(done) {

@@ -20,7 +20,7 @@ export function getApp(appDir: string, options = {}) {
   // 为了避免重复监听进程退出事件
   // 每次获取 daurk 都移除上次监听的事件
   if (darukInstance) {
-    darukInstance.exitHook.unhookAllEvent();
+    darukInstance.plugins.exitHook.unhookAllEvent();
     darukInstance = null;
   }
   darukInstance = new Daruk('test app', { ...defaultOptions, ...options });

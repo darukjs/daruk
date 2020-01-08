@@ -11,6 +11,6 @@ describe('load daruk.async', () => {
   });
 
   it('should run async function success', async () => {
-    assert.equal(await app.glue.connection, 'promise');
+    assert.equal(await app.module.glue.connection, 'promise');
   });
 });

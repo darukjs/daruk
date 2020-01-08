@@ -12,10 +12,6 @@ const isObj = is.object;
 
 class Loader {
   /**
-   * @desc 加载 daruk 配置
-   */
-  public loadDarukConfig(path: string) {}
-  /**
    * @desc 加载 controller
    * controller 的目录结构也是路由 path 的一部分
    */

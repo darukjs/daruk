@@ -7,7 +7,7 @@ import plugins from '../core/plugin';
 import { DarukCore } from '../typings/daruk';
 
 plugins.add('darukExitHook', (daruk: DarukCore) => {
-  daruk.exitHook = new ExitHook({
+  daruk.plugins.exitHook = new ExitHook({
     onExit: (err: Error) => {
       if (err) {
         daruk.prettyLog(err.stack || err.message, { level: 'error' });
