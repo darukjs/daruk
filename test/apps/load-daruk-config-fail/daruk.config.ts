@@ -1,9 +1,9 @@
 import path = require('path');
-import { Daruk } from '../../../src/typings/daruk';
+import { Daruk } from '../../../src';
 
 const mockNodeModulesPacket = path.resolve(__dirname, './node_modules/mock-middleware/index.js');
 
-export default function(daruk: Daruk.DarukCore) {
+export default function(daruk: Daruk) {
   return {
     globalModule: {
       module1: () => {}

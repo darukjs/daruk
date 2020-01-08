@@ -14,7 +14,7 @@ plugins.add('darukTimer', (daruk: Daruk) => {
     timeZone: 'Asia/Shanghai'
   };
   Object.keys(timer).forEach(function initTimer(jobName: string) {
-    let job = timer[jobName];
+    let job = timer[jobName](daruk);
     job = { ...defaultJob, ...job };
     job.export = new cronJob(
       job.cronTime,

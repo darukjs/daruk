@@ -95,9 +95,7 @@ plugins.add('darukRouter', (daruk: DarukRouter) => {
             // 判断路由是否重复定义
             assert(
               routeMap[method].indexOf(routePath) === -1,
-              `[router] duplicate routing definition in ${
-                ControllerClass.name
-              }.${funcName}: ${routePath}`
+              `[router] duplicate routing definition in ${ControllerClass.name}.${funcName}: ${routePath}`
             );
             // 保存路由 path
             routeMap[method].push(routePath);
@@ -143,7 +141,7 @@ plugins.add('darukRouter', (daruk: DarukRouter) => {
               ctx: Koa['context'],
               next: () => Promise<void>
             ): Promise<any> {
-              let controllerInstance = new ControllerClass(ctx);
+              let controllerInstance = new ControllerClass(ctx, daruk);
               await controllerInstance[funcName](ctx, next);
               // 允许用户在 controller 销毁前执行清理逻辑
               if (isFn(controllerInstance._destroy)) {

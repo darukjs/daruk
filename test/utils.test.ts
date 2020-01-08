@@ -20,7 +20,7 @@ describe('utils', () => {
   it('uRequire', () => {
     // 支持 common.js 和 es module
     assert(uRequire('path') !== undefined);
-    assert(uRequire(path.resolve(__dirname, '../src/core/daruk_core.ts')) !== undefined);
+    assert(uRequire(path.resolve(__dirname, '../src/core/daruk.ts')) !== undefined);
   });
   it('isSubClass', () => {
     class A {}

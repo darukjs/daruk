@@ -10,9 +10,9 @@ export default class BaseContext {
   public ctx: koa['context'];
   public app: DarukCore;
   public module: DarukCore['module'];
-  public constructor(ctx: koa['context']) {
+  public constructor(ctx: koa['context'], daruk: DarukCore) {
     this.ctx = ctx;
-    this.app = ctx.app;
-    this.module.service = this.app.module.service;
+    this.ctx.app = daruk;
+    this.ctx.module = daruk.module;
   }
 }

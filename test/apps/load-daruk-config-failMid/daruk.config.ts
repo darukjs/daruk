@@ -1,7 +1,6 @@
 import path = require('path');
-import { Daruk } from '../../../src/typings/daruk';
 
-export default function(daruk: Daruk.DarukCore) {
+export default function() {
   return {
     globalModule: {
       module1: () => {}

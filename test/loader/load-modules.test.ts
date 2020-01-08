@@ -7,7 +7,7 @@ const assert = chai.assert;
 
 describe('load modules', () => {
   let app: Daruk;
-  let ctx: koa.Context;
+  let ctx: koa['context'];
   before(() => {
     app = getApp('load-modules');
     ctx = app.mockContext();

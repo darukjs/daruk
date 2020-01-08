@@ -21,7 +21,6 @@ describe('cover-branches', () => {
     daruk.app.use((ctx: any, next: Function) => {
       return next();
     });
-
     // 传递 host 的情况
     daruk.listen(port, '127.0.0.1', done);
 

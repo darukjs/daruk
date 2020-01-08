@@ -20,7 +20,6 @@ import {
   typeParse,
   validate
 } from '../../../../src';
-import { Daruk } from '../../../../src/typings/daruk';
 
 class Store {
   public store: any;
@@ -47,39 +46,39 @@ const cacheStore = new Store();
 export default class Index extends BaseController {
   @get('/repeatMethod')
   @post('/repeatMethod')
-  public async repeatMethod(ctx: Daruk.Context, next: Function) {
+  public async repeatMethod(ctx: any, next: Function) {
     ctx.body = '';
   }
   @all('/all')
-  public async all(ctx: Daruk.Context, next: Function) {
+  public async all(ctx: any, next: Function) {
     ctx.body = '';
   }
   @del('/del')
-  public async del(ctx: Daruk.Context, next: Function) {
+  public async del(ctx: any, next: Function) {
     ctx.body = '';
   }
   @get('/get')
-  public async get(ctx: Daruk.Context, next: Function) {
+  public async get(ctx: any, next: Function) {
     ctx.body = '';
   }
   @head('/head')
-  public async head(ctx: Daruk.Context, next: Function) {
+  public async head(ctx: any, next: Function) {
     ctx.body = '';
   }
   @options('/options')
-  public async options(ctx: Daruk.Context, next: Function) {
+  public async options(ctx: any, next: Function) {
     ctx.body = '';
   }
   @patch('/patch')
-  public async patch(ctx: Daruk.Context, next: Function) {
+  public async patch(ctx: any, next: Function) {
     ctx.body = '';
   }
   @post('/post')
-  public async post(ctx: Daruk.Context, next: Function) {
+  public async post(ctx: any, next: Function) {
     ctx.body = '';
   }
   @put('/put')
-  public async put(ctx: Daruk.Context, next: Function) {
+  public async put(ctx: any, next: Function) {
     ctx.body = '';
   }
   @json()
@@ -94,12 +93,12 @@ export default class Index extends BaseController {
   }
   @redirect('/json2')
   @get('/redirect')
-  public redirect(ctx: Daruk.Context) {
+  public redirect(ctx: any) {
     ctx.body = '';
   }
   @type('application/json')
   @get('/type')
-  public type(ctx: Daruk.Context) {
+  public type(ctx: any) {
     ctx.body = {
       foo: 1
     };
@@ -107,18 +106,18 @@ export default class Index extends BaseController {
 
   @header('foo', 'bar')
   @get('/header')
-  public header(ctx: Daruk.Context) {
+  public header(ctx: any) {
     ctx.body = 'bar';
   }
 
   @header({ foo: 'bar' })
   @get('/headers')
-  public headers(ctx: Daruk.Context) {
+  public headers(ctx: any) {
     ctx.body = 'bar';
   }
 
   @get('/wildcard_(\\d)_(\\d).htm')
-  public deatil(ctx: Daruk.Context) {
+  public deatil(ctx: any) {
     ctx.body = {
       foo: 1
     };
@@ -126,12 +125,12 @@ export default class Index extends BaseController {
 
   @middleware('routeMiddleware')
   @get('/middleware')
-  public async middleware(ctx: Daruk.Context, next: Function) {}
+  public async middleware(ctx: any, next: Function) {}
 
   @middleware('multiRouteMiddleware', { foo: 1 })
   @middleware('routeMiddleware')
   @get('/multiMiddleware')
-  public async multiMiddleware(ctx: Daruk.Context, next: Function) {}
+  public async multiMiddleware(ctx: any, next: Function) {}
 
   @required({
     body: ['foo'],
@@ -139,7 +138,7 @@ export default class Index extends BaseController {
     params: ['id']
   })
   @post('/required/:id')
-  public async required(ctx: Daruk.Context, next: Function) {
+  public async required(ctx: any, next: Function) {
     ctx.body = ctx.validateRequired || '';
   }
 
@@ -162,7 +161,7 @@ export default class Index extends BaseController {
     }
   })
   @post('/typeparse/:id')
-  public typeParse(ctx: Daruk.Context) {
+  public typeParse(ctx: any) {
     ctx.body = {
       body: ctx.parseBody,
       params: ctx.parseParams,
@@ -176,7 +175,7 @@ export default class Index extends BaseController {
     }
   })
   @get('/validate')
-  public validate(ctx: Daruk.Context) {
+  public validate(ctx: any) {
     if (ctx.validateError.length) {
       ctx.body = ctx.validateError[0];
     } else {
@@ -190,7 +189,7 @@ export default class Index extends BaseController {
     }
   })
   @post('/validate')
-  public validatePost(ctx: Daruk.Context) {
+  public validatePost(ctx: any) {
     if (ctx.validateError.length) {
       ctx.body = ctx.validateError[0];
     } else {
@@ -207,13 +206,13 @@ export default class Index extends BaseController {
     }
   })
   @get('/cache')
-  public cache(ctx: Daruk.Context) {
+  public cache(ctx: any) {
     ctx.body = 'cacheData';
   }
 
   @disabled()
   @get('/disabled')
-  public disabled(ctx: Daruk.Context) {
+  public disabled(ctx: any) {
     ctx.body = '';
   }
 }

@@ -53,7 +53,7 @@ describe('http-server-shutdown', () => {
   it('mock error: graceful shutdown', (done) => {
     // @ts-ignore
     // 强制让 daruk-exit-hook 能够执行两次进程退出的回调
-    app.exitHook.called = false;
+    app.module.exitHook.called = false;
     const stubErrorLog = sinon.stub(app.logger, 'error');
     // 上面的测试用例已经关闭了 server
     // 再次执行关机回调时，http-server-shutdown 会再次执行 httpServer.close()

@@ -1,7 +1,5 @@
-import { Daruk } from '../../../../src/typings/daruk';
-
 export default function() {
-  return (ctx: Daruk.Context, next: Function) => {
+  return (ctx: any, next: Function) => {
     ctx.body = 'routeMiddleware';
     return next();
   };

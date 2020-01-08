@@ -15,7 +15,7 @@ class DarukPlugin extends EventEmitter {
   public remove(name: string) {
     delete this.plugins[name];
   }
-  public async run(Daruk: DarukCore) {
+  public run(Daruk: DarukCore) {
     let pluginOrder = Daruk.options.pluginOrder;
     pluginOrder.unshift(
       'wrapMiddlewareUse',
@@ -35,7 +35,7 @@ class DarukPlugin extends EventEmitter {
     while (pluginOrder.length) {
       let name = pluginOrder.shift();
       let plugin = this.plugins[name];
-      let p = await plugin(Daruk);
+      let p = plugin(Daruk);
       this.emit(`${name}:apply`, p);
     }
   }
