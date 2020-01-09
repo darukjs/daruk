@@ -4,9 +4,9 @@
  */
 
 import convertHrtime = require('convert-hrtime');
-import { DarukCore } from '../typings/daruk';
+import Daruk from '../core/daruk';
 
-export default (daruk: DarukCore) => {
+export default (daruk: Daruk) => {
   const midNames: string[] = [];
   const WRAP_MIDDLEWARE_USE = Symbol('WRAP_MIDDLEWARE_USE');
 
@@ -71,7 +71,7 @@ export default (daruk: DarukCore) => {
     return convertHrtime(process.hrtime()).nanoseconds;
   }
 
-  function wrapMiddleware(app: DarukCore['app']) {
+  function wrapMiddleware(app: Daruk['app']) {
     const use = app.use;
     // @ts-ignore
     app.use = function wrappedKoaUse(fn: Function, name: string) {

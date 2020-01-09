@@ -22,7 +22,6 @@ class Daruk extends Module {
   public name: string;
   public app: Koa;
   public httpServer: Http.Server | Https.Server;
-  private externalPlugins: string[];
   public constructor(name: string, options?: PartialOptions) {
     super();
     this.name = name;

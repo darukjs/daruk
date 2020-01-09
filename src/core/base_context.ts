@@ -3,16 +3,15 @@
  * 用于挂载 app、ctx、service
  */
 
-import koa = require('koa');
-import { DarukCore } from '../typings/daruk';
+import { Context } from '../typings/daruk';
+import Daruk from './daruk';
 
 export default class BaseContext {
-  public ctx: koa['context'];
-  public app: DarukCore;
-  public module: DarukCore['module'];
-  public constructor(ctx: koa['context'], daruk: DarukCore) {
+  public ctx: Context;
+  public app: Daruk;
+  public module: Daruk['module'];
+  public constructor(ctx: Context, daruk: Daruk) {
     this.ctx = ctx;
-    this.ctx.app = daruk;
     this.ctx.module = daruk.module;
   }
 }

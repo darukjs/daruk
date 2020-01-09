@@ -18,13 +18,12 @@ import {
   CONTROLLER_REDIRECT_PATH,
   MIDDLEWARE_NAME
 } from '../decorators/constants';
-import { DarukCore } from '../typings/daruk';
 import { filterBuiltInModule } from '../utils';
 
 const join = path.join;
 const isFn = is.fn;
 
-interface DarukRouter extends DarukCore {
+interface DarukRouter extends Daruk {
   router: Router;
 }
 

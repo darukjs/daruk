@@ -1,13 +1,13 @@
 import assert = require('assert');
 import fs = require('fs');
 import is = require('is');
+import Daruk from '../core/daruk';
 import loader from '../core/loader';
-import { DarukCore } from '../typings/daruk';
 import { uRequire } from '../utils';
 
 const isFn = is.fn;
 
-export default (daruk: DarukCore) => {
+export default (daruk: Daruk) => {
   const path = daruk.options.darukConfigPath;
   // 在 ts 的 dev 环境，文件名是 daruk.config.ts
   if (!fs.existsSync(path + '.js') && !fs.existsSync(path + '.ts')) return;

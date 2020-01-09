@@ -1,8 +1,8 @@
 import { CronJob as cronJob } from 'cron';
+import Daruk from '../core/daruk';
 import loader from '../core/loader';
-import { DarukCore } from '../typings/daruk';
 
-export default (daruk: DarukCore) => {
+export default (daruk: Daruk) => {
   let timer = loader.loadModule('timer', daruk.options.timerPath);
   daruk.mergeModule('timer', timer);
   daruk.emit('timerLoaded', daruk);
