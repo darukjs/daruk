@@ -4,19 +4,25 @@
  * @fileoverview plugin化daruk core
  */
 import KoaLogger = require('daruk-logger');
+import Http = require('http');
+import Https = require('https');
 import Koa = require('koa');
 import deepAssign = require('object-assign-deep');
 import path = require('path');
+import { join } from 'path';
 import { PartialOptions } from '../../types/daruk_options';
 import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
-import { getFilePathRecursive, uRequire } from '../utils';
+import { uRequire } from '../utils';
 import getDefaultOptions from './daruk_default_options';
-import DarukPlugin from './plugin';
-import Server from './server';
+import Module from './module';
 
-class Daruk extends Server {
-  public plugins: typeof DarukPlugin.plugins;
+class Daruk extends Module {
+  public plugins: { [key: string]: any };
+  public name: string;
+  public app: Koa;
+  public httpServer: Http.Server | Https.Server;
+  private externalPlugins: string[];
   public constructor(name: string, options?: PartialOptions) {
     super();
     this.name = name;
@@ -37,9 +43,6 @@ class Daruk extends Server {
     // 初始化装饰器与 daurk 实例之间的桥梁
     helpDecoratorClass.init(this);
     // 初始化内置插件
-    getFilePathRecursive(path.join(__dirname, '../plugins')).forEach((file: string) => {
-      uRequire(file);
-    });
     this.plugins = {};
     // 监听 koa 的错误事件，输出日志
     if (this.options.serverType === 'koa') {
@@ -47,8 +50,6 @@ class Daruk extends Server {
     } else {
       throw new Error('only support koa server Type');
     }
-    DarukPlugin.run(this);
-    this.plugins = DarukPlugin.plugins;
     // tslint:disable-next-line
     const self = this;
 
@@ -68,6 +69,29 @@ class Daruk extends Server {
     // 为模拟的 ctx 绑定 service
     ctx.module = this.module;
     return ctx;
+  }
+  /**
+   * @desc 启动服务
+   */
+  public async listen(...args: any[]): Promise<Http.Server> {
+    this.httpServer = this.app.listen(...args);
+    this.emit('ready');
+    return this.httpServer;
+  }
+  public async loadPlugin(paths: string[] = []) {
+    await this.plugin('../plugins/wrapMiddlewareUse');
+    await this.plugin('../plugins/exitHook');
+    await this.plugin('../plugins/darukConfig');
+    await this.plugin('../plugins/daruk_http_server_shutdown');
+    await this.plugin('../plugins/router');
+    await this.plugin('../plugins/timer');
+    for (let path of paths) {
+      await this.plugin(path);
+    }
+  }
+  private async plugin(path: string) {
+    const plugin = uRequire(join(__dirname, path));
+    this.plugins[path] = await plugin(this);
   }
 }
 

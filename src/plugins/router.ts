@@ -3,13 +3,12 @@ import is = require('is');
 import Koa = require('koa');
 import Router = require('koa-router');
 import path = require('path');
+// tslint:disable-next-line
+import 'reflect-metadata';
 import { join as ujoin } from 'upath';
 import urljoin = require('url-join');
 import Daruk from '../core/daruk';
 import loader from '../core/loader';
-import plugins from '../core/plugin';
-// tslint:disable-next-line
-import 'reflect-metadata';
 import {
   CONTROLLER_CLASS_PREFIX,
   CONTROLLER_DISABLED_CLASS,
@@ -19,16 +18,17 @@ import {
   CONTROLLER_REDIRECT_PATH,
   MIDDLEWARE_NAME
 } from '../decorators/constants';
+import { DarukCore } from '../typings/daruk';
 import { filterBuiltInModule } from '../utils';
 
 const join = path.join;
 const isFn = is.fn;
 
-interface DarukRouter extends Daruk {
+interface DarukRouter extends DarukCore {
   router: Router;
 }
 
-plugins.add('darukRouter', (daruk: DarukRouter) => {
+export default (daruk: DarukRouter) => {
   daruk.router = new Router();
   const outsidemiddlewares = loader.loadModule('middleware', daruk.options.middlewarePath);
   const middlewares = loader.loadModule('middleware', join(__dirname, '../built_in/middlewares'));
@@ -164,4 +164,4 @@ plugins.add('darukRouter', (daruk: DarukRouter) => {
   daruk.app.use(daruk.router.routes(), 'router');
   // @ts-ignore
   daruk.app.use(daruk.router.allowedMethods(), 'allowedMethods');
-});
+};

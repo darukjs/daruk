@@ -15,16 +15,18 @@ describe('cover-branches', () => {
   let stubExit: sinon.SinonStub;
 
   before((done) => {
-    daruk = getApp('cover-branches');
+    getApp('cover-branches').then((app) => {
+      daruk = app;
 
-    // 匿名中间件的情况
-    daruk.app.use((ctx: any, next: Function) => {
-      return next();
+      // 匿名中间件的情况
+      daruk.app.use((ctx: any, next: Function) => {
+        return next();
+      });
+      // 传递 host 的情况
+      daruk.listen(port, '127.0.0.1', done);
+
+      stubExit = sinon.stub(process, 'exit');
     });
-    // 传递 host 的情况
-    daruk.listen(port, '127.0.0.1', done);
-
-    stubExit = sinon.stub(process, 'exit');
   });
 
   after((done) => {

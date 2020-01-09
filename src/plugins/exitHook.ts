@@ -3,10 +3,9 @@
  */
 
 import ExitHook = require('daruk-exit-hook');
-import plugins from '../core/plugin';
 import { DarukCore } from '../typings/daruk';
 
-plugins.add('darukExitHook', (daruk: DarukCore) => {
+export default (daruk: DarukCore) => {
   daruk.module.exitHook = new ExitHook({
     onExit: (err: Error) => {
       if (err) {
@@ -19,4 +18,4 @@ plugins.add('darukExitHook', (daruk: DarukCore) => {
       daruk.prettyLog(`process exited: ${code}`);
     }
   });
-});
+};

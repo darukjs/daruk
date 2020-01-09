@@ -12,9 +12,11 @@ describe('apis', () => {
   let stubExit: sinon.SinonStub;
 
   before(() => {
-    app = getApp('apis');
-    ctx = app.mockContext();
-    stubExit = sinon.stub(process, 'exit');
+    getApp('apis').then((Daruk) => {
+      app = Daruk;
+      ctx = app.mockContext();
+      stubExit = sinon.stub(process, 'exit');
+    });
   });
 
   after(() => {

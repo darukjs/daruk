@@ -13,9 +13,11 @@ describe('decorators', () => {
   let app: Daruk;
   let server: Daruk['httpServer'];
   before((done) => {
-    app = getApp('decorators');
-    app.listen(port, done);
-    server = app.httpServer;
+    getApp('decorators').then((Daruk) => {
+      app = Daruk;
+      app.listen(port, done);
+      server = app.httpServer;
+    });
   });
 
   after((done) => {

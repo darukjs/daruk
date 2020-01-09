@@ -9,9 +9,11 @@ describe('define route', () => {
   let app: Daruk;
   let server: Daruk['httpServer'];
   before((done) => {
-    app = getApp('load-controllers');
-    app.listen(port, done);
-    server = app.httpServer;
+    getApp('load-controllers').then((Daruk) => {
+      app = Daruk;
+      app.listen(port, done);
+      server = app.httpServer;
+    });
   });
 
   after((done) => {

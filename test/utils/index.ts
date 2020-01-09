@@ -7,7 +7,7 @@ export function getRootPath(appName: string) {
 
 let darukInstance: Daruk;
 
-export function getApp(appDir: string, options = {}) {
+export async function getApp(appDir: string, options = {}) {
   const defaultOptions = {
     rootPath: getRootPath(appDir),
     debug: false,
@@ -24,5 +24,6 @@ export function getApp(appDir: string, options = {}) {
     darukInstance = null;
   }
   darukInstance = new Daruk('test app', { ...defaultOptions, ...options });
+  await darukInstance.loadPlugin();
   return darukInstance;
 }

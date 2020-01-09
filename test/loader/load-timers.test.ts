@@ -6,8 +6,11 @@ const assert = chai.assert;
 
 describe('define timer', () => {
   let app: Daruk;
-  before(() => {
-    app = getApp('load-timers');
+  before((done) => {
+    getApp('load-timers').then((Daruk) => {
+      app = Daruk;
+      done();
+    });
   });
 
   it('should timer be completed', function(done) {

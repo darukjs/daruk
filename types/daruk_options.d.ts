@@ -5,15 +5,11 @@ type RecursivePartial<T> = {
     ? RecursivePartial<U>[]
     : T[P] extends object
     ? RecursivePartial<T[P]>
-    : T[P]
+    : T[P];
 };
 
 export interface Options {
-  servicePath: string;
   controllerPath: string;
-  utilPath: string;
-  gluePath: string;
-  configPath: string;
   darukConfigPath: string;
   timerPath: string;
   middlewarePath: string;

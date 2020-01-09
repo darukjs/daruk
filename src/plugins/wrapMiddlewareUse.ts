@@ -4,10 +4,9 @@
  */
 
 import convertHrtime = require('convert-hrtime');
-import Daruk from '../core/daruk';
-import plugins from '../core/plugin';
+import { DarukCore } from '../typings/daruk';
 
-plugins.add('wrapMiddlewareUse', (daruk: Daruk) => {
+export default (daruk: DarukCore) => {
   const midNames: string[] = [];
   const WRAP_MIDDLEWARE_USE = Symbol('WRAP_MIDDLEWARE_USE');
 
@@ -72,7 +71,7 @@ plugins.add('wrapMiddlewareUse', (daruk: Daruk) => {
     return convertHrtime(process.hrtime()).nanoseconds;
   }
 
-  function wrapMiddleware(app: Daruk['app']) {
+  function wrapMiddleware(app: DarukCore['app']) {
     const use = app.use;
     // @ts-ignore
     app.use = function wrappedKoaUse(fn: Function, name: string) {
@@ -90,4 +89,4 @@ plugins.add('wrapMiddlewareUse', (daruk: Daruk) => {
   });
 
   wrapMiddleware(daruk.app);
-});
+};

@@ -9,7 +9,7 @@ describe('define middleware', () => {
   let app: Daruk;
   let server: Daruk['httpServer'];
   before((done) => {
-    app = getApp('load-middlewares', {
+    getApp('load-middlewares', {
       // 测试 daruk-logger middleware 的参数
       loggerMiddleware: {
         filter: () => true,
@@ -25,9 +25,11 @@ describe('define middleware', () => {
           'user_agent'
         ]
       }
+    }).then((Daruk) => {
+      app = Daruk;
+      app.listen(port, done);
+      server = app.httpServer;
     });
-    app.listen(port, done);
-    server = app.httpServer;
   });
 
   after((done) => {

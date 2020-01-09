@@ -8,7 +8,6 @@ import BaseContext from './base_context';
 
 const join = path.join;
 const isFn = is.fn;
-const isObj = is.object;
 
 class Loader {
   /**
@@ -57,38 +56,6 @@ class Loader {
       modules[name] = mod;
     });
     return modules;
-  }
-  /**
-   * @desc 加载导出类型为 class 的模块
-   * 比如 src/services
-   */
-  public loadClassModule(key: string, path: string) {
-    const descriptions = this.getModuleDesc(path);
-    const modules: any = {};
-    descriptions.forEach((desc) => {
-      const { name, path } = desc;
-      const classModule = uRequire(path);
-      assert(isFn(classModule), `[${key}] must export a function, ${path}`);
-      assert(
-        isSubClass(classModule, BaseContext),
-        `[${key}] must export a subclass of Daruk.Base${key.charAt(0).toUpperCase() +
-          key.slice(1)} in path: ${path}`
-      );
-      modules[name] = classModule;
-    });
-    return modules;
-  }
-  /**
-   * @desc 只是加载约定目录中的 index 文件并执行
-   * 将返回值保存到 daruk
-   * 比如 src/utils、src/config
-   */
-  public loadModuleSimple(type: string, path: string) {
-    // 这里 load 的是文件夹，所以可以直接判断路径是否存在
-    if (!fs.existsSync(path)) return;
-    const mod = uRequire(path);
-    assert(isFn(mod) || isObj(mod), `${type} must export a function or object in path: ${path}`);
-    return mod;
   }
   /**
    * @desc 加载 daurk.config 配置的中间件

@@ -4,11 +4,9 @@
 
 import ExitHook = require('daruk-exit-hook');
 import ShutDown = require('http-server-shutdown');
-
-import plugins from '../core/plugin';
 import { DarukCore } from '../typings/daruk';
 
-plugins.add('darukHttpServerShutdown', (daruk: DarukCore) => {
+export default (daruk: DarukCore) => {
   daruk.on('ready', () => {
     if (daruk.options.gracefulShutdown.enable) {
       const serverShutDown = new ShutDown(daruk.httpServer, { monitor: false });
@@ -34,4 +32,4 @@ plugins.add('darukHttpServerShutdown', (daruk: DarukCore) => {
       });
     }
   });
-});
+};

@@ -7,17 +7,12 @@ import { Options } from '../../types/daruk_options';
 
 export default function getDefaultOptions(rootPath: string, name: string, debug: boolean): Options {
   return {
-    pluginOrder: [],
     rootPath,
     serverType: 'koa',
-    servicePath: join(rootPath, 'services'),
-    gluePath: join(rootPath, 'glues'),
     timerPath: join(rootPath, 'timers'),
     middlewarePath: join(rootPath, 'middlewares'),
     controllerPath: join(rootPath, 'controllers'),
-    utilPath: join(rootPath, 'utils'),
     darukConfigPath: join(rootPath, 'daruk.config'),
-    configPath: join(rootPath, 'config'),
     bodyOptions: {},
     debug,
     gracefulShutdown: {

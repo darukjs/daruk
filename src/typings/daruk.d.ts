@@ -2,13 +2,12 @@ import ExitHook = require('daruk-exit-hook');
 import KoaLogger = require('daruk-logger');
 import Koa = require('koa');
 import { Options, PartialOptions } from '../../types/daruk_options';
-import DarukPlugin from '../core/plugin';
 import Http = require('http');
 import Https = require('https');
 import { EventEmitter } from 'events';
 
 export interface DarukCore extends EventEmitter {
-  plugins: typeof DarukPlugin.plugins;
+  plugins: { [key: string]: any };
   name: string;
   module: {
     [key: string]: any;

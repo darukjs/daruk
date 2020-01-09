@@ -1,14 +1,13 @@
 import assert = require('assert');
 import fs = require('fs');
 import is = require('is');
-import Daruk from '../core/daruk';
 import loader from '../core/loader';
-import plugins from '../core/plugin';
+import { DarukCore } from '../typings/daruk';
 import { uRequire } from '../utils';
 
 const isFn = is.fn;
 
-plugins.add('darukGlobalConfig', (daruk: Daruk) => {
+export default (daruk: DarukCore) => {
   const path = daruk.options.darukConfigPath;
   // 在 ts 的 dev 环境，文件名是 daruk.config.ts
   if (!fs.existsSync(path + '.js') && !fs.existsSync(path + '.ts')) return;
@@ -16,7 +15,7 @@ plugins.add('darukGlobalConfig', (daruk: Daruk) => {
   assert(isFn(mod), `DarukConfig must export a function, ${path}`);
   const DarukConfig = mod(daruk);
   // daruk config 支持的配置类型
-  const validConfigKey = ['util', 'timer', 'middleware', 'middlewareOrder', 'globalModule'];
+  const validConfigKey = ['timer', 'middleware', 'middlewareOrder', 'globalModule'];
   validConfigKey.forEach((key) => {
     if (!DarukConfig[key]) return;
     // 特殊处理 middleware
@@ -36,4 +35,4 @@ plugins.add('darukGlobalConfig', (daruk: Daruk) => {
 
   daruk.emit('darukConfigLoaded', daruk);
   daruk.logModuleMsg('globalModule', daruk.module.globalModule);
-});
+};
