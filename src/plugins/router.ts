@@ -30,13 +30,14 @@ interface DarukRouter extends Daruk {
 
 plugins.add('darukRouter', (daruk: DarukRouter) => {
   daruk.router = new Router();
+  const outsidemiddlewares = loader.loadModule('middleware', daruk.options.middlewarePath);
   const middlewares = loader.loadModule('middleware', join(__dirname, '../built_in/middlewares'));
-  daruk.mergeModule('middleware', middlewares);
+  daruk.mergeModule('middleware', { ...middlewares, ...outsidemiddlewares });
   daruk.emit('middlewareLoaded', daruk);
 
   const middlewareOrder = daruk.module.middlewareOrder || [];
 
-  middlewareOrder.unshift('daruk_request_id', 'daruk_logger', 'daruk_body', 'daruk_context_loader');
+  middlewareOrder.unshift('daruk_request_id', 'daruk_logger', 'daruk_body');
 
   // 再次保存 middlewareOrder，使外部对最终的 middlewareOrder 可见
   daruk.module.middlewareOrder = middlewareOrder;
@@ -118,13 +119,13 @@ plugins.add('darukRouter', (daruk: DarukRouter) => {
                   modules.globalMiddleware[middlewareName] &&
                   options
                 ) {
-                  middleware = modules.globalMiddleware[middlewareName](options);
+                  middleware = modules.globalMiddleware[middlewareName](daruk)(options);
                 } else if (modules.globalMiddleware && !options) {
-                  middleware = modules.middleware[middlewareName];
+                  middleware = modules.middleware[middlewareName](daruk);
                 } else if (options) {
-                  middleware = modules.middleware[middlewareName](options);
+                  middleware = modules.middleware[middlewareName](daruk)(options);
                 } else {
-                  middleware = modules.middleware[middlewareName];
+                  middleware = modules.middleware[middlewareName](daruk);
                 }
                 assert(
                   isFn(middleware),

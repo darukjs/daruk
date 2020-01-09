@@ -38,7 +38,7 @@ describe('http-server-shutdown', () => {
       .expect(code200)
       .expect('delay route', () => {
         // graceful shutdown 后，服务器应该处于关闭状态
-        assert(server.listening === false);
+        assert(server.listening === false, 'graceful shutdown will be success');
         done();
       });
     // 因为 request 发出请求有一定的延时

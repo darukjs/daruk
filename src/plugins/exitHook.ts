@@ -11,7 +11,6 @@ plugins.add('darukExitHook', (daruk: DarukCore) => {
     onExit: (err: Error) => {
       if (err) {
         daruk.prettyLog(err.stack || err.message, { level: 'error' });
-        console.error(err);
       }
       daruk.prettyLog('process is exiting');
       daruk.emit('exit', err, daruk);

@@ -21,13 +21,8 @@ class DarukPlugin extends EventEmitter {
       'wrapMiddlewareUse',
       'darukExitHook',
       'darukHttpServerShutdown',
-      'darukRouter',
-      'darukConfig',
       'darukGlobalConfig',
-      'darukUtil',
-      'darukGlue',
-      'darukService',
-      'darukMiddleware',
+      'darukRouter',
       'darukTimer'
     );
     Daruk.emit('pluginOrderReady', pluginOrder);

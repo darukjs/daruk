@@ -1,6 +1,6 @@
 import chai = require('chai');
 import request = require('supertest');
-import { config, Daruk, glue, logger, util } from '../src';
+import { Daruk, logger } from '../src';
 import { getApp } from './utils';
 
 const port = 3000;
@@ -161,30 +161,6 @@ describe('decorators', () => {
       .expect('routeMiddleware multiRouteMiddleware', done);
   });
 
-  it('decorator "@config"', () => {
-    class A {
-      @config('option1')
-      public option1: any;
-    }
-
-    assert(new A().option1 !== undefined);
-  });
-  it('decorator "@glue"', () => {
-    class A {
-      @glue('testGlue')
-      public testGlue: any;
-    }
-
-    assert(new A().testGlue !== undefined);
-  });
-  it('decorator "@util"', () => {
-    class A {
-      @util('util1')
-      public util1: any;
-    }
-
-    assert(new A().util1 !== undefined);
-  });
   it('decorator "@logger"', () => {
     class A {
       @logger()

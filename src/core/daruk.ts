@@ -12,7 +12,6 @@ import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
 import { getFilePathRecursive, uRequire } from '../utils';
 import getDefaultOptions from './daruk_default_options';
-import HelpContextClass from './help_context_class';
 import DarukPlugin from './plugin';
 import Server from './server';
 
@@ -68,7 +67,6 @@ class Daruk extends Server {
     const ctx = this.app.createContext(request, response);
     // 为模拟的 ctx 绑定 service
     ctx.module = this.module;
-    ctx.module.service = new HelpContextClass(ctx, this);
     return ctx;
   }
 }
