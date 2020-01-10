@@ -67,6 +67,7 @@
     "daruk-request-id": "0.4.3",
     "htmlspecialchars": "^1.0.5",
     "http-server-shutdown": "^1.1.2",
+    "inversify": "^5.0.1",
     "is": "^3.3.0",
     "koa": "^2.5.2",
     "koa-body": "^4.1.0",
