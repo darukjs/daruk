@@ -1,5 +1,5 @@
 /**
- * @fileOverview daurk 初始化约定目录的模块
+ * @fileOverview daruk 初始化约定目录的模块
  */
 
 import assert = require('assert');
