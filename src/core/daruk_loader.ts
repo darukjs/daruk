@@ -127,7 +127,7 @@ class DarukLoader {
     this.app.mergeModule('middleware', middleware);
   }
   /**
-   * @desc 加载 daurk.config 配置的中间件
+   * @desc 加载 daruk.config 配置的中间件
    */
   private loadDarukConfigMid(midConfig: any) {
     const middleware: any = {};

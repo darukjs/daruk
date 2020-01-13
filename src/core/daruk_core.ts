@@ -78,7 +78,7 @@ class DarukCore extends Koa {
       this.logger = customLogger;
     }
 
-    // 初始化装饰器与 daurk 实例之间的桥梁
+    // 初始化装饰器与 daruk 实例之间的桥梁
     // @ts-ignore
     helpDecoratorClass.init(this);
 
