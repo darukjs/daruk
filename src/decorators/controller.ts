@@ -6,7 +6,6 @@ import assert = require('assert');
 import is = require('is');
 // tslint:disable-next-line
 import 'reflect-metadata';
-import BaseContext from '../core/base_context';
 import { CONTROLLER_PREFIX_PATH } from './constants';
 
 /**

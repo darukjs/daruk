@@ -1,15 +1,16 @@
 import assert = require('assert');
 import fs = require('fs');
+import { injectable } from 'inversify';
 import is = require('is');
 import path = require('path');
 import { normalize } from 'upath';
 import { getFilePathRecursive, isJsTsFile, isSubClass, JsTsReg, uRequire } from '../utils';
-import BaseContext from './base_context';
 
 const join = path.join;
 const isFn = is.fn;
 
-class Loader {
+@injectable()
+export default class Loader {
   /**
    * @desc 加载 controller
    * controller 的目录结构也是路由 path 的一部分
@@ -22,10 +23,6 @@ class Loader {
       .map((router: string) => normalize(router))
       .forEach((file: string) => {
         let controller = uRequire(file);
-        assert(
-          isSubClass(controller, BaseContext),
-          `[controller must export a subclass of Daruk.BaseController in path: ${file}`
-        );
         let RoutePath = file.replace(normalize(path), '').replace(JsTsReg, '');
         // 验证类名必须是首字母大写的驼峰形式，并且和路由 path 匹配
         const validClassName = RoutePath
@@ -119,5 +116,3 @@ class Loader {
     return descriptions;
   }
 }
-
-export default new Loader();

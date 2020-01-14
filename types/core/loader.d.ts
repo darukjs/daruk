@@ -1,4 +1,4 @@
-declare class Loader {
+export default class Loader {
     loadController(path: string): any;
     loadModule(type: string, path: string): any;
     loadDarukConfigMid(midConfig: any): {
@@ -7,5 +7,3 @@ declare class Loader {
     };
     private getModuleDesc;
 }
-declare const _default: Loader;
-export default _default;

@@ -2,7 +2,6 @@ import assert = require('assert');
 import is = require('is');
 // tslint:disable-next-line
 import 'reflect-metadata';
-import BaseContext from '../core/base_context';
 import { MIDDLEWARE_NAME } from './constants';
 
 /**
@@ -12,7 +11,7 @@ import { MIDDLEWARE_NAME } from './constants';
  */
 export function middleware(middlewareName: string, options?: any) {
   assert(is.string(middlewareName), `[Decorator @middleware] parameter must be a string`);
-  return (target: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     // 一个路由 handle 可能被多个 @middleware 修饰
     const middleares = Reflect.getMetadata(MIDDLEWARE_NAME, target.constructor, propertyKey) || [];
     middleares.push({ middlewareName, options });

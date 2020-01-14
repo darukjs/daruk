@@ -6,7 +6,7 @@ import ExitHook = require('daruk-exit-hook');
 import ShutDown = require('http-server-shutdown');
 import Daruk from '../core/daruk';
 
-export default (daruk: Daruk) => {
+export default async (daruk: Daruk) => {
   daruk.on('ready', () => {
     if (daruk.options.gracefulShutdown.enable) {
       const serverShutDown = new ShutDown(daruk.httpServer, { monitor: false });

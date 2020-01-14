@@ -3,12 +3,9 @@ import is = require('is');
 import Koa = require('koa');
 import Router = require('koa-router');
 import path = require('path');
-// tslint:disable-next-line
-import 'reflect-metadata';
 import { join as ujoin } from 'upath';
 import urljoin = require('url-join');
 import Daruk from '../core/daruk';
-import loader from '../core/loader';
 import {
   CONTROLLER_CLASS_PREFIX,
   CONTROLLER_DISABLED_CLASS,
@@ -21,16 +18,18 @@ import {
 import { filterBuiltInModule } from '../utils';
 
 const join = path.join;
-const isFn = is.fn;
 
 interface DarukRouter extends Daruk {
   router: Router;
 }
 
-export default (daruk: DarukRouter) => {
+export default async (daruk: DarukRouter) => {
   daruk.router = new Router();
-  const outsidemiddlewares = loader.loadModule('middleware', daruk.options.middlewarePath);
-  const middlewares = loader.loadModule('middleware', join(__dirname, '../built_in/middlewares'));
+  const outsidemiddlewares = daruk.loader.loadModule('middleware', daruk.options.middlewarePath);
+  const middlewares = daruk.loader.loadModule(
+    'middleware',
+    join(__dirname, '../built_in/middlewares')
+  );
   daruk.mergeModule('middleware', { ...middlewares, ...outsidemiddlewares });
   daruk.emit('middlewareLoaded', daruk);
 
@@ -45,7 +44,7 @@ export default (daruk: DarukRouter) => {
     assert(is.undefined(middleware) === false, `[middleware] ${name} is not found`);
     // 有些中间件是直接修改 koa 实例，不会返回一个函数
     // 因此只 use 函数类型的中间件
-    if (isFn(middleware)) {
+    if (is.fn(middleware)) {
       // @ts-ignore
       daruk.app.use(middleware(daruk), name);
     }
@@ -55,7 +54,7 @@ export default (daruk: DarukRouter) => {
     init: true
   });
   // controller 初始化
-  const routers = loader.loadController(daruk.options.controllerPath);
+  const routers = daruk.loader.loadController(daruk.options.controllerPath);
   daruk.mergeModule('controller', routers);
   daruk.emit('controllerLoaded', daruk);
   const controllers = daruk.module.controller;
@@ -127,7 +126,7 @@ export default (daruk: DarukRouter) => {
                   middleware = modules.middleware[middlewareName](daruk);
                 }
                 assert(
-                  isFn(middleware),
+                  is.fn(middleware),
                   `[middleware] ${middlewareName} is not found or not a function`
                 );
                 daruk.router.use(routePath, middleware);
@@ -144,7 +143,7 @@ export default (daruk: DarukRouter) => {
               let controllerInstance = new ControllerClass(ctx, daruk);
               await controllerInstance[funcName](ctx, next);
               // 允许用户在 controller 销毁前执行清理逻辑
-              if (isFn(controllerInstance._destroy)) {
+              if (is.fn(controllerInstance._destroy)) {
                 controllerInstance._destroy();
               }
               controllerInstance = null;

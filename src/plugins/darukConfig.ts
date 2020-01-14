@@ -2,12 +2,11 @@ import assert = require('assert');
 import fs = require('fs');
 import is = require('is');
 import Daruk from '../core/daruk';
-import loader from '../core/loader';
 import { uRequire } from '../utils';
 
 const isFn = is.fn;
 
-export default (daruk: Daruk) => {
+export default async (daruk: Daruk) => {
   const path = daruk.options.darukConfigPath;
   // 在 ts 的 dev 环境，文件名是 daruk.config.ts
   if (!fs.existsSync(path + '.js') && !fs.existsSync(path + '.ts')) return;
@@ -20,7 +19,7 @@ export default (daruk: Daruk) => {
     if (!DarukConfig[key]) return;
     // 特殊处理 middleware
     if (key === 'middleware') {
-      const { middleware, globalMiddleware } = loader.loadDarukConfigMid(DarukConfig[key]);
+      const { middleware, globalMiddleware } = daruk.loader.loadDarukConfigMid(DarukConfig[key]);
       daruk.mergeModule('middleware', middleware);
       daruk.mergeModule('globalMiddleware', globalMiddleware);
       return;

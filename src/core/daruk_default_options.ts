@@ -5,8 +5,13 @@
 import { join } from 'path';
 import { Options } from '../../types/daruk_options';
 
-export default function getDefaultOptions(rootPath: string, name: string, debug: boolean): Options {
+export default function getDefaultOptions(
+  rootPath: string,
+  name = 'daruk app',
+  debug = true
+): Options {
   return {
+    name,
     rootPath,
     serverType: 'koa',
     timerPath: join(rootPath, 'timers'),

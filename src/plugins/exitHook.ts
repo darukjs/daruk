@@ -5,7 +5,7 @@
 import ExitHook = require('daruk-exit-hook');
 import Daruk from '../core/daruk';
 
-export default (daruk: Daruk) => {
+export default async (daruk: Daruk) => {
   daruk.module.exitHook = new ExitHook({
     onExit: (err: Error) => {
       if (err) {

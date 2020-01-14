@@ -1,10 +1,9 @@
 import 'reflect-metadata';
-import BaseContext from '../core/base_context';
-export declare const post: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const get: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const del: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const put: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const patch: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const options: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const head: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare const all: (path: string) => (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const post: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const get: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const del: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const put: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const patch: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const options: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const head: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare const all: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;

@@ -9,6 +9,7 @@ type RecursivePartial<T> = {
 };
 
 export interface Options {
+  name: string;
   controllerPath: string;
   darukConfigPath: string;
   timerPath: string;
