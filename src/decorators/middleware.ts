@@ -1,7 +1,8 @@
 import assert = require('assert');
 import is = require('is');
-// tslint:disable-next-line
-import 'reflect-metadata';
+import { darukContainer } from '../core/inversify.config';
+import { TYPES } from '../core/types';
+import { Constructor } from '../typings/daruk';
 import { MIDDLEWARE_NAME } from './constants';
 
 /**
@@ -9,6 +10,7 @@ import { MIDDLEWARE_NAME } from './constants';
  * @param {string} middlewareName - 中间件的名字
  * @return Decorator - 装饰器
  */
+
 export function middleware(middlewareName: string, options?: any) {
   assert(is.string(middlewareName), `[Decorator @middleware] parameter must be a string`);
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
@@ -17,5 +19,14 @@ export function middleware(middlewareName: string, options?: any) {
     middleares.push({ middlewareName, options });
     // 保存 @middleware 应用的所有中间件名字
     Reflect.defineMetadata(MIDDLEWARE_NAME, middleares, target.constructor, propertyKey);
+  };
+}
+
+export function defineMiddlware(middlewareName: string) {
+  return (target: Constructor) => {
+    darukContainer
+      .bind<Constructor>(TYPES.Middleware)
+      .to(target)
+      .whenTargetNamed(middlewareName);
   };
 }

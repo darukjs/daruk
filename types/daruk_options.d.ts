@@ -9,6 +9,7 @@ type RecursivePartial<T> = {
 };
 
 export interface Options {
+  middwareOrder: string[];
   name: string;
   controllerPath: string;
   darukConfigPath: string;

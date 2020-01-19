@@ -14,6 +14,7 @@ export default function getDefaultOptions(
     name,
     rootPath,
     serverType: 'koa',
+    middwareOrder: [],
     timerPath: join(rootPath, 'timers'),
     middlewarePath: join(rootPath, 'middlewares'),
     controllerPath: join(rootPath, 'controllers'),

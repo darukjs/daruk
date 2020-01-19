@@ -1,8 +1,24 @@
-import Koa = require('koa');
 import Daruk from '../core/daruk';
 
-export interface Context extends Koa.Context {
-  module: Daruk['module'];
+export type Constructor<T = any> = new (...args: any[]) => T;
+
+export interface pluginClass {
+  initPlugin: (daruk: Daruk) => Promise<any>;
+}
+
+export interface timerClass {
+  cronTime: string;
+  start?: boolean;
+  timeZone?: string;
+  onTick: () => void;
+  onComplete?: () => void;
+  runOnInit?: () => void;
+  context?: any;
+  initTimer: (daruk: Daruk) => void;
+}
+
+export interface middlewareClass {
+  initMiddleware: (daruk: Daruk) => Function;
 }
 
 export interface ParseType {

@@ -2181,6 +2181,10 @@ interpret@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/interpret/download/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
 
+inversify-binding-decorators@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/inversify-binding-decorators/download/inversify-binding-decorators-4.0.0.tgz#c4d1ac50d7d6531f465ee7894e92031f7471c865"
+
 inversify-inject-decorators@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/inversify-inject-decorators/download/inversify-inject-decorators-3.1.0.tgz#d9941080bad77cec8a65ee29d905e4d5d73e1e95"

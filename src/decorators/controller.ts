@@ -4,9 +4,9 @@
 
 import assert = require('assert');
 import is = require('is');
-// tslint:disable-next-line
-import 'reflect-metadata';
-import { CONTROLLER_PREFIX_PATH } from './constants';
+import { darukContainer } from '../core/inversify.config';
+import { TYPES } from '../core/types';
+import { Constructor } from '../typings/daruk';
 
 /**
  * @desc controller 装饰器，将类装饰为 controller
@@ -14,12 +14,8 @@ import { CONTROLLER_PREFIX_PATH } from './constants';
  * @return Decorator - 装饰器
  */
 
-/*
-export function controller(prefixPath: string) {
-  assert(is.string(prefixPath), '[Decorator @controller] parameter must be a string');
-  return (target: any) => {
-    // 将路由前缀信息保存到当前的类
-    Reflect.defineMetadata(CONTROLLER_PREFIX_PATH, prefixPath, target);
+export function controller() {
+  return (target: Constructor) => {
+    darukContainer.bind<Constructor>(TYPES.ControllerClass).toConstructor(target);
   };
 }
-*/

@@ -1,7 +1,5 @@
 import assert = require('assert');
 import is = require('is');
-// tslint:disable-next-line
-import 'reflect-metadata';
 import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
 /**
