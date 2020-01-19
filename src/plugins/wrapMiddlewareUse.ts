@@ -13,7 +13,7 @@ import { pluginClass } from '../typings/daruk';
 @injectable()
 class WrapMiddlewareUse implements pluginClass {
   public async initPlugin(daruk: Daruk) {
-    daruk.on('init', () => {
+    daruk.on('initBefore', () => {
       const midNames: string[] = [];
       const WRAP_MIDDLEWARE_USE = Symbol('WRAP_MIDDLEWARE_USE');
 

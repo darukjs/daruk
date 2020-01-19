@@ -15,10 +15,6 @@ export default function getDefaultOptions(
     rootPath,
     serverType: 'koa',
     middwareOrder: [],
-    timerPath: join(rootPath, 'timers'),
-    middlewarePath: join(rootPath, 'middlewares'),
-    controllerPath: join(rootPath, 'controllers'),
-    darukConfigPath: join(rootPath, 'daruk.config'),
     bodyOptions: {},
     debug,
     gracefulShutdown: {

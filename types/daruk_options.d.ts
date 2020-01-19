@@ -11,10 +11,6 @@ type RecursivePartial<T> = {
 export interface Options {
   middwareOrder: string[];
   name: string;
-  controllerPath: string;
-  darukConfigPath: string;
-  timerPath: string;
-  middlewarePath: string;
   rootPath: string;
   debug: boolean;
   bodyOptions: koaBody.IKoaBodyOptions;

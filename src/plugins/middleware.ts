@@ -3,8 +3,7 @@ import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
 import { plugin } from '../decorators';
-import { MIDDLEWARE_NAME } from '../decorators/constants';
-import { Constructor, middlewareClass, pluginClass } from '../typings/daruk';
+import { middlewareClass, pluginClass } from '../typings/daruk';
 
 @plugin()
 @injectable()

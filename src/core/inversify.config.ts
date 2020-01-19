@@ -19,6 +19,9 @@ darukContainer
   .bind<interfaces.Newable<KoaLogger.logger>>(TYPES.KoaLogger)
   .toConstructor<KoaLogger.logger>(KoaLogger.logger);
 darukContainer.bind<Loader>(TYPES.Loader).to(Loader);
-darukContainer.bind<Daruk>(TYPES.Daruk).to(Daruk);
+darukContainer
+  .bind<Daruk>(TYPES.Daruk)
+  .to(Daruk)
+  .inSingletonScope();
 
 export { darukContainer, lazyInject };

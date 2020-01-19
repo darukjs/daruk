@@ -14,7 +14,6 @@ import Koa = require('koa');
 import deepAssign = require('object-assign-deep');
 import { dirname } from 'path';
 import { Options, PartialOptions } from '../../types/daruk_options';
-import helpDecoratorClass from '../decorators/help_decorator_class';
 import mockHttp from '../mock/http_server';
 import { pluginClass } from '../typings/daruk';
 import { debugLog } from '../utils';
@@ -25,7 +24,6 @@ import { TYPES } from './types';
 
 @injectable()
 class Daruk extends EventEmitter {
-  public plugins: { [key: string]: any };
   public name: string;
   public app: Koa;
   public httpServer: Http.Server | Https.Server;
@@ -37,9 +35,6 @@ class Daruk extends EventEmitter {
   @inject(TYPES.KoaLogger) private _koaLogger: interfaces.Newable<KoaLogger.logger>;
   public constructor() {
     super();
-    this.plugins = {};
-    // 初始化装饰器与 daurk 实例之间的桥梁
-    helpDecoratorClass.init(this);
   }
   public initOptions(options: PartialOptions = {}) {
     const rootPath = options.rootPath || dirname(require.main.filename);
@@ -66,6 +61,8 @@ class Daruk extends EventEmitter {
     });
   }
   public async initPlugin() {
+    await this.loader.loadFile('../plugins');
+    await this.loader.loadFile('../built_in');
     const plugins = darukContainer.getAll<pluginClass>(TYPES.PLUGINCLASS);
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);
@@ -74,6 +71,7 @@ class Daruk extends EventEmitter {
         .toConstantValue(retValue)
         .whenTargetNamed(plugin.constructor.name);
     }
+    this.emit('initBefore');
     this.emit('init');
     darukContainer.load(buildProviderModule());
   }
