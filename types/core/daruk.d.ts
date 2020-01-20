@@ -17,7 +17,7 @@ declare class Daruk extends EventEmitter {
     initOptions(options?: PartialOptions): void;
     loadFile(path: string): Promise<void>;
     initPlugin(): Promise<void>;
-    mockContext(req?: {}): Koa.ParameterizedContext<any, {}>;
+    mockContext(req?: {}): Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
     listen(...args: any[]): Promise<Http.Server>;
     prettyLog(msg: string, ext?: {
         type?: string;
