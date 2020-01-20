@@ -66,7 +66,7 @@ describe('cover-branches', () => {
     let lastUncaught = uncaughts.length - 1;
     uncaughts[lastUncaught](err);
 
-    const delay = 200;
+    const delay = 10;
     // 由于时机问题，延迟判断
     setTimeout(() => {
       // 应该调用 prettyLog 3 次

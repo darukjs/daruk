@@ -246,7 +246,7 @@ class Index {
   }
 }
 
-@prefix('/test/v1')
+@prefix('/v1/prefix')
 @injectable()
 @controller()
 class PrefixIndex {
@@ -256,7 +256,7 @@ class PrefixIndex {
   }
 }
 
-@prefix('/test/deep/v1')
+@prefix('/v1/prefix/test/deep')
 @injectable()
 @controller()
 class PrefixTestDeep {
