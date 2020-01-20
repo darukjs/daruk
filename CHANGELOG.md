@@ -3,11 +3,21 @@
 
 ### Bug Fixes
 
+* daruk version typo in example ([ed8db78](https://github.com/darukjs/daruk/commit/ed8db7872e5f5cd48dba37d7db4b410a726e56b5))
+* fix customLogger judge ([b4bb701](https://github.com/darukjs/daruk/commit/b4bb7015afaeb45a23b52b42f20dc4cfecfd0197))
+* lodash security alert ([5de29ca](https://github.com/darukjs/daruk/commit/5de29caeaea925690429e21e5b93604802b59883))
 * remove DarukCore interface ([c0d3ac1](https://github.com/darukjs/daruk/commit/c0d3ac169cee5295b0b755ada2b0b489060293d9))
 * remove deepDefineProperty ([34307f0](https://github.com/darukjs/daruk/commit/34307f0cc41e6d2708b509a1998fccf7d6e9db68))
 * remove deepDefineProperty code and test; ([1ab2a40](https://github.com/darukjs/daruk/commit/1ab2a40a08a9ae13b1730f1c7496026921a3eb30))
 * remove extra unused typing ([a65cbb2](https://github.com/darukjs/daruk/commit/a65cbb29e615bc340b91bca481d2b65fe72e0166))
 * test pass 100% ([a032335](https://github.com/darukjs/daruk/commit/a032335925222dfed342ae1260ef4d5a85a82c01))
+* update package dependencies ([c38db2a](https://github.com/darukjs/daruk/commit/c38db2afaac8c87dde87eec31d4dd10a17634213))
+* update set-value and mixin-deep security alert ([3a4e726](https://github.com/darukjs/daruk/commit/3a4e72649a73c6c231d1c12b6e57369ce62abcc7))
+
+
+### Features
+
+* mount timer to daruk instance ([02f2b4c](https://github.com/darukjs/daruk/commit/02f2b4c63c289f44e27a448263125e32cac24703))
 
 
 
