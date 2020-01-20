@@ -23,6 +23,22 @@ describe('cover-branches', () => {
       loggerOptions: {
         disable: true,
         overwriteConsole: false
+      },
+      loggerMiddleware: {
+        filter(ctx: any) {
+          return true;
+        },
+        requiredLogs: [
+          'remote_addr',
+          'method',
+          'url',
+          'http_version',
+          'status',
+          'referrer',
+          'request_time',
+          'perf',
+          'user_agent'
+        ]
       }
     });
     await server.initPlugin();

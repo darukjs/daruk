@@ -12,8 +12,7 @@ class GlobalMiddleware implements pluginClass {
     daruk.on('routerUseBefore', () => {
       if (darukContainer.isBound(TYPES.Middleware)) {
         let buildInMiddwareOrder = ['daruk_request_id', 'daruk_logger', 'daruk_body'];
-        let middwareOrder = daruk.options.middwareOrder || [];
-        middwareOrder = buildInMiddwareOrder.concat(middwareOrder);
+        let middwareOrder = buildInMiddwareOrder.concat(daruk.options.middwareOrder);
         middwareOrder.forEach((midname) => {
           let mid = darukContainer.getNamed<middlewareClass>(TYPES.Middleware, midname);
           let usehandle = mid.initMiddleware(daruk);
