@@ -2,27 +2,27 @@ import Daruk from '../core/daruk';
 
 export type Constructor<T = any> = new (...args: any[]) => T;
 
-export interface pluginClass {
+export interface PluginClass {
   initPlugin: (daruk: Daruk) => Promise<any>;
 }
 
-export interface cron {
+export interface Cron {
   stop: Function;
   start: Function;
 }
 
-export interface timerClass {
+export interface TimerClass {
   cronTime: string;
   start?: boolean;
   timeZone?: string;
-  onTick: (cron: cron, daruk: Daruk) => void;
-  onComplete?: (cron: cron, daruk: Daruk) => void;
+  onTick: (cron: Cron, daruk: Daruk) => void;
+  onComplete?: (cron: Cron, daruk: Daruk) => void;
   runOnInit?: boolean;
   context?: any;
   initTimer: (daruk: Daruk) => void;
 }
 
-export interface middlewareClass {
+export interface MiddlewareClass {
   initMiddleware: (daruk: Daruk) => Function;
 }
 

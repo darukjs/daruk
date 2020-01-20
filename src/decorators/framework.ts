@@ -3,16 +3,16 @@
  */
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
-import { Constructor, pluginClass, timerClass } from '../typings/daruk';
+import { Constructor, PluginClass, TimerClass } from '../typings/daruk';
 
 export function plugin() {
   return (target: Constructor) => {
-    darukContainer.bind<pluginClass>(TYPES.PLUGINCLASS).to(target);
+    darukContainer.bind<PluginClass>(TYPES.PLUGINCLASS).to(target);
   };
 }
 
 export function timer() {
   return (target: Constructor) => {
-    darukContainer.bind<timerClass>(TYPES.Timer).to(target);
+    darukContainer.bind<TimerClass>(TYPES.Timer).to(target);
   };
 }

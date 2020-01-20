@@ -7,11 +7,11 @@ import convertHrtime = require('convert-hrtime');
 import { injectable } from 'inversify';
 import Daruk from '../core/daruk';
 import { plugin } from '../decorators';
-import { pluginClass } from '../typings/daruk';
+import { PluginClass } from '../typings/daruk';
 
 @plugin()
 @injectable()
-class WrapMiddlewareUse implements pluginClass {
+class WrapMiddlewareUse implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('initBefore', () => {
       const midNames: string[] = [];

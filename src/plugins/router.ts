@@ -22,7 +22,7 @@ import {
   CONTROLLER_REDIRECT_PATH,
   MIDDLEWARE_NAME
 } from '../decorators/constants';
-import { Constructor, middlewareClass, pluginClass } from '../typings/daruk';
+import { Constructor, MiddlewareClass, PluginClass } from '../typings/daruk';
 
 interface DarukRouter extends Daruk {
   router: Router;
@@ -35,7 +35,7 @@ interface Meta {
 
 @plugin()
 @injectable()
-class RouterController implements pluginClass {
+class RouterController implements PluginClass {
   public async initPlugin(daruk: DarukRouter) {
     daruk.on('init', () => {
       daruk.router = new Router();
@@ -94,7 +94,7 @@ class RouterController implements pluginClass {
                   if (middlewares) {
                     // 可以对单个路由应用多个中间件
                     middlewares.forEach(({ middlewareName, options }) => {
-                      let mid = darukContainer.getNamed<middlewareClass>(
+                      let mid = darukContainer.getNamed<MiddlewareClass>(
                         TYPES.Middleware,
                         middlewareName
                       );

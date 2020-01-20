@@ -7,11 +7,11 @@ import { injectable } from 'inversify';
 import koaBody = require('koa-body');
 import Daruk from '../../core/daruk';
 import { defineMiddlware } from '../../decorators';
-import { middlewareClass } from '../../typings/daruk';
+import { MiddlewareClass } from '../../typings/daruk';
 
 @defineMiddlware('daruk_body')
 @injectable()
-class KoaBody implements middlewareClass {
+class KoaBody implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     return koaBody(daruk.options.bodyOptions);
   }

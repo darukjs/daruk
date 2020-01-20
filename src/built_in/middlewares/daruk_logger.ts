@@ -6,11 +6,11 @@ import { middleware as loggerMiddleware } from 'daruk-logger';
 import { injectable } from 'inversify';
 import Daruk from '../../core/daruk';
 import { defineMiddlware } from '../../decorators';
-import { middlewareClass } from '../../typings/daruk';
+import { MiddlewareClass } from '../../typings/daruk';
 
 @defineMiddlware('daruk_logger')
 @injectable()
-class DarukLogger implements middlewareClass {
+class DarukLogger implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     const { filter, requiredLogs } = daruk.options.loggerMiddleware;
     const options: any = {

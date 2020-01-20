@@ -15,7 +15,7 @@ import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
-import { pluginClass } from '../typings/daruk';
+import { PluginClass } from '../typings/daruk';
 import { debugLog } from '../utils';
 import getDefaultOptions from './daruk_default_options';
 import { darukContainer } from './inversify.config';
@@ -57,7 +57,7 @@ class Daruk extends EventEmitter {
   public async initPlugin() {
     await this.loader.loadFile(join(__dirname, '../plugins'));
     await this.loader.loadFile(join(__dirname, '../built_in'));
-    const plugins = darukContainer.getAll<pluginClass>(TYPES.PLUGINCLASS);
+    const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);
       if (darukContainer.isBoundNamed(TYPES.PluginInstance, plugin.constructor.name)) {

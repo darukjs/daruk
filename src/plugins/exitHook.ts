@@ -6,11 +6,11 @@ import ExitHook = require('daruk-exit-hook');
 import { injectable } from 'inversify';
 import Daruk from '../core/daruk';
 import { plugin } from '../decorators';
-import { pluginClass } from '../typings/daruk';
+import { PluginClass } from '../typings/daruk';
 
 @plugin()
 @injectable()
-class DarukExitHook implements pluginClass {
+class DarukExitHook implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     let exitHook = new ExitHook({
       onExit: (err: Error) => {

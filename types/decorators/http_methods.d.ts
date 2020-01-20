@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 export declare const post: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
 export declare const get: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;
 export declare const del: (path: string) => (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => void;

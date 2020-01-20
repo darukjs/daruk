@@ -9,11 +9,11 @@ import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
 import { plugin } from '../decorators';
-import { pluginClass } from '../typings/daruk';
+import { PluginClass } from '../typings/daruk';
 
 @plugin()
 @injectable()
-class DarukHttpShutdown implements pluginClass {
+class DarukHttpShutdown implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('serverReady', () => {
       if (daruk.options.gracefulShutdown.enable) {

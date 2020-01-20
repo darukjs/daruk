@@ -1,3 +1,3 @@
-declare function loggerDecorator(fileInfo?: string): (proto: any, propertyKey: string) => void;
-export declare const logger: typeof loggerDecorator;
-export {};
+import { Constructor } from '../typings/daruk';
+export declare function plugin(): (target: Constructor<any>) => void;
+export declare function timer(): (target: Constructor<any>) => void;
