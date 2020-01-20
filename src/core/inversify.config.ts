@@ -13,6 +13,8 @@ decorate(injectable(), EventEmitter);
 darukContainer.bind<Loader>(TYPES.Loader).to(Loader);
 darukContainer.bind<Daruk>(TYPES.Daruk).to(Daruk);
 
-const server = darukContainer.get<Daruk>(TYPES.Daruk);
+const DarukServer = () => {
+  return darukContainer.get<Daruk>(TYPES.Daruk);
+};
 
-export { darukContainer, lazyInject, server };
+export { darukContainer, lazyInject, DarukServer };

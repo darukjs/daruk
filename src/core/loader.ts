@@ -6,7 +6,7 @@ import { isJsTsFile, JsTsReg } from '../utils';
 @injectable()
 export default class Loader {
   public async loadFile(path: string) {
-    return recursive(join(__dirname, path)).then((files) => {
+    return recursive(path).then((files) => {
       return files
         .filter((file) => isJsTsFile(file))
         .map((file) => file.replace(JsTsReg, ''))

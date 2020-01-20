@@ -12,7 +12,7 @@ import { inject, injectable, interfaces } from 'inversify';
 import { buildProviderModule } from 'inversify-binding-decorators';
 import Koa = require('koa');
 import deepAssign = require('object-assign-deep');
-import { dirname } from 'path';
+import { dirname, join } from 'path';
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
 import { pluginClass } from '../typings/daruk';
@@ -54,9 +54,12 @@ class Daruk extends EventEmitter {
       self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
     });
   }
+  public async loadFile(path: string) {
+    return this.loader.loadFile(join(this.options.rootPath, path));
+  }
   public async initPlugin() {
-    await this.loader.loadFile('../plugins');
-    await this.loader.loadFile('../built_in');
+    await this.loader.loadFile(join(__dirname, '../plugins'));
+    await this.loader.loadFile(join(__dirname, '../built_in'));
     const plugins = darukContainer.getAll<pluginClass>(TYPES.PLUGINCLASS);
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);

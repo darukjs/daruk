@@ -114,7 +114,6 @@ class RouterController implements pluginClass {
 
                   // 初始化路由
                   daruk.prettyLog(`${method} - ${routePath}`, { type: 'router', init: true });
-                  console.log(method, routePath);
 
                   // @ts-ignore
                   daruk.router[method](routePath, async function routeHandle(

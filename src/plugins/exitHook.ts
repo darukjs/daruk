@@ -12,8 +12,7 @@ import { pluginClass } from '../typings/daruk';
 @injectable()
 class DarukExitHook implements pluginClass {
   public async initPlugin(daruk: Daruk) {
-    // tslint:disable-next-line:no-unused-expression
-    return new ExitHook({
+    let exitHook = new ExitHook({
       onExit: (err: Error) => {
         if (err) {
           daruk.prettyLog(err.stack || err.message, { level: 'error' });
@@ -25,5 +24,6 @@ class DarukExitHook implements pluginClass {
         daruk.prettyLog(`process exited: ${code}`);
       }
     });
+    return exitHook;
   }
 }

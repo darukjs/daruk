@@ -4,26 +4,36 @@
 
 import chai = require('chai');
 import sinon = require('sinon');
-import { server } from '../src';
+import { Daruk, DarukServer } from '../src';
 
 const port = 3000;
 const assert = chai.assert;
 
 describe('cover-branches', () => {
   let stubExit: sinon.SinonStub;
+  let server: Daruk;
 
-  before((done) => {
+  beforeEach(async () => {
+    server = DarukServer();
+    stubExit = sinon.stub(process, 'exit');
     // 匿名中间件的情况
+    server.initOptions({
+      rootPath: __dirname,
+      debug: false,
+      loggerOptions: {
+        disable: true,
+        overwriteConsole: false
+      }
+    });
+    await server.initPlugin();
     server.app.use((ctx: any, next: Function) => {
       return next();
     });
     // 传递 host 的情况
-    server.listen(port, '127.0.0.1', done);
-
-    stubExit = sinon.stub(process, 'exit');
+    await server.listen(port, '127.0.0.1');
   });
 
-  after((done) => {
+  afterEach((done) => {
     stubExit.restore();
     server.httpServer.close(done);
   });
@@ -50,16 +60,20 @@ describe('cover-branches', () => {
     const err = new Error('mockError');
     // stack 置为空，才能走到 error.stack 不存在的分支
     err.stack = '';
-
     // 手动调用报错函数
     // 从而执行进程退出回调
-    process.listeners('uncaughtException')[1](err);
+    let uncaughts = process.listeners('uncaughtException');
+    let lastUncaught = uncaughts.length - 1;
+    uncaughts[lastUncaught](err);
 
     const delay = 200;
     // 由于时机问题，延迟判断
     setTimeout(() => {
       // 应该调用 prettyLog 3 次
-      assert(stubPrettyLog.callCount === 3);
+      assert(
+        stubPrettyLog.callCount === 3,
+        `stubPrettyLog.callCount should 3,now is ${stubPrettyLog.callCount}`
+      );
       stubPrettyLog.restore();
       done();
     }, delay);

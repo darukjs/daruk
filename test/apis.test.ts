@@ -1,18 +1,24 @@
 import chai = require('chai');
 import sinon = require('sinon');
-import { server } from '../src';
+import { DarukServer } from '../src';
 
 const assert = chai.assert;
 
 describe('apis', () => {
   let stubExit: sinon.SinonStub;
+  let server = DarukServer();
 
-  before((done) => {
+  before(async () => {
     stubExit = sinon.stub(process, 'exit');
-    server.initOptions();
-    server.initPlugin().then(() => {
-      done();
+    server.initOptions({
+      rootPath: __dirname,
+      debug: false,
+      loggerOptions: {
+        disable: true,
+        overwriteConsole: false
+      }
     });
+    await server.initPlugin();
   });
 
   after(() => {
