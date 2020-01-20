@@ -30,7 +30,6 @@ Daruk2.0 同样基于 koa2，目前包含以下核心功能：
 安装
 
 ```bash
-# 全局安装 daruk 脚手架
 yarn add daruk
 ```
 
@@ -51,9 +50,7 @@ import { DarukServer, controller, injectable } from 'daruk';
     }
   }
 
-  myapp.initOptions({
-    rootPath: __dirname
-  });
+  myapp.initOptions();
   await myapp.initPlugin();
   myapp.listen(3000);
 })();
