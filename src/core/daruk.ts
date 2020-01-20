@@ -29,13 +29,7 @@ class Daruk extends EventEmitter {
   public httpServer: Http.Server | Https.Server;
   public logger: KoaLogger.logger;
   public options: Options;
-  // @inject(TYPES.DarukOptions) public options: Options;
   @inject(TYPES.Loader) public loader: Loader;
-  @inject(TYPES.Koa) private _koa: interfaces.Newable<Koa>;
-  @inject(TYPES.KoaLogger) private _koaLogger: interfaces.Newable<KoaLogger.logger>;
-  public constructor() {
-    super();
-  }
   public initOptions(options: PartialOptions = {}) {
     const rootPath = options.rootPath || dirname(require.main.filename);
     const defaultOptions = getDefaultOptions(rootPath, options.name, options.debug);
@@ -46,10 +40,10 @@ class Daruk extends EventEmitter {
     // 还原被 delete 的 customLogger
     this.options.customLogger = options.customLogger = customLogger;
     // 初始化 logger
-    this.logger = customLogger || new this._koaLogger(this.options.loggerOptions);
+    this.logger = customLogger || new KoaLogger.logger(this.options.loggerOptions);
     // 用于保存 DarukLoader 加载的模块
     if (this.options.serverType === 'koa') {
-      this.app = new this._koa();
+      this.app = new Koa();
     } else {
       throw new Error('only support koa server Type');
     }
