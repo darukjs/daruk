@@ -1,6 +1,7 @@
 import chai = require('chai');
+import path = require('path');
 import sinon = require('sinon');
-import { debugLog, isJsTsFile } from '../src/utils';
+import { debugLog, isJsTsFile, isSubClass, uRequire } from '../src/utils';
 
 const assert = chai.assert;
 
@@ -15,6 +16,18 @@ describe('utils', () => {
 
     assert(stub.callCount === 3);
     stub.restore();
+  });
+  it('uRequire', () => {
+    // 支持 common.js 和 es module
+    assert(uRequire('path') !== undefined);
+    assert(uRequire(path.resolve(__dirname, '../src/core/daruk.ts')) !== undefined);
+  });
+  it('isSubClass', () => {
+    class A {}
+    class B extends A {}
+    class C {}
+    assert(isSubClass(B, A) === true);
+    assert(isSubClass(B, C) === false);
   });
   it('isJsTsFile', () => {
     assert(isJsTsFile('.js') === true);

@@ -8,7 +8,6 @@ import { injectable } from 'inversify';
 import is = require('is');
 import Koa = require('koa');
 import Router = require('koa-router');
-import path = require('path');
 import urljoin = require('url-join');
 import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
@@ -24,9 +23,6 @@ import {
   MIDDLEWARE_NAME
 } from '../decorators/constants';
 import { Constructor, middlewareClass, pluginClass } from '../typings/daruk';
-import { filterBuiltInModule } from '../utils';
-
-const join = path.join;
 
 interface DarukRouter extends Daruk {
   router: Router;

@@ -2,7 +2,6 @@
  * @fileOverview 根据运行时环境获取默认的 daruk options
  */
 
-import { join } from 'path';
 import { Options } from '../../types/daruk_options';
 
 export default function getDefaultOptions(
