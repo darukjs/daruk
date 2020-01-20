@@ -6,13 +6,18 @@ export interface pluginClass {
   initPlugin: (daruk: Daruk) => Promise<any>;
 }
 
+export interface cron {
+  stop: Function;
+  start: Function;
+}
+
 export interface timerClass {
   cronTime: string;
   start?: boolean;
   timeZone?: string;
-  onTick: () => void;
-  onComplete?: () => void;
-  runOnInit?: () => void;
+  onTick: (cron: cron, daruk: Daruk) => void;
+  onComplete?: (cron: cron, daruk: Daruk) => void;
+  runOnInit?: boolean;
   context?: any;
   initTimer: (daruk: Daruk) => void;
 }

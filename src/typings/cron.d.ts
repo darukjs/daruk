@@ -7,7 +7,7 @@ declare module 'cron' {
       start: boolean,
       timezone: string,
       context: CronJob,
-      runOninit: Function
+      runOninit: boolean
     );
   }
 }

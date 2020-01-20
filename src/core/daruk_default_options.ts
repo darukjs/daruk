@@ -12,7 +12,6 @@ export default function getDefaultOptions(
   return {
     name,
     rootPath,
-    serverType: 'koa',
     middwareOrder: [],
     bodyOptions: {},
     debug,

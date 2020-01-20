@@ -10,14 +10,7 @@ describe('apis', () => {
 
   before(async () => {
     stubExit = sinon.stub(process, 'exit');
-    server.initOptions({
-      rootPath: __dirname,
-      debug: false,
-      loggerOptions: {
-        disable: true,
-        overwriteConsole: false
-      }
-    });
+    server.initOptions();
     await server.initPlugin();
   });
 
@@ -27,12 +20,14 @@ describe('apis', () => {
 
   it('mockContext', () => {
     const host = '10.22.22.3';
-    const context = server.mockContext({
+    const context1 = server.mockContext({
       headers: {
         host
       }
     });
-    assert(context.host === host);
+    assert(context1.host === host);
+    const context2 = server.mockContext();
+    assert(context2.host === '127.0.0.1');
   });
   it('listen string port', (done) => {
     server.listen('3000', '127.0.0.1', () => {

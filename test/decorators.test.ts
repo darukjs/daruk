@@ -269,4 +269,15 @@ describe('decorators', () => {
       .get('/disabled/test')
       .expect(code404, done);
   });
+
+  it('decorator @timer class', function(done) {
+    const timerDelay = 5000;
+    const timeOut = 1200;
+    // tslint:disable-next-line
+    this.timeout(timerDelay);
+    setTimeout(() => {
+      assert(server.timerComplete === true);
+      done();
+    }, timeOut);
+  });
 });

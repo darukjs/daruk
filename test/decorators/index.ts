@@ -2,6 +2,7 @@ import {
   all,
   cache,
   controller,
+  Daruk,
   defineMiddlware,
   del,
   disabled,
@@ -19,6 +20,7 @@ import {
   put,
   redirect,
   required,
+  timer,
   type,
   typeParse,
   validate
@@ -244,7 +246,14 @@ class Index {
   public disabled(ctx: any) {
     ctx.body = '';
   }
+  public _destroy() {
+    // destroy something
+  }
 }
+
+@injectable()
+@controller()
+class EmptyClass {}
 
 @prefix('/v1/prefix')
 @injectable()
@@ -274,5 +283,20 @@ class DisabledIndex {
   @get('/test')
   public async test(ctx: any, next: Function) {
     ctx.body = '';
+  }
+}
+
+@timer()
+@injectable()
+class Timers {
+  public cronTime: string;
+  public initTimer(daruk: Daruk) {
+    this.cronTime = '* * * * * *';
+  }
+  public onTick(cron: any) {
+    cron.stop();
+  }
+  public onComplete(cron: any, daruk: Daruk) {
+    daruk.timerComplete = true;
   }
 }

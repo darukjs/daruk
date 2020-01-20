@@ -24,6 +24,7 @@ import { TYPES } from './types';
 
 @injectable()
 class Daruk extends EventEmitter {
+  [key: string]: any;
   public name: string;
   public app: Koa;
   public httpServer: Http.Server | Https.Server;
@@ -42,11 +43,7 @@ class Daruk extends EventEmitter {
     // 初始化 logger
     this.logger = customLogger || new KoaLogger.logger(this.options.loggerOptions);
     // 用于保存 DarukLoader 加载的模块
-    if (this.options.serverType === 'koa') {
-      this.app = new Koa();
-    } else {
-      throw new Error('only support koa server Type');
-    }
+    this.app = new Koa();
     // tslint:disable-next-line
     const self = this;
     // 监听 koa 的错误事件，输出日志
