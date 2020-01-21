@@ -5,6 +5,7 @@
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
 import { Constructor } from '../typings/daruk';
+import { CONTROLLER_PRIORITY } from './constants';
 
 /**
  * @desc controller 装饰器，将类装饰为 controller
@@ -15,5 +16,11 @@ import { Constructor } from '../typings/daruk';
 export function controller() {
   return (target: Constructor) => {
     darukContainer.bind<Constructor>(TYPES.ControllerClass).toConstructor(target);
+  };
+}
+
+export function priority(priority: number) {
+  return (target: Constructor) => {
+    Reflect.defineMetadata(CONTROLLER_PRIORITY, priority, target);
   };
 }

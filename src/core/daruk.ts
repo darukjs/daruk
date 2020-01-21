@@ -8,21 +8,19 @@ import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
 import Http = require('http');
 import Https = require('https');
-import { inject, injectable, interfaces } from 'inversify';
 import { buildProviderModule } from 'inversify-binding-decorators';
 import Koa = require('koa');
 import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
+import recursive = require('recursive-readdir');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
 import { PluginClass } from '../typings/daruk';
-import { debugLog } from '../utils';
+import { debugLog, isJsTsFile, JsTsReg } from '../utils';
 import getDefaultOptions from './daruk_default_options';
 import { darukContainer } from './inversify.config';
-import Loader from './loader';
 import { TYPES } from './types';
 
-@injectable()
 class Daruk extends EventEmitter {
   [key: string]: any;
   public name: string;
@@ -30,7 +28,6 @@ class Daruk extends EventEmitter {
   public httpServer: Http.Server | Https.Server;
   public logger: KoaLogger.logger;
   public options: Options;
-  @inject(TYPES.Loader) public loader: Loader;
   public initOptions(options: PartialOptions = {}) {
     const rootPath = options.rootPath || dirname(require.main.filename);
     const defaultOptions = getDefaultOptions(rootPath, options.name, options.debug);
@@ -52,11 +49,11 @@ class Daruk extends EventEmitter {
     });
   }
   public async loadFile(path: string) {
-    return this.loader.loadFile(join(this.options.rootPath, path));
+    return this._loadFile(join(this.options.rootPath, path));
   }
   public async initPlugin() {
-    await this.loader.loadFile(join(__dirname, '../plugins'));
-    await this.loader.loadFile(join(__dirname, '../built_in'));
+    await this._loadFile(join(__dirname, '../plugins'));
+    await this._loadFile(join(__dirname, '../built_in'));
     const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);
@@ -107,6 +104,16 @@ class Daruk extends EventEmitter {
     } else {
       this.logger[level](prefixInfo + msg);
     }
+  }
+  private async _loadFile(path: string) {
+    return recursive(path).then((files) => {
+      return files
+        .filter((file) => isJsTsFile(file))
+        .map((file) => file.replace(JsTsReg, ''))
+        .forEach((path: string) => {
+          require(path);
+        });
+    });
   }
 }
 

@@ -149,6 +149,13 @@ describe('decorators', () => {
       .expect(code200, done);
   });
 
+  it('decorator @priority', (done) => {
+    request(app)
+      .get('/v1/prefix/index')
+      .expect(code200)
+      .expect('AB', done);
+  });
+
   it('decorator @prefix deep controller', (done) => {
     request(app)
       .get('/v1/prefix/test/deep/json')

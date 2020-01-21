@@ -17,6 +17,7 @@ import {
   patch,
   post,
   prefix,
+  priority,
   put,
   redirect,
   required,
@@ -258,10 +259,22 @@ class EmptyClass {}
 @prefix('/v1/prefix')
 @injectable()
 @controller()
-class PrefixIndex {
+@priority(-1)
+class PrefixIndexA {
   @get('/index')
   public async test(ctx: any, next: Function) {
-    ctx.body = '';
+    ctx.body = 'A';
+    await next();
+  }
+}
+
+@prefix('/v1/prefix')
+@injectable()
+@controller()
+class PrefixIndexB {
+  @get('/index')
+  public async test(ctx: any, next: Function) {
+    ctx.body = ctx.body + 'B';
   }
 }
 
