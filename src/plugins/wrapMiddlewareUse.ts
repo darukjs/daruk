@@ -7,7 +7,7 @@ import convertHrtime = require('convert-hrtime');
 import { injectable } from 'inversify';
 import Daruk from '../core/daruk';
 import { plugin } from '../decorators';
-import { PluginClass } from '../typings/daruk';
+import { DarukContext, PluginClass } from '../typings/daruk';
 
 @plugin()
 @injectable()
@@ -15,10 +15,10 @@ class WrapMiddlewareUse implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('initBefore', () => {
       const midNames: string[] = [];
-      const WRAP_MIDDLEWARE_USE = Symbol('WRAP_MIDDLEWARE_USE');
+      const WRAP_MIDDLEWARE_USE = 'WRAP_MIDDLEWARE_USE';
 
       function wrapUse(fn: Function, name: string) {
-        let f = async (ctx: any, next: Function) => {
+        let f = async (ctx: DarukContext, next: Function) => {
           enterMid(ctx);
           await fn(ctx, next);
           outMid(ctx);
@@ -27,12 +27,12 @@ class WrapMiddlewareUse implements PluginClass {
         return f;
       }
 
-      function enterMid(ctx: any) {
+      function enterMid(ctx: DarukContext) {
         let time = getTimeInfo(ctx);
         time.list.push(getHrTime());
       }
 
-      function outMid(ctx: any) {
+      function outMid(ctx: DarukContext) {
         let ns2ms = 1000000;
         let time = getTimeInfo(ctx);
         // 最后进入的中间件，最先出来
@@ -44,7 +44,7 @@ class WrapMiddlewareUse implements PluginClass {
         time.diff.unshift(diff);
         if (time.list.length === 0) {
           // 所有中间件都被 pop 掉之后，结束所有mid
-          let data: any = {};
+          let data: { [key: string]: number; sum?: number } = {};
           let sum = 0;
           time.diff.forEach(function summeryTimeConsumption(diff: number, index: number) {
             sum += diff;
@@ -60,7 +60,7 @@ class WrapMiddlewareUse implements PluginClass {
         }
       }
 
-      function getTimeInfo(ctx: any) {
+      function getTimeInfo(ctx: DarukContext) {
         // 将时间信息保存到 ctx
         let timeInfo = ctx[WRAP_MIDDLEWARE_USE];
         if (!timeInfo) {

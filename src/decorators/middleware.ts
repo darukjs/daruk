@@ -11,9 +11,9 @@ import { MIDDLEWARE_NAME } from './constants';
  * @return Decorator - 装饰器
  */
 
-export function middleware(middlewareName: string, options?: any) {
+export function middleware(middlewareName: string, options?: { [key: string]: any }) {
   assert(is.string(middlewareName), `[Decorator @middleware] parameter must be a string`);
-  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (target: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     // 一个路由 handle 可能被多个 @middleware 修饰
     const middleares = Reflect.getMetadata(MIDDLEWARE_NAME, target.constructor, propertyKey) || [];
     middleares.push({ middlewareName, options });

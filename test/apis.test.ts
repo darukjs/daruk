@@ -29,11 +29,6 @@ describe('apis', () => {
     const context2 = server.mockContext();
     assert(context2.host === '127.0.0.1');
   });
-  it('listen string port', (done) => {
-    server.listen('3000', '127.0.0.1', () => {
-      server.httpServer.close(done);
-    });
-  });
 
   it('listen args with port, host, cb', (done) => {
     let port = 3000;

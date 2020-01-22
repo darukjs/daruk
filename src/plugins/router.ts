@@ -80,11 +80,10 @@ class RouterController implements PluginClass {
                     // 不转path，因为可能会把通配符转成unix path
                     const routePath = urljoin('/', prefix, path).replace(/\/\//g, '/');
                     // 获取针对路由的中间件名字
-                    const middlewares: Array<any> = Reflect.getMetadata(
-                      MIDDLEWARE_NAME,
-                      controller,
-                      funcName
-                    );
+                    const middlewares: Array<{
+                      middlewareName: string;
+                      options: { [key: string]: any };
+                    }> = Reflect.getMetadata(MIDDLEWARE_NAME, controller, funcName);
                     // 是否使用了中间件装饰器
                     if (middlewares) {
                       // 可以对单个路由应用多个中间件
@@ -113,7 +112,7 @@ class RouterController implements PluginClass {
                     daruk.router[method](routePath, async function routeHandle(
                       ctx: Koa['context'],
                       next: () => Promise<void>
-                    ): Promise<any> {
+                    ) {
                       let instance = new controller();
                       if (darukContainer.isBound('ctx')) {
                         darukContainer.rebind('ctx').toConstantValue(ctx);

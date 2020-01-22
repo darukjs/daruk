@@ -5,7 +5,7 @@ import koa = require('koa');
 import { method, ParseType, validateFunc } from '../typings/daruk';
 
 export function validate(method: method, key: string, validateFunc: validateFunc) {
-  return (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
 
     descriptor.value = async function validateWrap(ctx: koa.Context, next: Function) {
@@ -40,7 +40,7 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
     }
   }
 
-  return (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
 
     descriptor.value = async function verify(ctx: koa.Context, next: Function) {
@@ -87,7 +87,7 @@ export function typeParse(config: { body?: ParseType; query?: ParseType; params?
     return parsed;
   }
 
-  return (proto: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
 
     descriptor.value = async function parseWrap(ctx: koa.Context, next: Function) {

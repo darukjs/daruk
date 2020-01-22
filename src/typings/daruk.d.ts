@@ -1,4 +1,13 @@
+import Http = require('http');
+import Https = require('https');
+import Koa = require('koa');
 import Daruk from '../core/daruk';
+
+export type Server = Http.Server | Https.Server;
+
+export interface DarukContext extends Koa.Context {
+  [key: string]: any;
+}
 
 export type Constructor<T = any> = new (...args: any[]) => T;
 

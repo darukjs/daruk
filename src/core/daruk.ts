@@ -6,16 +6,15 @@
  */
 import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
-import Http = require('http');
-import Https = require('https');
 import { buildProviderModule } from 'inversify-binding-decorators';
 import Koa = require('koa');
+import { ListenOptions } from 'net';
 import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
 import recursive = require('recursive-readdir');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
-import { PluginClass } from '../typings/daruk';
+import { PluginClass, Server } from '../typings/daruk';
 import { debugLog, isJsTsFile, JsTsReg } from '../utils';
 import getDefaultOptions from './daruk_default_options';
 import { darukContainer } from './inversify.config';
@@ -25,7 +24,7 @@ class Daruk extends EventEmitter {
   [key: string]: any;
   public name: string;
   public app: Koa;
-  public httpServer: Http.Server | Https.Server;
+  public httpServer: Server;
   public logger: KoaLogger.logger;
   public options: Options;
   public initOptions(options: PartialOptions = {}) {
@@ -44,9 +43,10 @@ class Daruk extends EventEmitter {
     // tslint:disable-next-line
     const self = this;
     // 监听 koa 的错误事件，输出日志
-    this.app.on('error', function handleKoaError(err: any) {
+    this.app.on('error', function handleKoaError(err: Error) {
       self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
     });
+    this.emit('initOptions');
   }
   public async loadFile(path: string) {
     return this._loadFile(join(this.options.rootPath, path));
@@ -55,6 +55,7 @@ class Daruk extends EventEmitter {
     await this._loadFile(join(__dirname, '../plugins'));
     await this._loadFile(join(__dirname, '../built_in'));
     const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
+    this.emit('initBefore');
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);
       if (darukContainer.isBoundNamed(TYPES.PluginInstance, plugin.constructor.name)) {
@@ -69,7 +70,6 @@ class Daruk extends EventEmitter {
           .whenTargetNamed(plugin.constructor.name);
       }
     }
-    this.emit('initBefore');
     this.emit('init');
     darukContainer.load(buildProviderModule());
   }
@@ -87,8 +87,22 @@ class Daruk extends EventEmitter {
   /**
    * @desc 启动服务
    */
-  public async listen(...args: any[]): Promise<Http.Server> {
-    this.httpServer = this.app.listen(...args);
+  public listen(
+    port?: number,
+    hostname?: string,
+    backlog?: number,
+    listeningListener?: () => void
+  ): Server;
+  public listen(port: number, hostname?: string, listeningListener?: () => void): Server;
+  public listen(port: number, backlog?: number, listeningListener?: () => void): Server;
+  public listen(port: number, listeningListener?: () => void): Server;
+  public listen(path: string, backlog?: number, listeningListener?: () => void): Server;
+  public listen(path: string, listeningListener?: () => void): Server;
+  public listen(handle: any, backlog?: number, listeningListener?: () => void): Server;
+  public listen(handle: any, listeningListener?: () => void): Server;
+  public listen(options: ListenOptions, listeningListener?: () => void): Server;
+  public listen(): Server {
+    this.httpServer = this.app.listen.apply(this.app, Array.prototype.slice.call(arguments, 0));
     this.emit('serverReady');
     return this.httpServer;
   }

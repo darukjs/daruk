@@ -8,13 +8,19 @@ import Daruk from '../../core/daruk';
 import { defineMiddlware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';
 
+interface LoggerOptions {
+  filter?: (ctx: Daruk['app']['context']) => boolean;
+  transform?: (logObj: { [key: string]: string }, ctx: Daruk['app']['context']) => void;
+  requiredLogs?: string[];
+}
+
 @defineMiddlware('daruk_logger')
 @injectable()
 class DarukLogger implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     const { filter, requiredLogs } = daruk.options.loggerMiddleware;
-    const options: any = {
-      transform(logObj: any, ctx: any) {
+    const options: LoggerOptions = {
+      transform(logObj, ctx) {
         // 保存日志信息到 ctx 以便后续输出日志
         ctx.access_log = logObj;
       }
