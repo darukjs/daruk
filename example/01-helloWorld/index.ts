@@ -1,10 +1,10 @@
-import { controller, DarukServer, get, injectable } from '../../src';
+import { controller, DarukContext, DarukServer, get, injectable, Next } from '../../src';
 
 @injectable()
 @controller()
 class HelloWorld {
   @get('/')
-  public async index(ctx: any) {
+  public async index(ctx: DarukContext, next: Next) {
     ctx.body = 'hello world';
   }
 }
