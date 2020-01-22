@@ -2,14 +2,13 @@
  * @fileOverview 初始化timer
  */
 
-import { CronJob as cronJob } from 'cron';
-import ExitHook = require('daruk-exit-hook');
+import { CronJob } from 'cron';
 import { injectable } from 'inversify';
 import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
 import { plugin } from '../decorators';
-import { Cron, PluginClass, TimerClass } from '../typings/daruk';
+import { PluginClass, TimerClass } from '../typings/daruk';
 
 @plugin()
 @injectable()
@@ -20,7 +19,7 @@ class Timer implements PluginClass {
         const timer = darukContainer.getAll<TimerClass>(TYPES.Timer);
         timer.forEach(function initTimer(job: TimerClass) {
           job.initTimer(daruk);
-          let instance = new cronJob(
+          let instance: CronJob = new CronJob(
             job.cronTime,
             function() {
               job.onTick(this, daruk);
@@ -32,7 +31,7 @@ class Timer implements PluginClass {
             job.timeZone || 'Asia/Shanghai',
             job.context,
             job.runOnInit || false
-          ) as Cron;
+          );
         });
       }
     });

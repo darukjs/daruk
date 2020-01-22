@@ -1,9 +1,12 @@
+import { CronJob } from 'cron';
 import Http = require('http');
 import Https = require('https');
 import Koa = require('koa');
 import Daruk from '../core/daruk';
 
 export type Server = Http.Server | Https.Server;
+
+export type Next = () => Promise<any>;
 
 export interface DarukContext extends Koa.Context {
   [key: string]: any;
@@ -15,17 +18,12 @@ export interface PluginClass {
   initPlugin: (daruk: Daruk) => Promise<any>;
 }
 
-export interface Cron {
-  stop: Function;
-  start: Function;
-}
-
 export interface TimerClass {
   cronTime: string;
   start?: boolean;
   timeZone?: string;
-  onTick: (cron: Cron, daruk: Daruk) => void;
-  onComplete?: (cron: Cron, daruk: Daruk) => void;
+  onTick: (cron: CronJob, daruk: Daruk) => void;
+  onComplete?: (cron: CronJob, daruk: Daruk) => void;
   runOnInit?: boolean;
   context?: any;
   initTimer: (daruk: Daruk) => void;

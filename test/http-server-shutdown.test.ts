@@ -1,7 +1,17 @@
 import chai = require('chai');
 import sinon = require('sinon');
 import request = require('supertest');
-import { controller, Daruk, darukContainer, DarukServer, get, injectable, TYPES } from '../src';
+import {
+  controller,
+  Daruk,
+  darukContainer,
+  DarukContext,
+  DarukServer,
+  get,
+  injectable,
+  Next,
+  TYPES
+} from '../src';
 
 const assert = chai.assert;
 const port = 3000;
@@ -18,7 +28,7 @@ describe('http-server-shutdown', () => {
     @controller()
     class Index {
       @get('/')
-      public async index(ctx: any, next: any) {
+      public async index(ctx: DarukContext, next: Next) {
         // 定义一个 2s 返回的路由
         await new Promise((resolve) => {
           const routeTimeout = 2000;

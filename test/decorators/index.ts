@@ -2,7 +2,9 @@ import {
   all,
   cache,
   controller,
+  CronJob,
   Daruk,
+  DarukContext,
   defineMiddlware,
   del,
   disabled,
@@ -13,6 +15,7 @@ import {
   JSON,
   json,
   middleware,
+  Next,
   options,
   patch,
   post,
@@ -28,7 +31,7 @@ import {
 } from '../../src';
 
 class Store {
-  public store: any;
+  public store: { [key: string]: any };
   public constructor() {
     this.store = {};
   }
@@ -53,8 +56,8 @@ const cacheStore = new Store();
 @injectable()
 class MultiRouteMiddlewareRouteMiddleware {
   public initMiddleware() {
-    return (options: any) => {
-      return (ctx: any, next: Function) => {
+    return (options: { [key: string]: any }) => {
+      return (ctx: DarukContext, next: Next) => {
         ctx.body = ctx.body + ' multiRouteMiddleware';
         return next();
       };
@@ -66,7 +69,7 @@ class MultiRouteMiddlewareRouteMiddleware {
 @injectable()
 class RouteMiddleware {
   public initMiddleware() {
-    return (ctx: any, next: Function) => {
+    return (ctx: DarukContext, next: Next) => {
       ctx.body = 'routeMiddleware';
       return next();
     };
@@ -78,39 +81,39 @@ class RouteMiddleware {
 class Index {
   @get('/repeatMethod')
   @post('/repeatMethod')
-  public async repeatMethod(ctx: any, next: Function) {
+  public async repeatMethod(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @all('/all')
-  public async all(ctx: any, next: Function) {
+  public async all(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @del('/del')
-  public async del(ctx: any, next: Function) {
+  public async del(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @get('/get')
-  public async get(ctx: any, next: Function) {
+  public async get(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @head('/head')
-  public async head(ctx: any, next: Function) {
+  public async head(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @options('/options')
-  public async options(ctx: any, next: Function) {
+  public async options(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @patch('/patch')
-  public async patch(ctx: any, next: Function) {
+  public async patch(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @post('/post')
-  public async post(ctx: any, next: Function) {
+  public async post(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @put('/put')
-  public async put(ctx: any, next: Function) {
+  public async put(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
   @json()
@@ -125,12 +128,12 @@ class Index {
   }
   @redirect('/json2')
   @get('/redirect')
-  public redirect(ctx: any) {
+  public redirect(ctx: DarukContext) {
     ctx.body = '';
   }
   @type('application/json')
   @get('/type')
-  public type(ctx: any) {
+  public type(ctx: DarukContext) {
     ctx.body = {
       foo: 1
     };
@@ -138,18 +141,18 @@ class Index {
 
   @header('foo', 'bar')
   @get('/header')
-  public header(ctx: any) {
+  public header(ctx: DarukContext) {
     ctx.body = 'bar';
   }
 
   @header({ foo: 'bar' })
   @get('/headers')
-  public headers(ctx: any) {
+  public headers(ctx: DarukContext) {
     ctx.body = 'bar';
   }
 
   @get('/wildcard_(\\d)_(\\d).htm')
-  public deatil(ctx: any) {
+  public deatil(ctx: DarukContext) {
     ctx.body = {
       foo: 1
     };
@@ -157,12 +160,12 @@ class Index {
 
   @middleware('routeMiddleware')
   @get('/middleware')
-  public async middleware(ctx: any, next: Function) {}
+  public async middleware(ctx: DarukContext, next: Next) {}
 
   @middleware('multiRouteMiddleware', { foo: 1 })
   @middleware('routeMiddleware')
   @get('/multiMiddleware')
-  public async multiMiddleware(ctx: any, next: Function) {}
+  public async multiMiddleware(ctx: DarukContext, next: Next) {}
 
   @required({
     body: ['foo'],
@@ -170,7 +173,7 @@ class Index {
     params: ['id']
   })
   @post('/required/:id')
-  public async required(ctx: any, next: Function) {
+  public async required(ctx: DarukContext, next: Next) {
     ctx.body = ctx.validateRequired || '';
   }
 
@@ -193,7 +196,7 @@ class Index {
     }
   })
   @post('/typeparse/:id')
-  public typeParse(ctx: any) {
+  public typeParse(ctx: DarukContext) {
     ctx.body = {
       body: ctx.parseBody,
       params: ctx.parseParams,
@@ -207,7 +210,7 @@ class Index {
     }
   })
   @get('/validate')
-  public validate(ctx: any) {
+  public validate(ctx: DarukContext) {
     if (ctx.validateError.length) {
       ctx.body = ctx.validateError[0];
     } else {
@@ -221,7 +224,7 @@ class Index {
     }
   })
   @post('/validate')
-  public validatePost(ctx: any) {
+  public validatePost(ctx: DarukContext) {
     if (ctx.validateError.length) {
       ctx.body = ctx.validateError[0];
     } else {
@@ -238,13 +241,13 @@ class Index {
     }
   })
   @get('/cache')
-  public cache(ctx: any) {
+  public cache(ctx: DarukContext) {
     ctx.body = 'cacheData';
   }
 
   @disabled()
   @get('/disabled')
-  public disabled(ctx: any) {
+  public disabled(ctx: DarukContext) {
     ctx.body = '';
   }
   public _destroy() {
@@ -262,7 +265,7 @@ class EmptyClass {}
 @priority(-1)
 class PrefixIndexA {
   @get('/index')
-  public async test(ctx: any, next: Function) {
+  public async test(ctx: DarukContext, next: Next) {
     ctx.body = 'A';
     await next();
   }
@@ -273,7 +276,7 @@ class PrefixIndexA {
 @controller()
 class PrefixIndexB {
   @get('/index')
-  public async test(ctx: any, next: Function) {
+  public async test(ctx: DarukContext, next: Next) {
     ctx.body = ctx.body + 'B';
   }
 }
@@ -283,7 +286,7 @@ class PrefixIndexB {
 @controller()
 class PrefixTestDeep {
   @get('/json')
-  public async json(ctx: any, next: Function) {
+  public async json(ctx: DarukContext, next: Next) {
     ctx.body = { foo: 1 };
   }
 }
@@ -294,7 +297,7 @@ class PrefixTestDeep {
 @controller()
 class DisabledIndex {
   @get('/test')
-  public async test(ctx: any, next: Function) {
+  public async test(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
 }
@@ -306,10 +309,10 @@ class Timers {
   public initTimer(daruk: Daruk) {
     this.cronTime = '* * * * * *';
   }
-  public onTick(cron: any) {
+  public onTick(cron: CronJob) {
     cron.stop();
   }
-  public onComplete(cron: any, daruk: Daruk) {
+  public onComplete(cron: CronJob, daruk: Daruk) {
     daruk.timerComplete = true;
   }
 }

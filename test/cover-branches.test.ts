@@ -4,7 +4,7 @@
 
 import chai = require('chai');
 import sinon = require('sinon');
-import { Daruk, DarukServer } from '../src';
+import { Daruk, DarukContext, DarukServer, Next } from '../src';
 
 const port = 3000;
 const assert = chai.assert;
@@ -25,7 +25,7 @@ describe('cover-branches', () => {
         overwriteConsole: false
       },
       loggerMiddleware: {
-        filter(ctx: any) {
+        filter(ctx: DarukContext) {
           return true;
         },
         requiredLogs: [
@@ -42,7 +42,7 @@ describe('cover-branches', () => {
       }
     });
     await server.initPlugin();
-    server.app.use((ctx: any, next: Function) => {
+    server.app.use((ctx: DarukContext, next: Next) => {
       return next();
     });
     // 传递 host 的情况
