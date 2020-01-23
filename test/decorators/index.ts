@@ -76,7 +76,6 @@ class RouteMiddleware {
   }
 }
 
-@injectable()
 @controller()
 class Index {
   @get('/repeatMethod')
@@ -255,12 +254,10 @@ class Index {
   }
 }
 
-@injectable()
 @controller()
 class EmptyClass {}
 
 @prefix('/v1/prefix')
-@injectable()
 @controller()
 @priority(-1)
 class PrefixIndexA {
@@ -272,7 +269,6 @@ class PrefixIndexA {
 }
 
 @prefix('/v1/prefix')
-@injectable()
 @controller()
 class PrefixIndexB {
   @get('/index')
@@ -282,7 +278,6 @@ class PrefixIndexB {
 }
 
 @prefix('/v1/prefix/test/deep')
-@injectable()
 @controller()
 class PrefixTestDeep {
   @get('/json')
@@ -293,7 +288,6 @@ class PrefixTestDeep {
 
 @prefix('/disabled')
 @disabled()
-@injectable()
 @controller()
 class DisabledIndex {
   @get('/test')

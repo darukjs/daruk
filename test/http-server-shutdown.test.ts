@@ -24,7 +24,6 @@ describe('http-server-shutdown', () => {
   before(async () => {
     server = DarukServer();
 
-    @injectable()
     @controller()
     class Index {
       @get('/')

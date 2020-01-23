@@ -39,9 +39,9 @@ interface Meta {
 class RouterController implements PluginClass {
   public async initPlugin(daruk: DarukRouter) {
     daruk.on('init', () => {
-      daruk.router = new Router();
-
       daruk.emit('routerUseBefore');
+
+      daruk.router = new Router();
 
       if (darukContainer.isBound(TYPES.ControllerClass)) {
         const controllers = darukContainer.getAll<Constructor>(TYPES.ControllerClass);

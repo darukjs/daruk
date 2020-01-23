@@ -30,7 +30,7 @@ export interface TimerClass {
 }
 
 export interface MiddlewareClass {
-  initMiddleware: (daruk: Daruk) => Function;
+  initMiddleware: (daruk: Daruk) => Koa.Middleware | void | Function;
 }
 
 export interface ParseType {
