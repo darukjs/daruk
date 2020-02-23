@@ -5,7 +5,7 @@ import {
   CronJob,
   Daruk,
   DarukContext,
-  defineMiddlware,
+  defineMiddleware,
   del,
   disabled,
   get,
@@ -52,7 +52,7 @@ class Store {
 
 const cacheStore = new Store();
 
-@defineMiddlware('multiRouteMiddleware')
+@defineMiddleware('multiRouteMiddleware')
 @injectable()
 class MultiRouteMiddlewareRouteMiddleware {
   public initMiddleware() {
@@ -65,7 +65,7 @@ class MultiRouteMiddlewareRouteMiddleware {
   }
 }
 
-@defineMiddlware('routeMiddleware')
+@defineMiddleware('routeMiddleware')
 @injectable()
 class RouteMiddleware {
   public initMiddleware() {

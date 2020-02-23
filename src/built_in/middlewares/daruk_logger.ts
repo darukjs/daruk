@@ -5,7 +5,7 @@
 import { middleware as loggerMiddleware } from 'daruk-logger';
 import { injectable } from 'inversify';
 import Daruk from '../../core/daruk';
-import { defineMiddlware } from '../../decorators';
+import { defineMiddleware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';
 
 interface LoggerOptions {
@@ -14,7 +14,7 @@ interface LoggerOptions {
   requiredLogs?: string[];
 }
 
-@defineMiddlware('daruk_logger')
+@defineMiddleware('daruk_logger')
 @injectable()
 class DarukLogger implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {

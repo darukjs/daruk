@@ -22,7 +22,7 @@ export function middleware(middlewareName: string, options?: { [key: string]: an
   };
 }
 
-export function defineMiddlware(middlewareName: string) {
+export function defineMiddleware(middlewareName: string) {
   return (target: Constructor) => {
     darukContainer
       .bind<Constructor>(TYPES.Middleware)
