@@ -1,9 +1,20 @@
-import { Daruk } from 'daruk';
+import { DarukServer } from '../../src';
 
-const port = 3000;
-const myApp = new Daruk('my-comments-app', {
-  rootPath: __dirname,
-  debug: process.env.NODE_ENV === 'dev'
-});
+(async () => {
+  let app = DarukServer();
+  let port = 3000;
 
-myApp.run(port);
+  app.initOptions({
+    rootPath: __dirname,
+    middlewareOrder: ['koa-ejs', 'koa-favicon']
+  });
+
+  await app.loadFile('./middlewares');
+  await app.loadFile('./glues');
+  await app.loadFile('./controllers');
+  await app.loadFile('./services');
+  await app.initPlugin();
+
+  app.listen(port);
+  app.logger.info(`app listen port ${port}`);
+})();

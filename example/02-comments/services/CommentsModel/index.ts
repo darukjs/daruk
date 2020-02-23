@@ -1,13 +1,14 @@
-import { BaseService, Context } from 'daruk';
+import { DarukContext, inject, injectable, provide } from '../../../../src';
 import Comments from '../../entity/comments';
+import Db from '../../glues/connection';
 
-export default class CommentsModel extends BaseService {
-  public constructor(ctx: Context) {
-    super(ctx);
-  }
+@provide('CommentsModel')
+export default class CommentsModel {
+  @inject('ctx') public ctx: DarukContext;
+  @inject('Db') public Db: Db;
   public async findAllAndCount(page = 0, limit = 10) {
-    let connection = await this.ctx.glue.connection;
-    let comments = await connection.getRepository(Comments).findAndCount({
+    let connection = await this.Db.getConnection();
+    let comments = connection.getRepository(Comments).findAndCount({
       skip: limit * page,
       take: limit,
       order: {
@@ -17,7 +18,7 @@ export default class CommentsModel extends BaseService {
     return comments;
   }
   public async insert(name: string, content: string) {
-    let connection = await this.ctx.glue.connection;
+    let connection = await this.Db.getConnection();
     let EntityManager = connection.manager;
     let comments = await EntityManager.create(Comments, {
       name,

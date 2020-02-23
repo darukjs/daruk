@@ -2,12 +2,10 @@
  * 框架直接以文件名作为路由前缀，controller 装饰器暂时不使用
  */
 
-import assert = require('assert');
-import is = require('is');
-// tslint:disable-next-line
-import 'reflect-metadata';
-import BaseContext from '../core/base_context';
-import { CONTROLLER_PREFIX_PATH } from './constants';
+import { darukContainer } from '../core/inversify.config';
+import { TYPES } from '../core/types';
+import { Constructor } from '../typings/daruk';
+import { CONTROLLER_PRIORITY } from './constants';
 
 /**
  * @desc controller 装饰器，将类装饰为 controller
@@ -15,12 +13,14 @@ import { CONTROLLER_PREFIX_PATH } from './constants';
  * @return Decorator - 装饰器
  */
 
-/*
-export function controller(prefixPath: string) {
-  assert(is.string(prefixPath), '[Decorator @controller] parameter must be a string');
-  return (target: any) => {
-    // 将路由前缀信息保存到当前的类
-    Reflect.defineMetadata(CONTROLLER_PREFIX_PATH, prefixPath, target);
+export function controller() {
+  return (target: Constructor) => {
+    darukContainer.bind<Constructor>(TYPES.ControllerClass).toConstructor(target);
   };
 }
-*/
+
+export function priority(priority: number) {
+  return (target: Constructor) => {
+    Reflect.defineMetadata(CONTROLLER_PRIORITY, priority, target);
+  };
+}

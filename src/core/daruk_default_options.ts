@@ -2,31 +2,19 @@
  * @fileOverview 根据运行时环境获取默认的 daruk options
  */
 
-import { join } from 'path';
 import { Options } from '../../types/daruk_options';
 
-export default function getDefaultOptions(rootPath: string, name: string, debug: boolean): Options {
+export default function getDefaultOptions(
+  rootPath: string,
+  name = 'daruk app',
+  debug = true
+): Options {
   return {
+    name,
     rootPath,
-    servicePath: join(rootPath, 'services'),
-    gluePath: join(rootPath, 'glues'),
-    timerPath: join(rootPath, 'timers'),
-    middlewarePath: join(rootPath, 'middlewares'),
-    controllerPath: join(rootPath, 'controllers'),
-    utilPath: join(rootPath, 'utils'),
-    darukConfigPath: join(rootPath, 'daruk.config'),
-    configPath: join(rootPath, 'config'),
+    middwareOrder: [],
     bodyOptions: {},
     debug,
-    // monitor: {
-    //   enable: false,
-    //   v8AnalyticsPath: 'v8-analytics',
-    //   v8ProfilerPath: 'v8-profiler-node8',
-    //   auth: {
-    //     name: '',
-    //     password: ''
-    //   }
-    // },
     gracefulShutdown: {
       enable: false,
       timeout: 10 * 1000

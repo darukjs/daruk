@@ -3,9 +3,16 @@
  * https://github.com/dlau/koa-body
  */
 
+import { injectable } from 'inversify';
 import koaBody = require('koa-body');
-import { Daruk } from '../../typings/daruk';
+import Daruk from '../../core/daruk';
+import { defineMiddlware } from '../../decorators';
+import { MiddlewareClass } from '../../typings/daruk';
 
-export default (app: Daruk.DarukCore) => {
-  return koaBody(app.options.bodyOptions);
-};
+@defineMiddlware('daruk_body')
+@injectable()
+class KoaBody implements MiddlewareClass {
+  public initMiddleware(daruk: Daruk) {
+    return koaBody(daruk.options.bodyOptions);
+  }
+}

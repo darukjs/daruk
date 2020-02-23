@@ -4,17 +4,19 @@
 
 # Daruk
 
-[Daruk](https://darukjs.github.io/daruk.org) 是一款基于 Koa2，使用 typescript 开发的轻量级 web 框架。使用过 koa2 框架的朋友应该知道，koa2 属于比较原始和基础的 http server 实现，在日常的开发工作中，我们可能需要通过安装很多开源的中间件，自己完成复杂的项目配置，路由管理，以及和业务无关的工作：如日志，监控，性能等基础组件的定制。
+[Daruk](https://darukjs.github.io/daruk.org) 是一款基于 Koa2，使用 Typescript 开发的轻量级 web 框架。Daruk 的初衷是让人们可以更方便的开发 Nodejs Web 应用并能够体会到 Typescript 编程的乐趣。Daruk 本身基于 100%基于 Typescript 开发，使用 inversifyjs 的 IoC 容器管理依赖，让开发者享受最佳的 OOP 和 IoC 的编程体验。
 
-有了 Daruk，我们可以轻松地一键初始化你的 web 项目，快速的编写业务代码。Daruk 的目的就是轻量和易扩展，新增的概念少，上手难度低，核心代码也不多，但是可以提供给开发者更多的灵活选择，快速完成业务开发，约束项目规范和代码格式。
+框架内部集成了许多方便灵活的装饰器函数，让开发者可以写更少的代码来完成更多的事情，Daruk2.0 更改了之前严格要求目录约定的范式，提供给开发者更灵活的操作空间来进行项目约束和编写，但是内置的功能并没有缺失，整个框架的开发能力和 Daruk1.0 能力持平。
+
+比如在 Daruk2.0 中，我们可以使用装饰器来快速定义 service，controller，timer，middleware 等能力来编写 web 应用，且提供了一些基本的内置中间件和路由服务等，更灵活的定义，让 Daruk2.0 可以更灵活的定制你的 web 项目和编写测试脚本。
 
 Daruk 来源自塞尔达传说旷野之息里的四英杰之一，拥有在周围张开结界保护自己的力量，框架的目的也是为了给 nodejs server 提供健壮的基础管理能力。
 
-Daruk 基于 koa2，包含以下核心功能：
+Daruk2.0 同样基于 koa2，目前包含以下核心功能：
 
-- 一键生成项目，开箱即用
-- 合理和克制的分层目录结构
-- 自动 loader 与装饰器结合的机制
+- 开启装饰器配置，ts 环境下引入即用，无需脚手架等工具。
+- 提供给开发者编写影响框架内部能力的插件机制
+- 可以自定义目录结构，在启动时使用 API 加载你自己定义的源文件
 - 完整的 typescript 开发体验
 - 服务启动完整生命周期 hook
 - 自定义(性能日志 & 业务日志) 染色功能
@@ -25,22 +27,34 @@ Daruk 基于 koa2，包含以下核心功能：
 
 ## Installation & Quick start
 
+安装
+
 ```bash
-# 全局安装 daruk 脚手架
-cnpm i -g daruk-cli
-
-# 初始化项目
-# --ignore 表示忽略本地模板缓存
-daruk init --ignore daruk-example
-
-# 运行项目
-cd daruk-example
-npm run dev
+yarn add daruk
 ```
 
-## Demo video
+开始编写 web 应用
 
-<p align="left"><a href="https://v.youku.com/v_show/id_XNDExMjA5MTI2NA==.html?spm=a2hzp.8244740.0.0" target="_blank">点击开始</a></p>
+```typescript
+import { DarukServer, controller, injectable } from 'daruk';
+
+(async () => {
+  const myapp = DarukServer();
+
+  @injectable()
+  @controller()
+  class Index {
+    @get('/')
+    public async index(ctx: any) {
+      ctx.body = 'hello world';
+    }
+  }
+
+  myapp.initOptions();
+  await myapp.initPlugin();
+  myapp.listen(3000);
+})();
+```
 
 ## Docs
 

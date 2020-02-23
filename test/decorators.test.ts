@@ -1,7 +1,6 @@
 import chai = require('chai');
 import request = require('supertest');
-import { config, Daruk, glue, logger, util } from '../src';
-import { getApp } from './utils';
+import { Daruk, DarukServer } from '../src';
 
 const port = 3000;
 const code200 = 200;
@@ -10,105 +9,114 @@ const code302 = 302;
 const assert = chai.assert;
 
 describe('decorators', () => {
-  let app: Daruk;
-  let server: Daruk['httpServer'];
-  before((done) => {
-    app = getApp('decorators');
-    app.listen(port, done);
-    server = app.httpServer;
+  let app: Daruk['httpServer'];
+  let server = DarukServer();
+  before(async () => {
+    server.initOptions({
+      rootPath: __dirname,
+      debug: false,
+      loggerOptions: {
+        disable: true,
+        overwriteConsole: false
+      }
+    });
+    await server.loadFile('./decorators');
+    await server.initPlugin();
+    await server.listen(port);
+    app = server.httpServer;
   });
 
   after((done) => {
-    app.httpServer.close(done);
+    server.httpServer.close(done);
   });
 
   it('decorator repeat method', (done) => {
-    request(server)
+    request(app)
       .get('/repeatMethod')
       .expect(code200, () => {
-        request(server)
+        request(app)
           .post('/repeatMethod')
           .expect(code200, done);
       });
   });
 
   it('decorator "@all"', (done) => {
-    request(server)
+    request(app)
       .get('/all')
       .expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(server)
+    request(app)
       .del('/del')
       .expect(code200, done);
   });
   it('decorator "@get"', (done) => {
-    request(server)
+    request(app)
       .get('/get')
       .expect(code200, done);
   });
   it('decorator "@head"', (done) => {
-    request(server)
+    request(app)
       .head('/head')
       .expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(server)
+    request(app)
       .del('/del')
       .expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(server)
+    request(app)
       .del('/del')
       .expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(server)
+    request(app)
       .del('/del')
       .expect(code200, done);
   });
   it('decorator "@options"', (done) => {
-    request(server)
+    request(app)
       .options('/options')
       .expect(code200, done);
   });
   it('decorator "@patch"', (done) => {
-    request(server)
+    request(app)
       .patch('/patch')
       .expect(code200, done);
   });
   it('decorator "@post"', (done) => {
-    request(server)
+    request(app)
       .post('/post')
       .expect(code200, done);
   });
   it('decorator "@put"', (done) => {
-    request(server)
+    request(app)
       .put('/put')
       .expect(code200, done);
   });
   it('decorator @json', (done) => {
-    request(server)
+    request(app)
       .get('/json1')
       .expect(code200)
       .expect({ foo: 1 }, done);
   });
   it('decorator @JSON', (done) => {
-    request(server)
+    request(app)
       .get('/json2')
       .expect(code200)
       .expect({ foo: 1 }, done);
   });
 
   it('decorator @type', (done) => {
-    request(server)
+    request(app)
       .get('/type')
       .expect('Content-Type', /application\/json/)
       .expect(code200, done);
   });
 
   it('decorator @header', (done) => {
-    request(server)
+    request(app)
       .get('/header')
       .expect(code200)
       .expect('foo', 'bar')
@@ -116,7 +124,7 @@ describe('decorators', () => {
   });
 
   it('decorator @header', (done) => {
-    request(server)
+    request(app)
       .get('/headers')
       .expect(code200)
       .expect('foo', 'bar')
@@ -124,86 +132,52 @@ describe('decorators', () => {
   });
 
   it('decorator @get for wildcard', (done) => {
-    request(server)
+    request(app)
       .get('/wildcard_3_4.htm')
       .expect(code200, done);
   });
 
   it('decorator @redirect', (done) => {
-    request(server)
+    request(app)
       .get('/redirect')
       .expect(code302, done);
   });
 
   it('decorator @prefix', (done) => {
-    request(server)
+    request(app)
       .get('/v1/prefix/index')
       .expect(code200, done);
   });
 
+  it('decorator @priority', (done) => {
+    request(app)
+      .get('/v1/prefix/index')
+      .expect(code200)
+      .expect('AB', done);
+  });
+
   it('decorator @prefix deep controller', (done) => {
-    request(server)
+    request(app)
       .get('/v1/prefix/test/deep/json')
       .expect(code200, done);
   });
 
   it('decorator "@middleware"', (done) => {
-    request(server)
+    request(app)
       .get('/middleware')
       .expect(code200)
       .expect('routeMiddleware', done);
   });
 
   it('decorator "multi @middleware"', (done) => {
-    request(server)
+    request(app)
       .get('/multiMiddleware')
       .expect(code200)
       .expect('routeMiddleware multiRouteMiddleware', done);
   });
 
-  it('decorator "@config"', () => {
-    class A {
-      @config('option1')
-      public option1: any;
-    }
-
-    assert(new A().option1 !== undefined);
-  });
-  it('decorator "@glue"', () => {
-    class A {
-      @glue('testGlue')
-      public testGlue: any;
-    }
-
-    assert(new A().testGlue !== undefined);
-  });
-  it('decorator "@util"', () => {
-    class A {
-      @util('util1')
-      public util1: any;
-    }
-
-    assert(new A().util1 !== undefined);
-  });
-  it('decorator "@logger"', () => {
-    class A {
-      @logger()
-      public logger: any;
-    }
-
-    assert(new A().logger !== undefined);
-  });
-  it('decorator "@logger" with fileInfo', () => {
-    class A {
-      @logger('customFileInfo')
-      public logger: any;
-    }
-
-    // 自定义 logger 的 fileInfo 成功
-    assert(new A().logger.customFileInformation === 'customFileInfo');
-  });
   it('decorator "@required" success', (done) => {
-    request(server)
+    request(app)
       .post('/required/1')
       .send({ foo: 2 })
       .query({ bar: 3 })
@@ -211,7 +185,7 @@ describe('decorators', () => {
       .expect('', done);
   });
   it('decorator "@required" fail', (done) => {
-    request(server)
+    request(app)
       .post('/required/1')
       .expect(code200)
       .expect(
@@ -223,7 +197,7 @@ describe('decorators', () => {
       );
   });
   it('decorator @typeParse', (done) => {
-    request(server)
+    request(app)
       .post('/typeparse/123')
       .send({ foo: '123', object2: '{"a":1}', arr2: '[1,2,3]' })
       .query({ bar: [1, 2, 3], object2: '{a:1}', arr2: '1,2,3,4' })
@@ -243,7 +217,7 @@ describe('decorators', () => {
   });
 
   it('decorator @typeParse without request args', (done) => {
-    request(server)
+    request(app)
       .post('/typeparse/123')
       .expect(code200)
       .expect(
@@ -257,7 +231,7 @@ describe('decorators', () => {
   });
 
   it('decorator @validate success', (done) => {
-    request(server)
+    request(app)
       .get('/validate')
       .query({
         foo: 'bar'
@@ -266,7 +240,7 @@ describe('decorators', () => {
   });
 
   it('decorator @validate fail', (done) => {
-    request(server)
+    request(app)
       .post('/validate')
       .send({
         foo: 'foo'
@@ -276,13 +250,13 @@ describe('decorators', () => {
   });
 
   it('decorator @cache', (done) => {
-    request(server)
+    request(app)
       .get('/cache')
       .query({
         foo: 'bar'
       })
       .expect(code200, () => {
-        request(server)
+        request(app)
           .get('/cache')
           .query({
             foo: 'bar'
@@ -292,14 +266,25 @@ describe('decorators', () => {
   });
 
   it('decorator @disabled method', (done) => {
-    request(server)
+    request(app)
       .get('/disabled')
       .expect(code404, done);
   });
 
   it('decorator @disabled class', (done) => {
-    request(server)
+    request(app)
       .get('/disabled/test')
       .expect(code404, done);
+  });
+
+  it('decorator @timer class', function(done) {
+    const timerDelay = 5000;
+    const timeOut = 1200;
+    // tslint:disable-next-line
+    this.timeout(timerDelay);
+    setTimeout(() => {
+      assert(server.timerComplete === true);
+      done();
+    }, timeOut);
   });
 });

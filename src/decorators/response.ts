@@ -1,7 +1,6 @@
 import assert = require('assert');
 import is = require('is');
-import BaseContext from '../core/base_context';
-import { Daruk } from '../typings/daruk';
+import koa = require('koa');
 import {
   CONTROLLER_CLASS_PREFIX,
   CONTROLLER_DISABLED_CLASS,
@@ -23,7 +22,7 @@ export function prefix(path: string) {
 }
 
 export function disabled() {
-  return (proto: any, propertyKey?: string, descriptor?: PropertyDescriptor) => {
+  return (proto: Object, propertyKey?: string, descriptor?: PropertyDescriptor) => {
     if (propertyKey) {
       const target = proto.constructor;
       Reflect.defineMetadata(CONTROLLER_DISABLED_METHOD, 'disabled', target, propertyKey);
@@ -57,11 +56,11 @@ export function disabled() {
  *    }
  */
 export function json() {
-  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
     type('application/json')(proto, propertyKey, descriptor);
 
-    descriptor.value = async function jsonWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+    descriptor.value = async function jsonWrap(ctx: koa.Context, next: () => Promise<void>) {
       const val = await oldFunc(ctx);
       // 确保是Object类型
       ctx.body = { ...val };
@@ -79,7 +78,7 @@ export const JSON = json;
  */
 export function redirect(path: string) {
   assert(is.string(path), `[Decorator @${path}] parameter must be a string`);
-  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const target = proto.constructor;
     Reflect.defineMetadata(CONTROLLER_REDIRECT_PATH, path, target, propertyKey);
   };
@@ -99,9 +98,9 @@ export function redirect(path: string) {
  */
 export function type(type: string) {
   assert(is.string(type), `[Decorator @${type}] parameter must be a string`);
-  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
-    descriptor.value = async function typeWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+    descriptor.value = async function typeWrap(ctx: koa.Context, next: () => Promise<void>) {
       await oldFunc(ctx);
       ctx.type = type;
       await next();
@@ -131,9 +130,9 @@ export function header(key: string | { [key: string]: string }, value?: string) 
     headers = key;
   }
 
-  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
-    descriptor.value = async function headerWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+    descriptor.value = async function headerWrap(ctx: koa.Context, next: () => Promise<void>) {
       await oldFunc(ctx);
       ctx.set(headers);
       await next();
@@ -143,9 +142,9 @@ export function header(key: string | { [key: string]: string }, value?: string) 
 
 export function cache(callback: (cacheKey: string, shouldCacheData?: string) => Promise<string>) {
   assert(is.function(callback), `[Decorator @${callback}] parameter must be a function`);
-  return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;
-    descriptor.value = async function cacheWrap(ctx: Daruk.Context, next: () => Promise<void>) {
+    descriptor.value = async function cacheWrap(ctx: koa.Context, next: () => Promise<void>) {
       let cacheKey = ctx.request.querystring;
       let cacheData = await callback(cacheKey);
       if (cacheData) {

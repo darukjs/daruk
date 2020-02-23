@@ -1,10 +1,15 @@
-import { BaseController, Context, post } from 'daruk';
+import { controller, DarukContext, inject, injectable, Next, post, prefix } from '../../../src';
+import CommentsModel from '../services/CommentsModel';
 
-export default class Comments extends BaseController {
+@injectable()
+@controller()
+@prefix('/comments')
+class Comments {
+  @inject('CommentsModel') private CommentsModel: CommentsModel;
   @post('/insert')
-  public async index(ctx: Context, next: Function) {
+  public async index(ctx: DarukContext, next: Next) {
     let { name, content } = ctx.request.body;
-    await ctx.service.CommentsModel.insert(name, content);
+    await this.CommentsModel.insert(name, content);
     ctx.redirect('/');
     await next();
   }

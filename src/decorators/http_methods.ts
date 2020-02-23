@@ -1,8 +1,5 @@
 import assert = require('assert');
 import is = require('is');
-// tslint:disable-next-line
-import 'reflect-metadata';
-import BaseContext from '../core/base_context';
 import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
 /**
@@ -10,11 +7,12 @@ import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
  * @param {string} method - http method，如 get、post、head
  * @return Decorator - 装饰器
  */
+
 function createMethodDecorator(method: string) {
   // 装饰器接收路由 path 作为参数
   return function httpMethodDecorator(path: string) {
     assert(is.string(path), `[Decorator @${method}] parameter must be a string`);
-    return (proto: BaseContext, propertyKey: string, descriptor: PropertyDescriptor) => {
+    return (proto: Object, propertyKey: string) => {
       const target = proto.constructor;
       // 获取该类上已经被装饰器装饰过的方法
       const funcs = Reflect.getMetadata(CONTROLLER_FUNC_NAME, target) || [];

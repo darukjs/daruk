@@ -1,5 +1,18 @@
-import { Daruk } from 'daruk';
+import { controller, DarukContext, DarukServer, get, injectable, Next } from '../../src';
 
-const myApp = new Daruk('myapp', { rootPath: __dirname, debug: process.env.NODE_ENV === 'dev' });
-const port = 3000;
-myApp.listen(port);
+@controller()
+class HelloWorld {
+  @get('/')
+  public async index(ctx: DarukContext, next: Next) {
+    ctx.body = 'hello world';
+  }
+}
+
+(async () => {
+  let app = DarukServer();
+  let port = 3000;
+  app.initOptions();
+  await app.initPlugin();
+  app.listen(port);
+  app.logger.info(`app listen port ${port}`);
+})();
