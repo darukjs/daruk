@@ -1,9 +1,9 @@
 import ejs = require('koa-ejs');
 import { join } from 'path';
-import { Daruk, defineMiddlware, injectable, MiddlewareClass } from '../../../src';
+import { Daruk, defineMiddleware, injectable, MiddlewareClass } from '../../../src';
 
 @injectable()
-@defineMiddlware('koa-ejs')
+@defineMiddleware('koa-ejs')
 class KoaEjs implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     ejs(daruk.app, {

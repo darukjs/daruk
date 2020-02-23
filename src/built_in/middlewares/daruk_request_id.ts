@@ -5,10 +5,10 @@
 import { xRequestId } from 'daruk-request-id';
 import { injectable } from 'inversify';
 import Daruk from '../../core/daruk';
-import { defineMiddlware } from '../../decorators';
+import { defineMiddleware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';
 
-@defineMiddlware('daruk_request_id')
+@defineMiddleware('daruk_request_id')
 @injectable()
 class DarukRquestId implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
