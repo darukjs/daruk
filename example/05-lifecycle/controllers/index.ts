@@ -1,9 +1,10 @@
-import { BaseController, Context, get } from 'daruk';
+import { controller, DarukContext, get, injectable, Next } from '../../../src';
 
-export default class Index extends BaseController {
+@injectable()
+@controller()
+class Index {
   @get('/')
-  public index(ctx: Context, next: Function) {
-    let randomWord = ctx.util.randomWord;
-    ctx.body = `hi, ${randomWord(true, 10, 10)}`;
+  public index(ctx: DarukContext, next: Next) {
+    ctx.body = `hello world`;
   }
 }

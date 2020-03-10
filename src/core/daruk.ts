@@ -55,7 +55,6 @@ class Daruk extends EventEmitter {
     await this._loadFile(join(__dirname, '../plugins'));
     await this._loadFile(join(__dirname, '../built_in'));
     const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
-    this.emit('initBefore');
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);
       if (darukContainer.isBoundNamed(TYPES.PluginInstance, plugin.constructor.name)) {

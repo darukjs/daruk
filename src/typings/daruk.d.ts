@@ -8,8 +8,13 @@ export type Server = Http.Server | Https.Server;
 
 export type Next = () => Promise<any>;
 
+interface DarukRequest extends Koa.Request {
+  id: string;
+}
+
 export interface DarukContext extends Koa.Context {
   [key: string]: any;
+  request: DarukRequest;
 }
 
 export type Constructor<T = any> = new (...args: any[]) => T;
