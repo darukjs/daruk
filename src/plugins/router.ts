@@ -114,11 +114,6 @@ class RouterController implements PluginClass {
                       next: () => Promise<void>
                     ) {
                       let instance = new controller();
-                      if (darukContainer.isBound('ctx')) {
-                        darukContainer.rebind('ctx').toConstantValue(ctx);
-                      } else {
-                        darukContainer.bind('ctx').toConstantValue(ctx);
-                      }
                       await instance[funcName](ctx, next);
                       // 允许用户在 controller 销毁前执行清理逻辑
                       if (is.fn(instance._destroy)) {

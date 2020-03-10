@@ -8,7 +8,6 @@ import {
   DarukContext,
   DarukServer,
   get,
-  injectable,
   Next,
   TYPES
 } from '../src';

@@ -12,7 +12,7 @@ export default function getDefaultOptions(
   return {
     name,
     rootPath,
-    middwareOrder: [],
+    middlewareOrder: [],
     bodyOptions: {},
     debug,
     gracefulShutdown: {

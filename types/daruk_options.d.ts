@@ -9,7 +9,7 @@ type RecursivePartial<T> = {
 };
 
 export interface Options {
-  middwareOrder: string[];
+  middlewareOrder: string[];
   name: string;
   rootPath: string;
   debug: boolean;
