@@ -17,9 +17,7 @@ function fixIP(buffer: Buffer) {
   }
 }
 
-export default function() {
-  return {
-    fixIP,
-    getToday
-  };
-}
+export default {
+  fixIP,
+  getToday
+};

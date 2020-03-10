@@ -1,9 +1,20 @@
-import { Context, Daruk } from 'daruk';
+import {
+  Daruk,
+  DarukContext,
+  defineMiddleware,
+  injectable,
+  MiddlewareClass,
+  Next
+} from '../../../src';
 
-export default function(daruk: Daruk) {
-  return async (ctx: Context, next: Function) => {
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    await next();
-  };
+@injectable()
+@defineMiddleware('cors')
+class Cors implements MiddlewareClass {
+  public initMiddleware(daruk: Daruk) {
+    return async (ctx: DarukContext, next: Next) => {
+      ctx.set('Access-Control-Allow-Origin', '*');
+      ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      await next();
+    };
+  }
 }

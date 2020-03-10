@@ -1,19 +1,20 @@
-import { BaseController, config, Context, Daruk, get, middleware, util } from 'daruk';
+import { controller, DarukContext, get, inject, injectable, middleware, Next } from '../../../src';
+import config from '../config';
+import weather from '../services/weather';
+import utils from '../utils';
 
-export default class Index extends BaseController {
-  @util('getToday')
-  public getToday: Daruk['util']['getToday'];
-  @config('author')
-  public author: Daruk['config']['author'];
-  @config('version')
-  public version: Daruk['config']['version'];
+@injectable()
+@controller()
+class Index {
+  @inject('weather') private weather: weather;
   @middleware('cors')
   @get('/')
-  public async index(ctx: Context, next: Function) {
-    await ctx.service.weather.getWeather()
+  public async index(ctx: DarukContext, next: Next) {
+    await this.weather
+      .getWeather()
       .then((weather: string) => {
-        ctx.body = `Hi, ${this.author}, project version is ${this.version},
-                Today is ${this.getToday()}, weather is ${weather}`;
+        ctx.body = `Hi, ${config.author}, project version is ${config.version},
+                Today is ${utils.getToday()}, weather is ${weather}`;
       })
       .catch((err: string) => {
         ctx.body = `Get weather information error, message: ${err}`;

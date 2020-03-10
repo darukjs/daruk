@@ -1,4 +1,10 @@
-class Cache {
+// @ts-ignore
+import { fluentProvide } from '../../../src';
+
+@(fluentProvide('Cache')
+  .inSingletonScope()
+  .done())
+export default class Cache {
   public store: any;
   public constructor() {
     this.store = {};
@@ -9,8 +15,4 @@ class Cache {
   public get(key: string) {
     return this.store[key];
   }
-}
-
-export default function() {
-  return new Cache();
 }
