@@ -1,6 +1,12 @@
-import { Daruk } from 'daruk';
+import { DarukServer } from '../../src';
 
-const myApp = new Daruk('myapp', { rootPath: __dirname, debug: process.env.NODE_ENV === 'dev' });
-const port = 1318;
+(async () => {
+  let app = DarukServer();
+  app.initOptions({
+    rootPath: __dirname,
+    debug: process.env.NODE_ENV === 'dev'
+  });
 
-myApp.run(port);
+  await app.loadFile('./timers');
+  await app.initPlugin();
+})();
