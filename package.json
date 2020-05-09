@@ -1,13 +1,13 @@
 {
   "name": "daruk",
-  "version": "2.0.0",
+  "version": "2.0.0-beta2",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "dev": "ts-node --project tsconfig.json --files src/index.ts",
-    "build": "rimraf -rf ./build && tsc",
+    "build": "rimraf -rf ./build && tsc && cp -rf src/typings types/typings",
     "demo": "ts-node --project tsconfig.json --files",
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test": "cross-env TS_NODE_FILES=true nyc --reporter=lcov --reporter=text-summary --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
