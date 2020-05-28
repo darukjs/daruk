@@ -12,7 +12,7 @@
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "test": "cross-env TS_NODE_FILES=true nyc --reporter=lcov --reporter=text-summary --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./src/**/*.ts",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "types": "./types/index.d.ts",
