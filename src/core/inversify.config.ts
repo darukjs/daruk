@@ -2,7 +2,9 @@ import { Container } from 'inversify';
 import getDecorators from 'inversify-inject-decorators';
 import Daruk from './daruk';
 
-const darukContainer = new Container();
+const darukContainer = new Container({
+  skipBaseClassChecks: true
+});
 let { lazyInject } = getDecorators(darukContainer);
 
 const DarukServer = () => {
