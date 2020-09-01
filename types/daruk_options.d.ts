@@ -1,4 +1,5 @@
 import koaBody = require('koa-body');
+import { DarukContext } from '../src';
 
 type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
@@ -26,7 +27,7 @@ export interface Options {
   loggerOptions: any;
   customLogger: any;
   loggerMiddleware: {
-    filter?: () => boolean;
+    filter?: (ctx: DarukContext) => boolean;
     requiredLogs?: string[];
   };
   gracefulShutdown: {

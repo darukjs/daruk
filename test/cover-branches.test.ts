@@ -15,6 +15,7 @@ describe('cover-branches', () => {
 
   beforeEach(async () => {
     server = DarukServer();
+    // @ts-ignore
     stubExit = sinon.stub(process, 'exit');
     // 匿名中间件的情况
     server.initOptions({
@@ -59,7 +60,7 @@ describe('cover-branches', () => {
     const stubPrettyLog = sinon
       .stub(server, 'prettyLog')
       .callsFake((msg, options = { level: 'info' }) => {
-        prettyLogLevel = options.level;
+        prettyLogLevel = options.level || 'info';
       });
 
     const err = new Error('mockError');

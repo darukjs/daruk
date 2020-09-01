@@ -299,7 +299,7 @@ class DisabledIndex {
 @timer()
 @injectable()
 class Timers {
-  public cronTime: string;
+  public cronTime!: string;
   public initTimer(daruk: Daruk) {
     this.cronTime = '* * * * * *';
   }

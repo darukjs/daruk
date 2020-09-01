@@ -17,4 +17,12 @@ class Index {
       limit
     });
   }
+  @get('/test')
+  public async test(ctx: DarukContext, next: Next) {
+    let a = ctx.query.a;
+    let res = await this.CommentsModel.test();
+    res = await this.CommentsModel.test();
+    res = await this.CommentsModel.test();
+    ctx.body = res + ',' + a;
+  }
 }

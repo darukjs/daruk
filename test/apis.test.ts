@@ -9,6 +9,7 @@ describe('apis', () => {
   let server = DarukServer();
 
   before(async () => {
+    // @ts-ignore
     stubExit = sinon.stub(process, 'exit');
     server.initOptions();
     await server.initPlugin();
