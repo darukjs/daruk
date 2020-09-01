@@ -1,9 +1,11 @@
-import { inject, provide } from '../../../../src';
+import { DarukContext, inject, injectable, service } from '../../../../src';
 import Comments from '../../entity/comments';
 import Db from '../../glues/connection';
 
-@provide('CommentsModel')
+@injectable()
+@service()
 export default class CommentsModel {
+  public ctx: DarukContext;
   @inject('Db') public Db: Db;
   public async findAllAndCount(page = 0, limit = 10) {
     let connection = await this.Db.getConnection();
