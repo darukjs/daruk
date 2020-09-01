@@ -47,13 +47,18 @@ Daruk2.0 同样基于 koa2，目前包含以下核心功能：
 安装
 
 ```bash
-yarn add daruk
+mkdir daruk-demo
+cd daruk-demo
+npm init
+npm add daruk ts-node typescript
+mkidr src
+touch src/index.ts
 ```
 
-开始编写 web 应用
+开始编写 web 应用 `src/index.ts`
 
 ```typescript
-import { DarukServer, controller, injectable } from 'daruk';
+import { DarukServer, controller, injectable, get } from 'daruk';
 
 (async () => {
   const myapp = DarukServer();
@@ -71,6 +76,57 @@ import { DarukServer, controller, injectable } from 'daruk';
   await myapp.initPlugin();
   myapp.listen(3000);
 })();
+```
+
+创建编译时的 `tsconfig.json` 文件
+
+```bash
+touch tsconfig.json
+```
+
+```json
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./build",
+    "rootDir": "./src",
+    "typeRoots": [],
+    "types": [],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.ts"]
+}
+```
+
+编辑 `package.json` 的启动和编译脚本
+
+```json
+{
+  "scripts": {
+    "dev": "NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts",
+    "build": "tsc"
+  }
+}
+```
+
+启动服务
+
+```bash
+npm run dev
+> NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts
+[2020-9-1 19:52:12] [debug] [init] [router] get - /
+```
+
+打包脚本并启动编译后的脚本
+
+```bash
+npm run build
+node build/index.js
 ```
 
 ## Docs
