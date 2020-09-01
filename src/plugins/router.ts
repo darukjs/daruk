@@ -3,11 +3,11 @@
  * @date 2020-01-15
  * @fileoverview 重构router部分,使用依赖控制controller
  */
+import Router = require('@koa/router');
 import assert = require('assert');
 import { injectable } from 'inversify';
 import is = require('is');
 import Koa = require('koa');
-import Router = require('koa-router');
 import urljoin = require('url-join');
 import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
