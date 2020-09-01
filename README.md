@@ -19,90 +19,67 @@
 ![APM](https://img.shields.io/apm/l/vim-mode.svg)
 [![Build Status](https://dev.azure.com/designsor/daruk/_apis/build/status/darukjs.daruk?branchName=developer)](https://dev.azure.com/designsor/daruk/_build/latest?definitionId=3&branchName=developer)
 
-# Daruk
+## Daruk
 
-[Chinese Document](./CN.md)
+[Daruk](https://darukjs.com) 是一款基于 Koa2，使用 Typescript 开发的轻量级 web 框架。Daruk 的初衷是让人们可以更方便的开发 Nodejs Web 应用并能够体会到 Typescript 编程的乐趣。Daruk 本身基于 100%基于 Typescript 开发，使用 inversifyjs 的 IoC 容器管理依赖，让开发者享受最佳的 OOP 和 IoC 的编程体验。
 
-[Daruk](https://darukjs.github.io/daruk.org) is a lightweight web framework base on [Koa](https://github.com/koajs/koa) and written in [Typescript](https://www.typescriptlang.org/). Koa is original http server implementation if you used it. In the daily development,we have to use many open source middleware in Koa to implement scaffold, routing, abstraction and some components such as logging, monitoring, etc.
+框架内部集成了许多方便灵活的装饰器函数，让开发者可以写更少的代码来完成更多的事情，Daruk2.0 更改了之前严格要求目录约定的范式，提供给开发者更灵活的操作空间来进行项目约束和编写，但是内置的功能并没有缺失，整个框架的开发能力和 Daruk1.0 能力持平。
 
-We can create your web project by Daruk scaffold for business. Daruk core is lightweight and easy extension and learing, but it can provides more options for developer to rapid development such as constraints directory specification and code style.
+比如在 Daruk2.0 中，我们可以使用装饰器来快速定义 service，controller，timer，middleware 等能力来编写 web 应用，且提供了一些基本的内置中间件和路由服务等，更灵活的定义，让 Daruk2.0 可以更灵活的定制你的 web 项目和编写测试脚本。
 
-Daruk, it comes from [The Legend of Zelda: Breath of the Wild](https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild) one of the four heroes, it have symbol of guardian ability. The goal of the framework is also as it.
+Daruk 来源自塞尔达传说旷野之息里的四英杰之一，拥有在周围张开结界保护自己的力量，框架的目的也是为了给 nodejs server 提供健壮的基础管理能力。
 
-Daruk is base on Koa2, includes features:
+Daruk2.0 同样基于 koa2，目前包含以下核心功能：
 
-- Scaffolding
-- Directory and file specification
-- Auto loader and decorator combination
-- Complete Typescript development experience
-- Lifecycle and hook.
-- Custom(performance logs & business logs) & tracked
-- Online performance analysis
-- Lightweight link tracking
-- The MVC development of object-oriented
-- Support the development of the module
+- 开启装饰器配置，ts 环境下引入即用，无需脚手架等工具。
+- 提供给开发者编写影响框架内部能力的插件机制
+- 可以自定义目录结构，在启动时使用 API 加载你自己定义的源文件
+- 完整的 typescript 开发体验
+- 服务启动完整生命周期 hook
+- 自定义(性能日志 & 业务日志) 染色功能
+- 支持线上实时性能分析
+- 轻量级的链路追踪
+- 面向对象的 mvc 开发体验
+- 配套的一些周边模块
 
-## Installation scaffolding
+## Installation & Quick start
+
+安装
 
 ```bash
-# install daruk scaffold cli
-$ cnpm i -g daruk-cli
-
-# init project
-# --ignore ignore local template cache
-$ daruk init --ignore daruk-example
-
-# run the project
-$ cd daruk-example
-$ npm run dev
+yarn add daruk
 ```
 
-## Quick start
-
-You can write your code shown below :
+开始编写 web 应用
 
 ```typescript
-import { Daruk } from 'daruk';
+import { DarukServer, controller, injectable } from 'daruk';
 
-const myApp = new Daruk('darukProject', {
-  rootPath: __dirname,
-  debug: process.env.NODE_ENV === 'dev'
-});
+(async () => {
+  const myapp = DarukServer();
 
-myApp.listen(process.env.PORT || 3000);
-```
-
-`controllers/index.ts`:
-
-```typescript
-import { BaseController, config, Context, Daruk, get, middleware, util } from 'daruk';
-
-export default class Index extends BaseController {
-  @util('getToday')
-  public getToday: Daruk['util']['getToday'];
-
-  @config('author')
-  public author: Daruk['config']['author'];
-
-  @config('version')
-  public version: Daruk['config']['version'];
-
-  @middleware('cors')
-  @get('/')
-  public async index(ctx: Context, next: Function) {
-    const weather = await ctx.service.weather.getWeather();
-    ctx.body = `Hi, ${this.author}, project version is ${
-      this.version
-    }, Today is ${this.getToday()}, weather is ${weather}`;
+  @injectable()
+  @controller()
+  class Index {
+    @get('/')
+    public async index(ctx: any) {
+      ctx.body = 'hello world';
+    }
   }
-}
-```
 
-More information you can check out [example/03-weather](./example/03-weather).
+  myapp.initOptions();
+  await myapp.initPlugin();
+  myapp.listen(3000);
+})();
+```
 
 ## Docs
 
-More docs: [Quick Start](http://darukjs.com/)
+查看 Daruk 文档[快速开始](http://darukjs.com/)吧！
+
+## Example
+
+查看实际的 web 服务例子 [example](https://github.com/darukjs/daruk/tree/2.0/example)
 
 ## Features Todo
 
