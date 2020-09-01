@@ -110,6 +110,7 @@
     "instrument": true
   },
   "files": [
+    "src",
     "types",
     "build",
     "LICENSE"
