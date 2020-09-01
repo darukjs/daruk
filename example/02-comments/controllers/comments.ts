@@ -5,7 +5,7 @@ import CommentsModel from '../services/CommentsModel';
 @controller()
 @prefix('/comments')
 class Comments {
-  @inject('CommentsModel') private CommentsModel: CommentsModel;
+  @inject('CommentsModel') private CommentsModel!: CommentsModel;
   @post('/insert')
   public async index(ctx: DarukContext, next: Next) {
     let { name, content } = ctx.request.body;

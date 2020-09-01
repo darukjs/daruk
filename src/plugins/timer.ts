@@ -21,11 +21,11 @@ class Timer implements PluginClass {
           job.initTimer(daruk);
           let instance: CronJob = new CronJob(
             job.cronTime,
-            function() {
-              job.onTick(this, daruk);
+            () => {
+              job.onTick(instance, daruk);
             },
-            function() {
-              job.onComplete(this, daruk);
+            () => {
+              if (job.onComplete) job.onComplete(instance, daruk);
             },
             job.start || true,
             job.timeZone || 'Asia/Shanghai',

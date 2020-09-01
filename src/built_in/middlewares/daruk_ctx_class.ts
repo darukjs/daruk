@@ -15,13 +15,13 @@ class DarukCtxClass implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     return async (ctx: DarukContext, next: Next) => {
       let services = Reflect.getMetadata(SERVICE, Reflect) || [];
-      services.forEach((target) => {
+      services.forEach((target: Constructor) => {
         let service = new target();
         service.ctx = ctx;
         darukContainer.bind<Constructor>(target.name).toConstantValue(service);
       });
       await next();
-      services.forEach((target) => {
+      services.forEach((target: Constructor) => {
         darukContainer.unbind(target.name);
       });
     };

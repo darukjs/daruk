@@ -42,7 +42,7 @@ class WrapMiddlewareUse implements PluginClass {
       time.diff.unshift(diff);
       if (time.list.length === 0) {
         // 所有中间件都被 pop 掉之后，结束所有mid
-        let data: { [key: string]: number; sum?: number } = {};
+        let data: { [key: string]: number } = {};
         let sum = 0;
         time.diff.forEach(function summeryTimeConsumption(diff: number, index: number) {
           sum += diff;
@@ -81,6 +81,7 @@ class WrapMiddlewareUse implements PluginClass {
       // @ts-ignore
       app.use = function wrappedKoaUse(fn: Function, name: string) {
         midNames.push(name || 'index_' + midNames.length);
+        // @ts-ignore
         return use.call(app, wrapUse(fn, name));
       };
     }

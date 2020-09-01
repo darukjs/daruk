@@ -23,7 +23,7 @@ class DarukHttpShutdown implements PluginClass {
           TYPES.PluginInstance,
           'DarukExitHook'
         );
-        DarukExitHook.addHook(function handleHttpGracefulShutdown(err: Error, cb: Function) {
+        DarukExitHook.addHook(function handleHttpGracefulShutdown(err: Error | null, cb: Function) {
           daruk.logger.info(`handle unfinished connections, waiting up to ${timeout}ms`);
           const startTime = Date.now();
           serverShutDown

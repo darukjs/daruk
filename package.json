@@ -66,6 +66,7 @@
     "@koa/router": "^9.4.0",
     "@types/cron": "^1.7.1",
     "@types/koa": "^2.0.46",
+    "@types/koa__router": "^8.0.2",
     "@types/node": "^10.12.18",
     "@types/recursive-readdir": "^2.2.0",
     "@types/url-join": "^4.0.0",

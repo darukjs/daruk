@@ -27,8 +27,8 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
     is.object(config) && Object.keys(config).length > 0,
     `[Decorator required] parameter must be a object and more than one property`
   );
-  function check(actual: { [key: string]: string }, expected: string[], part: method) {
-    if (is.object(actual)) {
+  function check(actual: { [key: string]: string }, expected: string[] | undefined, part: method) {
+    if (is.object(actual) && expected) {
       for (let key of expected) {
         if (is.undefined(actual[key])) {
           return {
@@ -57,33 +57,35 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
 }
 
 export function typeParse(config: { body?: ParseType; query?: ParseType; params?: ParseType }) {
-  function parse(constructors: ParseType, actual: { [key: string]: string }) {
+  function parse(constructors: ParseType | undefined, actual: { [key: string]: string }) {
     const parsed: { [key: string]: any } = {};
-    Object.keys(constructors).forEach((key) => {
-      if (!actual[key]) {
-        return;
-      }
-      const constructor = constructors[key];
-      switch (constructor) {
-        case Boolean:
-        case String:
-        case Number:
-          parsed[key] = constructor(htmlspecialchars(actual[key]));
-          break;
-        case Object:
-        case Array:
-          try {
-            parsed[key] = JSON.parse(actual[key]);
-          } catch (e) {
-            if (constructor === Object) {
-              parsed[key] = {};
-            } else {
-              parsed[key] = Array(actual[key]);
+    if (constructors) {
+      Object.keys(constructors).forEach((key) => {
+        if (!actual[key]) {
+          return;
+        }
+        const constructor = constructors[key];
+        switch (constructor) {
+          case Boolean:
+          case String:
+          case Number:
+            parsed[key] = constructor(htmlspecialchars(actual[key]));
+            break;
+          case Object:
+          case Array:
+            try {
+              parsed[key] = JSON.parse(actual[key]);
+            } catch (e) {
+              if (constructor === Object) {
+                parsed[key] = {};
+              } else {
+                parsed[key] = Array(actual[key]);
+              }
             }
-          }
-          break;
-      }
-    });
+            break;
+        }
+      });
+    }
     return parsed;
   }
 

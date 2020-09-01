@@ -6,7 +6,7 @@ import Comments from '../entity/comments';
 
 @(fluentProvide('Db').inSingletonScope().done())
 export default class Db {
-  public connection: Connection;
+  public connection!: Connection;
   public async getConnection() {
     if (!this.connection) {
       this.connection = await createConnection({

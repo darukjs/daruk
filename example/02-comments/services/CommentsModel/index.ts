@@ -5,8 +5,8 @@ import Db from '../../glues/connection';
 @injectable()
 @service()
 export default class CommentsModel {
-  public ctx: DarukContext;
-  @inject('Db') public Db: Db;
+  public ctx!: DarukContext;
+  @inject('Db') public Db!: Db;
   public async findAllAndCount(page = 0, limit = 10) {
     let connection = await this.Db.getConnection();
     let comments = connection.getRepository(Comments).findAndCount({

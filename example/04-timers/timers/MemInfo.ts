@@ -4,7 +4,7 @@ import { CronJob, Daruk, injectable, timer, TimerClass } from '../../../src';
 @injectable()
 @timer()
 class MyTimer implements TimerClass {
-  public cronTime: string;
+  public cronTime!: string;
   public initTimer(daruk: Daruk) {
     this.cronTime = '* * * * * *';
   }

@@ -11,6 +11,7 @@ import Koa = require('koa');
 import { ListenOptions } from 'net';
 import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
+import { setUncaughtExceptionCaptureCallback } from 'process';
 import recursive = require('recursive-readdir');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
@@ -22,13 +23,24 @@ import { TYPES } from './types';
 
 class Daruk extends EventEmitter {
   [key: string]: any;
-  public name: string;
+  public name!: string;
   public app: Koa;
-  public httpServer: Server;
-  public logger: KoaLogger.logger;
-  public options: Options;
+  public httpServer!: Server;
+  public logger!: KoaLogger.logger;
+  public options!: Options;
+  public constructor() {
+    super();
+    // 用于保存 DarukLoader 加载的模块
+    this.app = new Koa();
+    // tslint:disable-next-line
+    const self = this;
+    // 监听 koa 的错误事件，输出日志
+    this.app.on('error', function handleKoaError(err: Error) {
+      self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
+    });
+  }
   public initOptions(options: PartialOptions = {}) {
-    const rootPath = options.rootPath || dirname(require.main.filename);
+    const rootPath = options.rootPath || dirname(require?.main?.filename as string);
     const defaultOptions = getDefaultOptions(rootPath, options.name, options.debug);
     const customLogger = options.customLogger;
     // customLogger 可能是一个类，不能进行 deep assign
@@ -38,14 +50,7 @@ class Daruk extends EventEmitter {
     this.options.customLogger = options.customLogger = customLogger;
     // 初始化 logger
     this.logger = customLogger || new KoaLogger.logger(this.options.loggerOptions);
-    // 用于保存 DarukLoader 加载的模块
-    this.app = new Koa();
-    // tslint:disable-next-line
-    const self = this;
-    // 监听 koa 的错误事件，输出日志
-    this.app.on('error', function handleKoaError(err: Error) {
-      self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
-    });
+    this.name = this.options.name;
     this.emit('initOptions');
   }
   public async loadFile(path: string) {
@@ -100,8 +105,9 @@ class Daruk extends EventEmitter {
   public listen(handle: any, backlog?: number, listeningListener?: () => void): Server;
   public listen(handle: any, listeningListener?: () => void): Server;
   public listen(options: ListenOptions, listeningListener?: () => void): Server;
-  public listen(): Server {
-    this.httpServer = this.app.listen.apply(this.app, Array.prototype.slice.call(arguments, 0));
+  public listen(...args: any[]): Server {
+    // @ts-ignore
+    this.httpServer = this.app.listen.apply(this.app, args);
     this.emit('serverReady');
     return this.httpServer;
   }

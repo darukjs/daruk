@@ -3,8 +3,7 @@ import { DarukServer } from '../../src';
 (async () => {
   let app = DarukServer();
   app.initOptions({
-    rootPath: __dirname,
-    debug: process.env.NODE_ENV === 'dev'
+    rootPath: __dirname
   });
 
   await app.loadFile('./timers');

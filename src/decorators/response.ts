@@ -124,7 +124,7 @@ export function header(key: string | { [key: string]: string }, value?: string) 
   );
 
   let headers: { [key: string]: string } = {};
-  if (typeof key === 'string') {
+  if (typeof key === 'string' && value) {
     headers[key] = value;
   } else if (typeof key === 'object') {
     headers = key;

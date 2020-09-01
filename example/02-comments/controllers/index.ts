@@ -4,7 +4,7 @@ import CommentsModel from '../services/CommentsModel';
 @injectable()
 @controller()
 class Index {
-  @inject('CommentsModel') private CommentsModel: CommentsModel;
+  @inject('CommentsModel') private CommentsModel!: CommentsModel;
   @get('/')
   public async index(ctx: DarukContext, next: Next) {
     let { page = 1, limit = 5 } = ctx.query;

@@ -37,7 +37,7 @@ interface Meta {
 @plugin()
 @injectable()
 class RouterController implements PluginClass {
-  public async initPlugin(daruk: DarukRouter) {
+  public async initPlugin(daruk: Daruk) {
     daruk.on('init', () => {
       daruk.emit('routerUseBefore');
 

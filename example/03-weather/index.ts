@@ -6,8 +6,7 @@ import config from './config';
 
   app.initOptions({
     name: 'myapp',
-    rootPath: __dirname,
-    debug: process.env.NODE_ENV === 'dev'
+    rootPath: __dirname
   });
 
   await app.loadFile('./glues');

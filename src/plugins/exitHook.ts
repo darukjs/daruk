@@ -13,7 +13,7 @@ import { PluginClass } from '../typings/daruk';
 class DarukExitHook implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     let exitHook = new ExitHook({
-      onExit: (err: Error) => {
+      onExit: (err: Error | null) => {
         if (err) {
           daruk.prettyLog(err.stack || err.message, { level: 'error' });
         }

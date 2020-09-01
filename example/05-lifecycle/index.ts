@@ -4,8 +4,7 @@ import { Daruk, DarukContext, DarukServer } from '../../src';
   let app = DarukServer();
   const port = 3000;
   app.initOptions({
-    rootPath: __dirname,
-    debug: process.env.NODE_ENV === 'dev'
+    rootPath: __dirname
   });
 
   app.on('access', (ctx: DarukContext) => {
