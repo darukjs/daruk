@@ -89,7 +89,7 @@ Beta [TodoList](./docs/todo-list.md)
 
 Please let us know how can we help. Do check out issues for bug reports or suggestions first.
 
-To become a contributor, please follow our [contributing guide](./docs/how-to-contribute.md)
+To become a contributor, please follow our [contributing guide](./docs/CONTRIBUTING.md)
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
