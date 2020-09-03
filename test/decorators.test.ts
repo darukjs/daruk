@@ -10,18 +10,17 @@ const assert = chai.assert;
 
 describe('decorators', () => {
   let app: Daruk['httpServer'];
-  let server = DarukServer();
+  let server = DarukServer({
+    rootPath: __dirname,
+    debug: false,
+    loggerOptions: {
+      disable: true,
+      overwriteConsole: false
+    }
+  });
   before(async () => {
-    server.initOptions({
-      rootPath: __dirname,
-      debug: false,
-      loggerOptions: {
-        disable: true,
-        overwriteConsole: false
-      }
-    });
     await server.loadFile('./decorators');
-    await server.initPlugin();
+    await server.binding();
     await server.listen(port);
     app = server.httpServer;
   });
@@ -34,78 +33,48 @@ describe('decorators', () => {
     request(app)
       .get('/repeatMethod')
       .expect(code200, () => {
-        request(app)
-          .post('/repeatMethod')
-          .expect(code200, done);
+        request(app).post('/repeatMethod').expect(code200, done);
       });
   });
 
   it('decorator "@all"', (done) => {
-    request(app)
-      .get('/all')
-      .expect(code200, done);
+    request(app).get('/all').expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(app)
-      .del('/del')
-      .expect(code200, done);
+    request(app).del('/del').expect(code200, done);
   });
   it('decorator "@get"', (done) => {
-    request(app)
-      .get('/get')
-      .expect(code200, done);
+    request(app).get('/get').expect(code200, done);
   });
   it('decorator "@head"', (done) => {
-    request(app)
-      .head('/head')
-      .expect(code200, done);
+    request(app).head('/head').expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(app)
-      .del('/del')
-      .expect(code200, done);
+    request(app).del('/del').expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(app)
-      .del('/del')
-      .expect(code200, done);
+    request(app).del('/del').expect(code200, done);
   });
   it('decorator "@del"', (done) => {
-    request(app)
-      .del('/del')
-      .expect(code200, done);
+    request(app).del('/del').expect(code200, done);
   });
   it('decorator "@options"', (done) => {
-    request(app)
-      .options('/options')
-      .expect(code200, done);
+    request(app).options('/options').expect(code200, done);
   });
   it('decorator "@patch"', (done) => {
-    request(app)
-      .patch('/patch')
-      .expect(code200, done);
+    request(app).patch('/patch').expect(code200, done);
   });
   it('decorator "@post"', (done) => {
-    request(app)
-      .post('/post')
-      .expect(code200, done);
+    request(app).post('/post').expect(code200, done);
   });
   it('decorator "@put"', (done) => {
-    request(app)
-      .put('/put')
-      .expect(code200, done);
+    request(app).put('/put').expect(code200, done);
   });
   it('decorator @json', (done) => {
-    request(app)
-      .get('/json1')
-      .expect(code200)
-      .expect({ foo: 1 }, done);
+    request(app).get('/json1').expect(code200).expect({ foo: 1 }, done);
   });
   it('decorator @JSON', (done) => {
-    request(app)
-      .get('/json2')
-      .expect(code200)
-      .expect({ foo: 1 }, done);
+    request(app).get('/json2').expect(code200).expect({ foo: 1 }, done);
   });
 
   it('decorator @type', (done) => {
@@ -116,57 +85,35 @@ describe('decorators', () => {
   });
 
   it('decorator @header', (done) => {
-    request(app)
-      .get('/header')
-      .expect(code200)
-      .expect('foo', 'bar')
-      .expect('bar', done);
+    request(app).get('/header').expect(code200).expect('foo', 'bar').expect('bar', done);
   });
 
   it('decorator @header', (done) => {
-    request(app)
-      .get('/headers')
-      .expect(code200)
-      .expect('foo', 'bar')
-      .expect('bar', done);
+    request(app).get('/headers').expect(code200).expect('foo', 'bar').expect('bar', done);
   });
 
   it('decorator @get for wildcard', (done) => {
-    request(app)
-      .get('/wildcard_3_4.htm')
-      .expect(code200, done);
+    request(app).get('/wildcard_3_4.htm').expect(code200, done);
   });
 
   it('decorator @redirect', (done) => {
-    request(app)
-      .get('/redirect')
-      .expect(code302, done);
+    request(app).get('/redirect').expect(code302, done);
   });
 
   it('decorator @prefix', (done) => {
-    request(app)
-      .get('/v1/prefix/index')
-      .expect(code200, done);
+    request(app).get('/v1/prefix/index').expect(code200, done);
   });
 
   it('decorator @priority', (done) => {
-    request(app)
-      .get('/v1/prefix/index')
-      .expect(code200)
-      .expect('AB', done);
+    request(app).get('/v1/prefix/index').expect(code200).expect('AB', done);
   });
 
   it('decorator @prefix deep controller', (done) => {
-    request(app)
-      .get('/v1/prefix/test/deep/json')
-      .expect(code200, done);
+    request(app).get('/v1/prefix/test/deep/json').expect(code200, done);
   });
 
   it('decorator "@middleware"', (done) => {
-    request(app)
-      .get('/middleware')
-      .expect(code200)
-      .expect('routeMiddleware', done);
+    request(app).get('/middleware').expect(code200).expect('routeMiddleware', done);
   });
 
   it('decorator "multi @middleware"', (done) => {
@@ -185,16 +132,13 @@ describe('decorators', () => {
       .expect('', done);
   });
   it('decorator "@required" fail', (done) => {
-    request(app)
-      .post('/required/1')
-      .expect(code200)
-      .expect(
-        {
-          part: 'body',
-          key: 'foo'
-        },
-        done
-      );
+    request(app).post('/required/1').expect(code200).expect(
+      {
+        part: 'body',
+        key: 'foo'
+      },
+      done
+    );
   });
   it('decorator @typeParse', (done) => {
     request(app)
@@ -266,18 +210,14 @@ describe('decorators', () => {
   });
 
   it('decorator @disabled method', (done) => {
-    request(app)
-      .get('/disabled')
-      .expect(code404, done);
+    request(app).get('/disabled').expect(code404, done);
   });
 
   it('decorator @disabled class', (done) => {
-    request(app)
-      .get('/disabled/test')
-      .expect(code404, done);
+    request(app).get('/disabled/test').expect(code404, done);
   });
 
-  it('decorator @timer class', function(done) {
+  it('decorator @timer class', function (done) {
     const timerDelay = 5000;
     const timeOut = 1200;
     // tslint:disable-next-line

@@ -1,5 +1,6 @@
 import { controller, DarukContext, DarukServer, get, injectable, Next } from '../../src';
 
+@injectable()
 @controller()
 class HelloWorld {
   @get('/')
@@ -11,8 +12,7 @@ class HelloWorld {
 (async () => {
   let app = DarukServer();
   let port = 3000;
-  app.initOptions();
-  await app.initPlugin();
+  await app.binding();
   app.listen(port);
   app.logger.info(`app listen port ${port}`);
 })();

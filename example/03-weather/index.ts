@@ -2,9 +2,7 @@ import { DarukServer } from '../../src';
 import config from './config';
 
 (async () => {
-  let app = DarukServer();
-
-  app.initOptions({
+  let app = DarukServer({
     name: 'myapp',
     rootPath: __dirname
   });
@@ -13,7 +11,7 @@ import config from './config';
   await app.loadFile('./services');
   await app.loadFile('./middlewares');
   await app.loadFile('./controllers');
-  await app.initPlugin();
+  await app.binding();
   app.listen(config.port);
   app.logger.info(`app listen port ${config.port}`);
 })();

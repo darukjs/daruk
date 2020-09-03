@@ -11,7 +11,6 @@ import Koa = require('koa');
 import { ListenOptions } from 'net';
 import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
-import { setUncaughtExceptionCaptureCallback } from 'process';
 import recursive = require('recursive-readdir');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
@@ -39,7 +38,7 @@ class Daruk extends EventEmitter {
       self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
     });
   }
-  public initOptions(options: PartialOptions = {}) {
+  public _initOptions(options: PartialOptions = {}) {
     const rootPath = options.rootPath || dirname(require?.main?.filename as string);
     const defaultOptions = getDefaultOptions(rootPath, options.name, options.debug);
     const customLogger = options.customLogger;
@@ -51,12 +50,11 @@ class Daruk extends EventEmitter {
     // 初始化 logger
     this.logger = customLogger || new KoaLogger.logger(this.options.loggerOptions);
     this.name = this.options.name;
-    this.emit('initOptions');
   }
   public async loadFile(path: string) {
     return this._loadFile(join(this.options.rootPath, path));
   }
-  public async initPlugin() {
+  public async binding() {
     await this._loadFile(join(__dirname, '../plugins'));
     await this._loadFile(join(__dirname, '../built_in'));
     const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
@@ -74,7 +72,7 @@ class Daruk extends EventEmitter {
           .whenTargetNamed(plugin.constructor.name);
       }
     }
-    this.emit('init');
+    this.emit('init', darukContainer);
     darukContainer.load(buildProviderModule());
   }
   /**
@@ -108,7 +106,7 @@ class Daruk extends EventEmitter {
   public listen(...args: any[]): Server {
     // @ts-ignore
     this.httpServer = this.app.listen.apply(this.app, args);
-    this.emit('serverReady');
+    this.emit('serverReady', this.httpServer);
     return this.httpServer;
   }
   /**

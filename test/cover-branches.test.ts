@@ -14,11 +14,7 @@ describe('cover-branches', () => {
   let server: Daruk;
 
   beforeEach(async () => {
-    server = DarukServer();
-    // @ts-ignore
-    stubExit = sinon.stub(process, 'exit');
-    // 匿名中间件的情况
-    server.initOptions({
+    server = DarukServer({
       rootPath: __dirname,
       debug: false,
       loggerOptions: {
@@ -42,7 +38,9 @@ describe('cover-branches', () => {
         ]
       }
     });
-    await server.initPlugin();
+    // @ts-ignore
+    stubExit = sinon.stub(process, 'exit');
+    await server.binding();
     server.app.use((ctx: DarukContext, next: Next) => {
       return next();
     });

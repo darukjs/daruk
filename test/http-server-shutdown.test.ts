@@ -21,7 +21,17 @@ describe('http-server-shutdown', () => {
   let server: Daruk;
   let stub: sinon.SinonStub;
   before(async () => {
-    server = DarukServer();
+    server = DarukServer({
+      rootPath: __dirname,
+      debug: false,
+      loggerOptions: {
+        disable: true,
+        overwriteConsole: false
+      },
+      gracefulShutdown: {
+        enable: true
+      }
+    });
 
     @controller()
     class Index {
@@ -39,19 +49,7 @@ describe('http-server-shutdown', () => {
       }
     }
 
-    server.initOptions({
-      rootPath: __dirname,
-      debug: false,
-      loggerOptions: {
-        disable: true,
-        overwriteConsole: false
-      },
-      gracefulShutdown: {
-        enable: true
-      }
-    });
-
-    await server.initPlugin();
+    await server.binding();
     await server.listen(port);
     app = server.httpServer;
     // 因为 daruk-exit-hook 监听到退出信号或者退出事件时，会执行进程退出的回调然后再执行 process.exit

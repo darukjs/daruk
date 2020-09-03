@@ -11,8 +11,7 @@ describe('apis', () => {
   before(async () => {
     // @ts-ignore
     stubExit = sinon.stub(process, 'exit');
-    server.initOptions();
-    await server.initPlugin();
+    await server.binding();
   });
 
   after(() => {
