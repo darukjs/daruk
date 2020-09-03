@@ -58,7 +58,7 @@ touch src/index.ts
 开始编写 web 应用 `src/index.ts`
 
 ```typescript
-import { DarukServer, controller, injectable, get, DarukContext } from 'daruk';
+import { DarukServer, controller, get, DarukContext } from 'daruk';
 
 (async () => {
   const myapp = DarukServer();
