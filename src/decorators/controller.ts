@@ -2,6 +2,7 @@
  * 框架直接以文件名作为路由前缀，controller 装饰器暂时不使用
  */
 
+import { injectable } from 'inversify';
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
 import { Constructor } from '../typings/daruk';
@@ -15,6 +16,7 @@ import { CONTROLLER_PRIORITY } from './constants';
 
 export function controller() {
   return (target: Constructor) => {
+    injectable()(target);
     darukContainer.bind<Constructor>(TYPES.ControllerClass).toConstructor(target);
   };
 }

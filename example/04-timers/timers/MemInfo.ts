@@ -1,7 +1,6 @@
 import { freemem } from 'os';
 import { CronJob, Daruk, injectable, timer, TimerClass } from '../../../src';
 
-@injectable()
 @timer()
 class MyTimer implements TimerClass {
   public cronTime!: string;

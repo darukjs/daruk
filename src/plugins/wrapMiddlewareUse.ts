@@ -10,7 +10,6 @@ import { plugin } from '../decorators';
 import { DarukContext, Next, PluginClass } from '../typings/daruk';
 
 @plugin()
-@injectable()
 class WrapMiddlewareUse implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     const midNames: string[] = [];

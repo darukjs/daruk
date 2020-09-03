@@ -1,6 +1,5 @@
 import { controller, DarukContext, get, injectable, Next } from '../../../src';
 
-@injectable()
 @controller()
 class Index {
   @get('/')

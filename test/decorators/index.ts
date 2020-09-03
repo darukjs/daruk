@@ -53,7 +53,6 @@ class Store {
 const cacheStore = new Store();
 
 @defineMiddleware('multiRouteMiddleware')
-@injectable()
 class MultiRouteMiddlewareRouteMiddleware {
   public initMiddleware() {
     return (options: { [key: string]: any }) => {
@@ -66,7 +65,6 @@ class MultiRouteMiddlewareRouteMiddleware {
 }
 
 @defineMiddleware('routeMiddleware')
-@injectable()
 class RouteMiddleware {
   public initMiddleware() {
     return (ctx: DarukContext, next: Next) => {
@@ -297,7 +295,6 @@ class DisabledIndex {
 }
 
 @timer()
-@injectable()
 class Timers {
   public cronTime!: string;
   public initTimer(daruk: Daruk) {

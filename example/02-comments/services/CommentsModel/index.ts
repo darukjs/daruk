@@ -10,7 +10,6 @@ function sleep(n: number) {
   });
 }
 
-@injectable()
 @service()
 export default class CommentsModel {
   public ctx!: DarukContext;

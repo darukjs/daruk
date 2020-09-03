@@ -6,7 +6,6 @@ import { plugin } from '../decorators';
 import { MiddlewareClass, PluginClass } from '../typings/daruk';
 
 @plugin()
-@injectable()
 class GlobalMiddleware implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('routerUseBefore', () => {

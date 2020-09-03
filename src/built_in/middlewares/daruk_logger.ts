@@ -15,7 +15,6 @@ interface LoggerOptions {
 }
 
 @defineMiddleware('daruk_logger')
-@injectable()
 class DarukLogger implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     const { filter, requiredLogs } = daruk.options.loggerMiddleware;

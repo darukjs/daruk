@@ -9,7 +9,6 @@ import { plugin } from '../decorators';
 import { PluginClass } from '../typings/daruk';
 
 @plugin()
-@injectable()
 class DarukExitHook implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     let exitHook = new ExitHook({

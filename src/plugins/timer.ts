@@ -11,7 +11,6 @@ import { plugin } from '../decorators';
 import { PluginClass, TimerClass } from '../typings/daruk';
 
 @plugin()
-@injectable()
 class Timer implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('init', () => {

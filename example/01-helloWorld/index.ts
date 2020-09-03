@@ -1,6 +1,5 @@
 import { controller, DarukContext, DarukServer, get, injectable, Next } from '../../src';
 
-@injectable()
 @controller()
 class HelloWorld {
   @get('/')

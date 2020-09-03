@@ -10,7 +10,6 @@ import { SERVICE } from '../../decorators/constants';
 import { Constructor, MiddlewareClass, Next } from '../../typings/daruk';
 
 @defineMiddleware('daruk_ctx_class')
-@injectable()
 class DarukCtxClass implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     let services = Reflect.getMetadata(SERVICE, Reflect) || [];

@@ -3,7 +3,6 @@ import config from '../config';
 import weather from '../services/weather';
 import utils from '../utils';
 
-@injectable()
 @controller()
 class Index {
   @inject('weather') private weather!: weather;

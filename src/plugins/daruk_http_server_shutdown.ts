@@ -12,7 +12,6 @@ import { plugin } from '../decorators';
 import { PluginClass } from '../typings/daruk';
 
 @plugin()
-@injectable()
 class DarukHttpShutdown implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('serverReady', () => {

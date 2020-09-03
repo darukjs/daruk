@@ -1,7 +1,6 @@
 import { controller, DarukContext, get, inject, injectable, Next } from '../../../src';
 import CommentsModel from '../services/CommentsModel';
 
-@injectable()
 @controller()
 class Index {
   @inject('CommentsModel') private CommentsModel!: CommentsModel;

@@ -10,7 +10,6 @@ import { defineMiddleware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';
 
 @defineMiddleware('daruk_body')
-@injectable()
 class KoaBody implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     return koaBody(daruk.options.bodyOptions);
