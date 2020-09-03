@@ -58,7 +58,7 @@ touch src/index.ts
 开始编写 web 应用 `src/index.ts`
 
 ```typescript
-import { DarukServer, controller, injectable, get } from 'daruk';
+import { DarukServer, controller, injectable, get, DarukContext } from 'daruk';
 
 (async () => {
   const myapp = DarukServer();
@@ -67,7 +67,7 @@ import { DarukServer, controller, injectable, get } from 'daruk';
   @controller()
   class Index {
     @get('/')
-    public async index(ctx: any) {
+    public async index(ctx: DarukContext) {
       ctx.body = 'hello world';
     }
   }
