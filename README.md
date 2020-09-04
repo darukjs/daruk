@@ -135,9 +135,7 @@ node build/index.js
 
 查看实际的 web 服务例子 [example](https://github.com/darukjs/daruk/tree/2.0/example)
 
-## Features Todo
-
-Beta [TodoList](./docs/todo-list.md)
+[daruk-demo](https://github.com/darukjs/daruk-demo)
 
 ## How to Contribute
 
