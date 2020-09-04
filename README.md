@@ -129,7 +129,7 @@ node build/index.js
 
 ## Docs
 
-查看 Daruk 文档[快速开始](http://darukjs.com/)吧！
+查看 Daruk 文档[快速开始](https://darukjs.com/)吧！ TypeDoc 则可以从这里开始 [API DOC](https://doc.darukjs.com/)吧！
 
 ## Example
 
