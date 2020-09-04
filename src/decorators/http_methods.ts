@@ -20,7 +20,10 @@ function handleMethodDecorator(method: string, path: string, proto: Object, prop
   Reflect.defineMetadata(CONTROLLER_PATH, routerMetas, target, propertyKey);
 }
 
-// 导出 http method 装饰器
+/**
+ * @decorator
+ * @param path
+ */
 export function post(path: string) {
   return (proto: Object, propertyKey: string) => {
     handleMethodDecorator('post', path, proto, propertyKey);
