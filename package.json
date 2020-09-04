@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "doc": "typedoc",
-    "deploydoc": "./deployDoc.sh",
+    "deploy": "./deployDoc.sh",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "dev": "ts-node --project tsconfig.json --files src/index.ts",
