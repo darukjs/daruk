@@ -1,5 +1,24 @@
 {
   "compileOnSave": true,
+  "typedocOptions": {
+    "mode": "file",
+    "inputFiles": ["./src"],
+    "out": "docs",
+    "readme": "none",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "stripInternal": true,
+    "exclude": [
+      "**/built_in/**/*.ts",
+      "**/plugins/*.ts",
+      "**/utils/*.ts",
+      "**/decorators/constants.ts",
+      "**/core/inversify.confg.ts",
+      "**/core/types.ts",
+      "**/core/daruk_default_options.ts",
+      "**/mock/*.ts"
+    ]
+  },
   "compilerOptions": {
     /* Basic Options */
     "target": "es2017" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */,

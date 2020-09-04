@@ -12,7 +12,6 @@ import {
   head,
   header,
   injectable,
-  JSON,
   json,
   middleware,
   Next,
@@ -116,11 +115,6 @@ class Index {
   @json()
   @get('/json1')
   public json() {
-    return { foo: 1 };
-  }
-  @get('/json2')
-  @JSON()
-  public JSON() {
     return { foo: 1 };
   }
   @redirect('/json2')

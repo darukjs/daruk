@@ -6,7 +6,11 @@ import Daruk from './daruk';
 const darukContainer = new Container({
   skipBaseClassChecks: true
 });
-let { lazyInject } = getDecorators(darukContainer);
+
+let {
+  /** @internal */
+  lazyInject
+} = getDecorators(darukContainer);
 
 const DarukServer = (options?: PartialOptions) => {
   let instance = new Daruk();

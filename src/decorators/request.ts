@@ -1,4 +1,5 @@
 import assert = require('assert');
+/** @internal */
 import htmlspecialchars = require('htmlspecialchars');
 import is = require('is');
 import koa = require('koa');

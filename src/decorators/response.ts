@@ -1,6 +1,10 @@
+/** @internal */
 import assert = require('assert');
+/** @internal */
 import is = require('is');
+/** @internal */
 import koa = require('koa');
+
 import {
   CONTROLLER_CLASS_PREFIX,
   CONTROLLER_DISABLED_CLASS,
@@ -68,9 +72,6 @@ export function json() {
     };
   };
 }
-
-// json的大写别名
-export const JSON = json;
 
 /**
  * URL 重定向

@@ -73,9 +73,6 @@ describe('decorators', () => {
   it('decorator @json', (done) => {
     request(app).get('/json1').expect(code200).expect({ foo: 1 }, done);
   });
-  it('decorator @JSON', (done) => {
-    request(app).get('/json2').expect(code200).expect({ foo: 1 }, done);
-  });
 
   it('decorator @type', (done) => {
     request(app)

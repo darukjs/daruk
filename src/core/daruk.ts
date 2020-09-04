@@ -1,16 +1,19 @@
 /**
  * @author xiaojue
- * @date 20190614
- * @update 20200113
- * @fileoverview plugin化daruk core
+ * @fileoverview darukServer 实例
  */
+
+/** @internal */
 import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
 import { buildProviderModule } from 'inversify-binding-decorators';
+/** @internal */
 import Koa = require('koa');
 import { ListenOptions } from 'net';
+/** @internal */
 import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
+/** @internal */
 import recursive = require('recursive-readdir');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';

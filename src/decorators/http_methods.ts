@@ -2,48 +2,69 @@ import assert = require('assert');
 import is = require('is');
 import { CONTROLLER_FUNC_NAME, CONTROLLER_PATH } from './constants';
 
-/**
- * @desc 生成 http method 装饰器
- * @param {string} method - http method，如 get、post、head
- * @return Decorator - 装饰器
- */
-
-function createMethodDecorator(method: string) {
-  // 装饰器接收路由 path 作为参数
-  return function httpMethodDecorator(path: string) {
-    assert(is.string(path), `[Decorator @${method}] parameter must be a string`);
-    return (proto: Object, propertyKey: string) => {
-      const target = proto.constructor;
-      // 获取该类上已经被装饰器装饰过的方法
-      const funcs = Reflect.getMetadata(CONTROLLER_FUNC_NAME, target) || [];
-      // 加入当前方法名
-      funcs.push(propertyKey);
-      // 保存该类中被装饰过的方法
-      Reflect.defineMetadata(CONTROLLER_FUNC_NAME, funcs, target);
-      let routerMetas = Reflect.getMetadata(CONTROLLER_PATH, target, propertyKey) || [];
-      routerMetas.push({
-        method,
-        path
-      });
-      Reflect.defineMetadata(CONTROLLER_PATH, routerMetas, target, propertyKey);
-    };
-  };
+/** @internal */
+function handleMethodDecorator(method: string, path: string, proto: Object, propertyKey: string) {
+  assert(is.string(path), `[Decorator @${method}] parameter must be a string`);
+  const target = proto.constructor;
+  // 获取该类上已经被装饰器装饰过的方法
+  const funcs = Reflect.getMetadata(CONTROLLER_FUNC_NAME, target) || [];
+  // 加入当前方法名
+  funcs.push(propertyKey);
+  // 保存该类中被装饰过的方法
+  Reflect.defineMetadata(CONTROLLER_FUNC_NAME, funcs, target);
+  let routerMetas = Reflect.getMetadata(CONTROLLER_PATH, target, propertyKey) || [];
+  routerMetas.push({
+    method,
+    path
+  });
+  Reflect.defineMetadata(CONTROLLER_PATH, routerMetas, target, propertyKey);
 }
 
 // 导出 http method 装饰器
+export function post(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('post', path, proto, propertyKey);
+  };
+}
 
-export const post = createMethodDecorator('post');
+export function get(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('get', path, proto, propertyKey);
+  };
+}
 
-export const get = createMethodDecorator('get');
+export function del(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('del', path, proto, propertyKey);
+  };
+}
 
-export const del = createMethodDecorator('del');
+export function put(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('put', path, proto, propertyKey);
+  };
+}
 
-export const put = createMethodDecorator('put');
+export function patch(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('patch', path, proto, propertyKey);
+  };
+}
 
-export const patch = createMethodDecorator('patch');
+export function options(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('options', path, proto, propertyKey);
+  };
+}
 
-export const options = createMethodDecorator('options');
+export function head(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('head', path, proto, propertyKey);
+  };
+}
 
-export const head = createMethodDecorator('head');
-
-export const all = createMethodDecorator('all');
+export function all(path: string) {
+  return (proto: Object, propertyKey: string) => {
+    handleMethodDecorator('all', path, proto, propertyKey);
+  };
+}
