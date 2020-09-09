@@ -51,7 +51,7 @@ mkdir daruk-demo
 cd daruk-demo
 npm init
 npm add daruk ts-node typescript
-mkidr src
+mkdir src
 touch src/index.ts
 ```
 
