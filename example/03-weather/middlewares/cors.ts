@@ -7,7 +7,6 @@ import {
   Next
 } from '../../../src';
 
-@injectable()
 @defineMiddleware('cors')
 class Cors implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {

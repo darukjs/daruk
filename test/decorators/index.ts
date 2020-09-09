@@ -12,7 +12,6 @@ import {
   head,
   header,
   injectable,
-  JSON,
   json,
   middleware,
   Next,
@@ -53,7 +52,6 @@ class Store {
 const cacheStore = new Store();
 
 @defineMiddleware('multiRouteMiddleware')
-@injectable()
 class MultiRouteMiddlewareRouteMiddleware {
   public initMiddleware() {
     return (options: { [key: string]: any }) => {
@@ -66,7 +64,6 @@ class MultiRouteMiddlewareRouteMiddleware {
 }
 
 @defineMiddleware('routeMiddleware')
-@injectable()
 class RouteMiddleware {
   public initMiddleware() {
     return (ctx: DarukContext, next: Next) => {
@@ -118,11 +115,6 @@ class Index {
   @json()
   @get('/json1')
   public json() {
-    return { foo: 1 };
-  }
-  @get('/json2')
-  @JSON()
-  public JSON() {
     return { foo: 1 };
   }
   @redirect('/json2')
@@ -297,9 +289,8 @@ class DisabledIndex {
 }
 
 @timer()
-@injectable()
 class Timers {
-  public cronTime: string;
+  public cronTime!: string;
   public initTimer(daruk: Daruk) {
     this.cronTime = '* * * * * *';
   }

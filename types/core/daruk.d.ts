@@ -12,6 +12,7 @@ declare class Daruk extends EventEmitter {
     httpServer: Server;
     logger: KoaLogger.logger;
     options: Options;
+    constructor();
     initOptions(options?: PartialOptions): void;
     loadFile(path: string): Promise<void>;
     initPlugin(): Promise<void>;

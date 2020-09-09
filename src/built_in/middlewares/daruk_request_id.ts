@@ -9,7 +9,6 @@ import { defineMiddleware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';
 
 @defineMiddleware('daruk_request_id')
-@injectable()
 class DarukRquestId implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     return xRequestId(daruk.options.requestId, daruk.app);

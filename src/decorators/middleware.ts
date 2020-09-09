@@ -1,4 +1,5 @@
 import assert = require('assert');
+import { injectable } from 'inversify';
 import is = require('is');
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
@@ -24,9 +25,7 @@ export function middleware(middlewareName: string, options?: { [key: string]: an
 
 export function defineMiddleware(middlewareName: string) {
   return (target: Constructor) => {
-    darukContainer
-      .bind<Constructor>(TYPES.Middleware)
-      .to(target)
-      .whenTargetNamed(middlewareName);
+    injectable()(target);
+    darukContainer.bind<Constructor>(TYPES.Middleware).to(target).whenTargetNamed(middlewareName);
   };
 }

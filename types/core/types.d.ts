@@ -9,5 +9,6 @@ declare const TYPES: {
     PluginInstance: symbol;
     Timer: symbol;
     Middleware: symbol;
+    Service: symbol;
 };
 export { TYPES };

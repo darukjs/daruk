@@ -8,7 +8,8 @@ const TYPES = {
   DarukOptions: Symbol.for('Value<DarukOptions>'),
   PluginInstance: Symbol.for('Value<PluginInstance>'),
   Timer: Symbol.for('Newable<Timer>'),
-  Middleware: Symbol.for('Newable<GlobalMiddleware>')
+  Middleware: Symbol.for('Newable<GlobalMiddleware>'),
+  Service: Symbol.for('Newable<Service>')
 };
 
 export { TYPES };

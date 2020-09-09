@@ -1,13 +1,17 @@
 import { CronJob } from 'cron';
+/** @internal */
 import Http = require('http');
+/** @internal */
 import Https = require('https');
 import Koa = require('koa');
 import Daruk from '../core/daruk';
 
+/** @internal */
 export type Server = Http.Server | Https.Server;
 
 export type Next = () => Promise<any>;
 
+/** @internal */
 interface DarukRequest extends Koa.Request {
   id: string;
 }
@@ -38,6 +42,7 @@ export interface MiddlewareClass {
   initMiddleware: (daruk: Daruk) => Koa.Middleware | void | Function;
 }
 
+/** @internal */
 export interface ParseType {
   [key: string]:
     | ArrayConstructor
@@ -46,8 +51,11 @@ export interface ParseType {
     | NumberConstructor
     | ObjectConstructor;
 }
+/** @internal */
 export interface ParsedType {
   [key: string]: Array<string> | Boolean | String | Number | Object;
 }
+/** @internal */
 export type method = 'body' | 'query' | 'params';
+/** @internal */
 export type validateFunc = (value: string) => string | undefined;

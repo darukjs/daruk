@@ -1,9 +1,11 @@
 {
   "name": "daruk",
-  "version": "2.0.0-beta2",
+  "version": "2.1.0",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
+    "doc": "typedoc",
+    "deploy": "./deployDoc.sh",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "dev": "ts-node --project tsconfig.json --files src/index.ts",
@@ -36,12 +38,12 @@
     "@types/convert-hrtime": "^2.0.0",
     "@types/expect": "^1.20.3",
     "@types/is": "^0.0.21",
+    "@types/koa-ejs": "^4.2.0",
+    "@types/koa-favicon": "^2.0.19",
     "@types/mocha": "^5.2.5",
     "@types/sinon": "^7.0.10",
     "@types/supertest": "^2.0.7",
     "@types/url-join": "^4.0.0",
-    "@types/koa-ejs": "^4.2.0",
-    "@types/koa-favicon": "^2.0.19",
     "all-contributors-cli": "^6.3.1",
     "chai": "^4.1.2",
     "codecov": "^3.5.0",
@@ -60,12 +62,14 @@
     "tslint-config-alloy": "^0.2.1",
     "tslint-config-prettier": "^1.17.0",
     "typeorm": "^0.2.16",
-    "typescript": "^3.0.1"
+    "typescript": "^4.0.2",
+    "typedoc": "^0.19.0"
   },
   "dependencies": {
+    "@koa/router": "^9.4.0",
     "@types/cron": "^1.7.1",
     "@types/koa": "^2.0.46",
-    "@types/koa-router": "^7.0.37",
+    "@types/koa__router": "^8.0.2",
     "@types/node": "^10.12.18",
     "@types/recursive-readdir": "^2.2.0",
     "@types/url-join": "^4.0.0",
@@ -83,7 +87,6 @@
     "is": "^3.3.0",
     "koa": "^2.5.2",
     "koa-body": "^4.1.0",
-    "koa-router": "^7.4.0",
     "object-assign-deep": "^0.4.0",
     "recursive-readdir": "^2.2.2",
     "reflect-metadata": "^0.1.13",
@@ -110,6 +113,7 @@
     "instrument": true
   },
   "files": [
+    "src",
     "types",
     "build",
     "LICENSE"

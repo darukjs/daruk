@@ -1,6 +1,10 @@
+/** @internal */
 import assert = require('assert');
+/** @internal */
 import is = require('is');
+/** @internal */
 import koa = require('koa');
+
 import {
   CONTROLLER_CLASS_PREFIX,
   CONTROLLER_DISABLED_CLASS,
@@ -69,9 +73,6 @@ export function json() {
   };
 }
 
-// json的大写别名
-export const JSON = json;
-
 /**
  * URL 重定向
  * @param {string} path - 跳转的路径
@@ -124,7 +125,7 @@ export function header(key: string | { [key: string]: string }, value?: string) 
   );
 
   let headers: { [key: string]: string } = {};
-  if (typeof key === 'string') {
+  if (typeof key === 'string' && value) {
     headers[key] = value;
   } else if (typeof key === 'object') {
     headers = key;

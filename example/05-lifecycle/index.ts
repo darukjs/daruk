@@ -1,12 +1,10 @@
 import { Daruk, DarukContext, DarukServer } from '../../src';
 
 (async () => {
-  let app = DarukServer();
-  const port = 3000;
-  app.initOptions({
-    rootPath: __dirname,
-    debug: process.env.NODE_ENV === 'dev'
+  let app = DarukServer({
+    rootPath: __dirname
   });
+  const port = 3000;
 
   app.on('access', (ctx: DarukContext) => {
     console.log(ctx.request.id);
@@ -18,7 +16,7 @@ import { Daruk, DarukContext, DarukServer } from '../../src';
   });
 
   await app.loadFile('./controllers');
-  await app.initPlugin();
+  await app.binding();
 
   app.listen(port);
 })();

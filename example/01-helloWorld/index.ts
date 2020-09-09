@@ -11,8 +11,7 @@ class HelloWorld {
 (async () => {
   let app = DarukServer();
   let port = 3000;
-  app.initOptions();
-  await app.initPlugin();
+  await app.binding();
   app.listen(port);
   app.logger.info(`app listen port ${port}`);
 })();

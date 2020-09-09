@@ -1,16 +1,19 @@
 /**
  * @author xiaojue
- * @date 20190614
- * @update 20200113
- * @fileoverview plugin化daruk core
+ * @fileoverview darukServer 实例
  */
+
+/** @internal */
 import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
 import { buildProviderModule } from 'inversify-binding-decorators';
+/** @internal */
 import Koa = require('koa');
 import { ListenOptions } from 'net';
+/** @internal */
 import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
+/** @internal */
 import recursive = require('recursive-readdir');
 import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
@@ -22,13 +25,24 @@ import { TYPES } from './types';
 
 class Daruk extends EventEmitter {
   [key: string]: any;
-  public name: string;
+  public name!: string;
   public app: Koa;
-  public httpServer: Server;
-  public logger: KoaLogger.logger;
-  public options: Options;
-  public initOptions(options: PartialOptions = {}) {
-    const rootPath = options.rootPath || dirname(require.main.filename);
+  public httpServer!: Server;
+  public logger!: KoaLogger.logger;
+  public options!: Options;
+  public constructor() {
+    super();
+    // 用于保存 DarukLoader 加载的模块
+    this.app = new Koa();
+    // tslint:disable-next-line
+    const self = this;
+    // 监听 koa 的错误事件，输出日志
+    this.app.on('error', function handleKoaError(err: Error) {
+      self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
+    });
+  }
+  public _initOptions(options: PartialOptions = {}) {
+    const rootPath = options.rootPath || dirname(require?.main?.filename as string);
     const defaultOptions = getDefaultOptions(rootPath, options.name, options.debug);
     const customLogger = options.customLogger;
     // customLogger 可能是一个类，不能进行 deep assign
@@ -38,20 +52,12 @@ class Daruk extends EventEmitter {
     this.options.customLogger = options.customLogger = customLogger;
     // 初始化 logger
     this.logger = customLogger || new KoaLogger.logger(this.options.loggerOptions);
-    // 用于保存 DarukLoader 加载的模块
-    this.app = new Koa();
-    // tslint:disable-next-line
-    const self = this;
-    // 监听 koa 的错误事件，输出日志
-    this.app.on('error', function handleKoaError(err: Error) {
-      self.prettyLog('[koa error] ' + (err.stack || err.message), { level: 'error' });
-    });
-    this.emit('initOptions');
+    this.name = this.options.name;
   }
   public async loadFile(path: string) {
     return this._loadFile(join(this.options.rootPath, path));
   }
-  public async initPlugin() {
+  public async binding() {
     await this._loadFile(join(__dirname, '../plugins'));
     await this._loadFile(join(__dirname, '../built_in'));
     const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
@@ -69,7 +75,7 @@ class Daruk extends EventEmitter {
           .whenTargetNamed(plugin.constructor.name);
       }
     }
-    this.emit('init');
+    this.emit('init', darukContainer);
     darukContainer.load(buildProviderModule());
   }
   /**
@@ -100,9 +106,10 @@ class Daruk extends EventEmitter {
   public listen(handle: any, backlog?: number, listeningListener?: () => void): Server;
   public listen(handle: any, listeningListener?: () => void): Server;
   public listen(options: ListenOptions, listeningListener?: () => void): Server;
-  public listen(): Server {
-    this.httpServer = this.app.listen.apply(this.app, Array.prototype.slice.call(arguments, 0));
-    this.emit('serverReady');
+  public listen(...args: any[]): Server {
+    // @ts-ignore
+    this.httpServer = this.app.listen.apply(this.app, args);
+    this.emit('serverReady', this.httpServer);
     return this.httpServer;
   }
   /**

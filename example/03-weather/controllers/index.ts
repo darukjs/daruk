@@ -3,10 +3,9 @@ import config from '../config';
 import weather from '../services/weather';
 import utils from '../utils';
 
-@injectable()
 @controller()
 class Index {
-  @inject('weather') private weather: weather;
+  @inject('weather') private weather!: weather;
   @middleware('cors')
   @get('/')
   public async index(ctx: DarukContext, next: Next) {
