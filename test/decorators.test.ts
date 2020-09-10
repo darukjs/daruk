@@ -109,6 +109,10 @@ describe('decorators', () => {
     request(app).get('/v1/prefix/test/deep/json').expect(code200, done);
   });
 
+  it('decorator "middleware for @controller"', (done) => {
+    request(app).get('/ControllerMiddleware').expect(code200).expect('routeMiddleware', done);
+  });
+
   it('decorator "@middleware"', (done) => {
     request(app).get('/middleware').expect(code200).expect('routeMiddleware', done);
   });

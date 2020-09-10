@@ -18,6 +18,7 @@ import {
   CONTROLLER_DISABLED_CLASS,
   CONTROLLER_DISABLED_METHOD,
   CONTROLLER_FUNC_NAME,
+  CONTROLLER_MIDDLEWARES,
   CONTROLLER_PATH,
   CONTROLLER_PRIORITY,
   CONTROLLER_REDIRECT_PATH,
@@ -44,7 +45,6 @@ class RouterController implements PluginClass {
 
       if (darukContainer.isBound(TYPES.ControllerClass)) {
         const controllers = darukContainer.getAll<Constructor>(TYPES.ControllerClass);
-
         controllers
           .sort((a: Constructor, b: Constructor) => {
             let Apriority = Reflect.getMetadata(CONTROLLER_PRIORITY, a) || 0;
@@ -52,6 +52,8 @@ class RouterController implements PluginClass {
             return Apriority - Bpriority;
           })
           .forEach((controller: Constructor) => {
+            // 获取整个类的中间件
+            let controllerMiddlewares = Reflect.getMetadata(CONTROLLER_MIDDLEWARES, controller);
             // 获取是否整个类被disabled
             const classDisabled =
               Reflect.getMetadata(CONTROLLER_DISABLED_CLASS, controller) === 'disabled';
@@ -79,10 +81,14 @@ class RouterController implements PluginClass {
                     // 不转path，因为可能会把通配符转成unix path
                     const routePath = urljoin('/', prefix, path).replace(/\/\//g, '/');
                     // 获取针对路由的中间件名字
-                    const middlewares: Array<{
+                    let middlewares: Array<{
                       middlewareName: string;
                       options: { [key: string]: any };
                     }> = Reflect.getMetadata(MIDDLEWARE_NAME, controller, funcName);
+                    if (controllerMiddlewares) {
+                      if (middlewares) middlewares = controllerMiddlewares.concat(middlewares);
+                      else middlewares = controllerMiddlewares;
+                    }
                     // 是否使用了中间件装饰器
                     if (middlewares) {
                       // 可以对单个路由应用多个中间件

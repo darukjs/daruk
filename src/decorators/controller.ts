@@ -6,16 +6,19 @@ import { injectable } from 'inversify';
 import { darukContainer } from '../core/inversify.config';
 import { TYPES } from '../core/types';
 import { Constructor } from '../typings/daruk';
-import { CONTROLLER_PRIORITY } from './constants';
+import { CONTROLLER_MIDDLEWARES, CONTROLLER_PRIORITY } from './constants';
 
 /**
  * @desc controller 装饰器，将类装饰为 controller
- * @param {string} prefixPath - 路由前缀
+ * @param {Array} middlewares - 整个类的中间件数组
  * @return Decorator - 装饰器
  */
 
-export function controller() {
+export function controller(
+  middlewares?: [{ middlewareName: string; options?: { [key: string]: any } }]
+) {
   return (target: Constructor) => {
+    Reflect.defineMetadata(CONTROLLER_MIDDLEWARES, middlewares, target);
     injectable()(target);
     darukContainer.bind<Constructor>(TYPES.ControllerClass).toConstructor(target);
   };
