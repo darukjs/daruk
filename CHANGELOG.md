@@ -1,22 +1,58 @@
-# [2.0.0](https://github.com/darukjs/daruk/compare/v0.5.8...v2.0.0) (2020-01-20)
+# [2.1.0](https://github.com/darukjs/daruk/compare/2.0.2...2.1.0) (2020-09-03)
 
 
 ### Bug Fixes
 
+* update version ([331abd8](https://github.com/darukjs/daruk/commit/331abd8ad47b9ac8f7a6ec3e2df78c260a420dbd))
+
+
+
+## [2.0.2](https://github.com/darukjs/daruk/compare/2.0.1...2.0.2) (2020-09-01)
+
+
+### Bug Fixes
+
+* add files src ([aa01d5e](https://github.com/darukjs/daruk/commit/aa01d5e2a4e63fa1dcf1bbff8fe39bd09824e52b))
+* rebuild ([8f47fe4](https://github.com/darukjs/daruk/commit/8f47fe4c25e53af444ee63d0d3409d6014249091))
+
+
+
+## [2.0.1](https://github.com/darukjs/daruk/compare/2.0.0...2.0.1) (2020-09-01)
+
+
+### Bug Fixes
+
+* fix  build script ([4d18ae1](https://github.com/darukjs/daruk/commit/4d18ae168b0e08666564e3916d0627d64ec02daa))
+* fix build bug ([6ffb39a](https://github.com/darukjs/daruk/commit/6ffb39ae4c5dc23e42ed1c6e470e6c4085b2feb2))
+
+
+
+# [2.0.0](https://github.com/darukjs/daruk/compare/v0.5.8...2.0.0) (2020-09-01)
+
+
+### Bug Fixes
+
+* build typings path ([300dc7b](https://github.com/darukjs/daruk/commit/300dc7b893e24a85d22c116b066e14e0cd5fc05b))
 * daruk version typo in example ([ed8db78](https://github.com/darukjs/daruk/commit/ed8db7872e5f5cd48dba37d7db4b410a726e56b5))
 * fix customLogger judge ([b4bb701](https://github.com/darukjs/daruk/commit/b4bb7015afaeb45a23b52b42f20dc4cfecfd0197))
+* fix test,remove ctx decorators ([6b907a6](https://github.com/darukjs/daruk/commit/6b907a6f75a90491c6d0fe4aaa39f5474b13ba23))
 * lodash security alert ([5de29ca](https://github.com/darukjs/daruk/commit/5de29caeaea925690429e21e5b93604802b59883))
+* remove build file ([c3d77bf](https://github.com/darukjs/daruk/commit/c3d77bfc114329b63daebc4ff41e04ae9e4594bf))
 * remove DarukCore interface ([c0d3ac1](https://github.com/darukjs/daruk/commit/c0d3ac169cee5295b0b755ada2b0b489060293d9))
 * remove deepDefineProperty ([34307f0](https://github.com/darukjs/daruk/commit/34307f0cc41e6d2708b509a1998fccf7d6e9db68))
 * remove deepDefineProperty code and test; ([1ab2a40](https://github.com/darukjs/daruk/commit/1ab2a40a08a9ae13b1730f1c7496026921a3eb30))
 * remove extra unused typing ([a65cbb2](https://github.com/darukjs/daruk/commit/a65cbb29e615bc340b91bca481d2b65fe72e0166))
+* remove plugin before events,fix wrapMiddlewareUse ([ef9c4f6](https://github.com/darukjs/daruk/commit/ef9c4f623de67154d164b2d2864e69c1f7c4a49c))
 * test pass 100% ([a032335](https://github.com/darukjs/daruk/commit/a032335925222dfed342ae1260ef4d5a85a82c01))
+* typos ([18daab0](https://github.com/darukjs/daruk/commit/18daab03d1cc0abdf6f526c8d93bd38ab4e6d4ce))
 * update package dependencies ([c38db2a](https://github.com/darukjs/daruk/commit/c38db2afaac8c87dde87eec31d4dd10a17634213))
 * update set-value and mixin-deep security alert ([3a4e726](https://github.com/darukjs/daruk/commit/3a4e72649a73c6c231d1c12b6e57369ce62abcc7))
+* update test ([5894097](https://github.com/darukjs/daruk/commit/5894097c69d5663b44b2fb5ec2813df04470e96d))
 
 
 ### Features
 
+* add [@priority](https://github.com/priority) ([3090022](https://github.com/darukjs/daruk/commit/3090022547320b801537fd28dcdab443cc54dfc4))
 * mount timer to daruk instance ([02f2b4c](https://github.com/darukjs/daruk/commit/02f2b4c63c289f44e27a448263125e32cac24703))
 
 
