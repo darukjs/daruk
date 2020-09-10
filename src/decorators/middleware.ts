@@ -9,6 +9,7 @@ import { MIDDLEWARE_NAME } from './constants';
 /**
  * @desc middleware 中间件装饰器
  * @param {string} middlewareName - 中间件的名字
+ * @param options
  * @return Decorator - 装饰器
  */
 
