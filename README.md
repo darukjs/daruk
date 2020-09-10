@@ -179,6 +179,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://www.zhihu.com/people/mrno-64/posts"><img src="https://avatars2.githubusercontent.com/u/45007226?v=4" width="40px;" alt=""/><br /><sub><b>WangHan</b></sub></a><br /><a href="https://github.com/darukjs/daruk/commits?author=sewerganger" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/zuigzm"><img src="https://avatars0.githubusercontent.com/u/16127180?v=4" width="40px;" alt=""/><br /><sub><b>zuigzm</b></sub></a><br /><a href="https://github.com/darukjs/daruk/issues?q=author%3Azuigzm" title="Bug reports">🐛</a> <a href="https://github.com/darukjs/daruk/commits?author=zuigzm" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Chersquwn"><img src="https://avatars3.githubusercontent.com/u/8766318?v=4" width="40px;" alt=""/><br /><sub><b>南北</b></sub></a><br /><a href="https://github.com/darukjs/daruk/commits?author=Chersquwn" title="Code">💻</a> <a href="https://github.com/darukjs/daruk/commits?author=Chersquwn" title="Documentation">📖</a></td>
   </tr>
 </table>
 
