@@ -140,6 +140,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sewerganger",
+      "name": "WangHan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/45007226?v=4",
+      "profile": "https://www.zhihu.com/people/mrno-64/posts",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
