@@ -73,6 +73,16 @@ class RouteMiddleware {
   }
 }
 
+@controller([
+  {
+    middlewareName: 'routeMiddleware'
+  }
+])
+class ControllerMiddleware {
+  @get('/ControllerMiddleware')
+  public async ControllerMiddleware(ctx: DarukContext, next: Next) {}
+}
+
 @controller()
 class Index {
   @get('/repeatMethod')

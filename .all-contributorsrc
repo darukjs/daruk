@@ -140,6 +140,35 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sewerganger",
+      "name": "WangHan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/45007226?v=4",
+      "profile": "https://www.zhihu.com/people/mrno-64/posts",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "zuigzm",
+      "name": "zuigzm",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/16127180?v=4",
+      "profile": "https://github.com/zuigzm",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "Chersquwn",
+      "name": "南北",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8766318?v=4",
+      "profile": "https://github.com/Chersquwn",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
