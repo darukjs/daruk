@@ -1,6 +1,6 @@
 {
   "name": "daruk",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
@@ -44,6 +44,7 @@
     "@types/sinon": "^7.0.10",
     "@types/supertest": "^2.0.7",
     "@types/url-join": "^4.0.0",
+    "@types/node": "^10.12.18",
     "all-contributors-cli": "^6.3.1",
     "chai": "^4.1.2",
     "codecov": "^3.5.0",
@@ -70,7 +71,6 @@
     "@types/cron": "^1.7.1",
     "@types/koa": "^2.0.46",
     "@types/koa__router": "^8.0.2",
-    "@types/node": "^10.12.18",
     "@types/recursive-readdir": "^2.2.0",
     "@types/url-join": "^4.0.0",
     "chalk": "^2.4.1",
