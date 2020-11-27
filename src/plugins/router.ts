@@ -47,8 +47,8 @@ class RouterController implements PluginClass {
         const controllers = darukContainer.getAll<Constructor>(TYPES.ControllerClass);
         controllers
           .sort((a: Constructor, b: Constructor) => {
-            let Apriority = Reflect.getMetadata(CONTROLLER_PRIORITY, a) || 0;
-            let Bpriority = Reflect.getMetadata(CONTROLLER_PRIORITY, b) || 0;
+            const Apriority = Reflect.getMetadata(CONTROLLER_PRIORITY, a) || 0;
+            const Bpriority = Reflect.getMetadata(CONTROLLER_PRIORITY, b) || 0;
             return Apriority - Bpriority;
           })
           .forEach((controller: Constructor) => {
@@ -70,7 +70,7 @@ class RouterController implements PluginClass {
                   Reflect.getMetadata(CONTROLLER_DISABLED_METHOD, controller, funcName) ===
                   'disabled';
                 if (!methodDisabled) {
-                  let metaRouters = Reflect.getMetadata(CONTROLLER_PATH, controller, funcName);
+                  const metaRouters = Reflect.getMetadata(CONTROLLER_PATH, controller, funcName);
                   metaRouters.forEach(function defineMethdRoute(meta: Meta) {
                     const { method, path } = meta;
                     // 重定向信息
@@ -93,7 +93,7 @@ class RouterController implements PluginClass {
                     if (middlewares) {
                       // 可以对单个路由应用多个中间件
                       middlewares.forEach(({ middlewareName, options }) => {
-                        let mid = darukContainer.getNamed<MiddlewareClass>(
+                        const mid = darukContainer.getNamed<MiddlewareClass>(
                           TYPES.Middleware,
                           middlewareName
                         );

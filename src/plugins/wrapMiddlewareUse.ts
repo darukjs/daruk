@@ -15,7 +15,7 @@ class WrapMiddlewareUse implements PluginClass {
     const midNames: string[] = [];
     const WRAP_MIDDLEWARE_USE = 'WRAP_MIDDLEWARE_USE';
     function wrapUse(fn: Function, name: string) {
-      let f = async (ctx: DarukContext, next: Next) => {
+      const f = async (ctx: DarukContext, next: Next) => {
         enterMid(ctx);
         await fn(ctx, next);
         outMid(ctx);
@@ -25,12 +25,12 @@ class WrapMiddlewareUse implements PluginClass {
     }
 
     function enterMid(ctx: DarukContext) {
-      let time = getTimeInfo(ctx);
+      const time = getTimeInfo(ctx);
       time.list.push(getHrTime());
     }
 
     function outMid(ctx: DarukContext) {
-      let ns2ms = 1000000;
+      const ns2ms = 1000000;
       let time = getTimeInfo(ctx);
       // 最后进入的中间件，最先出来
       let start = time.list.pop();

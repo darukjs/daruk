@@ -7,13 +7,13 @@ const darukContainer = new Container({
   skipBaseClassChecks: true
 });
 
-let {
+const {
   /** @internal */
   lazyInject
 } = getDecorators(darukContainer);
 
 const DarukServer = (options?: PartialOptions) => {
-  let instance = new Daruk();
+  const instance = new Daruk();
   instance._initOptions(options);
   return instance;
 };

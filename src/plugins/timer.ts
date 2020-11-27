@@ -18,7 +18,7 @@ class Timer implements PluginClass {
         const timer = darukContainer.getAll<TimerClass>(TYPES.Timer);
         timer.forEach(function initTimer(job: TimerClass) {
           job.initTimer(daruk);
-          let instance: CronJob = new CronJob(
+          const instance: CronJob = new CronJob(
             job.cronTime,
             () => {
               job.onTick(instance, daruk);
