@@ -6,6 +6,7 @@
 /** @internal */
 import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
+import { injectable } from 'inversify';
 import { buildProviderModule } from 'inversify-binding-decorators';
 /** @internal */
 import Koa = require('koa');
