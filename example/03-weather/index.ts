@@ -4,7 +4,9 @@ import config from './config';
 (async () => {
   let app = DarukServer({
     name: 'myapp',
-    rootPath: __dirname
+    rootPath: __dirname,
+    // 也可以放404的中间件
+    middlewareOrder: [/*'xxx404',*/ 'errorMid', 'cors']
   });
 
   await app.loadFile('./glues');

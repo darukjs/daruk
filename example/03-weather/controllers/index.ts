@@ -1,4 +1,5 @@
 import { controller, DarukContext, get, inject, injectable, middleware, Next } from '../../../src';
+import { CONTROLLER_DISABLED_CLASS } from '../../../src/decorators/constants';
 import config from '../config';
 import weather from '../services/weather';
 import utils from '../utils';
@@ -9,6 +10,7 @@ class Index {
   @middleware('cors')
   @get('/')
   public async index(ctx: DarukContext, next: Next) {
+    // throw new Error('dsa');
     await this.weather
       .getWeather()
       .then((weather: string) => {
