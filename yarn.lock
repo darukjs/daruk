@@ -1827,8 +1827,8 @@ highlight.js@^10.0.0:
   resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-10.1.2.tgz#c20db951ba1c22c055010648dfffd7b2a968e00c"
 
 highlight.js@^9.6.0:
-  version "9.18.0"
-  resolved "https://registry.npm.taobao.org/highlight.js/download/highlight.js-9.18.0.tgz?cache=0&sync_timestamp=1579529409172&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhighlight.js%2Fdownload%2Fhighlight.js-9.18.0.tgz#6b1763cfcd53744313bd3f31f1210f7beb962c79"
+  version "9.18.5"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
 
 hosted-git-info@^2.1.4:
   version "2.8.5"
