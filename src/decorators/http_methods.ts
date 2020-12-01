@@ -38,7 +38,7 @@ export function get(path: string) {
 
 export function del(path: string) {
   return (proto: Object, propertyKey: string) => {
-    handleMethodDecorator('del', path, proto, propertyKey);
+    handleMethodDecorator('delete', path, proto, propertyKey);
   };
 }
 
