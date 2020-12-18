@@ -13,9 +13,9 @@ declare class Daruk extends EventEmitter {
     logger: KoaLogger.logger;
     options: Options;
     constructor();
-    initOptions(options?: PartialOptions): void;
+    _initOptions(options?: PartialOptions): void;
     loadFile(path: string): Promise<void>;
-    initPlugin(): Promise<void>;
+    binding(): Promise<void>;
     mockContext(req?: {}): Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
     listen(port?: number, hostname?: string, backlog?: number, listeningListener?: () => void): Server;
     listen(port: number, hostname?: string, listeningListener?: () => void): Server;
