@@ -137,6 +137,10 @@ node build/index.js
 
 [daruk-demo](https://github.com/darukjs/daruk-demo)
 
+使用腾讯云应用一键部署：
+
+[<img src="https://user-images.githubusercontent.com/289225/104697551-e5d3ee00-574a-11eb-998a-e90b986210a3.png" width="100">](https://www.cloudbase.net/marketplace.html)
+
 ## How to Contribute
 
 Please let us know how can we help. Do check out issues for bug reports or suggestions first.
