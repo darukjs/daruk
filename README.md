@@ -150,6 +150,12 @@ To become a contributor, please follow our [contributing guide](./docs/CONTRIBUT
 [pr-welcoming-image]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [pr-welcoming-url]: https://github.com/darukjs/daruk/pull/new
 
+## Some companies using Daruk
+
+<img src="https://user-images.githubusercontent.com/289225/104696993-094a6900-574a-11eb-90d6-6746e0228af1.png" width="100">
+
+<img src="https://user-images.githubusercontent.com/289225/104696847-d607da00-5749-11eb-8975-92261baa22f5.png" width="100">
+
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -186,6 +192,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
