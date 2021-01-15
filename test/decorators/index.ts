@@ -11,6 +11,7 @@ import {
   get,
   head,
   header,
+  inject,
   injectable,
   json,
   middleware,
@@ -23,6 +24,7 @@ import {
   put,
   redirect,
   required,
+  service,
   timer,
   type,
   typeParse,
@@ -70,6 +72,59 @@ class RouteMiddleware {
       ctx.body = 'routeMiddleware';
       return next();
     };
+  }
+}
+
+@service()
+class MyServiceA {
+  @inject('ctx') public ctx?: DarukContext;
+  public getRet() {
+    // @ts-ignore
+    return this.ctx.query.id;
+  }
+}
+
+@service()
+class MyServiceB {
+  @inject('ctx') public ctx?: DarukContext;
+  public getRet() {
+    return new Promise((r) => {
+      setTimeout(() => {
+        // @ts-ignore
+        r(this.ctx.query.id);
+      }, 2000);
+    });
+  }
+}
+
+@service()
+class MyServiceC {
+  @inject('ctx') public ctx?: DarukContext;
+  public getRet() {
+    // @ts-ignore
+    return this.ctx.query.id;
+  }
+}
+
+@controller()
+class ServiceTest {
+  @inject('MyServiceA') public MyServiceA?: MyServiceA;
+  @inject('MyServiceB') public MyServiceB?: MyServiceB;
+  @inject('MyServiceC') public MyServiceC?: MyServiceC;
+  @get('/methodA')
+  public async methodA(ctx: DarukContext, next: Next) {
+    // @ts-ignore
+    ctx.body = this.MyServiceA.getRet();
+  }
+  @get('/methodB')
+  public async methodB(ctx: DarukContext, next: Next) {
+    // @ts-ignore
+    ctx.body = await this.MyServiceB.getRet();
+  }
+  @get('/methodC')
+  public async methodC(ctx: DarukContext, next: Next) {
+    // @ts-ignore
+    ctx.body = this.MyServiceC.getRet();
   }
 }
 

@@ -29,6 +29,40 @@ describe('decorators', () => {
     server.httpServer.close(done);
   });
 
+  it('decorator @service', (done) => {
+    let requestSize = [];
+    request(app)
+      .get('/methodA?id=A')
+      .expect(code200)
+      .expect('A', (err, res) => {
+        if (err) throw err;
+        requestSize.push(true);
+        if (requestSize.length === 2 && !err) {
+          done();
+        }
+      });
+    request(app)
+      .get('/methodB?id=B')
+      .expect(code200)
+      .expect('B', (err, res) => {
+        if (err) throw err;
+        requestSize.push(true);
+        if (requestSize.length === 2 && !err) {
+          done();
+        }
+      });
+    request(app)
+      .get('/methodC?id=C')
+      .expect(code200)
+      .expect('C', (err, res) => {
+        if (err) throw err;
+        requestSize.push(true);
+        if (requestSize.length === 2 && !err) {
+          done();
+        }
+      });
+  });
+
   it('decorator repeat method', (done) => {
     request(app)
       .get('/repeatMethod')
