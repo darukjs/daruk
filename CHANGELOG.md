@@ -1,3 +1,32 @@
+# [2.3.0](https://github.com/darukjs/daruk/compare/2.2.2...2.3.0) (2021-01-15)
+
+
+### Bug Fixes
+
+* del http decorators method name ([ce52b93](https://github.com/darukjs/daruk/commit/ce52b93eff43b44e79082a3a79dfa6f3b3045389))
+* fix d.ts dir ([17a2fa6](https://github.com/darukjs/daruk/commit/17a2fa63ca1f8ebb782249362355d6054ec948f3))
+* fix service ctx bug,and add [@inject](https://github.com/inject)(ctx) Identifier ([dc0d697](https://github.com/darukjs/daruk/commit/dc0d6971760fa7f74fcab3f806a27ad6effca947))
+* fix some typeerror ([a85d691](https://github.com/darukjs/daruk/commit/a85d691586b95f45453340ade5b6cb7e2f4deaac))
+* move @type/node to devDependencies ([06ad3b8](https://github.com/darukjs/daruk/commit/06ad3b81a3b97cb2f27bf10a20725fbfab5be868))
+* word error ([b011bd0](https://github.com/darukjs/daruk/commit/b011bd03a2761ac5a47d33d0cfbffc9599d7c962))
+
+
+
+## [2.1.1](https://github.com/darukjs/daruk/compare/2.1.0...2.1.1) (2020-09-10)
+
+
+### Bug Fixes
+
+* add daruk.ts type ([bc78fb1](https://github.com/darukjs/daruk/commit/bc78fb1c96cdd2d6c78fd620f746e979ec0d70c9))
+
+
+### Features
+
+* controller support middlewares ([8109efc](https://github.com/darukjs/daruk/commit/8109efc4c726baca5d93ae4f9e91c53584dbe0ef))
+* support controller middleware and publish new version ([d8ce5ba](https://github.com/darukjs/daruk/commit/d8ce5ba7b17f8e9eb8fc4e1f170ed5b17de4b457))
+
+
+
 # [2.1.0](https://github.com/darukjs/daruk/compare/2.0.2...2.1.0) (2020-09-03)
 
 

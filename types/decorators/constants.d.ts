@@ -9,3 +9,4 @@ export declare const CONTROLLER_DISABLED_METHOD = "daruk:controller_disabled_met
 export declare const CONTROLLER_PRIORITY = "daruk:controller_priority";
 export declare const SERVICE = "daruk:service";
 export declare const CONTROLLER_MIDDLEWARES = "daruk:controller_middleware";
+export declare const CONTROLLER_CLASS = "daruk:controller_class";
