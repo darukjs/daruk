@@ -152,7 +152,7 @@ To become a contributor, please follow our [contributing guide](./docs/CONTRIBUT
 
 ## Some companies using Daruk
 
-<img src="https://user-images.githubusercontent.com/289225/104696993-094a6900-574a-11eb-90d6-6746e0228af1.png" width="100">
+<img src="https://user-images.githubusercontent.com/289225/104697186-59c1c680-574a-11eb-9e48-bec9d52171ce.png" width="100">
 
 <img src="https://user-images.githubusercontent.com/289225/104696847-d607da00-5749-11eb-8975-92261baa22f5.png" width="100">
 
