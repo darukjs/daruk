@@ -160,6 +160,8 @@ To become a contributor, please follow our [contributing guide](./docs/CONTRIBUT
 
 <img src="https://user-images.githubusercontent.com/289225/104696847-d607da00-5749-11eb-8975-92261baa22f5.png" width="100">
 
+<img src="https://user-images.githubusercontent.com/15033260/104886723-2af35c80-59a5-11eb-8a93-590b73df4ef6.png" width="100">
+
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
