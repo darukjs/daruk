@@ -145,7 +145,7 @@ node build/index.js
 
 Please let us know how can we help. Do check out issues for bug reports or suggestions first.
 
-To become a contributor, please follow our [contributing guide](./docs/CONTRIBUTING.md)
+To become a contributor, please follow our [contributing guide](https://github.com/darukjs/daruk/blob/2.0/CONTRIBUTING.md)
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
