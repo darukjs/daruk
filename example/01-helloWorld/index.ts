@@ -1,4 +1,4 @@
-import { controller, DarukContext, DarukServer, get, injectable, Next } from '../../src';
+import { controller, DarukContext, DarukServer, get, Next } from '../../src';
 
 @controller()
 class HelloWorld {
