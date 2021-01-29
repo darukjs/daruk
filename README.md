@@ -145,7 +145,7 @@ node build/index.js
 
 Please let us know how can we help. Do check out issues for bug reports or suggestions first.
 
-To become a contributor, please follow our [contributing guide](./docs/CONTRIBUTING.md)
+To become a contributor, please follow our [contributing guide](https://github.com/darukjs/daruk/blob/2.0/CONTRIBUTING.md)
 
 [npm-image]: https://img.shields.io/npm/v/daruk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/daruk
@@ -156,9 +156,8 @@ To become a contributor, please follow our [contributing guide](./docs/CONTRIBUT
 
 ## Some companies using Daruk
 
-<img src="https://user-images.githubusercontent.com/289225/104697186-59c1c680-574a-11eb-9e48-bec9d52171ce.png" width="100">
+<img src="https://user-images.githubusercontent.com/289225/104697186-59c1c680-574a-11eb-9e48-bec9d52171ce.png" width="150"> <img src="https://user-images.githubusercontent.com/289225/104696847-d607da00-5749-11eb-8975-92261baa22f5.png" width="150"> <img src="https://user-images.githubusercontent.com/15033260/104886723-2af35c80-59a5-11eb-8a93-590b73df4ef6.png" width="150"> <img src="https://user-images.githubusercontent.com/289225/104888850-4c097c80-59a8-11eb-95bf-c51e448957e2.png" width="150"> <img src="https://user-images.githubusercontent.com/289225/104888945-6ba0a500-59a8-11eb-9030-fb06b4827b51.png" width="150">
 
-<img src="https://user-images.githubusercontent.com/289225/104696847-d607da00-5749-11eb-8975-92261baa22f5.png" width="100">
 
 ## Contributors
 
