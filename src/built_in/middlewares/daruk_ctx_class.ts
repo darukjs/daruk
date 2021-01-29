@@ -14,6 +14,7 @@ class DarukCtxClass implements MiddlewareClass {
       let requestContainer = new Container({ skipBaseClassChecks: true });
       requestContainer.parent = darukContainer;
       requestContainer.bind<DarukContext>('ctx').toConstantValue(ctx);
+      requestContainer.bind<Daruk>('Daruk').toConstantValue(_daruk);
       ctx.requestContainer = requestContainer;
       await next();
     };
