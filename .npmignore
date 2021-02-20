@@ -1,8 +1,8 @@
 # source
-test/
-example/
-docs/
-src/
+test
+example
+docs
+src
 # settings
 .vscode
 .idea
