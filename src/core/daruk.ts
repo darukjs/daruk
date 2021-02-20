@@ -64,10 +64,12 @@ class Daruk extends EventEmitter {
     const plugins = darukContainer.getAll<PluginClass>(TYPES.PLUGINCLASS);
     for (let plugin of plugins) {
       let retValue = await plugin.initPlugin(this);
-      darukContainer
-        .bind(TYPES.PluginInstance)
-        .toConstantValue(retValue)
-        .whenTargetNamed(plugin.constructor.name);
+      if (!darukContainer.isBoundNamed(TYPES.PluginInstance, plugin.constructor.name)) {
+        darukContainer
+          .bind(TYPES.PluginInstance)
+          .toConstantValue(retValue)
+          .whenTargetNamed(plugin.constructor.name);
+      }
     }
     this.emit('init', darukContainer);
     darukContainer.load(buildProviderModule());

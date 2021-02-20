@@ -32,7 +32,6 @@ describe('http-server-shutdown', () => {
         enable: true
       }
     });
-
     @controller()
     class Index {
       @get('/')
@@ -48,7 +47,6 @@ describe('http-server-shutdown', () => {
         next();
       }
     }
-
     await server.binding();
     await server.listen(port);
     app = server.httpServer;
@@ -58,7 +56,7 @@ describe('http-server-shutdown', () => {
     // @ts-ignore
     stub = sinon.stub(process, 'exit');
   });
-  after(() => {
+  afterEach(() => {
     // http-server-shutdown 会自动关闭 server，因此这里不需要关闭
     stub.restore();
   });
