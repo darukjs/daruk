@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { PartialOptions } from '../../types/daruk_options';
+import { PartialOptions } from '../typings/daruk_options';
 import Daruk from './daruk';
 
 const darukContainer = new Container({

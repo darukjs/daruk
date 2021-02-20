@@ -16,9 +16,9 @@ import deepAssign = require('object-assign-deep');
 import { dirname, join } from 'path';
 /** @internal */
 import recursive = require('recursive-readdir');
-import { Options, PartialOptions } from '../../types/daruk_options';
 import mockHttp from '../mock/http_server';
 import { PluginClass, Server } from '../typings/daruk';
+import { Options, PartialOptions } from '../typings/daruk_options';
 import { debugLog, isJsTsFile, JsTsReg } from '../utils';
 import getDefaultOptions from './daruk_default_options';
 import { darukContainer } from './inversify.config';

@@ -1,5 +1,5 @@
 import koaBody = require('koa-body');
-import { DarukContext } from '../src';
+import { DarukContext } from '../';
 
 type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]

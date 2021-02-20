@@ -3,8 +3,8 @@ import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
 import Koa = require('koa');
 import { ListenOptions } from 'net';
-import { Options, PartialOptions } from '../../types/daruk_options';
 import { Server } from '../typings/daruk';
+import { Options, PartialOptions } from '../typings/daruk_options';
 declare class Daruk extends EventEmitter {
     [key: string]: any;
     name: string;
