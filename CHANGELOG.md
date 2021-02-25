@@ -1,4 +1,19 @@
-# [2.3.0](https://github.com/darukjs/daruk/compare/2.2.2...2.3.0) (2021-01-15)
+## [2.3.4](https://github.com/darukjs/daruk/compare/v2.3.3...v2.3.4) (2021-02-25)
+
+
+
+## [2.3.3](https://github.com/darukjs/daruk/compare/v2.3.1...v2.3.3) (2021-02-20)
+
+
+### Bug Fixes
+
+* Daruk deps with requestContainer ([742f978](https://github.com/darukjs/daruk/commit/742f9789eea1de81056b9d0149445a5dca39fe11))
+* fix tests for plugin rebind ([27bba60](https://github.com/darukjs/daruk/commit/27bba60a72739badc59cc79098689b6772971374))
+* fix typings url ([6d5832f](https://github.com/darukjs/daruk/commit/6d5832f5e6202fa82d1f989a211fa90994efc9ca))
+
+
+
+## [2.3.1](https://github.com/darukjs/daruk/compare/2.2.2...v2.3.1) (2021-01-15)
 
 
 ### Bug Fixes
