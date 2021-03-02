@@ -178,18 +178,36 @@ describe('decorators', () => {
   it('decorator @typeParse', (done) => {
     request(app)
       .post('/typeparse/123')
-      .send({ foo: '123', object2: '{"a":1}', arr2: '[1,2,3]' })
+      .send({ foo: '123', arr: '[1]', object2: '{"a":1}', arr2: '[1,2,3]' })
       .query({ bar: [1, 2, 3], object2: '{a:1}', arr2: '1,2,3,4' })
       .expect(code200)
       .expect(
         {
           body: {
             foo: true,
+            arr: [1],
             arr2: [1, 2, 3],
             object2: { a: 1 }
           },
           params: { id: 123 },
           query: { bar: '1,2,3', object2: {}, arr2: ['1,2,3,4'] }
+        },
+        done
+      );
+  });
+
+  it('decorator @typeParse with x-www-form-urlencoded', (done) => {
+    request(app)
+      .post('/typeparse/123')
+      .send('arr=[1]')
+      .expect(code200)
+      .expect(
+        {
+          body: {
+            arr: [1]
+          },
+          params: { id: 123 },
+          query: {}
         },
         done
       );

@@ -71,8 +71,8 @@ class Daruk extends EventEmitter {
           .whenTargetNamed(plugin.constructor.name);
       }
     }
-    this.emit('init', darukContainer);
     darukContainer.load(buildProviderModule());
+    this.emit('init', darukContainer);
   }
   /**
    * @desc 模拟 ctx，从而可以从非请求链路中得到 ctx
