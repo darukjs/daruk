@@ -18,7 +18,7 @@ export function validate(method: method, key: string, validateFunc: validateFunc
         if (is.string(ret)) ctx.validateError.push(ret);
       }
       // tslint:disable-next-line:no-invalid-this
-      await oldFunc.call(this, ctx, next);
+      await oldFunc.call(this, ...arguments);
       await next();
     };
   };
@@ -53,7 +53,7 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
         check(query, config.query, 'query') ||
         check(params, config.params, 'params');
       // tslint:disable-next-line:no-invalid-this
-      await oldFunc.call(this, ctx, next);
+      await oldFunc.call(this, ...arguments);
       await next();
     };
   };
@@ -100,7 +100,7 @@ export function typeParse(config: { body?: ParseType; query?: ParseType; params?
       ctx.parseQuery = parse(config.query, ctx.query);
       ctx.parseParams = parse(config.params, ctx.params);
       // tslint:disable-next-line:no-invalid-this
-      await oldFunc.call(this, ctx, next);
+      await oldFunc.call(this, ...arguments);
       await next();
     };
   };

@@ -66,7 +66,7 @@ export function json() {
 
     descriptor.value = async function jsonWrap(ctx: koa.Context, next: () => Promise<void>) {
       // tslint:disable-next-line:no-invalid-this
-      const val = await oldFunc.call(this, ctx);
+      const val = await oldFunc.call(this, ...arguments);
       // 确保是Object类型
       ctx.body = { ...val };
       await next();
@@ -104,7 +104,7 @@ export function type(type: string) {
     const oldFunc = descriptor.value;
     descriptor.value = async function typeWrap(ctx: koa.Context, next: () => Promise<void>) {
       // tslint:disable-next-line:no-invalid-this
-      await oldFunc.call(this, ctx);
+      await oldFunc.call(this, ...arguments);
       ctx.type = type;
       await next();
     };
@@ -137,7 +137,7 @@ export function header(key: string | { [key: string]: string }, value?: string) 
     const oldFunc = descriptor.value;
     descriptor.value = async function headerWrap(ctx: koa.Context, next: () => Promise<void>) {
       // tslint:disable-next-line:no-invalid-this
-      await oldFunc.call(this, ctx);
+      await oldFunc.call(this, ...arguments);
       ctx.set(headers);
       await next();
     };
@@ -155,7 +155,7 @@ export function cache(callback: (cacheKey: string, shouldCacheData?: string) => 
         ctx.body = cacheData;
       } else {
         // tslint:disable-next-line:no-invalid-this
-        await oldFunc.call(this, ctx);
+        await oldFunc.call(this, ...arguments);
         await callback(cacheKey, ctx.body);
       }
       await next();
