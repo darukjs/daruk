@@ -156,7 +156,7 @@ export function cache(callback: (cacheKey: string, shouldCacheData?: string) => 
       } else {
         // tslint:disable-next-line:no-invalid-this
         await oldFunc.call(this, ...arguments);
-        await callback(cacheKey, ctx.body);
+        await callback(cacheKey, ctx.body as any);
       }
       await next();
     };

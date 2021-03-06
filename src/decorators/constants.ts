@@ -10,3 +10,4 @@ export const CONTROLLER_PRIORITY = 'daruk:controller_priority';
 export const SERVICE = 'daruk:service';
 export const CONTROLLER_MIDDLEWARES = 'daruk:controller_middleware';
 export const CONTROLLER_CLASS = 'daruk:controller_class';
+export const REQUESTBODY_CLASS = 'daruk:controller_request_body';

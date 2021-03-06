@@ -15,7 +15,8 @@
     "test": "cross-env TS_NODE_FILES=true nyc --reporter=lcov --reporter=text-summary --cache mocha --timeout 15000 --exit ./test/{,/**/}*.test.ts",
     "tslint": "tslint --project . ./src/**/*.ts",
     "prepublish": "npm run build",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "test_request-body": "ts-node --project tsconfig.json --files test/request-body/index.ts"
   },
   "types": "./types/index.d.ts",
   "files":[
@@ -82,6 +83,7 @@
     "@types/recursive-readdir": "^2.2.0",
     "@types/url-join": "^4.0.0",
     "chalk": "^2.4.1",
+    "class-validator": "^0.13.1",
     "convert-hrtime": "^2.0.0",
     "cron": "^1.7.1",
     "daruk-exit-hook": "^0.3.0",

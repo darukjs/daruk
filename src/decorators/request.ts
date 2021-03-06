@@ -1,9 +1,11 @@
 import assert = require('assert');
+import { ValidatorOptions } from 'class-validator';
 /** @internal */
 import htmlspecialchars = require('htmlspecialchars');
 import is = require('is');
 import koa = require('koa');
-import { method, ParseType, validateFunc } from '../typings/daruk';
+import { Constructor, method, ParseType, validateFunc } from '../typings/daruk';
+import { REQUESTBODY_CLASS } from './constants';
 
 export function validate(method: method, key: string, validateFunc: validateFunc) {
   return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
@@ -50,7 +52,7 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
       const { query, params } = ctx;
       ctx.validateRequired =
         check(body, config.body, 'body') ||
-        check(query, config.query, 'query') ||
+        check(query as any, config.query, 'query') ||
         check(params, config.params, 'params');
       // tslint:disable-next-line:no-invalid-this
       await oldFunc.call(this, ...arguments);
@@ -97,11 +99,19 @@ export function typeParse(config: { body?: ParseType; query?: ParseType; params?
 
     descriptor.value = async function parseWrap(ctx: koa.Context, next: Function) {
       ctx.parseBody = parse(config.body, ctx.request.body);
-      ctx.parseQuery = parse(config.query, ctx.query);
+      ctx.parseQuery = parse(config.query, ctx.query as any);
       ctx.parseParams = parse(config.params, ctx.params);
       // tslint:disable-next-line:no-invalid-this
       await oldFunc.call(this, ...arguments);
       await next();
     };
+  };
+}
+
+export function RequestBody(entity: Constructor, validatorOptions?: ValidatorOptions) {
+  return (target: any, propertyKey: string, index: number) => {
+    let bodys = Reflect.getMetadata(REQUESTBODY_CLASS, target.constructor, propertyKey) || [];
+    bodys = [{ index, entity, validatorOptions }].concat(bodys);
+    Reflect.defineMetadata(REQUESTBODY_CLASS, bodys, target.constructor, propertyKey);
   };
 }
