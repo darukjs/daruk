@@ -7,6 +7,7 @@ import Router = require('@koa/router');
 import assert = require('assert');
 import is = require('is');
 import Koa = require('koa');
+import { SwaggerRouter } from 'koa-swagger-decorator';
 import urljoin = require('url-join');
 import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
@@ -41,8 +42,12 @@ class RouterController implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('init', () => {
       daruk.emit('routerUseBefore');
-
-      daruk.router = new Router();
+      if (daruk.options.routerType === 'swagger') {
+        daruk.router = new SwaggerRouter(daruk.options.routerOptions, daruk.options.swaggerOptions);
+        daruk.router.swagger();
+      } else {
+        daruk.router = new Router(daruk.options.routerOptions);
+      }
 
       const controllers = Reflect.getMetadata(CONTROLLER_CLASS, Reflect) || [];
       const Services = Reflect.getMetadata(SERVICE, Reflect) || [];
@@ -53,6 +58,10 @@ class RouterController implements PluginClass {
           return Apriority - Bpriority;
         })
         .forEach((controller: Constructor) => {
+          if (daruk.options.routerType === 'swagger') {
+            console.log(controller);
+            daruk.router.map(controller, { doValidation: true });
+          }
           // 获取整个类的中间件
           let controllerMiddlewares = Reflect.getMetadata(CONTROLLER_MIDDLEWARES, controller);
           // 获取是否整个类被disabled
