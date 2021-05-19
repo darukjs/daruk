@@ -1428,6 +1428,13 @@ daruk-request-id@^0.4.3:
     "@types/uuid" "^3.4.4"
     uuid "^3.3.2"
 
+daruk-validate@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/daruk-validate/-/daruk-validate-1.0.2.tgz#f670b6ea33181d8525c8a518169d919e99e57d5b"
+  integrity sha512-yUQhsCYbJtC0kB8w+5+nu5duLLgLblatnrZgGnoBT02TlVWMj/HlUO/pi9bCR4D3MPZH/XeY84xiM+PI0glhSg==
+  dependencies:
+    parameter "^3.6.0"
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -3481,6 +3488,11 @@ package-hash@^3.0.0:
     hasha "^3.0.0"
     lodash.flattendeep "^4.4.0"
     release-zalgo "^1.0.0"
+
+parameter@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/parameter/-/parameter-3.6.0.tgz#bcf81327e98e433c72c134830ec84d15e81b963d"
+  integrity sha512-KtXBPFX92SNh6E3dTRJ8fT0Dw23XPyAmp3YGZwhupRUsxl0EbtV1StuWSt76MsQdh6r4azZogsc+QTxYLBDziQ==
 
 parent-module@^1.0.0:
   version "1.0.1"
