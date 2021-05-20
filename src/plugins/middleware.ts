@@ -12,6 +12,7 @@ class GlobalMiddleware implements PluginClass {
       if (darukContainer.isBound(TYPES.Middleware)) {
         let buildInMiddlewareOrder = [
           'daruk_request_id',
+          'daruk_cookie',
           'daruk_logger',
           'daruk_body',
           'daruk_ctx_class'
