@@ -37,44 +37,6 @@ export function disabled() {
 }
 
 /**
- * @desc 将函数的返回打包到 ctx.body，并返回 application/json 类型
- * @return MethodDecorator - 装饰器
- * @example
- *    class Class {
- *      @json()
- *      index(ctx) {
- *        return {
- *          foo: 1
- *        }
- *      }
- *    }
- *    // the same as
- *    class Class {
- *      async index(ctx, next) {
- *        ctx.body = {
- *          foo: 1
- *        }
- *        ctx.type = 'application/json'
- *        await next()
- *      }
- *    }
- */
-export function json() {
-  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-    const oldFunc = descriptor.value;
-    type('application/json')(proto, propertyKey, descriptor);
-
-    descriptor.value = async function jsonWrap(ctx: koa.Context, next: () => Promise<void>) {
-      // tslint:disable-next-line:no-invalid-this
-      const val = await oldFunc.call(this, ...arguments);
-      // 确保是Object类型
-      ctx.body = { ...val };
-      await next();
-    };
-  };
-}
-
-/**
  * URL 重定向
  * @param {string} path - 跳转的路径
  */
