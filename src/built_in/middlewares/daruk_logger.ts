@@ -3,7 +3,6 @@
  */
 
 import { middleware as loggerMiddleware } from 'daruk-logger';
-import { injectable } from 'inversify';
 import Daruk from '../../core/daruk';
 import { defineMiddleware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';

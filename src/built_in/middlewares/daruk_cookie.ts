@@ -1,16 +1,16 @@
 /**
- * @fileOverview koa-body 中间件
- * https://github.com/dlau/koa-body
+ * @fileOverview koa-cookie 中间件
+ * https://www.npmjs.com/package/koa-cookie
  */
 
-import koaBody = require('koa-body');
+import koaCookie from 'koa-cookie';
 import Daruk from '../../core/daruk';
 import { defineMiddleware } from '../../decorators';
 import { MiddlewareClass } from '../../typings/daruk';
 
-@defineMiddleware('daruk_body')
+@defineMiddleware('daruk_cookie')
 class KoaBody implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
-    return koaBody(daruk.options.bodyOptions);
+    return koaCookie();
   }
 }

@@ -390,6 +390,13 @@
   dependencies:
     "@types/koa" "*"
 
+"@types/koa-cookie@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@types/koa-cookie/-/koa-cookie-1.0.0.tgz#facd85b3f1b4cd1f72c73a70314757d459672ea0"
+  integrity sha512-0YTUgGqXlyVV2zYkDaDr5KNOXLki3ZqHP3adtlcz8+Fh94vzLfv8mnlxzDpfHuj//bIkwsh2zHVzdNrurUIKvA==
+  dependencies:
+    "@types/koa" "*"
+
 "@types/koa-ejs@^4.2.0":
   version "4.2.0"
   resolved "https://registry.npm.taobao.org/@types/koa-ejs/download/@types/koa-ejs-4.2.0.tgz#d103051f6eca2f6f77452d3f1bce2e6175b81d1f"
@@ -2727,6 +2734,11 @@ koa-convert@^1.2.0:
   dependencies:
     co "^4.6.0"
     koa-compose "^3.0.0"
+
+koa-cookie@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/koa-cookie/-/koa-cookie-1.0.0.tgz#7c79723dd03b97abcfe430028b700bd47a36dafb"
+  integrity sha1-fHlyPdA7l6vP5DACi3AL1Ho22vs=
 
 koa-ejs@^4.2.0:
   version "4.3.0"
