@@ -1,5 +1,5 @@
 /**
- * @fileOverview koa-body 中间件
+ * @fileOverview koa-cookie 中间件
  * https://www.npmjs.com/package/koa-cookie
  */
 
