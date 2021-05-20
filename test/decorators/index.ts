@@ -13,7 +13,6 @@ import {
   header,
   inject,
   injectable,
-  json,
   middleware,
   Next,
   options,
@@ -175,11 +174,7 @@ class Index {
   public async put(ctx: DarukContext, next: Next) {
     ctx.body = '';
   }
-  @json()
-  @get('/json1')
-  public json() {
-    return { foo: 1 };
-  }
+
   @redirect('/json2')
   @get('/redirect')
   public redirect(ctx: DarukContext) {
