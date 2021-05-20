@@ -23,11 +23,9 @@ import {
   priority,
   put,
   redirect,
-  required,
   service,
   timer,
   type,
-  typeParse,
   validate
 } from '../../src';
 
@@ -223,69 +221,23 @@ class Index {
   @get('/multiMiddleware')
   public async multiMiddleware(ctx: DarukContext, next: Next) {}
 
-  @required({
-    body: ['foo'],
-    query: ['bar'],
-    params: ['id']
-  })
-  @post('/required/:id')
-  public async required(ctx: DarukContext, next: Next) {
-    ctx.body = ctx.validateRequired || '';
-  }
-
-  @typeParse({
-    body: {
-      foo: Boolean,
-      bar: String,
-      arr: Array,
-      object: Object,
-      arr2: Array,
-      object2: Object
-    },
-    query: {
-      bar: String,
-      arr2: Array,
-      object2: Object
-    },
-    params: {
-      id: Number
-    }
-  })
-  @post('/typeparse/:id')
-  public typeParse(ctx: DarukContext) {
-    ctx.body = {
-      body: ctx.parseBody,
-      params: ctx.parseParams,
-      query: ctx.parseQuery
-    };
-  }
-
-  @validate('query', 'foo', (value: string) => {
-    if (value !== 'bar') {
-      return 'foo not pass validate!';
-    }
+  @validate({
+    foo: 'string'
   })
   @get('/validate')
   public validate(ctx: DarukContext) {
-    if (ctx.validateError.length) {
-      ctx.body = ctx.validateError[0];
-    } else {
-      ctx.body = '';
-    }
+    ctx.body = ctx.request.query;
   }
 
-  @validate('body', 'foo', (value: string) => {
-    if (value !== 'bar') {
-      return 'foo not pass validate!';
+  @validate({
+    foo: {
+      type: 'string?',
+      default: 'default'
     }
   })
   @post('/validate')
   public validatePost(ctx: DarukContext) {
-    if (ctx.validateError.length) {
-      ctx.body = ctx.validateError[0];
-    } else {
-      ctx.body = '';
-    }
+    ctx.body = ctx.request.body;
   }
 
   @cache(async (cacheKey, data) => {
