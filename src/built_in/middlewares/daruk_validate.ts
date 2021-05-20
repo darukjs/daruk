@@ -6,6 +6,10 @@ import { parameter } from 'daruk-validate';
 @defineMiddleware('daruk_validate')
 class DarukValidate implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
-    parameter(daruk.app, daruk.options.validateOptions);
+    const error = parameter(daruk.app, daruk.options.validateOptions);
+    // options.error = false no return error
+    if (daruk.options.validateOptions.error) {
+      return error;
+    }
   }
 }
