@@ -1,5 +1,4 @@
 import koaBody = require('koa-body');
-import koa from 'koa';
 import { DarukContext } from '../';
 
 type RecursivePartial<T> = {
@@ -11,11 +10,12 @@ type RecursivePartial<T> = {
 };
 
 interface ErrorOptions {
-  all: (err: Error, ctx: koa.Context) => void;
-  html: (err: Error, ctx: koa.Context) => void;
-  json: (err: Error, ctx: koa.Context) => void;
-  jsonp: (err: Error, ctx: koa.Context) => void;
-  redirect: (err: Error, ctx: koa.Context) => void;
+  all?: (err: Error, ctx: DarukContext) => void;
+  html?: (err: Error, ctx: DarukContext) => void;
+  text?: (err: Error, ctx: DarukContext) => void;
+  json?: (err: Error, ctx: DarukContext) => void;
+  jsonp?: (err: Error, ctx: DarukContext) => void;
+  redirect?: (err: Error, ctx: DarukContext) => void;
 }
 
 export interface Options {
@@ -53,7 +53,7 @@ export interface Options {
   };
   [key: string]: any;
   errorOptions?: ErrorOptions | undefined;
-  notFound?: (status: number, ctx: DarukContext) => {};
+  notFound?: (ctx: DarukContext) => void;
 }
 
 export type PartialOptions = RecursivePartial<Options>;

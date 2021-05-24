@@ -13,8 +13,8 @@ class KoaBody implements MiddlewareClass {
       try {
         await next();
         // tslint:disable-next-line:no-magic-numbers
-        if (ctx.status === 404) {
-          if (daruk.options.NotFound) daruk.options.NotFound(ctx.status, ctx);
+        if (ctx.status === 404 && daruk.options.notFound) {
+          daruk.options.notFound(ctx);
         }
       } catch (err) {
         ctx.throw(err);

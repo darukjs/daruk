@@ -1,5 +1,4 @@
-import { method, ParseType, validateFunc } from '../typings/daruk';
-export declare function validate(method: method, key: string, validateFunc: validateFunc): (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => void;
+import { ParseType } from '../typings/daruk';
 export declare function required(config: {
     body?: string[];
     query?: string[];
