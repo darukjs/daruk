@@ -2747,6 +2747,14 @@ koa-favicon@^2.0.1:
   dependencies:
     mz "^2.7.0"
 
+koa-onerror@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/koa-onerror/-/koa-onerror-4.1.0.tgz#7949c7651941e67b11813bf1fad03c2d34470b1c"
+  integrity sha512-UDvOkkXiyVtlhRIvo9wbqKG/pTiiVE5x2uIFpG5e6OmBawxBSURG/PeFa6e6UZjjxinXde3BmPWVSIVePMG6TA==
+  dependencies:
+    escape-html "^1.0.3"
+    stream-wormhole "^1.1.0"
+
 koa-router@^7.2.1:
   version "7.4.0"
   resolved "https://registry.npmjs.org/koa-router/-/koa-router-7.4.0.tgz#aee1f7adc02d5cb31d7d67465c9eacc825e8c5e0"
@@ -4222,6 +4230,11 @@ stream-events@^1.0.5:
   resolved "https://registry.yarnpkg.com/stream-events/-/stream-events-1.0.5.tgz#bbc898ec4df33a4902d892333d47da9bf1c406d5"
   dependencies:
     stubs "^3.0.0"
+
+stream-wormhole@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/stream-wormhole/-/stream-wormhole-1.1.0.tgz#300aff46ced553cfec642a05251885417693c33d"
+  integrity sha512-gHFfL3px0Kctd6Po0M8TzEvt3De/xu6cnRrjlfYNhwbhLPLwigI2t1nc6jrzNuaYg5C4YF78PPFuQPzRiqn9ew==
 
 string-width@^1.0.1:
   version "1.0.2"
