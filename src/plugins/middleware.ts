@@ -17,7 +17,8 @@ class GlobalMiddleware implements PluginClass {
           'daruk_cookie',
           'daruk_logger',
           'daruk_body',
-          'daruk_ctx_class'
+          'daruk_ctx_class',
+					'daruk_validate'
         ];
         let middlewareOrder = buildInMiddlewareOrder.concat(daruk.options.middlewareOrder);
         middlewareOrder.forEach((midname) => {

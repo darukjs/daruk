@@ -44,6 +44,13 @@ export interface Options {
     timeout: number;
   };
   requestId: any;
+  validateOptions: {
+    translate?: Function;
+    validateRoot?: boolean;
+    convert?: boolean;
+    widelyUndefined?: any;
+    error?: boolean;
+  };
   [key: string]: any;
   errorOptions?: ErrorOptions | undefined;
   notFound?: (status: number, ctx: DarukContext) => {};

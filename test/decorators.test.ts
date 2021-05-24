@@ -104,9 +104,6 @@ describe('decorators', () => {
   it('decorator "@put"', (done) => {
     request(app).put('/put').expect(code200, done);
   });
-  it('decorator @json', (done) => {
-    request(app).get('/json1').expect(code200).expect({ foo: 1 }, done);
-  });
 
   it('decorator @type', (done) => {
     request(app)
@@ -158,76 +155,7 @@ describe('decorators', () => {
       .expect('routeMiddleware multiRouteMiddleware', done);
   });
 
-  it('decorator "@required" success', (done) => {
-    request(app)
-      .post('/required/1')
-      .send({ foo: 2 })
-      .query({ bar: 3 })
-      .expect(code200)
-      .expect('', done);
-  });
-  it('decorator "@required" fail', (done) => {
-    request(app).post('/required/1').expect(code200).expect(
-      {
-        part: 'body',
-        key: 'foo'
-      },
-      done
-    );
-  });
-  it('decorator @typeParse', (done) => {
-    request(app)
-      .post('/typeparse/123')
-      .send({ foo: '123', arr: '[1]', object2: '{"a":1}', arr2: '[1,2,3]' })
-      .query({ bar: [1, 2, 3], object2: '{a:1}', arr2: '1,2,3,4' })
-      .expect(code200)
-      .expect(
-        {
-          body: {
-            foo: true,
-            arr: [1],
-            arr2: [1, 2, 3],
-            object2: { a: 1 }
-          },
-          params: { id: 123 },
-          query: { bar: '1,2,3', object2: {}, arr2: ['1,2,3,4'] }
-        },
-        done
-      );
-  });
-
-  it('decorator @typeParse with x-www-form-urlencoded', (done) => {
-    request(app)
-      .post('/typeparse/123')
-      .send('arr=[1]')
-      .expect(code200)
-      .expect(
-        {
-          body: {
-            arr: [1]
-          },
-          params: { id: 123 },
-          query: {}
-        },
-        done
-      );
-  });
-
-  it('decorator @typeParse without request args', (done) => {
-    request(app)
-      .post('/typeparse/123')
-      .expect(code200)
-      .expect(
-        {
-          body: {},
-          params: { id: 123 },
-          query: {}
-        },
-        done
-      );
-  });
-
-  it('decorator @validate success', (done) => {
+  it('decorator @validate get success', (done) => {
     request(app)
       .get('/validate')
       .query({
@@ -236,14 +164,17 @@ describe('decorators', () => {
       .expect(code200, done);
   });
 
-  it('decorator @validate fail', (done) => {
+  it('decorator @validate post success', (done) => {
     request(app)
       .post('/validate')
       .send({
         foo: 'foo'
       })
-      .expect(code200)
-      .expect('foo not pass validate!', done);
+      .expect(code200, done);
+  });
+
+  it('decorator @validate post default success', (done) => {
+    request(app).post('/validate').expect(code200, done);
   });
 
   it('decorator @cache', (done) => {
