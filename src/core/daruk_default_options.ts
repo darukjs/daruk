@@ -51,10 +51,10 @@ export default function getDefaultOptions(
     requestId: {
       inject: true
     },
-		// daruk validate options
-		validateOptions: {
-			// convert primitive params to specific type
-			convert: true
-		}
+    // daruk validate options
+    validateOptions: {
+      // convert primitive params to specific type
+      convert: true
+    }
   };
 }

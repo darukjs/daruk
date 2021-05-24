@@ -10,6 +10,6 @@ import { MiddlewareClass } from '../../typings/daruk';
 @defineMiddleware('daruk_error')
 class KoaBody implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
-    return error(daruk.app, daruk.options.errorOptions);
+    error(daruk.app, daruk.options.errorOptions);
   }
 }

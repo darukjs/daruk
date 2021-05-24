@@ -6,7 +6,7 @@ import Daruk from '../../core/daruk';
 import { defineMiddleware } from '../../decorators';
 import { DarukContext, MiddlewareClass, Next } from '../../typings/daruk';
 
-@defineMiddleware('daruk_error')
+@defineMiddleware('daruk_notFound')
 class KoaBody implements MiddlewareClass {
   public initMiddleware(daruk: Daruk) {
     return async (ctx: DarukContext, next: Next) => {

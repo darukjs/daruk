@@ -5,25 +5,6 @@ import is = require('is');
 import koa = require('koa');
 import { method, ParseType, validateFunc } from '../typings/daruk';
 
-export function validate(method: method, key: string, validateFunc: validateFunc) {
-  return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
-    const oldFunc = descriptor.value;
-
-    descriptor.value = async function validateWrap(ctx: koa.Context, next: Function) {
-      const checkObject = method === 'body' ? ctx.request.body : ctx[method];
-      const value = checkObject[key];
-      if (value) {
-        ctx.validateError = ctx.validateError || [];
-        const ret = validateFunc(value);
-        if (is.string(ret)) ctx.validateError.push(ret);
-      }
-      // tslint:disable-next-line:no-invalid-this
-      await oldFunc.call(this, ...arguments);
-      await next();
-    };
-  };
-}
-
 export function required(config: { body?: string[]; query?: string[]; params?: string[] }) {
   assert(
     is.object(config) && Object.keys(config).length > 0,
