@@ -7,7 +7,7 @@ declare module 'koa-onerror' {
     [key: string]: any;
     request: DarukRequest;
   }
-  interface options {
+  interface Options {
     all?: (err: Error, ctx: DarukContext) => void;
     html?: (err: Error, ctx: DarukContext) => void;
     json?: (err: Error, ctx: DarukContext) => void;
@@ -15,6 +15,6 @@ declare module 'koa-onerror' {
     jsonp?: (err: Error, ctx: DarukContext) => void;
     redirect?: (err: Error, ctx: DarukContext) => void;
   }
-  function onerror(app: koa, options: options | undefined): void;
+  function onerror(app: koa, options: Options | undefined): void;
   export = onerror;
 }

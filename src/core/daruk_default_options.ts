@@ -12,6 +12,7 @@ export default function getDefaultOptions(
   return {
     routerType: 'koa-router',
     name,
+    exitHook: true,
     routerOptions: {},
     swaggerOptions: { title: 'Daruk Server', description: 'Daruk API DOC', version: '1.0.0' },
     rootPath,

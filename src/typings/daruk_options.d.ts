@@ -24,6 +24,7 @@ export interface Options {
   rootPath: string;
   debug: boolean;
   bodyOptions: koaBody.IKoaBodyOptions;
+  exitHook: boolean;
   // monitor: {
   //   enable: boolean;
   //   v8AnalyticsPath: string;
