@@ -19,6 +19,10 @@
 ![APM](https://img.shields.io/apm/l/vim-mode.svg)
 [![Build Status](https://dev.azure.com/designsor/daruk/_apis/build/status/darukjs.daruk?branchName=developer)](https://dev.azure.com/designsor/daruk/_build/latest?definitionId=3&branchName=developer)
 
+## 讨论群
+
+https://github.com/darukjs/daruk/issues/129
+
 ## Daruk
 
 [Daruk](https://darukjs.com) 是一款基于 Koa2，使用 Typescript 开发的轻量级 web 框架。Daruk 的初衷是让人们可以更方便的开发 Nodejs Web 应用并能够体会到 Typescript 编程的乐趣。Daruk 本身基于 100%基于 Typescript 开发，使用 inversifyjs 的 IoC 容器管理依赖，让开发者享受最佳的 OOP 和 IoC 的编程体验。
