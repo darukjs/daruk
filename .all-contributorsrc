@@ -179,7 +179,18 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "alex1504",
+      "name": "Zerui Hu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15864345?v=4",
+      "profile": "http://huzerui.com/",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
