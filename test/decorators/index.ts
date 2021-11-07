@@ -125,6 +125,15 @@ class ServiceTest {
   }
 }
 
+@controller("/v1/prefix/controller")
+class ControllerPrefix {
+  @get('/index')
+  public async test(ctx: DarukContext, next: Next) {
+    ctx.body = 'A';
+    await next();
+  }
+}
+
 @controller([
   {
     middlewareName: 'routeMiddleware'
