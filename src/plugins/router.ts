@@ -89,7 +89,7 @@ class RouterController implements PluginClass {
                   // 避免解析出的路由没有 / 前缀
                   // 并保证前后都有 /，方便后续比对路由 key
                   // 不转path，因为可能会把通配符转成unix path
-                  const routePath = urljoin('/', prefix, path).replace(/\/\//g, '/');
+                  const routePath = urljoin('/', prefix, path).replace(/\/\//g, '/').replace(/\/+$/, "");
                   // 获取针对路由的中间件名字
                   let middlewares: Array<{
                     middlewareName: string;
