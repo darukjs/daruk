@@ -1,5 +1,5 @@
 import { Constructor } from '../typings/daruk';
-export declare function controller(middlewares?: [{
+export declare function controller(prefixOrMiddlewares?: string | [{
     middlewareName: string;
     options?: {
         [key: string]: any;

@@ -1796,10 +1796,10 @@ daruk-request-id@^0.4.3:
     "@types/uuid" "^3.4.4"
     uuid "^3.3.2"
 
-daruk-validate@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/daruk-validate/-/daruk-validate-1.0.4.tgz#305e4c2ab4f7fb54af037a076a607ea24c5ba219"
-  integrity sha512-CThhCv5O/01tbdf4MZFtNK6LUFI6T0TCmCTBoV1G1KIKcYnpizAbn3GzeUd+gbzPkoJlRl04CVo9RQSX7aZHTw==
+daruk-validate@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/daruk-validate/-/daruk-validate-1.0.5.tgz#c6a692a632cfd333ffce7e93dffbbd5ac36709b5"
+  integrity sha512-g6BGHvRA1xEmVeyO/FfOHkiXoXEm7/u2b9/wS7WwAmfhdi9s4oAxbhRSA3Zs69xSt3UiIzgq2wlXiVBXQEFvnQ==
   dependencies:
     parameter "^3.6.0"
 
