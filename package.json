@@ -1,6 +1,6 @@
 {
   "name": "daruk",
-  "version": "2.3.10",
+  "version": "2.3.11",
   "description": "a node.js web framework",
   "main": "build/index.js",
   "scripts": {
@@ -101,7 +101,7 @@
     "koa-body": "^4.1.0",
     "koa-cookie": "^1.0.0",
     "koa-onerror": "^4.1.0",
-    "koa-swagger-decorator": "^1.7.4",
+    "koa-swagger-decorator": "1.7.4",
     "object-assign-deep": "^0.4.0",
     "recursive-readdir": "^2.2.2",
     "reflect-metadata": "^0.1.13",
