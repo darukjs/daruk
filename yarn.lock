@@ -3339,10 +3339,10 @@ koa-router@^7.2.1:
     path-to-regexp "^1.1.1"
     urijs "^1.19.0"
 
-koa-swagger-decorator@^1.7.4:
+koa-swagger-decorator@1.7.4:
   version "1.7.4"
-  resolved "https://registry.npmjs.org/koa-swagger-decorator/-/koa-swagger-decorator-1.7.4.tgz#436d593684e805e39eb0e646f981971c71bbe214"
-  integrity sha512-NiN+aKHpjm9mqjFwvQvBvgBnfg3ihsjExTCJkEJyYRtFGHH0pyo3bc7oQ+/CwhEWsFhdodJDQVnjyIPlkViZqw==
+  resolved "https://registry.npmmirror.com/koa-swagger-decorator/download/koa-swagger-decorator-1.7.4.tgz#436d593684e805e39eb0e646f981971c71bbe214"
+  integrity sha1-Q21ZNoToBeOesOZG+YGXHHG74hQ=
   dependencies:
     "@types/globby" "^8.0.0"
     "@types/koa-router" "^7.0.31"
