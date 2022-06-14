@@ -9,7 +9,6 @@
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
     "dev": "ts-node --project tsconfig.json --files src/index.ts",
-    "t": "ts-node --project tsconfig.json --files src/Test/index.ts",
     "build": "node build.js",
     "demo": "ts-node --project tsconfig.json --files",
     "cov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
