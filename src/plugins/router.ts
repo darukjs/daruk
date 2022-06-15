@@ -147,21 +147,21 @@ function useMiddleware(
   daruk: Daruk,
   darukContainer: Container
 ) {
-  type middleware = {
+  interface IMiddleware {
     middlewareName: string;
     options: { [key: string]: any };
-  };
+  }
 
-  let result: middleware[];
+  let result: IMiddleware[];
 
   // 获取针对路由的中间件名字
-  let funMiddlewares: middleware[] | undefined = Reflect.getMetadata(
+  let funMiddlewares: IMiddleware[] | undefined = Reflect.getMetadata(
     MIDDLEWARE_NAME,
     controller,
     funcName
   );
   // 获取整个类的中间件
-  let controllerMiddlewares: middleware[] | undefined = Reflect.getMetadata(
+  let controllerMiddlewares: IMiddleware[] | undefined = Reflect.getMetadata(
     CONTROLLER_MIDDLEWARES,
     controller
   );
@@ -185,6 +185,6 @@ function useMiddleware(
     }
     assert(is.fn(middleware), `[middleware] ${middlewareName} is not found or not a function`);
     // @ts-ignore
-    daruk.router.use(routePath, middleware);
+    daruk.router[method](routePath, middleware);
   }
 }
