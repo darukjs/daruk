@@ -27,7 +27,13 @@ import {
   MIDDLEWARE_NAME,
   SERVICE
 } from '../decorators/constants';
-import { Constructor, DarukContext, MiddlewareClass, PluginClass } from '../typings/daruk';
+import {
+  Constructor,
+  DarukContext,
+  MiddlewareClass,
+  PluginClass,
+  MiddlewareConfig
+} from '../typings/daruk';
 
 interface DarukRouter extends Daruk {
   router: Router;
@@ -147,21 +153,16 @@ function useMiddleware(
   daruk: Daruk,
   darukContainer: Container
 ) {
-  interface IMiddleware {
-    middlewareName: string;
-    options: { [key: string]: any };
-  }
-
-  let result: IMiddleware[];
+  let result: MiddlewareConfig[];
 
   // 获取针对路由的中间件名字
-  let funMiddlewares: IMiddleware[] | undefined = Reflect.getMetadata(
+  let funMiddlewares: MiddlewareConfig[] | undefined = Reflect.getMetadata(
     MIDDLEWARE_NAME,
     controller,
     funcName
   );
   // 获取整个类的中间件
-  let controllerMiddlewares: IMiddleware[] | undefined = Reflect.getMetadata(
+  let controllerMiddlewares: MiddlewareConfig[] | undefined = Reflect.getMetadata(
     CONTROLLER_MIDDLEWARES,
     controller
   );

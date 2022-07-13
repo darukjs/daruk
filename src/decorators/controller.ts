@@ -4,7 +4,12 @@
 
 import { injectable } from 'inversify';
 import { Constructor } from '../typings/daruk';
-import { CONTROLLER_CLASS, CONTROLLER_CLASS_PREFIX, CONTROLLER_MIDDLEWARES, CONTROLLER_PRIORITY } from './constants';
+import {
+  CONTROLLER_CLASS,
+  CONTROLLER_CLASS_PREFIX,
+  CONTROLLER_MIDDLEWARES,
+  CONTROLLER_PRIORITY
+} from './constants';
 
 /**
  * @desc controller 装饰器，将类装饰为 controller
@@ -12,15 +17,17 @@ import { CONTROLLER_CLASS, CONTROLLER_CLASS_PREFIX, CONTROLLER_MIDDLEWARES, CONT
  * @return Decorator - 装饰器
  */
 export function controller(
-  prefixOrMiddlewares?: string | [{ middlewareName: string; options?: { [key: string]: any } }]
+  prefixOrMiddlewares?: string | Array<{ middlewareName: string; options?: { [key: string]: any } }>
 ) {
   return (target: Constructor) => {
     injectable()(target);
 
-    if (typeof prefixOrMiddlewares === "string") {
-      Reflect.defineMetadata(CONTROLLER_CLASS_PREFIX, prefixOrMiddlewares, target);
-    } else {
-      Reflect.defineMetadata(CONTROLLER_MIDDLEWARES, prefixOrMiddlewares, target);
+    if (prefixOrMiddlewares) {
+      if (typeof prefixOrMiddlewares === 'string') {
+        Reflect.defineMetadata(CONTROLLER_CLASS_PREFIX, prefixOrMiddlewares, target);
+      } else if (Array.isArray(prefixOrMiddlewares)) {
+        Reflect.defineMetadata(CONTROLLER_MIDDLEWARES, prefixOrMiddlewares, target);
+      }
     }
 
     let Controllers = Reflect.getMetadata(CONTROLLER_CLASS, Reflect) || [];

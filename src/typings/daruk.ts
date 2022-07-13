@@ -59,3 +59,12 @@ export interface ParsedType {
 export type method = 'body' | 'query' | 'params';
 /** @internal */
 export type validateFunc = (value: string) => string | undefined;
+
+export interface MiddlewareConfig {
+  middlewareName: string;
+  options?: MiddlewareConfigOptions;
+}
+
+export interface MiddlewareConfigOptions {
+  [key: string]: any;
+}
