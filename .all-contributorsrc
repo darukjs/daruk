@@ -189,6 +189,16 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "xiaoqiang1999",
+      "name": "薛定谔の狗狗",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40377409?v=4",
+      "profile": "https://github.com/xiaoqiang1999",
+      "contributions": [
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
