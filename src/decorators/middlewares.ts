@@ -13,7 +13,11 @@ interface MiddlewareAndOptions extends Array<string | object> {
  * @returns MethodDecorator & ClassDecorator - 装饰器
  */
 export function middlewares(...middlewares: Array<string | MiddlewareAndOptions>) {
-  return (target: Object | Constructor, propertyKey?: string, descriptor?: PropertyDescriptor) => {
+  return (
+    target: Record<string, unknown> | Constructor,
+    propertyKey?: string,
+    descriptor?: PropertyDescriptor
+  ) => {
     // 判断装饰对象是函数还是类
     if (propertyKey && descriptor) {
       // target为被装饰类的 prototype
@@ -30,13 +34,13 @@ export function middlewares(...middlewares: Array<string | MiddlewareAndOptions>
 }
 
 function getMiddlewaresConfig(middlewares: Array<string | MiddlewareAndOptions>) {
-  let result: MiddlewareConfig[] = [];
+  const result: MiddlewareConfig[] = [];
   for (let item of middlewares) {
     if (Array.isArray(item)) {
-      let [middlewareName, options] = item as MiddlewareAndOptions;
+      const [middlewareName, options] = item as MiddlewareAndOptions;
       result.push({ middlewareName, options });
     } else if (typeof item === 'string') {
-      let middlewareName = item;
+      const middlewareName = item;
       result.push({ middlewareName });
     }
   }

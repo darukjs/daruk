@@ -31,8 +31,8 @@ import {
   Constructor,
   DarukContext,
   MiddlewareClass,
-  PluginClass,
-  MiddlewareConfig
+  MiddlewareConfig,
+  PluginClass
 } from '../typings/daruk';
 
 interface DarukRouter extends Daruk {
@@ -156,13 +156,13 @@ function useMiddleware(
   let result: MiddlewareConfig[];
 
   // 获取针对路由的中间件名字
-  let funMiddlewares: MiddlewareConfig[] | undefined = Reflect.getMetadata(
+  const funMiddlewares: MiddlewareConfig[] | undefined = Reflect.getMetadata(
     MIDDLEWARE_NAME,
     controller,
     funcName
   );
   // 获取整个类的中间件
-  let controllerMiddlewares: MiddlewareConfig[] | undefined = Reflect.getMetadata(
+  const controllerMiddlewares: MiddlewareConfig[] | undefined = Reflect.getMetadata(
     CONTROLLER_MIDDLEWARES,
     controller
   );
