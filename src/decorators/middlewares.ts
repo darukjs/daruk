@@ -17,50 +17,52 @@ export function middlewares(...middlewares: Array<string | MiddlewareAndOptions>
     // 判断装饰对象是函数还是类
     if (propertyKey && descriptor) {
       // target为被装饰类的 prototype
-      defineFunMeta(target.constructor as Constructor, propertyKey, middlewares);
+      defineFunMeta(
+        target.constructor as Constructor,
+        propertyKey,
+        getMiddlewaresConfig(middlewares)
+      );
     } else {
       // target为被装饰类 (即constructor函数)
-      defineControllerMeta(target as Constructor, middlewares);
+      defineControllerMeta(target as Constructor, getMiddlewaresConfig(middlewares));
     }
   };
+}
+
+function getMiddlewaresConfig(middlewares: Array<string | MiddlewareAndOptions>) {
+  let result: MiddlewareConfig[] = [];
+  for (let item of middlewares) {
+    if (Array.isArray(item)) {
+      let [middlewareName, options] = item as MiddlewareAndOptions;
+      result.push({ middlewareName, options });
+    } else if (typeof item === 'string') {
+      let middlewareName = item;
+      result.push({ middlewareName });
+    }
+  }
+  return result;
 }
 
 function defineFunMeta(
   TargetClass: Constructor,
   propertyKey: string,
-  middlewares: Array<string | MiddlewareAndOptions>
+  configList: MiddlewareConfig[]
 ) {
   let middlewareList: MiddlewareConfig[] =
     Reflect.getMetadata(MIDDLEWARE_NAME, TargetClass, propertyKey) || [];
 
-  forMiddlewares(middlewares, (middlewareConfig) => middlewareList.push(middlewareConfig));
+  // 反向连接数组 使@middlewares书写顺序和中间件真实顺序保持一致
+  middlewareList = configList.concat(middlewareList);
 
   Reflect.defineMetadata(MIDDLEWARE_NAME, middlewareList, TargetClass, propertyKey);
 }
 
-function defineControllerMeta(
-  TargetClass: Constructor,
-  middlewares: Array<string | MiddlewareAndOptions>
-) {
+function defineControllerMeta(TargetClass: Constructor, configList: MiddlewareConfig[]) {
   let middlewareList: MiddlewareConfig[] =
     Reflect.getMetadata(CONTROLLER_MIDDLEWARES, TargetClass) || [];
 
-  forMiddlewares(middlewares, (middlewareConfig) => middlewareList.push(middlewareConfig));
+  // 反向连接数组 使@middlewares书写顺序和中间件真实顺序保持一致
+  middlewareList = configList.concat(middlewareList);
 
   Reflect.defineMetadata(CONTROLLER_MIDDLEWARES, middlewareList, TargetClass);
-}
-
-function forMiddlewares(
-  middlewares: Array<string | MiddlewareAndOptions>,
-  callback: (middlewareConfig: MiddlewareConfig) => unknown
-) {
-  for (let item of middlewares) {
-    if (Array.isArray(item)) {
-      let [middlewareName, options] = item as MiddlewareAndOptions;
-      callback({ middlewareName, options });
-    } else if (typeof item === 'string') {
-      let middlewareName = item;
-      callback({ middlewareName });
-    }
-  }
 }
