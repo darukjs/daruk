@@ -4,6 +4,7 @@ export * from './framework';
 export * from './response';
 export * from './controller';
 export * from './request';
+export * from './middlewares';
 export {
   request,
   tags,
