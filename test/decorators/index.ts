@@ -14,6 +14,7 @@ import {
   inject,
   injectable,
   middleware,
+  middlewares,
   Next,
   options,
   patch,
@@ -125,7 +126,7 @@ class ServiceTest {
   }
 }
 
-@controller("/v1/prefix/controller")
+@controller('/v1/prefix/controller')
 class ControllerPrefix {
   @get('/index')
   public async test(ctx: DarukContext, next: Next) {
@@ -320,5 +321,60 @@ class Timers {
   }
   public onComplete(cron: CronJob, daruk: Daruk) {
     daruk.timerComplete = true;
+  }
+}
+
+for (let i = 1; i <= 10; i++) {
+  // middlewares-3和middlewares-8 为带options的中间件
+  if ([3, 8].includes(i)) {
+    @defineMiddleware(`middlewares-${i}`)
+    class Middlewares {
+      public initMiddleware() {
+        return (options: object) => (ctx: DarukContext, next: Next) => {
+          ctx.body ? (ctx.body += ` ${i}`) : (ctx.body = `${i}`);
+          return next();
+        };
+      }
+    }
+    continue;
+  }
+  @defineMiddleware(`middlewares-${i}`)
+  class Middlewares {
+    public initMiddleware() {
+      return (ctx: DarukContext, next: Next) => {
+        ctx.body ? (ctx.body += ` ${i}`) : (ctx.body = `${i}`);
+        return next();
+      };
+    }
+  }
+}
+
+@controller()
+@middlewares('middlewares-1')
+@middlewares('middlewares-2', ['middlewares-3', { option: 1 }], 'middlewares-4', 'middlewares-5')
+@middlewares('middlewares-6')
+export class MiddlewaresDecorator {
+  @get('/middlewares')
+  @middlewares('middlewares-7')
+  @middlewares(['middlewares-8', { option: 1 }], 'middlewares-9')
+  @middlewares('middlewares-10')
+  get(ctx: DarukContext, next: Next) {
+    ctx.body ? (ctx.body += ' getMiddlewares') : (ctx.body = 'getMiddlewares');
+    return next();
+  }
+
+  @post('/middlewares')
+  @middlewares('middlewares-7')
+  @middlewares(['middlewares-8', { option: 1 }], 'middlewares-9')
+  post(ctx: DarukContext, next: Next) {
+    ctx.body ? (ctx.body += ' postMiddlewares') : (ctx.body = 'postMiddlewares');
+    return next();
+  }
+
+  @put('/middlewares')
+  @middlewares('middlewares-7')
+  put(ctx: DarukContext, next: Next) {
+    ctx.body ? (ctx.body += ' putMiddlewares') : (ctx.body = 'putMiddlewares');
+    return next();
   }
 }
