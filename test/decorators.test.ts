@@ -215,4 +215,21 @@ describe('decorators', () => {
       done();
     }, timeOut);
   });
+
+  it('decorator @middlewares for @controller and @method', (done) => {
+    request(app)
+      .get('/middlewares')
+      .expect(code200)
+      .expect('1 2 3 4 5 6 7 8 9 10 getMiddlewares', () => {
+        request(app)
+          .post('/middlewares')
+          .expect(code200)
+          .expect('1 2 3 4 5 6 7 8 9 postMiddlewares', () => {
+            request(app)
+              .put('/middlewares')
+              .expect(code200)
+              .expect('1 2 3 4 5 6 7 putMiddlewares', done);
+          });
+      });
+  });
 });

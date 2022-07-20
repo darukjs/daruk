@@ -100,6 +100,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#app" class="tsd-kind-icon">app</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#assert" class="tsd-kind-icon">assert</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#body" class="tsd-kind-icon">body</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#cookie" class="tsd-kind-icon">cookie</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#cookies" class="tsd-kind-icon">cookies</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#etag" class="tsd-kind-icon">etag</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="darukcontext.html#fresh" class="tsd-kind-icon">fresh</a></li>
@@ -237,6 +238,17 @@
 							<p>Get/Set response body.</p>
 						</div>
 					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="cookie" class="tsd-anchor"></a>
+					<h3>cookie</h3>
+					<div class="tsd-signature tsd-kind-icon">cookie<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="darukcontext.html">DarukContext</a>.<a href="darukcontext.html#cookie">cookie</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/koa-cookie/index.d.ts:21</li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="cookies" class="tsd-anchor"></a>
@@ -630,7 +642,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides ExtendableContext.request</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/darukjs/daruk/blob/dc0d697/src/typings/daruk.ts#L21">src/typings/daruk.ts:21</a></li>
+							<li>Defined in src/typings/daruk.ts:21</li>
 						</ul>
 					</aside>
 				</section>
@@ -1488,7 +1500,7 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">throw<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, code<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, properties<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span></li>
 						<li class="tsd-signature tsd-kind-icon">throw<span class="tsd-signature-symbol">(</span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span></li>
-						<li class="tsd-signature tsd-kind-icon">throw<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>properties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span></li>
+						<li class="tsd-signature tsd-kind-icon">throw<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>properties<span class="tsd-signature-symbol">: </span><a href="middlewareandoptions.html#array" class="tsd-signature-type">Array</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -1551,7 +1563,7 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>properties: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>properties: <a href="middlewareandoptions.html#array" class="tsd-signature-type">Array</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">never</span></h4>
@@ -1648,6 +1660,9 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="darukcontext.html#body" class="tsd-kind-icon">body</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="darukcontext.html#cookie" class="tsd-kind-icon">cookie</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="darukcontext.html#cookies" class="tsd-kind-icon">cookies</a>
@@ -1816,7 +1831,16 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface">
+						<a href="middlewareandoptions.html" class="tsd-kind-icon">Middleware<wbr>And<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="middlewareclass.html" class="tsd-kind-icon">Middleware<wbr>Class</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="middlewareconfig.html" class="tsd-kind-icon">Middleware<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="middlewareconfigoptions.html" class="tsd-kind-icon">Middleware<wbr>Config<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="pluginclass.html" class="tsd-kind-icon">Plugin<wbr>Class</a>
@@ -1846,6 +1870,12 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 						<a href="../index.html#controller" class="tsd-kind-icon">controller</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="../index.html#definecontrollermeta" class="tsd-kind-icon">define<wbr>Controller<wbr>Meta</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../index.html#definefunmeta" class="tsd-kind-icon">define<wbr>Fun<wbr>Meta</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="../index.html#definemiddleware" class="tsd-kind-icon">define<wbr>Middleware</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -1858,16 +1888,19 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 						<a href="../index.html#get" class="tsd-kind-icon">get</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="../index.html#getmiddlewaresconfig" class="tsd-kind-icon">get<wbr>Middlewares<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="../index.html#head" class="tsd-kind-icon">head</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../index.html#header" class="tsd-kind-icon">header</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../index.html#json" class="tsd-kind-icon">json</a>
+						<a href="../index.html#middleware" class="tsd-kind-icon">middleware</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../index.html#middleware" class="tsd-kind-icon">middleware</a>
+						<a href="../index.html#middlewares" class="tsd-kind-icon">middlewares</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../index.html#options" class="tsd-kind-icon">options</a>
@@ -1907,9 +1940,6 @@ this.accepts(<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hlj
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../index.html#typeparse" class="tsd-kind-icon">type<wbr>Parse</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../index.html#validate" class="tsd-kind-icon">validate</a>
 					</li>
 				</ul>
 			</nav>
