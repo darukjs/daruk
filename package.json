@@ -88,7 +88,7 @@
     "convert-hrtime": "^2.0.0",
     "cron": "^1.7.1",
     "daruk-exit-hook": "^0.3.0",
-    "daruk-logger": "^1.10.0",
+    "daruk-logger": "^1.10.1",
     "daruk-request-id": "^0.4.3",
     "daruk-validate": "^1.0.5",
     "htmlspecialchars": "^1.0.5",
