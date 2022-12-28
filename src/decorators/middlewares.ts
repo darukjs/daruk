@@ -13,11 +13,7 @@ interface MiddlewareAndOptions extends Array<string | object> {
  * @returns MethodDecorator & ClassDecorator - 装饰器
  */
 export function middlewares(...middlewares: Array<string | MiddlewareAndOptions>) {
-  return (
-    target: Record<string, unknown> | Constructor,
-    propertyKey?: string,
-    descriptor?: PropertyDescriptor
-  ) => {
+  return (target: Object | Constructor, propertyKey?: string, descriptor?: PropertyDescriptor) => {
     // 判断装饰对象是函数还是类
     if (propertyKey && descriptor) {
       // target为被装饰类的 prototype
