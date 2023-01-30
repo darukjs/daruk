@@ -19,7 +19,7 @@ jobs:
         restore-keys: |
           ${{ runner.OS }}-npm-cache
     - name: Install Dependencies
-      run: yarn --frozen-lockfile --non-interactive
+      run: yarn --non-interactive
     - name: Lint
       run: |
         yarn tslint
