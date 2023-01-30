@@ -6,7 +6,7 @@ cache:
   directories:
     - node_modules
 install:
-  - yarn --frozen-lockfile --non-interactive
+  - yarn  --non-interactive
 
 stages:
   - name: commit-message

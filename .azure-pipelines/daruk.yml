@@ -3,7 +3,7 @@ steps:
     inputs:
       versionSpec: $(node_version)
 
-  - script: yarn global add codecov && yarn --frozen-lockfile --non-interactive
+  - script: yarn global add codecov && yarn --non-interactive
     displayName: 'Install Dependency'
 
   - script: yarn run tslint
