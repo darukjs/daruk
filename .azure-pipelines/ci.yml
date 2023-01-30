@@ -10,8 +10,8 @@ jobs:
       vmImage: xcode9-macos10.13
     strategy:
       matrix:
-        node_10_x:
-          node_version: 10.x
+        node_14_x:
+          node_version: 14.x
     steps:
       - script: npm install -g yarn
       - template: ./daruk.yml
@@ -23,8 +23,8 @@ jobs:
       vmImage: ubuntu-16.04
     strategy:
       matrix:
-        node_10_x:
-          node_version: 10.x
+        node_14_x:
+          node_version: 14.x
 
     steps:
       - script: sudo apt-get install yarn
@@ -36,8 +36,8 @@ jobs:
       vmImage: vs2017-win2016
     strategy:
       matrix:
-        node_10_x:
-          node_version: 10.x
+         node_14_x:
+          node_version: 14.x
 
     steps:
       - script: choco install yarn
