@@ -106,7 +106,7 @@ export function header(key: string | { [key: string]: string }, value?: string) 
   };
 }
 
-export function cache(callback: (cacheKey: string, shouldCacheData?: string) => Promise<string>) {
+export function cache(callback: (cacheKey: string, shouldCacheData?: unknown | string) => Promise<string>) {
   assert(is.function(callback), `[Decorator @${callback}] parameter must be a function`);
   return (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => {
     const oldFunc = descriptor.value;

@@ -1,13 +1,13 @@
 /// <reference types="node" />
-/// <reference types="koa__router" />
+/// <reference types="node" />
 import { CronJob } from 'cron';
 import Http = require('http');
 import Https = require('https');
 import Koa = require('koa');
 import Daruk from '../core/daruk';
 import Router = require('@koa/router');
-export declare type Server = Http.Server | Https.Server;
-export declare type Next = () => Promise<any>;
+export type Server = Http.Server | Https.Server;
+export type Next = () => Promise<any>;
 interface DarukRequest extends Koa.Request {
     id: string;
 }
@@ -15,7 +15,7 @@ export interface DarukContext extends Koa.Context, Router.RouterParamContext {
     [key: string]: any;
     request: DarukRequest;
 }
-export declare type Constructor<T = any> = new (...args: any[]) => T;
+export type Constructor<T = any> = new (...args: any[]) => T;
 export interface PluginClass {
     initPlugin: (daruk: Daruk) => Promise<any>;
 }
@@ -38,8 +38,8 @@ export interface ParseType {
 export interface ParsedType {
     [key: string]: Array<string> | Boolean | String | Number | Object;
 }
-export declare type method = 'body' | 'query' | 'params';
-export declare type validateFunc = (value: string) => string | undefined;
+export type method = 'body' | 'query' | 'params';
+export type validateFunc = (value: string) => string | undefined;
 export interface MiddlewareConfig {
     middlewareName: string;
     options?: MiddlewareConfigOptions;

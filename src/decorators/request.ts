@@ -10,7 +10,7 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
     is.object(config) && Object.keys(config).length > 0,
     `[Decorator required] parameter must be a object and more than one property`
   );
-  function check(actual: { [key: string]: string }, expected: string[] | undefined, part: method) {
+  function check(actual: { [key: string]: any}, expected: string[] | undefined, part: method) {
     if (is.object(actual) && expected) {
       for (let key of expected) {
         if (is.undefined(actual[key])) {
@@ -41,7 +41,7 @@ export function required(config: { body?: string[]; query?: string[]; params?: s
 }
 
 export function typeParse(config: { body?: ParseType; query?: ParseType; params?: ParseType }) {
-  function parse(constructors: ParseType | undefined, actual: { [key: string]: string }) {
+  function parse(constructors: ParseType | undefined, actual: { [key: string]: any}) {
     const parsed: { [key: string]: any } = {};
     if (constructors) {
       Object.keys(constructors).forEach((key) => {

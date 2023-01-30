@@ -1,5 +1,6 @@
 import { Container } from 'inversify';
+import { PartialOptions } from '../typings/daruk_options';
 import Daruk from './daruk';
 declare const darukContainer: Container;
-declare const DarukServer: (options?: import("../typings/daruk_options").RecursivePartial<import("../typings/daruk_options").Options> | undefined) => Daruk;
+declare const DarukServer: (options?: PartialOptions) => Daruk;
 export { darukContainer, DarukServer };

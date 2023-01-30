@@ -17,7 +17,7 @@ class KoaBody implements MiddlewareClass {
           daruk.options.notFound(ctx);
         }
       } catch (err) {
-        ctx.throw(err);
+        ctx.throw(err,500);
       }
     };
   }

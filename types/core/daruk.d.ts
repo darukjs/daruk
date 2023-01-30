@@ -1,4 +1,5 @@
 /// <reference types="node" />
+/// <reference types="node" />
 import KoaLogger = require('daruk-logger');
 import { EventEmitter } from 'events';
 import Koa = require('koa');
@@ -16,7 +17,7 @@ declare class Daruk extends EventEmitter {
     _initOptions(options?: PartialOptions): void;
     loadFile(path: string): Promise<void>;
     binding(): Promise<void>;
-    mockContext(req?: {}): Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext>;
+    mockContext(req?: {}): Koa.ParameterizedContext<Koa.DefaultState, Koa.DefaultContext, unknown>;
     listen(port?: number, hostname?: string, backlog?: number, listeningListener?: () => void): Server;
     listen(port: number, hostname?: string, listeningListener?: () => void): Server;
     listen(port: number, backlog?: number, listeningListener?: () => void): Server;
