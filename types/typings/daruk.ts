@@ -5,6 +5,7 @@ import Http = require('http');
 import Https = require('https');
 import Koa = require('koa');
 import Daruk from '../core/daruk';
+import Router = require('@koa/router');
 
 /** @internal */
 export type Server = Http.Server | Https.Server;
@@ -15,11 +16,11 @@ export type Next = () => Promise<any>;
 interface DarukRequest extends Koa.Request {
   id: string;
 }
-
-export interface DarukContext extends Koa.Context {
+export interface DarukContext extends Koa.Context,Router.RouterParamContext {
   [key: string]: any;
   request: DarukRequest;
 }
+
 
 export type Constructor<T = any> = new (...args: any[]) => T;
 
