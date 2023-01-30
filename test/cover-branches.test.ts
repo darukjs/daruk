@@ -3,11 +3,11 @@
  */
 
 import chai = require('chai');
+import { assert } from 'console';
 import sinon = require('sinon');
 import { Daruk, DarukContext, DarukServer, Next } from '../src';
 
 const port = 3000;
-const assert = chai.assert;
 
 describe('cover-branches', () => {
   let stubExit: sinon.SinonStub;

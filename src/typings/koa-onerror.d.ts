@@ -1,5 +1,5 @@
 declare module 'koa-onerror' {
-	import Router from '@koa/router';
+  import Router from '@koa/router';
   import koa from 'koa';
   interface DarukRequest extends koa.Request {
     id: string;

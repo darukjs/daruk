@@ -1,11 +1,11 @@
 /// <reference types="node" />
 /// <reference types="node" />
+import Router = require('@koa/router');
 import { CronJob } from 'cron';
 import Http = require('http');
 import Https = require('https');
 import Koa = require('koa');
 import Daruk from '../core/daruk';
-import Router = require('@koa/router');
 export type Server = Http.Server | Https.Server;
 export type Next = () => Promise<any>;
 interface DarukRequest extends Koa.Request {

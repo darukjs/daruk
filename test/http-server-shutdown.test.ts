@@ -1,4 +1,5 @@
 import chai = require('chai');
+import { assert } from 'console';
 import sinon = require('sinon');
 import request = require('supertest');
 import {
@@ -12,7 +13,6 @@ import {
   TYPES
 } from '../src';
 
-const assert = chai.assert;
 const port = 3000;
 const code200 = 200;
 
@@ -37,7 +37,7 @@ describe('http-server-shutdown', () => {
       @get('/')
       public async index(ctx: DarukContext, next: Next) {
         // 定义一个 2s 返回的路由
-        await new Promise((resolve) => {
+        await new Promise<void>((resolve) => {
           const routeTimeout = 2000;
           setTimeout(() => {
             ctx.body = 'delay route';

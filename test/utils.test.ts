@@ -1,8 +1,7 @@
 import chai = require('chai');
+import { assert } from 'console';
 import sinon = require('sinon');
 import { debugLog, isJsTsFile } from '../src/utils';
-
-const assert = chai.assert;
 
 describe('utils', () => {
   it('highlight console', () => {

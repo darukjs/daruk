@@ -1,8 +1,7 @@
 import chai = require('chai');
+import { assert } from 'console';
 import sinon = require('sinon');
 import { DarukServer } from '../src';
-
-const assert = chai.assert;
 
 describe('apis', () => {
   let stubExit: sinon.SinonStub;
@@ -19,7 +18,7 @@ describe('apis', () => {
   });
 
   it('mockContext', () => {
-    const host = '10.22.22.3';
+    const host:string = '10.22.22.3';
     const context1 = server.mockContext({
       headers: {
         host

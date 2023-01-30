@@ -5,4 +5,4 @@ export declare function type(type: string): (proto: Object, propertyKey: string,
 export declare function header(key: string | {
     [key: string]: string;
 }, value?: string): (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => void;
-export declare function cache(callback: (cacheKey: string, shouldCacheData?: unknown | string) => Promise<string>): (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => void;
+export declare function cache(callback: (cacheKey: string, shouldCacheData?: any) => Promise<string>): (proto: Object, propertyKey: string, descriptor: PropertyDescriptor) => void;

@@ -1,4 +1,5 @@
 import chai = require('chai');
+import { assert } from 'console';
 import request = require('supertest');
 import { Daruk, DarukServer } from '../src';
 
@@ -6,7 +7,6 @@ const port = 3000;
 const code200 = 200;
 const code404 = 404;
 const code302 = 302;
-const assert = chai.assert;
 
 describe('decorators', () => {
   let app: Daruk['httpServer'];
