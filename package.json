@@ -90,7 +90,7 @@
     "daruk-exit-hook": "^0.3.0",
     "daruk-logger": "^1.10.1",
     "daruk-request-id": "^0.4.3",
-    "daruk-validate": "^1.0.5",
+    "daruk-validate": "^1.1.0",
     "htmlspecialchars": "^1.0.5",
     "http-server-shutdown": "^1.1.2",
     "inversify": "^5.0.1",
