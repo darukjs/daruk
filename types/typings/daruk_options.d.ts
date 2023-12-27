@@ -18,6 +18,9 @@ interface ErrorOptions {
   redirect?: (err: Error, ctx: DarukContext) => void;
 }
 
+
+
+
 export interface Options {
   middlewareOrder: string[];
   name: string;
@@ -25,6 +28,7 @@ export interface Options {
   debug: boolean;
   bodyOptions: koaBody.IKoaBodyOptions;
   exitHook: boolean;
+
   // monitor: {
   //   enable: boolean;
   //   v8AnalyticsPath: string;

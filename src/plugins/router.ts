@@ -4,11 +4,12 @@
  * @fileoverview 重构router部分,使用依赖控制controller
  */
 import Router = require('@koa/router');
+import swaggerJsdoc from 'swagger-jsdoc';
 import assert = require('assert');
 import { Container } from 'inversify';
 import is = require('is');
 import Koa = require('koa');
-import { SwaggerRouter } from 'koa-swagger-decorator';
+import { koaSwagger } from 'koa2-swagger-ui';
 import urljoin = require('url-join');
 import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
@@ -49,13 +50,9 @@ class RouterController implements PluginClass {
   public async initPlugin(daruk: Daruk) {
     daruk.on('init', () => {
       daruk.emit('routerUseBefore');
+      const options = daruk.options;
 
-      if (daruk.options.routerType === 'swagger') {
-        daruk.router = new SwaggerRouter(daruk.options.routerOptions, daruk.options.swaggerOptions);
-        daruk.router.swagger();
-      } else {
-        daruk.router = new Router(daruk.options.routerOptions);
-      }
+      daruk.router = new Router(options.routerOptions);
 
       const controllers = Reflect.getMetadata(CONTROLLER_CLASS, Reflect) || [];
       const Services = Reflect.getMetadata(SERVICE, Reflect) || [];
@@ -67,10 +64,6 @@ class RouterController implements PluginClass {
           return Apriority - Bpriority;
         })
         .forEach((controller: Constructor) => {
-          if (daruk.options.routerType === 'swagger') {
-            console.log(controller);
-            daruk.router.map(controller, { doValidation: true });
-          }
           // 获取是否整个类被disabled
           const classDisabled =
             Reflect.getMetadata(CONTROLLER_DISABLED_CLASS, controller) === 'disabled';
@@ -136,6 +129,29 @@ class RouterController implements PluginClass {
           });
         });
 
+      const swagger = options.swagger;
+      if (swagger.enable) {
+        const swaggerOptions = {
+          definition: {
+            openapi: '3.0.0',
+            info: {
+              title: swagger.title || 'daruk swagger docs',
+              description: swagger.description || 'a sample api',
+              version: swagger.version || '1.0.0'
+            },
+            host: swagger.host,
+            basePath: swagger.basePath
+          },
+          apis: swagger.apis
+        };
+        if (swagger.host) swaggerOptions.definition.host = swagger.host;
+        if (swagger.basePath) swaggerOptions.definition.basePath = swagger.basePath;
+        const openapiSpecification = swaggerJsdoc(swaggerOptions);
+        daruk.router.get(
+          swagger.prefix,
+          koaSwagger({ routePrefix: false, swaggerOptions: { spec: openapiSpecification } })
+        );
+      }
       // @ts-ignore
       daruk.app.use(daruk.router.routes(), 'router');
       // @ts-ignore
