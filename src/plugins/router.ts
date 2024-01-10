@@ -3,18 +3,17 @@
  * @date 2020-01-15
  * @fileoverview 重构router部分,使用依赖控制controller
  */
-import Router = require('@koa/router');
-import swaggerJsdoc from 'swagger-jsdoc';
 import assert = require('assert');
 import { Container } from 'inversify';
-import is = require('is');
-import Koa = require('koa');
-import { koaSwagger } from 'koa2-swagger-ui';
-import urljoin = require('url-join');
 import Daruk from '../core/daruk';
 import { darukContainer } from '../core/inversify.config';
+import { koaSwagger } from 'koa2-swagger-ui';
 import { TYPES } from '../core/types';
 import { plugin } from '../decorators';
+import is = require('is');
+import Router = require('@koa/router');
+import swaggerJsdoc from 'swagger-jsdoc';
+import urljoin = require('url-join');
 import {
   CONTROLLER_CLASS,
   CONTROLLER_CLASS_PREFIX,

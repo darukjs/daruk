@@ -8,6 +8,7 @@
     "eofline": false,
     "indent": [true, "spaces", 2],
     "no-empty-interface": false,
+		"ordered-imports": false,
     "jsdoc-format": false,
     "no-redundant-jsdoc": false,
     "unified-signatures": false
