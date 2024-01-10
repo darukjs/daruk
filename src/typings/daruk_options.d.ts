@@ -25,11 +25,11 @@ export interface Options {
   middlewareOrder: string[];
   name: string;
   rootPath: string;
-	routerOptions:any;
+  routerOptions: any;
   debug: boolean;
   bodyOptions: koaBody.IKoaBodyOptions;
   exitHook: boolean;
-	swagger:any;
+  swagger: any;
   // monitor: {
   //   enable: boolean;
   //   v8AnalyticsPath: string;
