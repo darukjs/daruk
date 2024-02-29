@@ -1,4 +1,4 @@
-import { Daruk, DarukContext, DarukServer } from '../../src';
+import { Daruk, DarukContext, DarukServer, darukContainer, TYPES } from '../../src';
 
 (async () => {
   let app = DarukServer({
@@ -17,6 +17,15 @@ import { Daruk, DarukContext, DarukServer } from '../../src';
 
   await app.loadFile('./controllers');
   await app.binding();
+
+  const DarukExitHook = darukContainer.getNamed(TYPES.PluginInstance, 'DarukExitHook');
+  //@ts-ignore
+  DarukExitHook.addHook(async (err, cb) => {
+    setTimeout(() => {
+      console.log(err, 'exit hook !!!');
+      cb();
+    }, 1000);
+  });
 
   app.listen(port);
 })();
